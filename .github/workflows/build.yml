@@ -1,0 +1,77 @@
+name: Build with PyInstaller
+
+on:
+  push:
+    branches:
+      - '*dev*'
+      - '*patch*'
+  workflow_call:
+    outputs:
+      windows-artifact-name:
+        description: "The name of the Windows artifact"
+        value: myscript-windows
+      # linux-artifact-name:
+      #   description: "The name of the Linux artifact"
+      #   value: myscript-linux
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        # os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [windows-latest]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.pull_request.base.ref }}
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.13'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Build with PyInstaller (Windows)
+      if: runner.os == 'Windows'
+      run: |
+        pyinstaller build.spec
+
+    # - name: Build with PyInstaller (Linux)
+    #   if: runner.os == 'Linux'
+    #   run: |
+    #     pyinstaller build.spec
+
+    # - name: Build with PyInstaller (macOS)
+    #   if: runner.os == 'macOS'
+    #   run: |
+    #     pyinstaller build.spec
+
+    - name: Upload Windows Artifact
+      if: runner.os == 'Windows'
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-windows
+        path: dist/DBtective.exe
+
+    # - name: Upload Linux Artifact
+    #   if: runner.os == 'Linux'
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: app-linux
+    #     path: dist/DBtective-linux
+
+    # - name: Upload macOS Artifact
+    #   if: runner.os == 'macOS'
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: app-macos
+    #     path: dist/DBtective-macos
+
