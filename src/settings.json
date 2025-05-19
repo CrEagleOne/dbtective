@@ -1,0 +1,44 @@
+{
+    "app_name": "DBtective",
+    "version": "v1.0.0",
+    "copyright": "",
+    "log_level": "DEBUG",
+    "year": 2025,
+    "theme_name": "default",
+    "workconfig": {
+        "extension": ".csv",
+        "files": [
+            "mastertable",
+            "slavetable"
+        ],
+        "db": "tmp_db.db"
+    },
+    "custom_title_bar": true,
+    "startup_size": [
+        900,
+        750
+    ],
+    "minimum_size": [
+        900,
+        750
+    ],
+    "lef_menu_size": {
+        "minimum": 50,
+        "maximum": 240
+    },
+    "left_menu_content_margins": 3,
+    "left_column_size": {
+        "minimum": 0,
+        "maximum": 240
+    },
+    "right_column_size": {
+        "minimum": 0,
+        "maximum": 240
+    },
+    "time_animation": 500,
+    "font": {
+        "family": "Segoe UI",
+        "title_size": 10,
+        "text_size": 9
+    }
+}
