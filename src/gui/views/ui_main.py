@@ -486,7 +486,7 @@ class UI_MainWindow(object):
         self.setFetchSize.setMaximumWidth(200)
 
         self.hashmode = py_radio_button.PyRadioButton(
-            text="Hash",
+            text="By hash",
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],
@@ -500,8 +500,8 @@ class UI_MainWindow(object):
         self.hashmode.setMinimumWidth(200)
         self.hashmode.setMaximumWidth(200)
 
-        self.fullmode = py_radio_button.PyRadioButton(
-            text="Full",
+        self.linemode = py_radio_button.PyRadioButton(
+            text="By lines",
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],
@@ -510,10 +510,25 @@ class UI_MainWindow(object):
             bg_color_active=self.themes["app_color"]["dark_three"],
             context_color=self.themes["app_color"]["context_color"]
         )
-        self.fullmode.setMinimumHeight(40)
-        self.fullmode.setMaximumHeight(40)
-        self.fullmode.setMinimumWidth(200)
-        self.fullmode.setMaximumWidth(200)
+        self.linemode.setMinimumHeight(40)
+        self.linemode.setMaximumHeight(40)
+        self.linemode.setMinimumWidth(200)
+        self.linemode.setMaximumWidth(200)
+
+        self.columnmode = py_radio_button.PyRadioButton(
+            text="By columns (Experimental)",
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            selection_color=self.themes["app_color"]["white"],
+            bg_color=self.themes["app_color"]["bg_one"],
+            bg_color_active=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"]
+        )
+        self.columnmode.setMinimumHeight(40)
+        self.columnmode.setMaximumHeight(40)
+        self.columnmode.setMinimumWidth(200)
+        self.columnmode.setMaximumWidth(200)
 
         self.clear_data = py_push_button.PyPushButton(
             text="Clear",
@@ -563,7 +578,8 @@ class UI_MainWindow(object):
         self.load_pages.extraction.addWidget(self.label_fetch, 2, 0)
         self.load_pages.extraction.addWidget(self.setFetchSize, 2, 1)
         self.load_pages.processing.addWidget(self.hashmode)
-        self.load_pages.processing.addWidget(self.fullmode)
+        self.load_pages.processing.addWidget(self.linemode)
+        self.load_pages.processing.addWidget(self.columnmode)
         self.load_pages.row_4_layout.setAlignment(QtCore.Qt.AlignRight)
         self.load_pages.row_4_layout.addWidget(self.clear_data)
         self.load_pages.row_4_layout.addWidget(self.compare)

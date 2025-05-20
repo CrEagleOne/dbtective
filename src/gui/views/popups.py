@@ -57,7 +57,7 @@ def display_info(message):
     msg_box.exec()
 
 
-def display_warn(message):
+def display_warn(message, test=True):
     """
     Warning popup
 
@@ -71,13 +71,16 @@ def display_warn(message):
     msg_box.setIcon(QtWidgets.QMessageBox.Warning)
     msg_box.setWindowTitle(title)
     msg_box.setText(message)
-    msg_box.setStandardButtons(
-        QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+    if test:
+        msg_box.setStandardButtons(
+            QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+    else:
+        msg_box.setStandardButtons(QtWidgets.QMessageBox.Ok)
     response = msg_box.exec()
 
-    if response == QtWidgets.QMessageBox.Yes:
-        return True
-    return False
+    if response == QtWidgets.QMessageBox.No:
+        return False
+    return True
 
 
 def display_error(message):

@@ -91,7 +91,8 @@ class MainEventHandler():
             lambda: controls.db_compare(self))
 
         self.ui.hashmode.toggled.connect(lambda: controls.db_compare(self))
-        self.ui.fullmode.toggled.connect(lambda: controls.db_compare(self))
+        self.ui.linemode.toggled.connect(lambda: controls.db_compare(self))
+        self.ui.columnmode.toggled.connect(lambda: controls.db_compare(self))
 
         self.ui.oracle_selector.clicked.connect(self.oracle_view)
 
@@ -282,7 +283,8 @@ class MainEventHandler():
             "events", "To continue, enter the password :")
         if db == "db1":
             self.settings_db1 = next(
-                ([db_type, ast.literal_eval(settings)]
+                ([db_type, ast.literal_eval(settings),
+                  self.ui.setDB1.currentText()]
                  for key, db_type, settings in self.config_list
                  if key == self.ui.setDB1.currentText()), None)
 
@@ -292,7 +294,8 @@ class MainEventHandler():
                     self.settings_db1[1]["password"] = password
         elif db == "db2":
             self.settings_db2 = next(
-                ([db_type, ast.literal_eval(settings)]
+                ([db_type, ast.literal_eval(settings),
+                  self.ui.setDB2.currentText()]
                  for key, db_type, settings in self.config_list
                  if key == self.ui.setDB2.currentText()), None)
 
@@ -311,7 +314,12 @@ class MainEventHandler():
         segment_length = int(self.ui.setSegmentLength.text(
         )) if self.ui.setExtractionType.isChecked() else None
 
-        mode = "hash" if self.ui.hashmode.isChecked() else "full"
+        if self.ui.hashmode.isChecked():
+            mode = "hash"
+        elif self.ui.linemode.isChecked():
+            mode = "line"
+        else:
+            mode = "column"
 
         self.worker = WorkerThread(mode, self.settings_db1, self.settings_db2,
                                    segment_length,
@@ -323,16 +331,18 @@ class MainEventHandler():
     def popup(self, display_type, texte):
         log = QtCore.QCoreApplication.translate("events",
                                                 "End of treatment")
-        self.ui.logbar.log_label.setText(log
-                                         )
+        self.ui.logbar.log_label.setText(log)
 
         if display_type == "error":
             popups.display_error(texte)
         elif display_type == "warn":
-            rtn = popups.display_warn(texte)
-            if rtn:
-                folder_path = common.get_work_folder("gap")
-                common.open_folders(folder_path)
+            if self.ui.hashmode.isChecked():
+                popups.display_warn(texte, False)
+            else:
+                rtn = popups.display_warn(texte)
+                if rtn:
+                    folder_path = common.get_work_folder("gap")
+                    common.open_folders(folder_path)
         else:
             popups.display_info(texte)
         self.ui.logbar.log_label.setText("")

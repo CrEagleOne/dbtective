@@ -9,11 +9,6 @@ from gui.core import functions
 from gui.views import ui_main, events
 from core.utils import config, exceptions, common, logs
 
-# from pathlib import Path
-
-# # Ajoute le chemin racine du projet à sys.path
-# sys.path.append(str(Path(__file__).parent))
-
 
 class MainWindow(QtWidgets.QMainWindow):
     error_signal = QtCore.Signal(tuple)
