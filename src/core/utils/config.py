@@ -83,7 +83,7 @@ def insert_query_db(query: str, args: tuple, **kwargs) -> int:
         args = args + (formatted_datetime,)
         cursor.execute(query, args)
     except sqlite3.IntegrityError as e:
-        raise exceptions.Error(409, e)
+        raise exceptions.Error(402, e)
     except sqlite3.OperationalError as e:
         if "syntax error" in str(e).lower():
             raise exceptions.Error(403, e)
@@ -107,9 +107,7 @@ def get_list_data(query, **kwargs) -> tuple:
         cursor.execute(query)
         return cursor.fetchall()
     except sqlite3.OperationalError as e:
-        if "no such column" in str(e).lower():
-            raise exceptions.Error(402, e)
-        if "no such table" in str(e).lower():
+        if "no such" in str(e).lower():
             raise exceptions.Error(404, e)
         if "syntax error" in str(e).lower():
             raise exceptions.Error(403, e)

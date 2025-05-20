@@ -14,6 +14,7 @@ Dépendances:
     - pandas
     - settings.py
     - common.py
+    - exceptions.py
 
 Usage Example:
     N/A
@@ -28,7 +29,7 @@ from functools import wraps
 import duckdb
 import pandas
 from gui.core import settings
-from core.utils import common
+from core.utils import common, exceptions
 
 
 def _duckdb(f):
@@ -58,9 +59,8 @@ def _duckdb(f):
             cnn = duckdb.connect(database=db_path)
             kwargs['cnn'] = cnn
             rv = f(*args, **kwargs)
-
         except duckdb.Error as e:
-            print(e)
+            raise exceptions.Error(500, e)
         finally:
             cnn.close()
         return rv
@@ -82,9 +82,20 @@ def retrieve_file_delimiter(filename: str, **kwargs) -> str:
     req = f"SELECT delimiter FROM sniff_csv('{filename}')"
     try:
         result = cnn.execute(req).fetchone()[0]
-    except (duckdb.CatalogException, duckdb.ParserException,
+
+    except duckdb.ParserException as e:
+        raise exceptions.Error(400, e)
+    except (duckdb.CatalogException,
             duckdb.BinderException) as e:
-        print(e)
+        raise exceptions.Error(404, e)
+    except duckdb.TypeMismatchException as e:
+        raise exceptions.Error(406, e)
+    except duckdb.ConversionException as e:
+        raise exceptions.Error(407, e)
+    except duckdb.TransactionException as e:
+        raise exceptions.Error(408, e)
+    except duckdb.IOException as e:
+        raise exceptions.Error(503, e)
     return result
 
 
@@ -109,14 +120,54 @@ def load_file_data(filename: str, tablename: str, **kwargs) -> bool:
             all_varchar=True, header=True, store_rejects=True,
             rejects_scan='rejects_scan', rejects_table='rejects_table')
         """)
-    except (duckdb.IOException, duckdb.CatalogException,
-            duckdb.ConstraintException, duckdb.TransactionException,
-            duckdb.ParserException, duckdb.BinderException,
-            duckdb.InvalidTypeException, duckdb.OutOfMemoryException,
-            duckdb.InvalidInputException, duckdb.ConversionException,
-            duckdb.SerializationException) as e:
-        print(e)
+    except duckdb.ParserException as e:
+        raise exceptions.Error(400, e)
+    except (duckdb.CatalogException,
+            duckdb.BinderException) as e:
+        raise exceptions.Error(404, e)
+    except duckdb.TypeMismatchException as e:
+        raise exceptions.Error(406, e)
+    except duckdb.ConversionException as e:
+        raise exceptions.Error(407, e)
+    except duckdb.TransactionException as e:
+        raise exceptions.Error(408, e)
+    except duckdb.IOException as e:
+        raise exceptions.Error(503, e)
+
     return True
+
+
+@_duckdb
+def get_datas_by_fetchall(query: str, arg: tuple = None,
+                          **kwargs) -> pandas.DataFrame:
+    """
+    Retrieves all rows as a data frame
+
+    Args:
+        query (str): SQL query
+        arg (optional, Tuple): Query args
+
+    Returns:
+        pd.DataFrame: Query result
+    """
+    cnn = kwargs.get('cnn')
+    try:
+        result = cnn.execute(query, arg).fetchall()
+    except duckdb.ParserException as e:
+        raise exceptions.Error(400, e)
+    except (duckdb.CatalogException,
+            duckdb.BinderException) as e:
+        raise exceptions.Error(404, e)
+    except duckdb.TypeMismatchException as e:
+        raise exceptions.Error(406, e)
+    except duckdb.ConversionException as e:
+        raise exceptions.Error(407, e)
+    except duckdb.TransactionException as e:
+        raise exceptions.Error(408, e)
+    except duckdb.IOException as e:
+        raise exceptions.Error(503, e)
+
+    return result
 
 
 @_duckdb
@@ -135,9 +186,19 @@ def get_datas_by_fetchdf(query: str, arg: tuple = None,
     cnn = kwargs.get('cnn')
     try:
         result = cnn.execute(query, arg).fetchdf()
-    except (duckdb.CatalogException, duckdb.ParserException,
+    except duckdb.ParserException as e:
+        raise exceptions.Error(400, e)
+    except (duckdb.CatalogException,
             duckdb.BinderException) as e:
-        print(e)
+        raise exceptions.Error(404, e)
+    except duckdb.TypeMismatchException as e:
+        raise exceptions.Error(406, e)
+    except duckdb.ConversionException as e:
+        raise exceptions.Error(407, e)
+    except duckdb.TransactionException as e:
+        raise exceptions.Error(408, e)
+    except duckdb.IOException as e:
+        raise exceptions.Error(503, e)
 
     return result
 

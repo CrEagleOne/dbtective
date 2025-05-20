@@ -37,17 +37,19 @@ MESSAGES = {
     401: QtCore.QCoreApplication.translate(
         "exceptions", "An error was occured"),
     402: QtCore.QCoreApplication.translate(
-        "exceptions", "No such column"),
+        "exceptions", "UNIQUE constraint failed"),
     403: QtCore.QCoreApplication.translate(
         "exceptions", "Syntax error"),
     404: QtCore.QCoreApplication.translate(
-        "exceptions", "Table or record not found"),
-    409: QtCore.QCoreApplication.translate(
-        "exceptions", "UNIQUE constraint failed"),
-    410: QtCore.QCoreApplication.translate(
-        "exceptions", "Data not provided"),
-    411: QtCore.QCoreApplication.translate(
+        "exceptions", "Table or column not found"),
+    405: QtCore.QCoreApplication.translate(
         "exceptions", "Incorrect database config"),
+    406: QtCore.QCoreApplication.translate(
+        "exceptions", "Data type mismatch"),
+    407: QtCore.QCoreApplication.translate(
+        "exceptions", "Conversion error"),
+    408: QtCore.QCoreApplication.translate(
+        "exceptions", "Transaction error"),
 
     500: QtCore.QCoreApplication.translate(
         "exceptions", "Failed to connect to database server"),
