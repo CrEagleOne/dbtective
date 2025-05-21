@@ -1,0 +1,221 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>core.utils.orders &mdash; DBtective 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            DBtective
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/modules.html">src</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">DBtective</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">core.utils.orders</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for core.utils.orders</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Module: orders</span>
+<span class="sd">Auteur: creagleone</span>
+<span class="sd">Date: 2025-05-07</span>
+
+<span class="sd">Description:</span>
+<span class="sd">    This module contains functions to execute database comparaison</span>
+
+<span class="sd">Dependencies:</span>
+<span class="sd">    - os</span>
+<span class="sd">    - pandas</span>
+<span class="sd">    - common.py</span>
+<span class="sd">    - exceptions.py</span>
+<span class="sd">    - logs.py</span>
+<span class="sd">    - duck.py</span>
+<span class="sd">    - settings.py</span>
+
+<span class="sd">Usage Example:</span>
+<span class="sd">    - N/A</span>
+
+<span class="sd">Notes:</span>
+<span class="sd">    - N/A</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">core.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">common</span><span class="p">,</span> <span class="n">exceptions</span><span class="p">,</span> <span class="n">logs</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">core.database</span><span class="w"> </span><span class="kn">import</span> <span class="n">duck</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gui.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">settings</span>
+
+
+<div class="viewcode-block" id="compare_db">
+<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.orders.compare_db">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compare_db</span><span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">settings_db1</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">settings_db2</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+               <span class="n">segment</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fetch</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Execute database comparaison</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mode (str): Type of processing to perform</span>
+<span class="sd">        settings_db1 (list): Database connection parameters</span>
+<span class="sd">        settings_db2 (list): Database connection parameters</span>
+<span class="sd">        segment (int | None): Segment size</span>
+<span class="sd">        fetch (int): Fetch size</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        exceptions.Warn: code 300 (data gap)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        int: code 201 (No data gap)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">settings_data</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">Settings</span><span class="p">()</span><span class="o">.</span><span class="n">get_settings</span><span class="p">()</span>
+    <span class="n">master_name</span> <span class="o">=</span> <span class="n">settings_data</span><span class="p">[</span><span class="s2">&quot;workconfig&quot;</span><span class="p">][</span><span class="s2">&quot;files&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">slave_name</span> <span class="o">=</span> <span class="n">settings_data</span><span class="p">[</span><span class="s2">&quot;workconfig&quot;</span><span class="p">][</span><span class="s2">&quot;files&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">extension</span> <span class="o">=</span> <span class="n">settings_data</span><span class="p">[</span><span class="s2">&quot;workconfig&quot;</span><span class="p">][</span><span class="s2">&quot;extension&quot;</span><span class="p">]</span>
+
+    <span class="n">folder</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_work_folder</span><span class="p">(</span><span class="s2">&quot;extracts&quot;</span><span class="p">)</span>
+    <span class="n">path1</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">master_name</span> <span class="o">+</span> <span class="n">extension</span><span class="p">)</span>
+    <span class="n">path2</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">slave_name</span> <span class="o">+</span> <span class="n">extension</span><span class="p">)</span>
+    <span class="n">outfile_folder</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_work_folder</span><span class="p">(</span><span class="s2">&quot;gap&quot;</span><span class="p">)</span>
+
+    <span class="n">warn</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="n">tables</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_common_tables</span><span class="p">(</span>
+        <span class="n">settings_db1</span><span class="p">,</span> <span class="n">settings_db2</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
+        <span class="n">common</span><span class="o">.</span><span class="n">extract_to_csv</span><span class="p">(</span>
+            <span class="n">settings_db1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">table</span><span class="p">,</span> <span class="n">path1</span><span class="p">,</span> <span class="n">segment</span><span class="p">,</span> <span class="n">fetch</span><span class="p">)</span>
+
+        <span class="n">common</span><span class="o">.</span><span class="n">extract_to_csv</span><span class="p">(</span>
+            <span class="n">settings_db2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">table</span><span class="p">,</span> <span class="n">path2</span><span class="p">,</span> <span class="n">segment</span><span class="p">,</span> <span class="n">fetch</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;hash&quot;</span><span class="p">:</span>
+            <span class="n">hash1</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_hash_file</span><span class="p">(</span><span class="n">path1</span><span class="p">)</span>
+            <span class="n">hash2</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_hash_file</span><span class="p">(</span><span class="n">path2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">hash1</span> <span class="o">!=</span> <span class="n">hash2</span><span class="p">:</span>
+                <span class="n">warn</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">logs</span><span class="o">.</span><span class="n">log_warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Gap found for table </span><span class="si">{</span><span class="n">table</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">duck</span><span class="o">.</span><span class="n">load_file_data</span><span class="p">(</span>
+                <span class="n">filename</span><span class="o">=</span><span class="n">path1</span><span class="p">,</span> <span class="n">tablename</span><span class="o">=</span><span class="n">master_name</span><span class="p">)</span>
+            <span class="n">duck</span><span class="o">.</span><span class="n">load_file_data</span><span class="p">(</span>
+                <span class="n">filename</span><span class="o">=</span><span class="n">path2</span><span class="p">,</span> <span class="n">tablename</span><span class="o">=</span><span class="n">slave_name</span><span class="p">)</span>
+
+            <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;(SELECT &#39;</span><span class="si">{</span><span class="n">settings_db1</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39; as DATABASE, *</span>
+<span class="s2">            FROM </span><span class="si">{</span><span class="n">master_name</span><span class="si">}</span>
+<span class="s2">            EXCEPT SELECT &#39;</span><span class="si">{</span><span class="n">settings_db1</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, * FROM </span><span class="si">{</span><span class="n">slave_name</span><span class="si">}</span><span class="s2">)</span>
+<span class="s2">            UNION</span>
+<span class="s2">            (SELECT &#39;</span><span class="si">{</span><span class="n">settings_db2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39; as DATABASE, * FROM </span><span class="si">{</span><span class="n">slave_name</span><span class="si">}</span>
+<span class="s2">            EXCEPT SELECT &#39;</span><span class="si">{</span><span class="n">settings_db2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;, * FROM </span><span class="si">{</span><span class="n">master_name</span><span class="si">}</span><span class="s2">)&quot;&quot;&quot;</span>
+
+            <span class="n">data</span> <span class="o">=</span> <span class="n">duck</span><span class="o">.</span><span class="n">get_datas_by_fetchdf</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;column&quot;</span><span class="p">:</span>
+                <span class="n">differences</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">find_most_similar_pairs</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">differences</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">path_outfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                        <span class="n">outfile_folder</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;gap_</span><span class="si">{</span><span class="n">table</span><span class="si">}</span><span class="s2">.txt&quot;</span><span class="p">)</span>
+                    <span class="n">common</span><span class="o">.</span><span class="n">create_gap_files</span><span class="p">(</span><span class="n">path_outfile</span><span class="p">,</span> <span class="n">differences</span><span class="p">)</span>
+                    <span class="n">warn</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+                        <span class="n">path_outfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                            <span class="n">outfile_folder</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;gap_</span><span class="si">{</span><span class="n">table</span><span class="si">}</span><span class="s2">.csv&quot;</span><span class="p">)</span>
+                        <span class="n">common</span><span class="o">.</span><span class="n">create_gap_files</span><span class="p">(</span><span class="n">path_outfile</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+                        <span class="n">warn</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="n">duck</span><span class="o">.</span><span class="n">delete_tmp_db</span><span class="p">()</span>
+            <span class="n">common</span><span class="o">.</span><span class="n">delete_work_folder</span><span class="p">(</span><span class="s2">&quot;extracts&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">warn</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Warn</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="mi">201</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, CrEagleOne.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

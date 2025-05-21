@@ -570,6 +570,9 @@ class UI_MainWindow(object):
         self.load_pages.row_3_groupbox.setStyleSheet(
             f"""border-radius: 8px;
             border: 2px solid {self.themes["app_color"]["grey"]};""")
+        self.load_pages.authentification.setStyleSheet(
+            f"""border-radius: 8px;
+            border: 2px solid {self.themes["app_color"]["grey"]};""")
         self.load_pages.extraction.addWidget(self.label_extraction, 0, 0)
         self.load_pages.extraction.addWidget(
             self.setExtractionType, 0, 1)

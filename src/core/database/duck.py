@@ -4,10 +4,11 @@
 Module: duckdb
 Auteur: creagleone
 Date: 2025-05-07
+
 Description:
     This module contains the functions to load and process comparison data
 
-Dépendances:
+Dependencies:
     - os
     - wraps (functools)
     - duckdb

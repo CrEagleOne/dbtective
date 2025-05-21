@@ -1,0 +1,317 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>core.utils.exceptions &mdash; DBtective 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            DBtective
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/modules.html">src</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">DBtective</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">core.utils.exceptions</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for core.utils.exceptions</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Module: exceptions</span>
+<span class="sd">Auteur: creagleone</span>
+<span class="sd">Date: 2025-05-07</span>
+
+<span class="sd">Description:</span>
+<span class="sd">    This module contains functions to manage custom exceptions</span>
+
+<span class="sd">Dependencies:</span>
+<span class="sd">    - QtCore (PySide6)</span>
+<span class="sd">    - logs.py</span>
+
+<span class="sd">Usage Example:</span>
+<span class="sd">    raise Error(100, &quot;texte&quot;)</span>
+
+<span class="sd">Notes:</span>
+<span class="sd">    - N/A</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">PySide6</span><span class="w"> </span><span class="kn">import</span> <span class="n">QtCore</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">core.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">logs</span>
+
+<span class="n">MESSAGES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">100</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;DB config saved !&quot;</span><span class="p">),</span>
+    <span class="mi">200</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Treatment completed successfully&quot;</span><span class="p">),</span>
+    <span class="mi">201</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;No gap found&quot;</span><span class="p">),</span>
+
+    <span class="mi">300</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Gap found between files&quot;</span><span class="p">),</span>
+
+    <span class="mi">400</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Poorly formed or invalid SQL query&quot;</span><span class="p">),</span>
+    <span class="mi">401</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;An error was occured&quot;</span><span class="p">),</span>
+    <span class="mi">402</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;UNIQUE constraint failed&quot;</span><span class="p">),</span>
+    <span class="mi">403</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Syntax error&quot;</span><span class="p">),</span>
+    <span class="mi">404</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Table or column not found&quot;</span><span class="p">),</span>
+    <span class="mi">405</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Incorrect database config&quot;</span><span class="p">),</span>
+    <span class="mi">406</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Data type mismatch&quot;</span><span class="p">),</span>
+    <span class="mi">407</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Conversion error&quot;</span><span class="p">),</span>
+    <span class="mi">408</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Transaction error&quot;</span><span class="p">),</span>
+
+    <span class="mi">500</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Failed to connect to database server&quot;</span><span class="p">),</span>
+    <span class="mi">501</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Database temporarily unavailable&quot;</span><span class="p">),</span>
+    <span class="mi">502</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Out of memory error&quot;</span><span class="p">),</span>
+    <span class="mi">503</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Disk I/O error&quot;</span><span class="p">),</span>
+    <span class="mi">504</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;No active Oracle listener&quot;</span><span class="p">),</span>
+    <span class="mi">505</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Account locked&quot;</span><span class="p">),</span>
+    <span class="mi">506</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Incorrect username or password&quot;</span><span class="p">),</span>
+
+    <span class="mi">600</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;System not supported&quot;</span><span class="p">),</span>
+    <span class="mi">601</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;settings file not found&quot;</span><span class="p">),</span>
+    <span class="mi">602</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;themes file not found&quot;</span><span class="p">),</span>
+
+    <span class="mi">999</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Unanticipated error - check logs&quot;</span><span class="p">),</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="ErrorSignal">
+<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.exceptions.ErrorSignal">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ErrorSignal</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A Qt object that provides an error signaling mechanism</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">error_signal</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Signal</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ErrorSignal.trigger_error">
+<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.exceptions.ErrorSignal.trigger_error">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">trigger_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Triggers an error signal with the given message</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            message (str): The error message to send</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">QtCore</span><span class="o">.</span><span class="n">QMetaObject</span><span class="o">.</span><span class="n">invokeMethod</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;emit_error&quot;</span><span class="p">,</span>
+                                        <span class="n">QtCore</span><span class="o">.</span><span class="n">Q_ARG</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">message</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="ErrorSignal.emit_error">
+<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.exceptions.ErrorSignal.emit_error">[docs]</a>
+    <span class="nd">@QtCore</span><span class="o">.</span><span class="n">Slot</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">emit_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Emits the error signal and logs the error message</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            message (str): The error message to emit and log</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_signal</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="n">logs</span><span class="o">.</span><span class="n">log_error</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="WarnSignal">
+<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.exceptions.WarnSignal">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">WarnSignal</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A Qt object that provides a warning signaling mechanism</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">warn_signal</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Signal</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<div class="viewcode-block" id="WarnSignal.trigger_warn">
+<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.exceptions.WarnSignal.trigger_warn">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">trigger_warn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Triggers a warning signal with the given message</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            message (str): The warning message to send</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">QtCore</span><span class="o">.</span><span class="n">QMetaObject</span><span class="o">.</span><span class="n">invokeMethod</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;emit_warn&quot;</span><span class="p">,</span>
+                                        <span class="n">QtCore</span><span class="o">.</span><span class="n">Q_ARG</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">message</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="WarnSignal.emit_warn">
+<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.exceptions.WarnSignal.emit_warn">[docs]</a>
+    <span class="nd">@QtCore</span><span class="o">.</span><span class="n">Slot</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">emit_warn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Emits the warning signal and logs the warning message</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            message (str): The warning message to emit and log</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">warn_signal</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="n">logs</span><span class="o">.</span><span class="n">log_warn</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="Error">
+<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.exceptions.Error">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Error</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Custom exception class that integrates logging and Qt</span>
+<span class="sd">    error signaling</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">system</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the exception with an error message and triggers</span>
+<span class="sd">        error logging</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            code (str): The error code used to fetch the corresponding message</span>
+<span class="sd">            system (str | None, optional): System context for logging</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">MESSAGES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="n">code</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Unknown code&quot;</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">system</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">logs</span><span class="o">.</span><span class="n">log_error</span><span class="p">(</span><span class="n">system</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">qt_error</span> <span class="o">=</span> <span class="n">ErrorSignal</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">qt_error</span><span class="o">.</span><span class="n">trigger_error</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Warn">
+<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.exceptions.Warn">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Warn</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Custom warning exception that integrates logging and Qt warning signaling</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the warning exception with a message and triggers</span>
+<span class="sd">        warning signaling</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            code (str): The warning code used to fetch the</span>
+<span class="sd">            corresponding message</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">MESSAGES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="n">code</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Unknown code&quot;</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">qt_warn</span> <span class="o">=</span> <span class="n">WarnSignal</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">qt_warn</span><span class="o">.</span><span class="n">trigger_warn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, CrEagleOne.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

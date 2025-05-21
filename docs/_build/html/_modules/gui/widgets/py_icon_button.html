@@ -1,0 +1,330 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gui.widgets.py_icon_button &mdash; DBtective 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            DBtective
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/modules.html">src</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">DBtective</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">gui.widgets.py_icon_button</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for gui.widgets.py_icon_button</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">PySide6</span><span class="w"> </span><span class="kn">import</span> <span class="n">QtWidgets</span><span class="p">,</span> <span class="n">QtGui</span><span class="p">,</span> <span class="n">QtCore</span>
+
+
+<div class="viewcode-block" id="PyIconButton">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_icon_button.PyIconButton">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PyIconButton</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">icon_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">app_parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">tooltip_text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">btn_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">width</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+        <span class="n">height</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+        <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+        <span class="n">bg_color</span><span class="o">=</span><span class="s2">&quot;#343b48&quot;</span><span class="p">,</span>
+        <span class="n">bg_color_hover</span><span class="o">=</span><span class="s2">&quot;#3c4454&quot;</span><span class="p">,</span>
+        <span class="n">bg_color_pressed</span><span class="o">=</span><span class="s2">&quot;#2c313c&quot;</span><span class="p">,</span>
+        <span class="n">icon_color</span><span class="o">=</span><span class="s2">&quot;#c3ccdf&quot;</span><span class="p">,</span>
+        <span class="n">icon_color_hover</span><span class="o">=</span><span class="s2">&quot;#dce1ec&quot;</span><span class="p">,</span>
+        <span class="n">icon_color_pressed</span><span class="o">=</span><span class="s2">&quot;#edf0f5&quot;</span><span class="p">,</span>
+        <span class="n">icon_color_active</span><span class="o">=</span><span class="s2">&quot;#f5f6f9&quot;</span><span class="p">,</span>
+        <span class="n">dark_one</span><span class="o">=</span><span class="s2">&quot;#1b1e23&quot;</span><span class="p">,</span>
+        <span class="n">text_foreground</span><span class="o">=</span><span class="s2">&quot;#8a95aa&quot;</span><span class="p">,</span>
+        <span class="n">context_color</span><span class="o">=</span><span class="s2">&quot;#568af2&quot;</span><span class="p">,</span>
+        <span class="n">top_margin</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+        <span class="n">is_active</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setFixedSize</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setCursor</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">PointingHandCursor</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setObjectName</span><span class="p">(</span><span class="n">btn_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bg_color</span> <span class="o">=</span> <span class="n">bg_color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bg_color_hover</span> <span class="o">=</span> <span class="n">bg_color_hover</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bg_color_pressed</span> <span class="o">=</span> <span class="n">bg_color_pressed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_icon_color</span> <span class="o">=</span> <span class="n">icon_color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_hover</span> <span class="o">=</span> <span class="n">icon_color_hover</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_pressed</span> <span class="o">=</span> <span class="n">icon_color_pressed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_active</span> <span class="o">=</span> <span class="n">icon_color_active</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_context_color</span> <span class="o">=</span> <span class="n">context_color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_top_margin</span> <span class="o">=</span> <span class="n">top_margin</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_active</span> <span class="o">=</span> <span class="n">is_active</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_bg_color</span> <span class="o">=</span> <span class="n">bg_color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_icon_path</span> <span class="o">=</span> <span class="n">icon_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_icon_color</span> <span class="o">=</span> <span class="n">icon_color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_border_radius</span> <span class="o">=</span> <span class="n">radius</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span> <span class="o">=</span> <span class="n">parent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_app_parent</span> <span class="o">=</span> <span class="n">app_parent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tooltip_text</span> <span class="o">=</span> <span class="n">tooltip_text</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tooltip</span> <span class="o">=</span> <span class="n">_ToolTip</span><span class="p">(</span>
+            <span class="n">app_parent</span><span class="p">,</span>
+            <span class="n">tooltip_text</span><span class="p">,</span>
+            <span class="n">dark_one</span><span class="p">,</span>
+            <span class="n">text_foreground</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tooltip</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+
+<div class="viewcode-block" id="PyIconButton.set_active">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_icon_button.PyIconButton.set_active">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_active</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">is_active</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_active</span> <span class="o">=</span> <span class="n">is_active</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">repaint</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PyIconButton.is_active">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_icon_button.PyIconButton.is_active">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_active</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_active</span></div>
+
+
+<div class="viewcode-block" id="PyIconButton.paintEvent">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_icon_button.PyIconButton.paintEvent">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="n">paint</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPainter</span><span class="p">()</span>
+        <span class="n">paint</span><span class="o">.</span><span class="n">begin</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">paint</span><span class="o">.</span><span class="n">setRenderHint</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QPainter</span><span class="o">.</span><span class="n">RenderHint</span><span class="o">.</span><span class="n">Antialiasing</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_active</span><span class="p">:</span>
+            <span class="n">brush</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_context_color</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">brush</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_set_bg_color</span><span class="p">))</span>
+
+        <span class="n">rect</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
+        <span class="n">paint</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">NoPen</span><span class="p">)</span>
+        <span class="n">paint</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">brush</span><span class="p">)</span>
+        <span class="n">paint</span><span class="o">.</span><span class="n">drawRoundedRect</span><span class="p">(</span>
+            <span class="n">rect</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_border_radius</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_border_radius</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">icon_paint</span><span class="p">(</span><span class="n">paint</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_icon_path</span><span class="p">,</span> <span class="n">rect</span><span class="p">)</span>
+
+        <span class="n">paint</span><span class="o">.</span><span class="n">end</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PyIconButton.change_style">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_icon_button.PyIconButton.change_style">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">change_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">event</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="o">.</span><span class="n">Enter</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_bg_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bg_color_hover</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_icon_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_hover</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">repaint</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">event</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="o">.</span><span class="n">Leave</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_bg_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bg_color</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_icon_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_icon_color</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">repaint</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">event</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="o">.</span><span class="n">MouseButtonPress</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_bg_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bg_color_pressed</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_icon_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_pressed</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">repaint</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">event</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="o">.</span><span class="n">MouseButtonRelease</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_bg_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bg_color_hover</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_icon_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_hover</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">repaint</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PyIconButton.enterEvent">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_icon_button.PyIconButton.enterEvent">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">enterEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">change_style</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="o">.</span><span class="n">Enter</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">move_tooltip</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tooltip</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PyIconButton.leaveEvent">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_icon_button.PyIconButton.leaveEvent">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">leaveEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">change_style</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="o">.</span><span class="n">Leave</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">move_tooltip</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tooltip</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PyIconButton.mousePressEvent">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_icon_button.PyIconButton.mousePressEvent">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mousePressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">LeftButton</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">change_style</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="o">.</span><span class="n">MouseButtonPress</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PyIconButton.mouseReleaseEvent">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_icon_button.PyIconButton.mouseReleaseEvent">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mouseReleaseEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">LeftButton</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">change_style</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="o">.</span><span class="n">MouseButtonRelease</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">released</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PyIconButton.icon_paint">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_icon_button.PyIconButton.icon_paint">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">icon_paint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qp</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">rect</span><span class="p">):</span>
+        <span class="n">icon</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">(</span><span class="n">image</span><span class="p">)</span><span class="o">.</span><span class="n">scaled</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">KeepAspectRatio</span><span class="p">)</span>
+        <span class="n">painter</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPainter</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setCompositionMode</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QPainter</span><span class="o">.</span><span class="n">CompositionMode_SourceIn</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_active</span><span class="p">:</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span><span class="n">icon</span><span class="o">.</span><span class="n">rect</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_active</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span><span class="n">icon</span><span class="o">.</span><span class="n">rect</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_icon_color</span><span class="p">)</span>
+        <span class="n">qp</span><span class="o">.</span><span class="n">drawPixmap</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="n">icon</span><span class="o">.</span><span class="n">width</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="n">icon</span><span class="o">.</span><span class="n">height</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="n">icon</span>
+        <span class="p">)</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">end</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PyIconButton.set_icon">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_icon_button.PyIconButton.set_icon">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon_path</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_icon_path</span> <span class="o">=</span> <span class="n">icon_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">repaint</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PyIconButton.move_tooltip">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_icon_button.PyIconButton.move_tooltip">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">move_tooltip</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">gp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapToGlobal</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QPoint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span><span class="o">.</span><span class="n">mapFromGlobal</span><span class="p">(</span><span class="n">gp</span><span class="p">)</span>
+        <span class="n">pos_x</span> <span class="o">=</span> <span class="p">(</span><span class="n">pos</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">-</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tooltip</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">//</span> <span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">pos_y</span> <span class="o">=</span> <span class="n">pos</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_top_margin</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tooltip</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">pos_x</span><span class="p">,</span> <span class="n">pos_y</span><span class="p">)</span></div>
+</div>
+
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_ToolTip</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">):</span>
+    <span class="n">style_tooltip</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    QLabel {{</span>
+<span class="s2">        background-color: </span><span class="si">{_dark_one}</span><span class="s2">;</span>
+<span class="s2">        color: </span><span class="si">{_text_foreground}</span><span class="s2">;</span>
+<span class="s2">        padding-left: 10px;</span>
+<span class="s2">        padding-right: 10px;</span>
+<span class="s2">        border-radius: 17px;</span>
+<span class="s2">        border: 0px solid transparent;</span>
+<span class="s2">        font: 800 9pt &quot;Segoe UI&quot;;</span>
+<span class="s2">    }}</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">parent</span><span class="p">,</span>
+        <span class="n">tooltip</span><span class="p">,</span>
+        <span class="n">dark_one</span><span class="p">,</span>
+        <span class="n">text_foreground</span>
+    <span class="p">):</span>
+        <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="n">style</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">style_tooltip</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">_dark_one</span><span class="o">=</span><span class="n">dark_one</span><span class="p">,</span>
+            <span class="n">_text_foreground</span><span class="o">=</span><span class="n">text_foreground</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setObjectName</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;label_tooltip&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMinimumHeight</span><span class="p">(</span><span class="mi">34</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setParent</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">tooltip</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">adjustSize</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shadow</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsDropShadowEffect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shadow</span><span class="o">.</span><span class="n">setBlurRadius</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shadow</span><span class="o">.</span><span class="n">setXOffset</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shadow</span><span class="o">.</span><span class="n">setYOffset</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shadow</span><span class="o">.</span><span class="n">setColor</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setGraphicsEffect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shadow</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, CrEagleOne.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -4,6 +4,7 @@
 Module: common
 Auteur: creagleone
 Date: 2025-05-07
+
 Description:
     This module contains functions to manage technical tables
 
@@ -221,9 +222,21 @@ def resource_path(relative_path: str) -> str:
     Returns :
         str : The absolute path to a resource file.
     """
-    if hasattr(sys, '_MEIPASS'):
-        return os.path.join(sys._MEIPASS, relative_path)
-    return os.path.join(os.path.abspath("."), relative_path)
+    if hasattr(sys, "_MEIPASS"):
+        base_path = sys._MEIPASS
+    else:
+        base_path = os.path.abspath(os.path.join(
+            os.path.dirname(__file__), '..', '..', '..'))
+
+    # base_path = sys._MEIPASS if hasattr(
+    #     sys, "_MEIPASS") else os.path.abspath(".")
+    full_path = os.path.join(base_path, relative_path)
+
+    if not os.path.exists(full_path):
+        raise exceptions.Error(
+            601, f"{full_path} not found")
+
+    return full_path
 
 
 def set_svg_icon(icon_name: str) -> str:
@@ -445,9 +458,10 @@ def find_most_similar_pairs(df: pandas.DataFrame,
         column (str, optional): The name of the column, defaults to 'merged'
 
     Returns:
-        list[tuple[tuple[str, str], set[str]]]: A list of tuples with:
-            - The pair of most similar strings
-            - A set indicating their symmetric differences
+        list: A list of tuples :
+                - The original pair of strings
+                - A set containing the symmetric difference between elements
+                    of both strings
     """
     df[column] = df.apply(merge_columns, axis=1)
     pairs = set()

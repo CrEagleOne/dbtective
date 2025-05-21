@@ -4,11 +4,12 @@
 Module: oracle
 Auteur: creagleone
 Date: 2025-05-07
+
 Description:
     This module contains the functions allowing you to retrieve data
     from an oracle database
 
-Dépendances:
+Dependencies:
     - socket
     - wraps (functools)
     - oracledb
@@ -19,7 +20,7 @@ Usage Example:
 
 Notes:
     - This module uses oracledb thin mode
-    - Designed for handling large datasets efficiently.
+    - Designed for handling large datasets efficiently
 """
 
 import socket

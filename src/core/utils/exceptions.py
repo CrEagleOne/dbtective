@@ -4,6 +4,7 @@
 Module: exceptions
 Auteur: creagleone
 Date: 2025-05-07
+
 Description:
     This module contains functions to manage custom exceptions
 
@@ -81,9 +82,6 @@ MESSAGES = {
 class ErrorSignal(QtCore.QObject):
     """
     A Qt object that provides an error signaling mechanism
-
-    Attributes:
-        error_signal (QtCore.Signal): Signal emitted when an error occurs
     """
 
     error_signal = QtCore.Signal(str)
@@ -113,9 +111,6 @@ class ErrorSignal(QtCore.QObject):
 class WarnSignal(QtCore.QObject):
     """
     A Qt object that provides a warning signaling mechanism
-
-    Attributes:
-        warn_signal (QtCore.Signal): Signal emitted when a warning occurs
     """
 
     warn_signal = QtCore.Signal(str)
@@ -146,10 +141,6 @@ class Error(Exception):
     """
     Custom exception class that integrates logging and Qt
     error signaling
-
-    Attributes:
-        message (str): The error message retrieved from predefined messages
-        qt_error (ErrorSignal): Instance for emitting Qt-based error signals
     """
 
     def __init__(self, code: str, system: str | None = None) -> None:
@@ -178,10 +169,6 @@ class Error(Exception):
 class Warn(Exception):
     """
     Custom warning exception that integrates logging and Qt warning signaling
-
-    Attributes:
-        message (str): The warning message retrieved from predefined messages
-        qt_warn (WarnSignal): Instance for emitting Qt-based warning signals
     """
 
     def __init__(self, code: str) -> None:

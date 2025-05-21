@@ -236,7 +236,7 @@
            <item>
             <widget class="QLabel" name="description_label">
              <property name="text">
-              <string>Add description here</string>
+              <string>Complete the following fields to start comparing the data</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
@@ -264,8 +264,7 @@
              <item>
               <widget class="QGroupBox" name="row_2_groupbox">
                <property name="styleSheet">
-                <string notr="true">border-radius: 4px;
-border: 2px solid red;</string>
+                <string notr="true"/>
                </property>
                <property name="title">
                 <string>Extraction</string>
@@ -366,8 +365,8 @@ border: 2px solid red;</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>274</width>
-            <height>222</height>
+            <width>832</width>
+            <height>697</height>
            </rect>
           </property>
           <property name="styleSheet">
