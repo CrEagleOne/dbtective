@@ -4,6 +4,7 @@
 Module: logs
 Auteur: creagleone
 Date: 2025-05-07
+
 Description:
     This module contains functions to manage logs
 

@@ -4,6 +4,7 @@
 Module: controls
 Auteur: creagleone
 Date: 2025-05-07
+
 Description:
     This module contains functions to controls input datas
 
@@ -117,6 +118,10 @@ def init_db_compare(self):
                         "2px solid transparent")
     common.update_style(self.ui.load_pages.row_3_groupbox, "border",
                         "2px solid transparent")
+    common.update_style(self.ui.load_pages.row_3_groupbox, "border",
+                        f"""2px solid {
+                            self.themes["app_color"]["grey"]
+                        }""")
 
 
 def db_compare(self):
