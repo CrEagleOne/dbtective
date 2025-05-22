@@ -32,7 +32,7 @@ from gui.core import settings
 
 
 def compare_db(mode: str, settings_db1: list, settings_db2: list,
-               segment: int | None, fetch: int) -> int:
+               segment: int | None, tables: list, fetch: int) -> int:
     """
     Execute database comparaison
 
@@ -41,10 +41,12 @@ def compare_db(mode: str, settings_db1: list, settings_db2: list,
         settings_db1 (list): Database connection parameters
         settings_db2 (list): Database connection parameters
         segment (int | None): Segment size
+        tables (int): List of tables to compare
         fetch (int): Fetch size
 
     Raises:
         exceptions.Warn: code 300 (data gap)
+        exceptions.Error: code 603 (No tables to compare)
 
     Returns:
         int: code 201 (No data gap)
@@ -61,8 +63,8 @@ def compare_db(mode: str, settings_db1: list, settings_db2: list,
 
     warn = False
 
-    tables = common.get_common_tables(
-        settings_db1, settings_db2)
+    if len(tables) == 0:
+        raise exceptions.Error(603)
 
     for table in tables:
         common.extract_to_csv(
@@ -97,14 +99,14 @@ def compare_db(mode: str, settings_db1: list, settings_db2: list,
                 differences = common.find_most_similar_pairs(data)
                 if len(differences) > 0:
                     path_outfile = os.path.join(
-                        outfile_folder, f"gap_{table}.txt")
+                        outfile_folder, f"column-mode_gap_{table}.txt")
                     common.create_gap_files(path_outfile, differences)
                     warn = True
             else:
                 if isinstance(data, pandas.DataFrame):
                     if not data.empty:
                         path_outfile = os.path.join(
-                            outfile_folder, f"gap_{table}.csv")
+                            outfile_folder, f"line-mode_gap_{table}.csv")
                         common.create_gap_files(path_outfile, data)
                         warn = True
 

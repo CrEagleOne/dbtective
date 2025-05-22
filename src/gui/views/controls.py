@@ -117,8 +117,6 @@ def init_db_compare(self):
     common.update_style(self.ui.setFetchSize, "border",
                         "2px solid transparent")
     common.update_style(self.ui.load_pages.row_3_groupbox, "border",
-                        "2px solid transparent")
-    common.update_style(self.ui.load_pages.row_3_groupbox, "border",
                         f"""2px solid {
                             self.themes["app_color"]["grey"]
                         }""")

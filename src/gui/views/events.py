@@ -40,6 +40,19 @@ from core.utils import config, exceptions, orders, common
 from core.database import oracle
 
 
+class KeyEventFilter(QtWidgets.QWidget):
+    key_pressed = QtCore.Signal(QtCore.QEvent)
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+    def eventFilter(self, source, event):
+        if event.type() == QtCore.QEvent.KeyPress:
+            self.key_pressed.emit(event)
+            return True
+        return super(KeyEventFilter, self).eventFilter(source, event)
+
+
 class MainEventHandler():
     def __init__(self, root):
         self.root = root
@@ -48,6 +61,9 @@ class MainEventHandler():
         self.settings_db2 = []
         self.use_segments = False
         self.worker = None
+
+        self.current_editable_row = -1
+        self.tables_list = []
 
         self.current_choice = None
         self.db_query = None
@@ -126,7 +142,61 @@ class MainEventHandler():
         self.ui.setCustomName.textChanged.connect(
             lambda: controls.oracle(self))
 
+        self.ui.tableWidget.cellClicked.connect(self.on_cell_clicked)
+        self.key_event_filter = KeyEventFilter(self.ui.tableWidget)
+        self.key_event_filter.key_pressed.connect(self.handle_key_press)
+        self.ui.tableWidget.installEventFilter(self.key_event_filter)
+        self.ui.select_all.clicked.connect(self.add_all_table)
+        self.ui.unselect_all.clicked.connect(self.ignore_all_table)
+
         self.ui.testDB.clicked.connect(self.test_db)
+
+    def on_cell_clicked(self, row, column):
+        self.current_editable_row = row
+
+    def handle_key_press(self, event):
+        if self.ui.tableWidget.hasFocus():
+            if event.key() == QtCore.Qt.Key_Delete:
+                text = QtCore.QCoreApplication.translate(
+                    "events", "Ignore")
+                if self.ui.tableWidget.item(
+                        self.current_editable_row, 0).text() != text:
+                    self.ui.tableWidget.setItem(
+                        self.current_editable_row, 0,
+                        QtWidgets.QTableWidgetItem(text))
+                    self.tables_list.remove(
+                        self.ui.tableWidget.item(self.current_editable_row,
+                                                 1).text())
+            elif event.key() == QtCore.Qt.Key_Backspace:
+                text = QtCore.QCoreApplication.translate(
+                    "events", "Compare")
+                if self.ui.tableWidget.item(
+                        self.current_editable_row, 0).text() != text:
+                    self.ui.tableWidget.setItem(
+                        self.current_editable_row, 0,
+                        QtWidgets.QTableWidgetItem(text))
+                    self.tables_list.append(
+                        self.ui.tableWidget.item(self.current_editable_row,
+                                                 1).text())
+        return
+
+    def add_all_table(self):
+        self.tables_list = []
+        text = QtCore.QCoreApplication.translate(
+            "events", "Compare")
+        for row in range(self.ui.tableWidget.rowCount()):
+            self.ui.tableWidget.setItem(
+                row, 0, QtWidgets.QTableWidgetItem(text))
+            self.tables_list.append(self.ui.tableWidget.item(row, 1).text())
+        return
+
+    def ignore_all_table(self):
+        self.tables_list = []
+        text = QtCore.QCoreApplication.translate(
+            "events", "Ignore")
+        for row in range(self.ui.tableWidget.rowCount()):
+            self.ui.tableWidget.setItem(
+                row, 0, QtWidgets.QTableWidgetItem(text))
 
     def update_db_list(self):
         self.db_query = "SELECT nom, connexion_type, settings FROM db_config"
@@ -146,6 +216,9 @@ class MainEventHandler():
         self.ui.setSegmentLength.blockSignals(True)
         self.ui.setFetchSize.blockSignals(True)
 
+        self.ui.tableWidget.setRowCount(0)
+        self.tables_list = []
+        self.current_editable_row = -1
         self.ui.setDB1.setCurrentIndex(-1)
         self.ui.setDB2.setCurrentIndex(-1)
         self.ui.setExtractionType.setChecked(False)
@@ -173,6 +246,9 @@ class MainEventHandler():
         """
         Test the connection to a database
         """
+        self.ui.testDB.setEnabled(False)
+        self.ui.clearDB.setEnabled(False)
+        self.ui.saveDB.setEnabled(False)
         settings = {}
         if self.current_choice == "Oracle":
             settings = {
@@ -185,6 +261,12 @@ class MainEventHandler():
             }
         self.worker = TestThread(settings)
         self.worker.signal_update.connect(self.popup)
+        self.worker.signal_update.connect(
+            lambda: self.ui.testDB.setEnabled(True))
+        self.worker.signal_update.connect(
+            lambda: self.ui.clearDB.setEnabled(True))
+        self.worker.signal_update.connect(
+            lambda: self.ui.saveDB.setEnabled(True))
         self.worker.start()
 
     def save_db(self):
@@ -212,7 +294,8 @@ class MainEventHandler():
             config.insert_query_db(query=query, args=args)
 
         except exceptions.Error as e:
-            WorkerThread.signal_update.emit("error", e.message)
+            # TODO: FIX that
+            TestThread.signal_update.emit("error", e.message)
         popups.display_info(exceptions.MESSAGES.get(100))
 
         self.update_db_list()
@@ -305,10 +388,21 @@ class MainEventHandler():
                 if password:
                     self.settings_db2[1]["password"] = password
 
+        if self.settings_db1 and self.settings_db2:
+            self.tables_list = []
+            self.worker = FiltersTablesThread(
+                self.settings_db1, self.settings_db2,
+                self.ui, self.tables_list)
+            self.worker.signal_update.connect(
+                self.popup)
+            self.worker.start()
+
     def execute_order_66(self):
-        texte = QtCore.QCoreApplication.translate("events",
-                                                  "Processing in progress...")
-        self.ui.logbar.log_label.setText(texte)
+        self.ui.compare.setEnabled(False)
+        self.ui.clear_data.setEnabled(False)
+        text = QtCore.QCoreApplication.translate("events",
+                                                 "Processing in progress...")
+        self.ui.logbar.log_label.setText(text)
         common.update_style(self.ui.logbar.log_label, "color",
                             self.themes["app_color"]["text_infos"])
 
@@ -323,29 +417,34 @@ class MainEventHandler():
             mode = "column"
 
         self.worker = WorkerThread(mode, self.settings_db1, self.settings_db2,
-                                   segment_length,
+                                   segment_length, self.tables_list,
                                    int(self.ui.setFetchSize.text()))
+
         self.worker.signal_update.connect(
             self.popup)
+        self.worker.signal_update.connect(
+            lambda: self.ui.compare.setEnabled(True))
+        self.worker.signal_update.connect(
+            lambda: self.ui.clear_data.setEnabled(True))
         self.worker.start()
 
-    def popup(self, display_type, texte):
+    def popup(self, display_type, text):
         log = QtCore.QCoreApplication.translate("events",
                                                 "End of treatment")
         self.ui.logbar.log_label.setText(log)
 
         if display_type == "error":
-            popups.display_error(texte)
+            popups.display_error(text)
         elif display_type == "warn":
             if self.ui.hashmode.isChecked():
-                popups.display_warn(texte, False)
+                popups.display_warn(text, False)
             else:
-                rtn = popups.display_warn(texte)
+                rtn = popups.display_warn(text)
                 if rtn:
                     folder_path = common.get_work_folder("gap")
                     common.open_folders(folder_path)
         else:
-            popups.display_info(texte)
+            popups.display_info(text)
         self.ui.logbar.log_label.setText("")
         common.update_style(self.ui.logbar.log_label, "color",
                             self.themes["app_color"]["text_description"])
@@ -365,11 +464,11 @@ class TestThread(QtCore.QThread):
             content = oracle.get_unique_data(self.settings, query=query)
             ping_time = (time.time() - start_time) * 1000
 
-            texte = f"""Server : {content} \n
+            text = f"""Server : {content} \n
             Ping response time : {ping_time:.2f} ms"""
 
             message = QtCore.QCoreApplication.translate(
-                "exceptions", texte)
+                "exceptions", text)
 
         except exceptions.Error as e:
             self.signal_update.emit("error", e.message)
@@ -377,15 +476,71 @@ class TestThread(QtCore.QThread):
             self.signal_update.emit("info", message)
 
 
+class FiltersTablesThread(QtCore.QThread):
+    signal_update = QtCore.Signal(str, str)
+    # show_signal = QtCore.Signal()
+
+    def __init__(self, settings_db1, settings_db2, content, table_list):
+        super().__init__()
+        self.settings_db1 = settings_db1
+        self.settings_db2 = settings_db2
+        self.content = content
+        self.tables_list = table_list
+
+        self.signal_update.connect(self.show_error)
+
+    def show_error(self):
+        self.content.tableWidget.setRowCount(0)
+        self.content.tableWidget.setRowCount(1)
+        text = QtCore.QCoreApplication.translate(
+            "events", "Unable to retrieve common tables")
+        item = QtWidgets.QTableWidgetItem(text)
+        item.setFont(QtGui.QFont("Arial", 20, QtGui.QFont.Bold))
+        item.setForeground(QtGui.QColor(255, 0, 0))
+        item.setTextAlignment(QtCore.Qt.AlignCenter)
+        self.content.tableWidget.setSpan(0, 0, 1,
+                                         self.content.tableWidget.columnCount()
+                                         )
+        self.content.tableWidget.setItem(0, 0, item)
+
+    def run(self):
+        try:
+            self.content.tableWidget.setRowCount(0)
+            data = common.get_common_tables(
+                self.settings_db1, self.settings_db2)
+            self.content.tableWidget.setRowCount(len(data))
+            for row_idx, (key, values) in enumerate(data.items()):
+                text = QtCore.QCoreApplication.translate(
+                    "events", "Compare")
+                self.content.tableWidget.setItem(
+                    row_idx, 0, QtWidgets.QTableWidgetItem(text))
+                self.content.tableWidget.setItem(
+                    row_idx, 1, QtWidgets.QTableWidgetItem(key))
+                self.tables_list.append(key)
+
+                for col_idx, value in enumerate(values):
+                    self.content.tableWidget.setItem(
+                        row_idx, col_idx + 2,
+                        QtWidgets.QTableWidgetItem(str(value)))
+
+        except exceptions.Error as e:
+            # self.show_error()
+            self.signal_update.emit("error", e.message)
+        # else:
+        #     self.show_signal.emit()
+
+
 class WorkerThread(QtCore.QThread):
     signal_update = QtCore.Signal(str, str)
 
-    def __init__(self, mode, settings_db1, settings_db2, segment, fetch):
+    def __init__(self, mode, settings_db1, settings_db2, segment,
+                 compare_tables, fetch):
         super().__init__()
         self.mode = mode
         self.settings_db1 = settings_db1
         self.settings_db2 = settings_db2
         self.segment = segment
+        self.compare_tables = compare_tables
         self.fetch = fetch
 
     def run(self):
@@ -393,6 +548,7 @@ class WorkerThread(QtCore.QThread):
             resultat = orders.compare_db(self.mode, self.settings_db1,
                                          self.settings_db2,
                                          self.segment,
+                                         self.compare_tables,
                                          self.fetch)
         except exceptions.Error as e:
             self.signal_update.emit("error", e.message)
