@@ -328,7 +328,38 @@
             </layout>
            </item>
            <item>
-            <layout class="QHBoxLayout" name="row_4_layout"/>
+            <layout class="QVBoxLayout" name="row_4_layout">
+             <item>
+              <widget class="QGroupBox" name="table_filter">
+               <property name="title">
+                <string>List of tables</string>
+               </property>
+               <layout class="QVBoxLayout" name="table_filter_layout">
+                <property name="spacing">
+                 <number>0</number>
+                </property>
+                <property name="sizeConstraint">
+                 <enum>QLayout::SizeConstraint::SetNoConstraint</enum>
+                </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>2</number>
+                </property>
+                <item>
+                 <layout class="QHBoxLayout" name="table_buttons"/>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
            </item>
            <item>
             <layout class="QHBoxLayout" name="row_5_layout"/>
@@ -365,8 +396,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>832</width>
-            <height>697</height>
+            <width>274</width>
+            <height>222</height>
            </rect>
           </property>
           <property name="styleSheet">

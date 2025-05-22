@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from PySide6 import QtWidgets
+from PySide6 import QtWidgets, QtCore
 
 
 class PyTableWidget(QtWidgets.QTableWidget):
@@ -54,7 +54,12 @@ class PyTableWidget(QtWidgets.QTableWidget):
             border-bottom: 1px solid {_bottom_line_color};
             margin-bottom: 1px;
         }}
-
+        QHeaderView::down-arrow
+        {{
+        }}
+        QHeaderView::up-arrow
+        {{
+        }}
         QScrollBar:horizontal {{
             border: none;
             background: {_scroll_bar_bg_color};
@@ -144,9 +149,42 @@ class PyTableWidget(QtWidgets.QTableWidget):
         grid_line_color="#555",
         scroll_bar_bg_color="#FFF",
         scroll_bar_btn_color="#3333",
-        context_color="#00ABE8"
+        context_color="#00ABE8",
+        headers=[]
     ):
         super().__init__()
+
+        self.setColumnCount(len(headers))
+
+        self.setSizeAdjustPolicy(
+            QtWidgets.QAbstractScrollArea.SizeAdjustPolicy.AdjustToContents)
+
+        self.setEditTriggers(
+            QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
+
+        self.setSelectionMode(
+            QtWidgets.QAbstractItemView.SelectionMode.SingleSelection)
+
+        self.setSelectionBehavior(
+            QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows)
+
+        self.setShowGrid(True)
+        self.setGridStyle(QtCore.Qt.PenStyle.NoPen)
+        self.setSortingEnabled(True)
+
+        self.setCornerButtonEnabled(True)
+        self.horizontalHeader().setCascadingSectionResizes(True)
+        self.horizontalHeader().setMinimumSectionSize(100)
+        self.horizontalHeader().setDefaultSectionSize(100)
+        self.horizontalHeader().setProperty(u"showSortIndicator", True)
+        self.horizontalHeader().setStretchLastSection(True)
+        self.verticalHeader().setVisible(False)
+
+        for i, column in enumerate(headers):
+            item = QtWidgets.QTableWidgetItem()
+            item.setTextAlignment(QtCore.Qt.AlignCenter)
+            item.setText(column)
+            self.setHorizontalHeaderItem(i, item)
 
         self.set_stylesheet(
             radius,

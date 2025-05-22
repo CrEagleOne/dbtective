@@ -4,7 +4,7 @@ from PySide6 import QtCore, QtWidgets, QtSvgWidgets
 from gui.widgets import (py_window, py_left_menu, py_left_column,
                          py_title_bar, py_logbar, py_grips, py_push_button,
                          py_line_edit, py_toggle, py_combobox, py_radio_button,
-                         py_label, py_tool_button)
+                         py_label, py_tool_button, py_table_widget)
 from gui.views import ui_main_pages, ui_right_column
 from gui.core import functions, settings, themes
 from core.utils import common
@@ -397,6 +397,57 @@ class UI_MainWindow(object):
         self.setDB2.setMinimumWidth(200)
         self.setDB2.setMaximumWidth(200)
 
+        self.select_all = py_push_button.PyPushButton(
+            text="Select all",
+            radius=8,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color="transparent",
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_four"],
+            bg_color_disabled=self.themes["app_color"]["grey"]
+        )
+        self.select_all.setMinimumHeight(30)
+        self.select_all.setMaximumHeight(30)
+        self.select_all.setMinimumWidth(100)
+        self.select_all.setMaximumWidth(100)
+
+        self.unselect_all = py_push_button.PyPushButton(
+            text="Unselect all",
+            radius=8,
+            color=self.themes["app_color"]["text_foreground"],
+            bg_color="transparent",
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_four"],
+            bg_color_disabled=self.themes["app_color"]["grey"]
+        )
+        self.unselect_all.setMinimumHeight(30)
+        self.unselect_all.setMaximumHeight(30)
+        self.unselect_all.setMinimumWidth(100)
+        self.unselect_all.setMaximumWidth(100)
+
+        self.tableWidget = py_table_widget.PyTableWidget(
+            radius=8,
+            color=self.themes["app_color"]["text_foreground"],
+            selection_color=self.themes["app_color"]["context_color"],
+            bg_color=self.themes["app_color"]["bg_two"],
+            header_horizontal_color=self.themes["app_color"]["dark_two"],
+            header_vertical_color=self.themes["app_color"]["bg_three"],
+            bottom_line_color=self.themes["app_color"]["bg_three"],
+            grid_line_color=self.themes["app_color"]["bg_one"],
+            scroll_bar_bg_color=self.themes["app_color"]["bg_one"],
+            scroll_bar_btn_color=self.themes["app_color"]["dark_four"],
+            context_color=self.themes["app_color"]["context_color"],
+            headers=["Status", "Table name", "Size in DB1", "Size in DB2",
+                     "Cols in DB1", "Cols in DB2", "Rows in DB1",
+                     "Rows in DB2"]
+        )
+        self.tableWidget.horizontalHeader().setSectionResizeMode(
+            QtWidgets.QHeaderView.Stretch)
+        self.tableWidget.setSelectionMode(
+            QtWidgets.QAbstractItemView.ExtendedSelection)
+        self.tableWidget.setSelectionBehavior(
+            QtWidgets.QAbstractItemView.SelectRows)
+
         self.label_extraction = py_label.PyLabel(
             text="Multiple queries",
             radius=8,
@@ -447,13 +498,14 @@ class UI_MainWindow(object):
             selection_color=self.themes["app_color"]["white"],
             bg_color=self.themes["app_color"]["dark_one"],
             bg_color_active=self.themes["app_color"]["dark_three"],
-            context_color=self.themes["app_color"]["context_color"]
+            context_color=self.themes["app_color"]["context_color"],
+            active=False
+
         )
         self.setSegmentLength.setMinimumHeight(40)
         self.setSegmentLength.setMaximumHeight(40)
         self.setSegmentLength.setMinimumWidth(200)
         self.setSegmentLength.setMaximumWidth(200)
-        self.setSegmentLength.setDisabled(True)
 
         self.label_fetch = py_label.PyLabel(
             text="Fetch Size",
@@ -583,10 +635,20 @@ class UI_MainWindow(object):
         self.load_pages.processing.addWidget(self.hashmode)
         self.load_pages.processing.addWidget(self.linemode)
         self.load_pages.processing.addWidget(self.columnmode)
-        self.load_pages.row_4_layout.setAlignment(QtCore.Qt.AlignRight)
-        self.load_pages.row_4_layout.addWidget(self.clear_data)
-        self.load_pages.row_4_layout.addWidget(self.compare)
-        self.load_pages.description_label.setMaximumHeight(200)
+        self.load_pages.row_5_layout.setAlignment(QtCore.Qt.AlignRight)
+        self.load_pages.row_5_layout.addWidget(self.clear_data)
+        self.load_pages.row_5_layout.addWidget(self.compare)
+        self.load_pages.description_label.setMaximumHeight(100)
+
+        self.load_pages.table_buttons.addWidget(self.select_all)
+        self.load_pages.table_buttons.addWidget(self.unselect_all)
+        self.load_pages.table_buttons.setAlignment(QtCore.Qt.AlignRight)
+
+        self.load_pages.table_filter.setStyleSheet(
+            f"""QGroupBox {{border-radius: 8px;
+            border: 2px solid {self.themes["app_color"]["grey"]}}};""")
+
+        self.load_pages.table_filter_layout.addWidget(self.tableWidget)
 
     def setup_page3(self):
         self.load_pages.oracle.hide()
@@ -852,7 +914,7 @@ class UI_MainWindow(object):
             self.isSavePwdOracle, 2, 2)
 
         self.labelCustomName = py_label.PyLabel(
-            text="Connexion name",
+            text="Connection name",
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],

@@ -169,8 +169,23 @@ class Ui_MainPages(object):
 
         self.verticalLayout.addLayout(self.row_3_layout)
 
-        self.row_4_layout = QHBoxLayout()
+        self.row_4_layout = QVBoxLayout()
         self.row_4_layout.setObjectName(u"row_4_layout")
+        self.table_filter = QGroupBox(self.contents)
+        self.table_filter.setObjectName(u"table_filter")
+        self.table_filter_layout = QVBoxLayout(self.table_filter)
+        self.table_filter_layout.setSpacing(0)
+        self.table_filter_layout.setObjectName(u"table_filter_layout")
+        self.table_filter_layout.setSizeConstraint(QLayout.SizeConstraint.SetNoConstraint)
+        self.table_filter_layout.setContentsMargins(0, 0, 0, 2)
+        self.table_buttons = QHBoxLayout()
+        self.table_buttons.setObjectName(u"table_buttons")
+
+        self.table_filter_layout.addLayout(self.table_buttons)
+
+
+        self.row_4_layout.addWidget(self.table_filter)
+
 
         self.verticalLayout.addLayout(self.row_4_layout)
 
@@ -199,7 +214,7 @@ class Ui_MainPages(object):
         self.scrollArea.setWidgetResizable(True)
         self.contents_2 = QWidget()
         self.contents_2.setObjectName(u"contents_2")
-        self.contents_2.setGeometry(QRect(0, 0, 832, 697))
+        self.contents_2.setGeometry(QRect(0, 0, 274, 222))
         self.contents_2.setStyleSheet(u"background: transparent;")
         self.verticalLayout_3 = QVBoxLayout(self.contents_2)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
@@ -313,6 +328,7 @@ class Ui_MainPages(object):
         self.description_label.setText(QCoreApplication.translate("MainPages", u"Complete the following fields to start comparing the data", None))
         self.row_2_groupbox.setTitle(QCoreApplication.translate("MainPages", u"Extraction", None))
         self.row_3_groupbox.setTitle(QCoreApplication.translate("MainPages", u"Processing", None))
+        self.table_filter.setTitle(QCoreApplication.translate("MainPages", u"List of tables", None))
         self.title_label_2.setText(QCoreApplication.translate("MainPages", u"add a new Database Config", None))
         self.description_label_2.setText(QCoreApplication.translate("MainPages", u"<html><head/><body><p><span style=\" font-size:9pt;\">To get started, choose the database from the following choice.<br/>Then, fill in the fields and click Save</span></p></body></html>", None))
         self.authentification.setTitle(QCoreApplication.translate("MainPages", u"Authentification", None))

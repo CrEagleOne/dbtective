@@ -5,7 +5,7 @@ from PySide6 import QtWidgets
 
 class PyLineEdit(QtWidgets.QLineEdit):
     style = '''
-    QLineEdit {{
+        QLineEdit {{
             background-color: {_bg_color};
             border-radius: {_radius}px;
             border: {_border_size}px solid transparent;
@@ -19,6 +19,9 @@ class PyLineEdit(QtWidgets.QLineEdit):
             border: {_border_size}px solid {_context_color};
             background-color: {_bg_color_active};
         }}
+        QLineEdit:disabled {{
+            background-color: {_bg_color_inactive};
+        }}
     '''
 
     def __init__(
@@ -31,9 +34,11 @@ class PyLineEdit(QtWidgets.QLineEdit):
         selection_color="#FFF",
         bg_color="#333",
         bg_color_active="#222",
+        bg_color_inactive="#6f7175",
         context_color="#00ABE8",
         input_mask=None,
         echomode="normal",
+        active=True
     ):
         super().__init__()
 
@@ -53,6 +58,9 @@ class PyLineEdit(QtWidgets.QLineEdit):
 
         self.setCursorPosition(0)
 
+        if not active:
+            self.setDisabled(True)
+
         self.set_stylesheet(
             radius,
             border_size,
@@ -60,6 +68,7 @@ class PyLineEdit(QtWidgets.QLineEdit):
             selection_color,
             bg_color,
             bg_color_active,
+            bg_color_inactive,
             context_color
         )
 
@@ -71,6 +80,7 @@ class PyLineEdit(QtWidgets.QLineEdit):
         selection_color,
         bg_color,
         bg_color_active,
+        bg_color_inactive,
         context_color
     ):
         style_format = self.style.format(
@@ -80,6 +90,7 @@ class PyLineEdit(QtWidgets.QLineEdit):
             _selection_color=selection_color,
             _bg_color=bg_color,
             _bg_color_active=bg_color_active,
+            _bg_color_inactive=bg_color_inactive,
             _context_color=context_color
         )
         self.setStyleSheet(style_format)

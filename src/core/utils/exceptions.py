@@ -73,6 +73,8 @@ MESSAGES = {
         "exceptions", "settings file not found"),
     602: QtCore.QCoreApplication.translate(
         "exceptions", "themes file not found"),
+    603: QtCore.QCoreApplication.translate(
+        "exceptions", "No tables to compare"),
 
     999: QtCore.QCoreApplication.translate(
         "exceptions", "Unanticipated error - check logs"),
