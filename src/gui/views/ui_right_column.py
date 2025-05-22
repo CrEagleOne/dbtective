@@ -1,23 +1,22 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-# Form generated from reading UI file 'right_column.ui'
+## Form generated from reading UI file 'right_column.ui'
 ##
-# Created by: Qt User Interface Compiler version 6.9.0
+## Created by: Qt User Interface Compiler version 6.9.0
 ##
-# WARNING! All changes made in this file will be lost when recompiling UI file!
+## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-                            QMetaObject, QObject, QPoint, QRect,
-                            QSize, QTime, QUrl, Qt)
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
 from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-                           QFont, QFontDatabase, QGradient, QIcon,
-                           QImage, QKeySequence, QLinearGradient, QPainter,
-                           QPalette, QPixmap, QRadialGradient, QTransform)
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QLabel, QSizePolicy, QStackedWidget,
-                               QVBoxLayout, QWidget)
-
+    QVBoxLayout, QWidget)
 
 class Ui_RightColumn(object):
     def setupUi(self, RightColumn):
@@ -87,18 +86,18 @@ class Ui_RightColumn(object):
 
         self.main_pages_layout.addWidget(self.menus)
 
+
         self.retranslateUi(RightColumn)
 
         self.menus.setCurrentIndex(1)
+
 
         QMetaObject.connectSlotsByName(RightColumn)
     # setupUi
 
     def retranslateUi(self, RightColumn):
-        RightColumn.setWindowTitle(
-            QCoreApplication.translate("RightColumn", u"Form", None))
-        self.label_1.setText(QCoreApplication.translate(
-            "RightColumn", u"Menu 1 - Right Menu", None))
-        self.label_2.setText(QCoreApplication.translate(
-            "RightColumn", u"Menu 2 - Right Menu", None))
+        RightColumn.setWindowTitle(QCoreApplication.translate("RightColumn", u"Form", None))
+        self.label_1.setText(QCoreApplication.translate("RightColumn", u"Menu 1 - Right Menu", None))
+        self.label_2.setText(QCoreApplication.translate("RightColumn", u"Menu 2 - Right Menu", None))
     # retranslateUi
+

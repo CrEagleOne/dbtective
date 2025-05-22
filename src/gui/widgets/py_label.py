@@ -33,7 +33,7 @@ class PyLabel(QtWidgets.QLabel):
         bg_color="#333",
         bg_color_active="#222",
         context_color="#00ABE8",
-        font_size="9px"
+        font_size="12px"
     ):
         super().__init__()
 

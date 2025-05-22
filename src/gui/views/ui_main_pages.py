@@ -174,10 +174,10 @@ class Ui_MainPages(object):
         self.table_filter = QGroupBox(self.contents)
         self.table_filter.setObjectName(u"table_filter")
         self.table_filter_layout = QVBoxLayout(self.table_filter)
-        self.table_filter_layout.setSpacing(0)
+        self.table_filter_layout.setSpacing(2)
         self.table_filter_layout.setObjectName(u"table_filter_layout")
         self.table_filter_layout.setSizeConstraint(QLayout.SizeConstraint.SetNoConstraint)
-        self.table_filter_layout.setContentsMargins(0, 0, 0, 2)
+        self.table_filter_layout.setContentsMargins(0, 4, 0, 2)
         self.table_buttons = QHBoxLayout()
         self.table_buttons.setObjectName(u"table_buttons")
 
@@ -214,7 +214,7 @@ class Ui_MainPages(object):
         self.scrollArea.setWidgetResizable(True)
         self.contents_2 = QWidget()
         self.contents_2.setObjectName(u"contents_2")
-        self.contents_2.setGeometry(QRect(0, 0, 274, 222))
+        self.contents_2.setGeometry(QRect(0, 0, 832, 697))
         self.contents_2.setStyleSheet(u"background: transparent;")
         self.verticalLayout_3 = QVBoxLayout(self.contents_2)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
@@ -254,17 +254,17 @@ class Ui_MainPages(object):
 
         self.oracle_layout.addLayout(self.settings_oracle)
 
-        self.authentification = QGroupBox(self.oracle)
-        self.authentification.setObjectName(u"authentification")
-        self.verticalLayout_4 = QVBoxLayout(self.authentification)
+        self.authentication = QGroupBox(self.oracle)
+        self.authentication.setObjectName(u"authentication")
+        self.verticalLayout_4 = QVBoxLayout(self.authentication)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.authentification_layout = QGridLayout()
-        self.authentification_layout.setObjectName(u"authentification_layout")
+        self.authentication_layout = QGridLayout()
+        self.authentication_layout.setObjectName(u"authentication_layout")
 
-        self.verticalLayout_4.addLayout(self.authentification_layout)
+        self.verticalLayout_4.addLayout(self.authentication_layout)
 
 
-        self.oracle_layout.addWidget(self.authentification)
+        self.oracle_layout.addWidget(self.authentication)
 
 
         self.verticalLayout_5.addLayout(self.oracle_layout)
@@ -331,6 +331,6 @@ class Ui_MainPages(object):
         self.table_filter.setTitle(QCoreApplication.translate("MainPages", u"List of tables", None))
         self.title_label_2.setText(QCoreApplication.translate("MainPages", u"add a new Database Config", None))
         self.description_label_2.setText(QCoreApplication.translate("MainPages", u"<html><head/><body><p><span style=\" font-size:9pt;\">To get started, choose the database from the following choice.<br/>Then, fill in the fields and click Save</span></p></body></html>", None))
-        self.authentification.setTitle(QCoreApplication.translate("MainPages", u"Authentification", None))
+        self.authentication.setTitle(QCoreApplication.translate("MainPages", u"Authentication", None))
     # retranslateUi
 

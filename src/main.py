@@ -120,7 +120,7 @@ def exception_hook(exctype: type[BaseException],
     """
     error_message = "".join(traceback.format_exception(exctype, value, tb))
     logs.log_critical(error_message)
-    exceptions.ErrorSignal(exceptions.MESSAGES.get(999))
+    exceptions.ErrorSignal(exceptions.Error(999))
 
 
 def main():
@@ -138,6 +138,11 @@ def main():
         config.setup_db()
     except exceptions.Error:
         sys.exit(0)
+
+    translator = QtCore.QTranslator()
+    locale = common.get_current_locale()
+    translator.load(f"src/gui/locales/{locale}.qm")
+    app.installTranslator(translator)
 
     logs.log_config()
     window = MainWindow()

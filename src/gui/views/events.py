@@ -83,6 +83,8 @@ class MainEventHandler():
         self.ui.compare.clicked.connect(lambda: controls.db_compare(self))
         self.ui.compare.clicked.connect(self.execute_order_66)
 
+        self.ui.setlocale.activated.connect(self.on_locale_changed)
+
         self.ui.setDB1.activated.connect(lambda: controls.db_compare(self))
         self.ui.setDB2.activated.connect(lambda: controls.db_compare(self))
         self.ui.setExtractionType.stateChanged.connect(
@@ -294,12 +296,11 @@ class MainEventHandler():
             config.insert_query_db(query=query, args=args)
 
         except exceptions.Error as e:
-            # TODO: FIX that
-            TestThread.signal_update.emit("error", e.message)
-        popups.display_info(exceptions.MESSAGES.get(100))
-
-        self.update_db_list()
-        self.clear_db()
+            popups.display_error(str(e.message))
+        else:
+            popups.display_info(str(exceptions.INFO(100)))
+            self.update_db_list()
+            self.clear_db()
 
     def clear_db(self):
         """
@@ -325,13 +326,13 @@ class MainEventHandler():
         self.ui.setUsernameOracle.blockSignals(True)
         self.ui.setCustomName.blockSignals(True)
 
-        self.ui.setHostOracle.setText("")
+        self.ui.setHostOracle.setText("localhost")
         self.ui.setPortOracle.setText("1521")
-        self.ui.setDBOracle.setText("")
+        self.ui.setDBOracle.setText("ORCL")
         self.ui.setSIDOracle.setCurrentIndex(0)
-        self.ui.setUsernameOracle.setText("")
+        self.ui.setUsernameOracle.setText("system")
         self.ui.setPasswordOracle.setText("")
-        self.ui.setCustomName.setText("")
+        self.ui.setCustomName.setText("ORCL")
 
         for btn in self.ui.load_pages.contents_2.findChildren(
                 QtWidgets.QToolButton):
@@ -360,11 +361,18 @@ class MainEventHandler():
         else:
             self.ui.setSegmentLength.setEnabled(False)
 
+    def on_locale_changed(self):
+        query = """UPDATE settings
+            SET [values] = ? where [key] = ?"""
+
+        config.update_settings(
+            query, (self.ui.setlocale.currentText(), "locale",))
+
     def on_db_changed(self, db):
         title = QtCore.QCoreApplication.translate(
             "events", "Input password")
         message = QtCore.QCoreApplication.translate(
-            "events", "To continue, enter the password :")
+            "events", "Please enter a password")
         if db == "db1":
             self.settings_db1 = next(
                 ([db_type, ast.literal_eval(settings),
@@ -464,11 +472,9 @@ class TestThread(QtCore.QThread):
             content = oracle.get_unique_data(self.settings, query=query)
             ping_time = (time.time() - start_time) * 1000
 
-            text = f"""Server : {content} \n
-            Ping response time : {ping_time:.2f} ms"""
-
             message = QtCore.QCoreApplication.translate(
-                "exceptions", text)
+                "events", f"""Server : {content} \n
+            Ping response time : {ping_time:.2f} ms""")
 
         except exceptions.Error as e:
             self.signal_update.emit("error", e.message)

@@ -336,7 +336,7 @@
                </property>
                <layout class="QVBoxLayout" name="table_filter_layout">
                 <property name="spacing">
-                 <number>0</number>
+                 <number>2</number>
                 </property>
                 <property name="sizeConstraint">
                  <enum>QLayout::SizeConstraint::SetNoConstraint</enum>
@@ -345,7 +345,7 @@
                  <number>0</number>
                 </property>
                 <property name="topMargin">
-                 <number>0</number>
+                 <number>4</number>
                 </property>
                 <property name="rightMargin">
                  <number>0</number>
@@ -396,8 +396,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>274</width>
-            <height>222</height>
+            <width>832</width>
+            <height>697</height>
            </rect>
           </property>
           <property name="styleSheet">
@@ -461,13 +461,13 @@
                    <layout class="QGridLayout" name="settings_oracle"/>
                   </item>
                   <item>
-                   <widget class="QGroupBox" name="authentification">
+                   <widget class="QGroupBox" name="authentication">
                     <property name="title">
-                     <string>Authentification</string>
+                     <string>Authentication</string>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_4">
                      <item>
-                      <layout class="QGridLayout" name="authentification_layout"/>
+                      <layout class="QGridLayout" name="authentication_layout"/>
                      </item>
                     </layout>
                    </widget>
