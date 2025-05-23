@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/creagleone/dbtective/compare/v1.1.1...v1.1.2) (2025-05-23)
+
+### 🐛 Bug Fixes
+
+* Fixed robot access rights ([02a3726](https://github.com/creagleone/dbtective/commit/02a3726c2b3afc74d8930e154722ed08451d0fde))
+* **pages:** Fix github pages ([f0bc68a](https://github.com/creagleone/dbtective/commit/f0bc68a1174547521530bfe8c0c05e09dcab163d))
+
 ## [1.1.1](https://github.com/creagleone/dbtective/compare/v1.1.0...v1.1.1) (2025-05-23)
 
 ### 🐛 Bug Fixes
