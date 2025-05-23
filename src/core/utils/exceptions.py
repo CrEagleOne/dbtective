@@ -22,64 +22,6 @@ Notes:
 from PySide6 import QtCore
 from core.utils import logs
 
-# MESSAGES = {
-#     100: QtCore.QCoreApplication.translate(
-#         "exceptions", "Backup successfully"),
-#     200: QtCore.QCoreApplication.translate(
-#         "exceptions", "Treatment completed successfully"),
-#     201: QtCore.QCoreApplication.translate(
-#         "exceptions", "No discrepancies were found"),
-
-#     300: QtCore.QCoreApplication.translate(
-#         "exceptions", "Discrepancies were found"),
-
-#     400: QtCore.QCoreApplication.translate(
-#         "exceptions", "Poorly formed or invalid SQL query"),
-#     401: QtCore.QCoreApplication.translate(
-#         "exceptions", "An error was occured"),
-#     402: QtCore.QCoreApplication.translate(
-#         "exceptions", "UNIQUE constraint failed"),
-#     403: QtCore.QCoreApplication.translate(
-#         "exceptions", "Syntax error"),
-#     404: QtCore.QCoreApplication.translate(
-#         "exceptions", "Table or column not found"),
-#     405: QtCore.QCoreApplication.translate(
-#         "exceptions", "Incorrect database config"),
-#     406: QtCore.QCoreApplication.translate(
-#         "exceptions", "Data type mismatch"),
-#     407: QtCore.QCoreApplication.translate(
-#         "exceptions", "Conversion error"),
-#     408: QtCore.QCoreApplication.translate(
-#         "exceptions", "Transaction error"),
-
-#     500: QtCore.QCoreApplication.translate(
-#         "exceptions", "Failed to connect to database"),
-#     501: QtCore.QCoreApplication.translate(
-#         "exceptions", "Database temporarily unavailable"),
-#     502: QtCore.QCoreApplication.translate(
-#         "exceptions", "Out of memory error"),
-#     503: QtCore.QCoreApplication.translate(
-#         "exceptions", "Disk I/O error"),
-#     504: QtCore.QCoreApplication.translate(
-#         "exceptions", "No active Oracle listener"),
-#     505: QtCore.QCoreApplication.translate(
-#         "exceptions", "Account locked"),
-#     506: QtCore.QCoreApplication.translate(
-#         "exceptions", "Incorrect username or password"),
-
-#     600: QtCore.QCoreApplication.translate(
-#         "exceptions", "System not supported"),
-#     601: QtCore.QCoreApplication.translate(
-#         "exceptions", "Settings file not found"),
-#     602: QtCore.QCoreApplication.translate(
-#         "exceptions", "Themes file not found"),
-#     603: QtCore.QCoreApplication.translate(
-#         "exceptions", "No tables to compare"),
-
-#     999: QtCore.QCoreApplication.translate(
-#         "exceptions", "Unanticipated error - check logs"),
-# }
-
 
 class ErrorSignal(QtCore.QObject):
     """
@@ -152,6 +94,31 @@ class Error(Exception):
 
         Args:
             code (str): The error code used to fetch the corresponding message
+
+                Possible values:
+                    - 400: Poorly formed or invalid SQL query
+                    - 401: An error was occured
+                    - 402: UNIQUE constraint failed
+                    - 403: Syntax error
+                    - 404: Table or column not found
+                    - 405: Incorrect database config
+                    - 406: Data type mismatch
+                    - 407: Conversion error
+                    - 408: Transaction error
+                    - 500: Failed to connect to database
+                    - 501: Database temporarily unavailable
+                    - 502: Out of memory error
+                    - 503: Disk I/O error
+                    - 504: No active Oracle listener
+                    - 505: Account locked
+                    - 506: Incorrect username or password
+                    - 600: System not supported
+                    - 601: Settings file not found
+                    - 602: Themes file not found
+                    - 603: No tables to compare
+                    - 604: Error occurring during data extraction
+                    - 999: Unanticipated error - check logs
+
             system (str | None, optional): System context for logging
         """
 
@@ -230,8 +197,10 @@ class Warn(Exception):
         warning signaling
 
         Args:
-            code (str): The warning code used to fetch the
-            corresponding message
+            code (str): The warn code used to fetch the corresponding message
+
+                Possible values:
+                    300: Discrepancies were found
         """
         super().__init__(code)
 
@@ -257,8 +226,13 @@ class INFO:
         info signaling
 
         Args:
-            code (str): The info code used to fetch the
-            corresponding message
+            code (str): The info code used to fetch the corresponding message
+
+                Possible values:
+                    - 100: Backup successfully
+                    - 101: Backup successfully
+                    - 200: Treatment completed successfully
+                    - 201: No discrepancies were found
         """
 
         self.info = {

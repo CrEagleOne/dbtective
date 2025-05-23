@@ -94,6 +94,7 @@
 <span class="sd">    - QtWidgets (PySide6)</span>
 <span class="sd">    - oracle.py</span>
 <span class="sd">    - exceptions.py</span>
+<span class="sd">    - config.py</span>
 
 <span class="sd">Usage Example:</span>
 <span class="sd">    update_style(widget, &quot;border&quot;, &quot;2px solid red&quot;)</span>
@@ -115,10 +116,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">PySide6</span><span class="w"> </span><span class="kn">import</span> <span class="n">QtWidgets</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">core.database</span><span class="w"> </span><span class="kn">import</span> <span class="n">oracle</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">core.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">exceptions</span>
-
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s2">&quot;..&quot;</span><span class="p">,</span> <span class="s2">&quot;..&quot;</span><span class="p">)))</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">core.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">exceptions</span><span class="p">,</span> <span class="n">config</span>
 
 
 <div class="viewcode-block" id="get_file_size">
@@ -322,8 +320,6 @@
         <span class="n">base_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
             <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">))</span>
 
-    <span class="c1"># base_path = sys._MEIPASS if hasattr(</span>
-    <span class="c1">#     sys, &quot;_MEIPASS&quot;) else os.path.abspath(&quot;.&quot;)</span>
     <span class="n">full_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_path</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">full_path</span><span class="p">):</span>
@@ -390,6 +386,25 @@
     <span class="n">path</span> <span class="o">=</span> <span class="n">resource_path</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">image_name</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">image</span></div>
+
+
+
+<div class="viewcode-block" id="set_locale">
+<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.common.set_locale">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">set_locale</span><span class="p">(</span><span class="n">translate_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the absolute path of the application translation file</span>
+
+<span class="sd">    Parameters :</span>
+<span class="sd">        icon_name (str) : The name of the icon.</span>
+
+<span class="sd">    Returns :</span>
+<span class="sd">        str : The path to the image.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">folder</span> <span class="o">=</span> <span class="s2">&quot;src/gui/locales/&quot;</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">resource_path</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
+    <span class="n">translate_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">translate_name</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">translate_file</span></div>
 
 
 
@@ -611,6 +626,43 @@
 
     <span class="n">differences</span> <span class="o">=</span> <span class="n">compare_pairs</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">pairs</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">differences</span></div>
+
+
+
+<div class="viewcode-block" id="get_current_locale">
+<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.common.get_current_locale">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_current_locale</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves the current locale setting from the configuration</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: The current locale setting</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;SELECT [values] from settings where [key] = ?&quot;</span>
+    <span class="k">return</span> <span class="n">config</span><span class="o">.</span><span class="n">get_settings</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;locale&quot;</span><span class="p">,))</span></div>
+
+
+
+<div class="viewcode-block" id="get_all_locales">
+<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.common.get_all_locales">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_all_locales</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;src/gui/locales&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves all available locales from the specified directory</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        path (str, optional): The path to the directory containing locale files</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: A list of available locales, with the current locale first</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">locale</span> <span class="o">=</span> <span class="n">get_current_locale</span><span class="p">()</span>
+    <span class="n">folder</span> <span class="o">=</span> <span class="n">resource_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">translations</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;en_US&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">f</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span>
+        <span class="n">folder</span><span class="p">)</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.qm&quot;</span><span class="p">)]</span>
+
+    <span class="n">translations</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">translations</span> <span class="k">if</span> <span class="n">f</span> <span class="o">!=</span> <span class="n">locale</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">locale</span><span class="p">]</span> <span class="o">+</span> <span class="n">translations</span></div>
 
 </pre></div>
 

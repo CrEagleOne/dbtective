@@ -15,10 +15,10 @@ copyright = f'{datetime.now().year}, CrEagleOne'
 author = 'CrEagleOne'
 release = '1.0.0'
 
-# Ajoutez le répertoire racine du projet au chemin de recherche de Python
 sys.path.insert(0, os.path.abspath('..'))
 
 autodoc_default_options = {
+    "special-members": "__init__",
     "members": True,
     "undoc-members": False,  # Document functions without docstrings
     "imported-members": False,  # Document imported functions
@@ -30,7 +30,7 @@ autodoc_default_options = {
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.napoleon",  # Support Google & NumPy docstrings
-    "sphinx.ext.viewcode",  # Ajoute un lien vers le code source
+    "sphinx.ext.viewcode",  # Adds a link to the source code
 ]
 
 templates_path = ['_templates']

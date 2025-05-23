@@ -78,7 +78,7 @@
 <a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_line_edit.PyLineEdit">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PyLineEdit</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLineEdit</span><span class="p">):</span>
     <span class="n">style</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">    QLineEdit {{</span>
+<span class="s1">        QLineEdit {{</span>
 <span class="s1">            background-color: </span><span class="si">{_bg_color}</span><span class="s1">;</span>
 <span class="s1">            border-radius: </span><span class="si">{_radius}</span><span class="s1">px;</span>
 <span class="s1">            border: </span><span class="si">{_border_size}</span><span class="s1">px solid transparent;</span>
@@ -92,6 +92,9 @@
 <span class="s1">            border: </span><span class="si">{_border_size}</span><span class="s1">px solid </span><span class="si">{_context_color}</span><span class="s1">;</span>
 <span class="s1">            background-color: </span><span class="si">{_bg_color_active}</span><span class="s1">;</span>
 <span class="s1">        }}</span>
+<span class="s1">        QLineEdit:disabled {{</span>
+<span class="s1">            background-color: </span><span class="si">{_bg_color_inactive}</span><span class="s1">;</span>
+<span class="s1">        }}</span>
 <span class="s1">    &#39;&#39;&#39;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
@@ -104,9 +107,11 @@
         <span class="n">selection_color</span><span class="o">=</span><span class="s2">&quot;#FFF&quot;</span><span class="p">,</span>
         <span class="n">bg_color</span><span class="o">=</span><span class="s2">&quot;#333&quot;</span><span class="p">,</span>
         <span class="n">bg_color_active</span><span class="o">=</span><span class="s2">&quot;#222&quot;</span><span class="p">,</span>
+        <span class="n">bg_color_inactive</span><span class="o">=</span><span class="s2">&quot;#6f7175&quot;</span><span class="p">,</span>
         <span class="n">context_color</span><span class="o">=</span><span class="s2">&quot;#00ABE8&quot;</span><span class="p">,</span>
         <span class="n">input_mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">echomode</span><span class="o">=</span><span class="s2">&quot;normal&quot;</span><span class="p">,</span>
+        <span class="n">active</span><span class="o">=</span><span class="kc">True</span>
     <span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
@@ -126,6 +131,9 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">setCursorPosition</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">active</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">set_stylesheet</span><span class="p">(</span>
             <span class="n">radius</span><span class="p">,</span>
             <span class="n">border_size</span><span class="p">,</span>
@@ -133,6 +141,7 @@
             <span class="n">selection_color</span><span class="p">,</span>
             <span class="n">bg_color</span><span class="p">,</span>
             <span class="n">bg_color_active</span><span class="p">,</span>
+            <span class="n">bg_color_inactive</span><span class="p">,</span>
             <span class="n">context_color</span>
         <span class="p">)</span>
 
@@ -146,6 +155,7 @@
         <span class="n">selection_color</span><span class="p">,</span>
         <span class="n">bg_color</span><span class="p">,</span>
         <span class="n">bg_color_active</span><span class="p">,</span>
+        <span class="n">bg_color_inactive</span><span class="p">,</span>
         <span class="n">context_color</span>
     <span class="p">):</span>
         <span class="n">style_format</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -155,6 +165,7 @@
             <span class="n">_selection_color</span><span class="o">=</span><span class="n">selection_color</span><span class="p">,</span>
             <span class="n">_bg_color</span><span class="o">=</span><span class="n">bg_color</span><span class="p">,</span>
             <span class="n">_bg_color_active</span><span class="o">=</span><span class="n">bg_color_active</span><span class="p">,</span>
+            <span class="n">_bg_color_inactive</span><span class="o">=</span><span class="n">bg_color_inactive</span><span class="p">,</span>
             <span class="n">_context_color</span><span class="o">=</span><span class="n">context_color</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="n">style_format</span><span class="p">)</span></div>

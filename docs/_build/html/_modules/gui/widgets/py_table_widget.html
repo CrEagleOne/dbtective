@@ -71,7 +71,7 @@
   <h1>Source code for gui.widgets.py_table_widget</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">PySide6</span><span class="w"> </span><span class="kn">import</span> <span class="n">QtWidgets</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PySide6</span><span class="w"> </span><span class="kn">import</span> <span class="n">QtWidgets</span><span class="p">,</span> <span class="n">QtCore</span>
 
 
 <div class="viewcode-block" id="PyTableWidget">
@@ -127,7 +127,12 @@
 <span class="s1">            border-bottom: 1px solid </span><span class="si">{_bottom_line_color}</span><span class="s1">;</span>
 <span class="s1">            margin-bottom: 1px;</span>
 <span class="s1">        }}</span>
-
+<span class="s1">        QHeaderView::down-arrow</span>
+<span class="s1">        {{</span>
+<span class="s1">        }}</span>
+<span class="s1">        QHeaderView::up-arrow</span>
+<span class="s1">        {{</span>
+<span class="s1">        }}</span>
 <span class="s1">        QScrollBar:horizontal {{</span>
 <span class="s1">            border: none;</span>
 <span class="s1">            background: </span><span class="si">{_scroll_bar_bg_color}</span><span class="s1">;</span>
@@ -217,9 +222,42 @@
         <span class="n">grid_line_color</span><span class="o">=</span><span class="s2">&quot;#555&quot;</span><span class="p">,</span>
         <span class="n">scroll_bar_bg_color</span><span class="o">=</span><span class="s2">&quot;#FFF&quot;</span><span class="p">,</span>
         <span class="n">scroll_bar_btn_color</span><span class="o">=</span><span class="s2">&quot;#3333&quot;</span><span class="p">,</span>
-        <span class="n">context_color</span><span class="o">=</span><span class="s2">&quot;#00ABE8&quot;</span>
+        <span class="n">context_color</span><span class="o">=</span><span class="s2">&quot;#00ABE8&quot;</span><span class="p">,</span>
+        <span class="n">headers</span><span class="o">=</span><span class="p">[]</span>
     <span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setColumnCount</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">headers</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setSizeAdjustPolicy</span><span class="p">(</span>
+            <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAbstractScrollArea</span><span class="o">.</span><span class="n">SizeAdjustPolicy</span><span class="o">.</span><span class="n">AdjustToContents</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setEditTriggers</span><span class="p">(</span>
+            <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAbstractItemView</span><span class="o">.</span><span class="n">EditTrigger</span><span class="o">.</span><span class="n">NoEditTriggers</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setSelectionMode</span><span class="p">(</span>
+            <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAbstractItemView</span><span class="o">.</span><span class="n">SelectionMode</span><span class="o">.</span><span class="n">SingleSelection</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setSelectionBehavior</span><span class="p">(</span>
+            <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAbstractItemView</span><span class="o">.</span><span class="n">SelectionBehavior</span><span class="o">.</span><span class="n">SelectRows</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setShowGrid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setGridStyle</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">PenStyle</span><span class="o">.</span><span class="n">NoPen</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setSortingEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setCornerButtonEnabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">horizontalHeader</span><span class="p">()</span><span class="o">.</span><span class="n">setCascadingSectionResizes</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">horizontalHeader</span><span class="p">()</span><span class="o">.</span><span class="n">setMinimumSectionSize</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">horizontalHeader</span><span class="p">()</span><span class="o">.</span><span class="n">setDefaultSectionSize</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">horizontalHeader</span><span class="p">()</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;showSortIndicator&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">horizontalHeader</span><span class="p">()</span><span class="o">.</span><span class="n">setStretchLastSection</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verticalHeader</span><span class="p">()</span><span class="o">.</span><span class="n">setVisible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">headers</span><span class="p">):</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">()</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">setTextAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setHorizontalHeaderItem</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">set_stylesheet</span><span class="p">(</span>
             <span class="n">radius</span><span class="p">,</span>

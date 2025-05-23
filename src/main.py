@@ -141,7 +141,10 @@ def main():
 
     translator = QtCore.QTranslator()
     locale = common.get_current_locale()
-    translator.load(f"src/gui/locales/{locale}.qm")
+
+    file = common.set_locale(locale + ".qm")
+
+    translator.load(file)
     app.installTranslator(translator)
 
     logs.log_config()
