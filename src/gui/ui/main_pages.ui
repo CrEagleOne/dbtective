@@ -236,7 +236,7 @@
            <item>
             <widget class="QLabel" name="description_label">
              <property name="text">
-              <string>Add description here</string>
+              <string>Complete the following fields to start comparing the data</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
@@ -264,8 +264,7 @@
              <item>
               <widget class="QGroupBox" name="row_2_groupbox">
                <property name="styleSheet">
-                <string notr="true">border-radius: 4px;
-border: 2px solid red;</string>
+                <string notr="true"/>
                </property>
                <property name="title">
                 <string>Extraction</string>
@@ -329,7 +328,38 @@ border: 2px solid red;</string>
             </layout>
            </item>
            <item>
-            <layout class="QHBoxLayout" name="row_4_layout"/>
+            <layout class="QVBoxLayout" name="row_4_layout">
+             <item>
+              <widget class="QGroupBox" name="table_filter">
+               <property name="title">
+                <string>List of tables</string>
+               </property>
+               <layout class="QVBoxLayout" name="table_filter_layout">
+                <property name="spacing">
+                 <number>2</number>
+                </property>
+                <property name="sizeConstraint">
+                 <enum>QLayout::SizeConstraint::SetNoConstraint</enum>
+                </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>4</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>2</number>
+                </property>
+                <item>
+                 <layout class="QHBoxLayout" name="table_buttons"/>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
            </item>
            <item>
             <layout class="QHBoxLayout" name="row_5_layout"/>
@@ -366,8 +396,8 @@ border: 2px solid red;</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>274</width>
-            <height>222</height>
+            <width>832</width>
+            <height>697</height>
            </rect>
           </property>
           <property name="styleSheet">
@@ -431,13 +461,13 @@ border: 2px solid red;</string>
                    <layout class="QGridLayout" name="settings_oracle"/>
                   </item>
                   <item>
-                   <widget class="QGroupBox" name="authentification">
+                   <widget class="QGroupBox" name="authentication">
                     <property name="title">
-                     <string>Authentification</string>
+                     <string>Authentication</string>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_4">
                      <item>
-                      <layout class="QGridLayout" name="authentification_layout"/>
+                      <layout class="QGridLayout" name="authentication_layout"/>
                      </item>
                     </layout>
                    </widget>

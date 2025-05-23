@@ -4,6 +4,7 @@
 Module: controls
 Auteur: creagleone
 Date: 2025-05-07
+
 Description:
     This module contains functions to controls input datas
 
@@ -111,14 +112,14 @@ def init_db_compare(self):
                         "2px solid transparent")
     common.update_style(self.ui.setDB2, "border",
                         "2px solid transparent")
-    common.update_style(self.ui.hashmode, "border",
-                        "2px solid transparent")
-    common.update_style(self.ui.fullmode, "border",
-                        "2px solid transparent")
     common.update_style(self.ui.setSegmentLength, "border",
                         "2px solid transparent")
     common.update_style(self.ui.setFetchSize, "border",
                         "2px solid transparent")
+    common.update_style(self.ui.load_pages.row_3_groupbox, "border",
+                        f"""2px solid {
+                            self.themes["app_color"]["grey"]
+                        }""")
 
 
 def db_compare(self):
@@ -155,9 +156,11 @@ def db_compare(self):
             pass
 
     if not self.ui.hashmode.isChecked() and \
-            not self.ui.fullmode.isChecked():
-        common.update_style(self.ui.hashmode, "border", "2px solid red")
-        common.update_style(self.ui.fullmode, "border", "2px solid red")
+            not self.ui.linemode.isChecked() and \
+            not self.ui.columnmode.isChecked():
+        common.update_style(self.ui.load_pages.row_3_groupbox,
+                            "border", "2px solid red")
+
         error = True
 
     if self.ui.setExtractionType.isChecked() and\

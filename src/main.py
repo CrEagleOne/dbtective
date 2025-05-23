@@ -9,11 +9,6 @@ from gui.core import functions
 from gui.views import ui_main, events
 from core.utils import config, exceptions, common, logs
 
-# from pathlib import Path
-
-# # Ajoute le chemin racine du projet à sys.path
-# sys.path.append(str(Path(__file__).parent))
-
 
 class MainWindow(QtWidgets.QMainWindow):
     error_signal = QtCore.Signal(tuple)
@@ -125,7 +120,7 @@ def exception_hook(exctype: type[BaseException],
     """
     error_message = "".join(traceback.format_exception(exctype, value, tb))
     logs.log_critical(error_message)
-    exceptions.ErrorSignal(exceptions.MESSAGES.get(999))
+    exceptions.ErrorSignal(exceptions.Error(999))
 
 
 def main():
@@ -143,6 +138,14 @@ def main():
         config.setup_db()
     except exceptions.Error:
         sys.exit(0)
+
+    translator = QtCore.QTranslator()
+    locale = common.get_current_locale()
+
+    file = common.set_locale(locale + ".qm")
+
+    translator.load(file)
+    app.installTranslator(translator)
 
     logs.log_config()
     window = MainWindow()

@@ -4,11 +4,12 @@
 Module: oracle
 Auteur: creagleone
 Date: 2025-05-07
+
 Description:
     This module contains the functions allowing you to retrieve data
     from an oracle database
 
-Dépendances:
+Dependencies:
     - socket
     - wraps (functools)
     - oracledb
@@ -19,7 +20,7 @@ Usage Example:
 
 Notes:
     - This module uses oracledb thin mode
-    - Designed for handling large datasets efficiently.
+    - Designed for handling large datasets efficiently
 """
 
 import socket
@@ -94,10 +95,8 @@ def get_unique_data(_db_config: list, query: str, **kwargs) -> tuple:
         return cursor.fetchone()
     except oracledb.DatabaseError as e:
         error = e.args[0]
-        if error.code == 942:
+        if error.code in [942, 904]:
             raise exceptions.Error(404, error.message)
-        if error.code == 904:
-            raise exceptions.Error(402, error.message)
         if error.code == 933:
             raise exceptions.Error(403, error.message)
         raise exceptions.Error(400, error.message)
@@ -129,10 +128,8 @@ def get_list_data(_db_config, query, **kwargs) -> tuple:
         return cursor.fetchall()
     except oracledb.DatabaseError as e:
         error = e.args[0]
-        if error.code == 942:
+        if error.code in [942, 904]:
             raise exceptions.Error(404, error.message)
-        if error.code == 904:
-            raise exceptions.Error(402, error.message)
         if error.code == 933:
             raise exceptions.Error(403, error.message)
         raise exceptions.Error(400, error.message)
@@ -155,7 +152,7 @@ def get_data_by_segment(_db_config, segment_size: int,
         query (str): Query to perform
 
     Raises:
-        exceptions.Error: code 100
+        exceptions.Error: code 604
 
     Yields:
         list: Segment data
@@ -165,6 +162,10 @@ def get_data_by_segment(_db_config, segment_size: int,
         cursor = conn.cursor()
         total_row_count = 0
         current_offset = 0
+
+        cursor.execute(f"{query} WHERE 1=0")
+        column_names = [desc[0] for desc in cursor.description]
+        yield [column_names]
 
         while True:
             if segment_size is None:
@@ -201,7 +202,7 @@ def get_data_by_segment(_db_config, segment_size: int,
             yield current_segment
 
     except oracledb.Error as e:
-        raise exceptions.Error(100, e)
+        raise exceptions.Error(604, e)
     finally:
         cursor.close()
 

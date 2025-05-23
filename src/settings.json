@@ -15,12 +15,12 @@
     },
     "custom_title_bar": true,
     "startup_size": [
-        900,
-        750
+        1000,
+        1000
     ],
     "minimum_size": [
-        900,
-        750
+        1000,
+        1000
     ],
     "lef_menu_size": {
         "minimum": 50,

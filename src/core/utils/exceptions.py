@@ -4,6 +4,7 @@
 Module: exceptions
 Auteur: creagleone
 Date: 2025-05-07
+
 Description:
     This module contains functions to manage custom exceptions
 
@@ -21,67 +22,10 @@ Notes:
 from PySide6 import QtCore
 from core.utils import logs
 
-MESSAGES = {
-    100: QtCore.QCoreApplication.translate(
-        "exceptions", "DB config saved !"),
-    200: QtCore.QCoreApplication.translate(
-        "exceptions", "Treatment completed successfully"),
-    201: QtCore.QCoreApplication.translate(
-        "exceptions", "No gap found"),
-
-    300: QtCore.QCoreApplication.translate(
-        "exceptions", "Gap found between files"),
-
-    400: QtCore.QCoreApplication.translate(
-        "exceptions", "Poorly formed or invalid SQL query"),
-    401: QtCore.QCoreApplication.translate(
-        "exceptions", "An error was occured"),
-    402: QtCore.QCoreApplication.translate(
-        "exceptions", "No such column"),
-    403: QtCore.QCoreApplication.translate(
-        "exceptions", "Syntax error"),
-    404: QtCore.QCoreApplication.translate(
-        "exceptions", "Table or record not found"),
-    409: QtCore.QCoreApplication.translate(
-        "exceptions", "UNIQUE constraint failed"),
-    410: QtCore.QCoreApplication.translate(
-        "exceptions", "Data not provided"),
-    411: QtCore.QCoreApplication.translate(
-        "exceptions", "Incorrect database config"),
-
-    500: QtCore.QCoreApplication.translate(
-        "exceptions", "Failed to connect to database server"),
-    501: QtCore.QCoreApplication.translate(
-        "exceptions", "Database temporarily unavailable"),
-    502: QtCore.QCoreApplication.translate(
-        "exceptions", "Out of memory error"),
-    503: QtCore.QCoreApplication.translate(
-        "exceptions", "Disk I/O error"),
-    504: QtCore.QCoreApplication.translate(
-        "exceptions", "No active Oracle listener"),
-    505: QtCore.QCoreApplication.translate(
-        "exceptions", "Account locked"),
-    506: QtCore.QCoreApplication.translate(
-        "exceptions", "Incorrect username or password"),
-
-    600: QtCore.QCoreApplication.translate(
-        "exceptions", "System not supported"),
-    601: QtCore.QCoreApplication.translate(
-        "exceptions", "settings file not found"),
-    602: QtCore.QCoreApplication.translate(
-        "exceptions", "themes file not found"),
-
-    999: QtCore.QCoreApplication.translate(
-        "exceptions", "Unanticipated error - check logs"),
-}
-
 
 class ErrorSignal(QtCore.QObject):
     """
     A Qt object that provides an error signaling mechanism
-
-    Attributes:
-        error_signal (QtCore.Signal): Signal emitted when an error occurs
     """
 
     error_signal = QtCore.Signal(str)
@@ -111,9 +55,6 @@ class ErrorSignal(QtCore.QObject):
 class WarnSignal(QtCore.QObject):
     """
     A Qt object that provides a warning signaling mechanism
-
-    Attributes:
-        warn_signal (QtCore.Signal): Signal emitted when a warning occurs
     """
 
     warn_signal = QtCore.Signal(str)
@@ -144,10 +85,6 @@ class Error(Exception):
     """
     Custom exception class that integrates logging and Qt
     error signaling
-
-    Attributes:
-        message (str): The error message retrieved from predefined messages
-        qt_error (ErrorSignal): Instance for emitting Qt-based error signals
     """
 
     def __init__(self, code: str, system: str | None = None) -> None:
@@ -157,9 +94,85 @@ class Error(Exception):
 
         Args:
             code (str): The error code used to fetch the corresponding message
+
+                Possible values:
+                    - 400: Poorly formed or invalid SQL query
+                    - 401: An error was occured
+                    - 402: UNIQUE constraint failed
+                    - 403: Syntax error
+                    - 404: Table or column not found
+                    - 405: Incorrect database config
+                    - 406: Data type mismatch
+                    - 407: Conversion error
+                    - 408: Transaction error
+                    - 500: Failed to connect to database
+                    - 501: Database temporarily unavailable
+                    - 502: Out of memory error
+                    - 503: Disk I/O error
+                    - 504: No active Oracle listener
+                    - 505: Account locked
+                    - 506: Incorrect username or password
+                    - 600: System not supported
+                    - 601: Settings file not found
+                    - 602: Themes file not found
+                    - 603: No tables to compare
+                    - 604: Error occurring during data extraction
+                    - 999: Unanticipated error - check logs
+
             system (str | None, optional): System context for logging
         """
-        self.message = MESSAGES.get(
+
+        self.errors = {
+            400: QtCore.QCoreApplication.translate(
+                "exceptions", "Poorly formed or invalid SQL query"),
+            401: QtCore.QCoreApplication.translate(
+                "exceptions", "An error was occured"),
+            402: QtCore.QCoreApplication.translate(
+                "exceptions", "UNIQUE constraint failed"),
+            403: QtCore.QCoreApplication.translate(
+                "exceptions", "Syntax error"),
+            404: QtCore.QCoreApplication.translate(
+                "exceptions", "Table or column not found"),
+            405: QtCore.QCoreApplication.translate(
+                "exceptions", "Incorrect database config"),
+            406: QtCore.QCoreApplication.translate(
+                "exceptions", "Data type mismatch"),
+            407: QtCore.QCoreApplication.translate(
+                "exceptions", "Conversion error"),
+            408: QtCore.QCoreApplication.translate(
+                "exceptions", "Transaction error"),
+
+            500: QtCore.QCoreApplication.translate(
+                "exceptions", "Failed to connect to database"),
+            501: QtCore.QCoreApplication.translate(
+                "exceptions", "Database temporarily unavailable"),
+            502: QtCore.QCoreApplication.translate(
+                "exceptions", "Out of memory error"),
+            503: QtCore.QCoreApplication.translate(
+                "exceptions", "Disk I/O error"),
+            504: QtCore.QCoreApplication.translate(
+                "exceptions", "No active Oracle listener"),
+            505: QtCore.QCoreApplication.translate(
+                "exceptions", "Account locked"),
+            506: QtCore.QCoreApplication.translate(
+                "exceptions", "Incorrect username or password"),
+
+            600: QtCore.QCoreApplication.translate(
+                "exceptions", "System not supported"),
+            601: QtCore.QCoreApplication.translate(
+                "exceptions", "Settings file not found"),
+            602: QtCore.QCoreApplication.translate(
+                "exceptions", "Themes file not found"),
+            603: QtCore.QCoreApplication.translate(
+                "exceptions", "No tables to compare"),
+            604: QtCore.QCoreApplication.translate(
+                "exceptions", "Error occurring during data extraction"),
+
+            999: QtCore.QCoreApplication.translate(
+                "exceptions", "Unanticipated error - check logs"),
+        }
+
+        self.message = self.errors.get(
             code, QtCore.QCoreApplication.translate(
                 "exceptions", "Unknown code"
             )
@@ -176,10 +189,6 @@ class Error(Exception):
 class Warn(Exception):
     """
     Custom warning exception that integrates logging and Qt warning signaling
-
-    Attributes:
-        message (str): The warning message retrieved from predefined messages
-        qt_warn (WarnSignal): Instance for emitting Qt-based warning signals
     """
 
     def __init__(self, code: str) -> None:
@@ -188,12 +197,19 @@ class Warn(Exception):
         warning signaling
 
         Args:
-            code (str): The warning code used to fetch the
-            corresponding message
+            code (str): The warn code used to fetch the corresponding message
+
+                Possible values:
+                    300: Discrepancies were found
         """
         super().__init__(code)
 
-        self.message = MESSAGES.get(
+        self.warn = {
+            300: QtCore.QCoreApplication.translate(
+                "exceptions", "Discrepancies were found"),
+        }
+
+        self.message = self.warn.get(
             code, QtCore.QCoreApplication.translate(
                 "exceptions", "Unknown code"
             )
@@ -201,3 +217,40 @@ class Warn(Exception):
 
         self.qt_warn = WarnSignal()
         self.qt_warn.trigger_warn(self.message)
+
+
+class INFO:
+    def __init__(self, code: str) -> None:
+        """
+        Initializes the info with a message and triggers
+        info signaling
+
+        Args:
+            code (str): The info code used to fetch the corresponding message
+
+                Possible values:
+                    - 100: Backup successfully
+                    - 101: Backup successfully
+                    - 200: Treatment completed successfully
+                    - 201: No discrepancies were found
+        """
+
+        self.info = {
+            100: QtCore.QCoreApplication.translate(
+                "exceptions", "Backup successfully"),
+            101: QtCore.QCoreApplication.translate(
+                "exceptions", "Backup successfully"),
+            200: QtCore.QCoreApplication.translate(
+                "exceptions", "Treatment completed successfully"),
+            201: QtCore.QCoreApplication.translate(
+                "exceptions", "No discrepancies were found"),
+        }
+
+        self.message = self.info.get(
+            code, QtCore.QCoreApplication.translate(
+                "exceptions", "Unknown code"
+            )
+        )
+
+    def __str__(self):
+        return self.message

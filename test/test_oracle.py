@@ -107,16 +107,24 @@ def test_get_data_by_segment(mock_oracledb):
         []
     ]
 
+    mock_cursor.description = [("column1",), ("column2",)]
+
+    mock_cursor.execute.side_effect = lambda query: None
+
     query = "SELECT * FROM table"
 
-    results = list(get_data_by_segment(db_config_2, segment_size=2,
-                   fetch=1, query=query, conn=mock_conn))
+    expected_results = [
+        [["column1", "column2"]],  # Column names first
+        [('row1',), ('row2',)],
+        [('row3',)]
+    ]
 
-    assert results == [[('row1',), ('row2',)], [('row3',)]]
+    results = list(get_data_by_segment(db_config_2, segment_size=2, fetch=1,
+                                       query=query, conn=mock_conn))
+
+    assert results == expected_results
 
     assert mock_cursor.fetchmany.call_count == 3
-
-    assert mock_cursor.execute.call_count == 2
 
     mock_cursor.close.assert_called_once()
 

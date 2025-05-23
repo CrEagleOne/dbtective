@@ -4,12 +4,14 @@
 Module: common
 Auteur: creagleone
 Date: 2025-05-07
+
 Description:
     This module contains functions to manage technical tables
 
 Dependencies:
     - os
     - sys
+    - shutil
     - re
     - hashlib
     - gzip
@@ -21,6 +23,7 @@ Dependencies:
     - QtWidgets (PySide6)
     - oracle.py
     - exceptions.py
+    - config.py
 
 Usage Example:
     update_style(widget, "border", "2px solid red")
@@ -31,6 +34,7 @@ Notes:
 
 import os
 import sys
+import shutil
 import re
 import hashlib
 import gzip
@@ -41,10 +45,7 @@ import subprocess
 import pandas
 from PySide6 import QtWidgets
 from core.database import oracle
-from core.utils import exceptions
-
-sys.path.append(os.path.abspath(os.path.join(
-    os.path.dirname(__file__), "..", "..")))
+from core.utils import exceptions, config
 
 
 def get_file_size(filepath: str) -> str:
@@ -135,7 +136,7 @@ def get_tables_of_db(db_config: list) -> tuple:
             LEFT JOIN USER_TAB_COLUMNS utc ON ut.TABLE_NAME = utc.TABLE_NAME
             GROUP BY ut.TABLE_NAME, ut.NUM_ROWS, ut.BLOCKS, ut.AVG_ROW_LEN"""
         return oracle.get_list_data(db_config[1], query)
-    raise exceptions.Error(411)
+    raise exceptions.Error(405)
 
 
 def get_common_tables(db1: list, db2: list) -> dict:
@@ -167,10 +168,8 @@ def extract_to_csv(db: list, table: str, file: str, segment_size: int | None,
 
     """
     query = f"SELECT * FROM {table}"
-    folder = get_work_folder("extracts")
-    path = os.path.join(folder, file)
 
-    with open(path, "w", newline="", encoding="utf-8") as f:
+    with open(file, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         datas = oracle.get_data_by_segment(
             db, segment_size, fetch_size, query)
@@ -221,9 +220,19 @@ def resource_path(relative_path: str) -> str:
     Returns :
         str : The absolute path to a resource file.
     """
-    if hasattr(sys, '_MEIPASS'):
-        return os.path.join(sys._MEIPASS, relative_path)
-    return os.path.join(os.path.abspath("."), relative_path)
+    if hasattr(sys, "_MEIPASS"):
+        base_path = sys._MEIPASS
+    else:
+        base_path = os.path.abspath(os.path.join(
+            os.path.dirname(__file__), '..', '..', '..'))
+
+    full_path = os.path.join(base_path, relative_path)
+
+    if not os.path.exists(full_path):
+        raise exceptions.Error(
+            601, f"{full_path} not found")
+
+    return full_path
 
 
 def set_svg_icon(icon_name: str) -> str:
@@ -276,16 +285,38 @@ def set_image(image_name: str) -> str:
     return image
 
 
-def create_gap_files(nom_fichier: str, data: pandas.DataFrame):
+def set_locale(translate_name: str) -> str:
     """
-    Compare les données des 2 tables
+    Returns the absolute path of the application translation file
+
+    Parameters :
+        icon_name (str) : The name of the icon.
+
+    Returns :
+        str : The path to the image.
+    """
+    folder = "src/gui/locales/"
+    path = resource_path(folder)
+    translate_file = os.path.normpath(os.path.join(path, translate_name))
+    return translate_file
+
+
+def create_gap_files(filename: str, data: pandas.DataFrame):
+    """
+    Create a csv file containing the data discrepancies
 
     Args:
-        nom_fichier (str): Nom du fichier
-        data (pd.DataFrame): Données à écrire
+        filename (str): Path of the file to write
+        data (pd.DataFrame): Data to write
     """
-    data.to_csv(nom_fichier, header=not os.path.exists(
-        nom_fichier), index=False, mode='a')
+    if filename.endswith('csv'):
+        data.to_csv(filename, header=True, index=False, mode='w')
+    else:
+        with open(filename, 'w', encoding='UTF-8') as f:
+            for diff in data:
+                pair, diff_set = diff
+                f.write(f"Paire: {pair}\n")
+                f.write(f"Différences: {diff_set}\n\n")
 
 
 def get_work_files(path: str) -> str:
@@ -320,6 +351,21 @@ def get_work_folder(path: str) -> str:
     return work_folder
 
 
+def delete_work_folder(path: str):
+    """
+    Deletes all files and subdirectories inside a temporary work folder
+    and recreates an empty version of it
+
+    Args:
+        path (str): The relative path inside the 'dbtective' temp directory
+                    to be purged
+    """
+    temp_dir = tempfile.gettempdir()
+    work_folder = os.path.join(temp_dir, "dbtective", path)
+    shutil.rmtree(work_folder)
+    os.makedirs(work_folder)
+
+
 def open_folders(folder: str):
     """
     Ouvrir un fichier avec un éditeur de fichier
@@ -330,10 +376,151 @@ def open_folders(folder: str):
     system = platform.system()
 
     if system == "Windows":
-        subprocess.run(f'explorer "{folder}"', shell=True, check=True)
+        subprocess.run(f'explorer "{folder}"', shell=True, check=False)
     elif system == "Linux":
-        subprocess.run(["xdg-open", folder], check=True)
+        subprocess.run(["xdg-open", folder], check=False)
     elif system == "Darwin":
-        subprocess.run(["open", folder], check=True)
+        subprocess.run(["open", folder], check=False)
     else:
         raise exceptions.Error(600, system)
+
+
+def levenshtein_distance(s1: str, s2: str) -> int:
+    """
+    Calculate the Levenshtein distance between two strings
+
+    The Levenshtein distance is a measure of the difference between
+    two sequences, which is defined as the minimum number of
+    single-character edits (insertions, deletions, or substitutions)
+    required to change one sequence into the other
+
+    Parameters:
+    s1 (str): The first string to compare
+    s2 (str): The second string to compare
+
+    Returns:
+    int: The Levenshtein distance between s1 and s2
+    """
+    if len(s1) < len(s2):
+        s1, s2 = s2, s1
+
+    if len(s2) == 0:
+        return len(s1)
+
+    previous_row = range(len(s2) + 1)
+    for i, c1 in enumerate(s1):
+        current_row = [i + 1]
+        for j, c2 in enumerate(s2):
+            insertions = previous_row[j + 1] + 1
+            deletions = current_row[j] + 1
+            substitutions = previous_row[j] + (c1 != c2)
+            current_row.append(min(insertions, deletions, substitutions))
+        previous_row = current_row
+
+    return previous_row[-1]
+
+
+def compare_pairs(pairs: list) -> list:
+    """
+    Compare pairs of comma-separated strings and return the symmetric
+    difference between their elements
+
+    Args:
+        pairs (list[tuple[str, str]]): A list of tuples, where each tuple
+                                        contains two comma-separated strings
+                                        to compare
+
+    Returns:
+        list: A list of tuples :
+                - The original pair of strings
+                - A set containing the symmetric difference between elements
+                    of both strings
+    """
+    differences = []
+    for pair in pairs:
+        s1, s2 = pair
+        set1 = set(s1.split(','))
+        set2 = set(s2.split(','))
+        diff = set1.symmetric_difference(set2)
+        differences.append((pair, diff))
+    return differences
+
+
+def merge_columns(row: pandas.Series) -> str:
+    """
+    Converts a pandas Series row into a comma-separated string
+
+    Args:
+        row (pandas.Series): A pandas row containing values to merge
+
+    Returns:
+        str: A single string with all row values joined by commas
+    """
+    return ','.join(row.astype(str))
+
+
+def find_most_similar_pairs(df: pandas.DataFrame,
+                            column: str = 'merged') -> list:
+    """
+    Finds the most similar pairs in a DataFrame column using
+    Levenshtein distance
+
+    Args:
+        df (pandas.DataFrame): The DataFrame containing the column to compare
+        column (str, optional): The name of the column, defaults to 'merged'
+
+    Returns:
+        list: A list of tuples :
+                - The original pair of strings
+                - A set containing the symmetric difference between elements
+                    of both strings
+    """
+    df[column] = df.apply(merge_columns, axis=1)
+    pairs = set()
+    for i in range(len(df)):
+        s1 = df.iloc[i][column]
+        min_distance = float('inf')
+        most_similar = None
+        for j in range(len(df)):
+            if i != j:
+                s2 = df.iloc[j][column]
+                distance = levenshtein_distance(s1, s2)
+                if distance < min_distance:
+                    min_distance = distance
+                    most_similar = s2
+        pair = tuple(sorted([s1, most_similar]))
+        pairs.add(pair)
+
+    differences = compare_pairs(list(pairs))
+    return differences
+
+
+def get_current_locale() -> str:
+    """
+    Retrieves the current locale setting from the configuration
+
+    Returns:
+        str: The current locale setting
+    """
+    query = "SELECT [values] from settings where [key] = ?"
+    return config.get_settings(query, ("locale",))
+
+
+def get_all_locales(path="src/gui/locales") -> list:
+    """
+    Retrieves all available locales from the specified directory
+
+    Args:
+        path (str, optional): The path to the directory containing locale files
+
+    Returns:
+        list: A list of available locales, with the current locale first
+    """
+    locale = get_current_locale()
+    folder = resource_path(path)
+    translations = ["en_US"] + [os.path.splitext(f)[0] for f in os.listdir(
+        folder) if f.endswith(".qm")]
+
+    translations = [f for f in translations if f != locale]
+
+    return [locale] + translations

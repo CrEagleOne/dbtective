@@ -4,6 +4,7 @@
 Module: themes
 Auteur: creagleone
 Date: 2025-05-07
+
 Description:
     This module contains functions to recover theme settings
 
@@ -30,27 +31,23 @@ from core.utils import common, exceptions
 class Themes():
     """
     Manages application settings stored in a JSON file
-
-    Attributes:
-        json_file (str): The settings file name
-        app_path (str): The absolute path to the settings file
-        settings_path (str): The normalized path for accessing the settings
-        items (dict): Dictionary holding the loaded settings
     """
-    _settings = settings.Settings().get_settings()
-    json_file = f"src/gui/themes/{_settings['theme_name']}.json"
-    app_path = common.resource_path(json_file)
-    settings_path = os.path.normpath(app_path)
-    if not os.path.isfile(settings_path):
-        raise exceptions.Error(
-            602,
-            f"{_settings['theme_name']}.json not found in {settings_path}")
 
     def __init__(self):
         """
         Initializes the Settings class by loading existing settings
         """
         super().__init__()
+
+        _settings = settings.Settings().get_settings()
+        json_file = f"src/gui/themes/{_settings['theme_name']}.json"
+        app_path = common.resource_path(json_file)
+        self.settings_path = os.path.normpath(app_path)
+        if not os.path.isfile(self.settings_path):
+            raise exceptions.Error(
+                602,
+                f"""{_settings['theme_name']}.json not found in
+                    {self.settings_path}""")
 
         self.items = {}
         self.deserialize()
