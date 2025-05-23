@@ -168,12 +168,68 @@
 
 
 
+<div class="viewcode-block" id="update_settings">
+<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.config.update_settings">[docs]</a>
+<span class="nd">@_sqlite</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">update_settings</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Updates the language</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        query (str): Query to perform</span>
+<span class="sd">        args (tuple): Query args</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;conn&#39;</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">OperationalError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;no such&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;syntax error&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">403</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">401</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="get_settings">
+<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.config.get_settings">[docs]</a>
+<span class="nd">@_sqlite</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_settings</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves the language</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        query (str): Query to perform</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: Query result</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;conn&#39;</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">OperationalError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;no such&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;syntax error&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">403</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">401</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span></div>
+
+
+
 <div class="viewcode-block" id="get_list_data">
 <a class="viewcode-back" href="../../../source/core.utils.html#core.utils.config.get_list_data">[docs]</a>
 <span class="nd">@_sqlite</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_list_data</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Recover saved database settings</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        query (str): Query to perform</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        tuple: Query result</span>
@@ -217,6 +273,15 @@
 <span class="s2">                                        DEFAULT (&#39;</span><span class="si">{}</span><span class="s2">&#39;),</span>
 <span class="s2">            date_creation     DATETIME     NOT NULL,</span>
 <span class="s2">            date_modification DATETIME</span>
+<span class="s2">        );&quot;&quot;&quot;</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        CREATE TABLE IF NOT EXISTS settings (</span>
+<span class="s2">            id       INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT</span>
+<span class="s2">                            NOT NULL ON CONFLICT ROLLBACK,</span>
+<span class="s2">            [key]            UNIQUE ON CONFLICT ROLLBACK</span>
+<span class="s2">                            NOT NULL ON CONFLICT ROLLBACK,</span>
+<span class="s2">            [values]         NOT NULL ON CONFLICT ROLLBACK</span>
 <span class="s2">        );&quot;&quot;&quot;</span>
     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
     <span class="k">return</span> <span class="mi">200</span></div>

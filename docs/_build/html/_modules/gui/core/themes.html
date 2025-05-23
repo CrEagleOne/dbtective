@@ -105,14 +105,6 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Manages application settings stored in a JSON file</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># _settings = settings.Settings().get_settings()</span>
-    <span class="c1"># json_file = f&quot;src/gui/themes/{_settings[&#39;theme_name&#39;]}.json&quot;</span>
-    <span class="c1"># app_path = common.resource_path(json_file)</span>
-    <span class="c1"># settings_path = os.path.normpath(app_path)</span>
-    <span class="c1"># if not os.path.isfile(settings_path):</span>
-    <span class="c1">#     raise exceptions.Error(</span>
-    <span class="c1">#         602,</span>
-    <span class="c1">#         f&quot;{_settings[&#39;theme_name&#39;]}.json not found in {settings_path}&quot;)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -127,7 +119,8 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">settings_path</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span>
                 <span class="mi">602</span><span class="p">,</span>
-                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_settings</span><span class="p">[</span><span class="s1">&#39;theme_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.json not found in </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">settings_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="si">{</span><span class="n">_settings</span><span class="p">[</span><span class="s1">&#39;theme_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.json not found in</span>
+<span class="s2">                    </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">settings_path</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">deserialize</span><span class="p">()</span>

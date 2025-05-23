@@ -285,6 +285,22 @@ def set_image(image_name: str) -> str:
     return image
 
 
+def set_locale(translate_name: str) -> str:
+    """
+    Returns the absolute path of the application translation file
+
+    Parameters :
+        icon_name (str) : The name of the icon.
+
+    Returns :
+        str : The path to the image.
+    """
+    folder = "src/gui/locales/"
+    path = resource_path(folder)
+    translate_file = os.path.normpath(os.path.join(path, translate_name))
+    return translate_file
+
+
 def create_gap_files(filename: str, data: pandas.DataFrame):
     """
     Create a csv file containing the data discrepancies
@@ -501,8 +517,9 @@ def get_all_locales(path="src/gui/locales") -> list:
         list: A list of available locales, with the current locale first
     """
     locale = get_current_locale()
+    folder = resource_path(path)
     translations = ["en_US"] + [os.path.splitext(f)[0] for f in os.listdir(
-        path) if f.endswith(".qm")]
+        folder) if f.endswith(".qm")]
 
     translations = [f for f in translations if f != locale]
 

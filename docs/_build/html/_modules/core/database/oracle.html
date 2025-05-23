@@ -231,7 +231,7 @@
 <span class="sd">        query (str): Query to perform</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        exceptions.Error: code 100</span>
+<span class="sd">        exceptions.Error: code 604</span>
 
 <span class="sd">    Yields:</span>
 <span class="sd">        list: Segment data</span>
@@ -281,7 +281,7 @@
             <span class="k">yield</span> <span class="n">current_segment</span>
 
     <span class="k">except</span> <span class="n">oracledb</span><span class="o">.</span><span class="n">Error</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">604</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
     <span class="k">finally</span><span class="p">:</span>
         <span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 

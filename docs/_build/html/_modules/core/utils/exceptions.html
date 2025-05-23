@@ -93,62 +93,6 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">PySide6</span><span class="w"> </span><span class="kn">import</span> <span class="n">QtCore</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">core.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">logs</span>
 
-<span class="n">MESSAGES</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="mi">100</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;DB config saved !&quot;</span><span class="p">),</span>
-    <span class="mi">200</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Treatment completed successfully&quot;</span><span class="p">),</span>
-    <span class="mi">201</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;No gap found&quot;</span><span class="p">),</span>
-
-    <span class="mi">300</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Gap found between files&quot;</span><span class="p">),</span>
-
-    <span class="mi">400</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Poorly formed or invalid SQL query&quot;</span><span class="p">),</span>
-    <span class="mi">401</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;An error was occured&quot;</span><span class="p">),</span>
-    <span class="mi">402</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;UNIQUE constraint failed&quot;</span><span class="p">),</span>
-    <span class="mi">403</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Syntax error&quot;</span><span class="p">),</span>
-    <span class="mi">404</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Table or column not found&quot;</span><span class="p">),</span>
-    <span class="mi">405</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Incorrect database config&quot;</span><span class="p">),</span>
-    <span class="mi">406</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Data type mismatch&quot;</span><span class="p">),</span>
-    <span class="mi">407</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Conversion error&quot;</span><span class="p">),</span>
-    <span class="mi">408</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Transaction error&quot;</span><span class="p">),</span>
-
-    <span class="mi">500</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Failed to connect to database server&quot;</span><span class="p">),</span>
-    <span class="mi">501</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Database temporarily unavailable&quot;</span><span class="p">),</span>
-    <span class="mi">502</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Out of memory error&quot;</span><span class="p">),</span>
-    <span class="mi">503</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Disk I/O error&quot;</span><span class="p">),</span>
-    <span class="mi">504</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;No active Oracle listener&quot;</span><span class="p">),</span>
-    <span class="mi">505</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Account locked&quot;</span><span class="p">),</span>
-    <span class="mi">506</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Incorrect username or password&quot;</span><span class="p">),</span>
-
-    <span class="mi">600</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;System not supported&quot;</span><span class="p">),</span>
-    <span class="mi">601</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;settings file not found&quot;</span><span class="p">),</span>
-    <span class="mi">602</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;themes file not found&quot;</span><span class="p">),</span>
-
-    <span class="mi">999</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-        <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Unanticipated error - check logs&quot;</span><span class="p">),</span>
-<span class="p">}</span>
-
 
 <div class="viewcode-block" id="ErrorSignal">
 <a class="viewcode-back" href="../../../source/core.utils.html#core.utils.exceptions.ErrorSignal">[docs]</a>
@@ -234,6 +178,8 @@
 <span class="sd">    error signaling</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+<div class="viewcode-block" id="Error.__init__">
+<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.exceptions.Error.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">system</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initializes the exception with an error message and triggers</span>
@@ -241,9 +187,85 @@
 
 <span class="sd">        Args:</span>
 <span class="sd">            code (str): The error code used to fetch the corresponding message</span>
+
+<span class="sd">                Possible values:</span>
+<span class="sd">                    - 400: Poorly formed or invalid SQL query</span>
+<span class="sd">                    - 401: An error was occured</span>
+<span class="sd">                    - 402: UNIQUE constraint failed</span>
+<span class="sd">                    - 403: Syntax error</span>
+<span class="sd">                    - 404: Table or column not found</span>
+<span class="sd">                    - 405: Incorrect database config</span>
+<span class="sd">                    - 406: Data type mismatch</span>
+<span class="sd">                    - 407: Conversion error</span>
+<span class="sd">                    - 408: Transaction error</span>
+<span class="sd">                    - 500: Failed to connect to database</span>
+<span class="sd">                    - 501: Database temporarily unavailable</span>
+<span class="sd">                    - 502: Out of memory error</span>
+<span class="sd">                    - 503: Disk I/O error</span>
+<span class="sd">                    - 504: No active Oracle listener</span>
+<span class="sd">                    - 505: Account locked</span>
+<span class="sd">                    - 506: Incorrect username or password</span>
+<span class="sd">                    - 600: System not supported</span>
+<span class="sd">                    - 601: Settings file not found</span>
+<span class="sd">                    - 602: Themes file not found</span>
+<span class="sd">                    - 603: No tables to compare</span>
+<span class="sd">                    - 604: Error occurring during data extraction</span>
+<span class="sd">                    - 999: Unanticipated error - check logs</span>
+
 <span class="sd">            system (str | None, optional): System context for logging</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">MESSAGES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">errors</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="mi">400</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Poorly formed or invalid SQL query&quot;</span><span class="p">),</span>
+            <span class="mi">401</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;An error was occured&quot;</span><span class="p">),</span>
+            <span class="mi">402</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;UNIQUE constraint failed&quot;</span><span class="p">),</span>
+            <span class="mi">403</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Syntax error&quot;</span><span class="p">),</span>
+            <span class="mi">404</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Table or column not found&quot;</span><span class="p">),</span>
+            <span class="mi">405</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Incorrect database config&quot;</span><span class="p">),</span>
+            <span class="mi">406</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Data type mismatch&quot;</span><span class="p">),</span>
+            <span class="mi">407</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Conversion error&quot;</span><span class="p">),</span>
+            <span class="mi">408</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Transaction error&quot;</span><span class="p">),</span>
+
+            <span class="mi">500</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Failed to connect to database&quot;</span><span class="p">),</span>
+            <span class="mi">501</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Database temporarily unavailable&quot;</span><span class="p">),</span>
+            <span class="mi">502</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Out of memory error&quot;</span><span class="p">),</span>
+            <span class="mi">503</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Disk I/O error&quot;</span><span class="p">),</span>
+            <span class="mi">504</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;No active Oracle listener&quot;</span><span class="p">),</span>
+            <span class="mi">505</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Account locked&quot;</span><span class="p">),</span>
+            <span class="mi">506</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Incorrect username or password&quot;</span><span class="p">),</span>
+
+            <span class="mi">600</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;System not supported&quot;</span><span class="p">),</span>
+            <span class="mi">601</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Settings file not found&quot;</span><span class="p">),</span>
+            <span class="mi">602</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Themes file not found&quot;</span><span class="p">),</span>
+            <span class="mi">603</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;No tables to compare&quot;</span><span class="p">),</span>
+            <span class="mi">604</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Error occurring during data extraction&quot;</span><span class="p">),</span>
+
+            <span class="mi">999</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Unanticipated error - check logs&quot;</span><span class="p">),</span>
+        <span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
             <span class="n">code</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
                 <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Unknown code&quot;</span>
             <span class="p">)</span>
@@ -255,6 +277,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">qt_error</span> <span class="o">=</span> <span class="n">ErrorSignal</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">qt_error</span><span class="o">.</span><span class="n">trigger_error</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">)</span></div>
+</div>
 
 
 
@@ -265,18 +288,27 @@
 <span class="sd">    Custom warning exception that integrates logging and Qt warning signaling</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+<div class="viewcode-block" id="Warn.__init__">
+<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.exceptions.Warn.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initializes the warning exception with a message and triggers</span>
 <span class="sd">        warning signaling</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            code (str): The warning code used to fetch the</span>
-<span class="sd">            corresponding message</span>
+<span class="sd">            code (str): The warn code used to fetch the corresponding message</span>
+
+<span class="sd">                Possible values:</span>
+<span class="sd">                    300: Discrepancies were found</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">MESSAGES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">warn</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="mi">300</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Discrepancies were found&quot;</span><span class="p">),</span>
+        <span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">warn</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
             <span class="n">code</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
                 <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Unknown code&quot;</span>
             <span class="p">)</span>
@@ -284,6 +316,50 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">qt_warn</span> <span class="o">=</span> <span class="n">WarnSignal</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">qt_warn</span><span class="o">.</span><span class="n">trigger_warn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="INFO">
+<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.exceptions.INFO">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">INFO</span><span class="p">:</span>
+<div class="viewcode-block" id="INFO.__init__">
+<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.exceptions.INFO.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the info with a message and triggers</span>
+<span class="sd">        info signaling</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            code (str): The info code used to fetch the corresponding message</span>
+
+<span class="sd">                Possible values:</span>
+<span class="sd">                    - 100: Backup successfully</span>
+<span class="sd">                    - 101: Backup successfully</span>
+<span class="sd">                    - 200: Treatment completed successfully</span>
+<span class="sd">                    - 201: No discrepancies were found</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">info</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="mi">100</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Backup successfully&quot;</span><span class="p">),</span>
+            <span class="mi">101</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Backup successfully&quot;</span><span class="p">),</span>
+            <span class="mi">200</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Treatment completed successfully&quot;</span><span class="p">),</span>
+            <span class="mi">201</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;No discrepancies were found&quot;</span><span class="p">),</span>
+        <span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="n">code</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Unknown code&quot;</span>
+            <span class="p">)</span>
+        <span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">message</span></div>
 
 </pre></div>
 

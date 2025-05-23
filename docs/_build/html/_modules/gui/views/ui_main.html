@@ -75,7 +75,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">gui.widgets</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">py_window</span><span class="p">,</span> <span class="n">py_left_menu</span><span class="p">,</span> <span class="n">py_left_column</span><span class="p">,</span>
                          <span class="n">py_title_bar</span><span class="p">,</span> <span class="n">py_logbar</span><span class="p">,</span> <span class="n">py_grips</span><span class="p">,</span> <span class="n">py_push_button</span><span class="p">,</span>
                          <span class="n">py_line_edit</span><span class="p">,</span> <span class="n">py_toggle</span><span class="p">,</span> <span class="n">py_combobox</span><span class="p">,</span> <span class="n">py_radio_button</span><span class="p">,</span>
-                         <span class="n">py_label</span><span class="p">,</span> <span class="n">py_tool_button</span><span class="p">)</span>
+                         <span class="n">py_label</span><span class="p">,</span> <span class="n">py_tool_button</span><span class="p">,</span> <span class="n">py_table_widget</span><span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">gui.views</span><span class="w"> </span><span class="kn">import</span> <span class="n">ui_main_pages</span><span class="p">,</span> <span class="n">ui_right_column</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">gui.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">functions</span><span class="p">,</span> <span class="n">settings</span><span class="p">,</span> <span class="n">themes</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">core.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">common</span>
@@ -84,68 +84,86 @@
 <div class="viewcode-block" id="UI_MainWindow">
 <a class="viewcode-back" href="../../../source/gui.views.html#gui.views.ui_main.UI_MainWindow">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">UI_MainWindow</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="n">add_left_menus</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="s2">&quot;btn_icon&quot;</span><span class="p">:</span> <span class="s2">&quot;icon_home.svg&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;btn_id&quot;</span><span class="p">:</span> <span class="s2">&quot;btn_home&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;btn_text&quot;</span><span class="p">:</span> <span class="s2">&quot;Home&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;btn_tooltip&quot;</span><span class="p">:</span> <span class="s2">&quot;Home page&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;show_top&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-            <span class="s2">&quot;is_active&quot;</span><span class="p">:</span> <span class="kc">True</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="s2">&quot;btn_icon&quot;</span><span class="p">:</span> <span class="s2">&quot;icon_widgets.svg&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;btn_id&quot;</span><span class="p">:</span> <span class="s2">&quot;btn_widgets&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;btn_text&quot;</span><span class="p">:</span> <span class="s2">&quot;Compare database&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;btn_tooltip&quot;</span><span class="p">:</span> <span class="s2">&quot;Compare database&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;show_top&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-            <span class="s2">&quot;is_active&quot;</span><span class="p">:</span> <span class="kc">False</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="s2">&quot;btn_icon&quot;</span><span class="p">:</span> <span class="s2">&quot;icon_add_user.svg&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;btn_id&quot;</span><span class="p">:</span> <span class="s2">&quot;btn_add_user&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;btn_text&quot;</span><span class="p">:</span> <span class="s2">&quot;Add a new config&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;btn_tooltip&quot;</span><span class="p">:</span> <span class="s2">&quot;Add DB config&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;show_top&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-            <span class="s2">&quot;is_active&quot;</span><span class="p">:</span> <span class="kc">False</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="s2">&quot;btn_icon&quot;</span><span class="p">:</span> <span class="s2">&quot;icon_info.svg&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;btn_id&quot;</span><span class="p">:</span> <span class="s2">&quot;btn_info&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;btn_text&quot;</span><span class="p">:</span> <span class="s2">&quot;Information&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;btn_tooltip&quot;</span><span class="p">:</span> <span class="s2">&quot;Open informations&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;show_top&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-            <span class="s2">&quot;is_active&quot;</span><span class="p">:</span> <span class="kc">False</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="s2">&quot;btn_icon&quot;</span><span class="p">:</span> <span class="s2">&quot;icon_settings.svg&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;btn_id&quot;</span><span class="p">:</span> <span class="s2">&quot;btn_settings&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;btn_text&quot;</span><span class="p">:</span> <span class="s2">&quot;Settings&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;btn_tooltip&quot;</span><span class="p">:</span> <span class="s2">&quot;Open settings&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;show_top&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-            <span class="s2">&quot;is_active&quot;</span><span class="p">:</span> <span class="kc">False</span>
-        <span class="p">}</span>
-    <span class="p">]</span>
-
-    <span class="n">add_title_bar_menus</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="s2">&quot;btn_icon&quot;</span><span class="p">:</span> <span class="s2">&quot;icon_search.svg&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;btn_id&quot;</span><span class="p">:</span> <span class="s2">&quot;btn_search&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;btn_tooltip&quot;</span><span class="p">:</span> <span class="s2">&quot;Search&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;is_active&quot;</span><span class="p">:</span> <span class="kc">False</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="s2">&quot;btn_icon&quot;</span><span class="p">:</span> <span class="s2">&quot;icon_settings.svg&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;btn_id&quot;</span><span class="p">:</span> <span class="s2">&quot;btn_top_settings&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;btn_tooltip&quot;</span><span class="p">:</span> <span class="s2">&quot;Top settings&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;is_active&quot;</span><span class="p">:</span> <span class="kc">False</span>
-        <span class="p">}</span>
-    <span class="p">]</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">Settings</span><span class="p">()</span><span class="o">.</span><span class="n">get_settings</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">themes</span> <span class="o">=</span> <span class="n">themes</span><span class="o">.</span><span class="n">Themes</span><span class="p">()</span><span class="o">.</span><span class="n">get_theme</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_left_menus</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;btn_icon&quot;</span><span class="p">:</span> <span class="s2">&quot;icon_home.svg&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;btn_id&quot;</span><span class="p">:</span> <span class="s2">&quot;btn_home&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;btn_text&quot;</span><span class="p">:</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Home&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;btn_tooltip&quot;</span><span class="p">:</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Home page&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;show_top&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&quot;is_active&quot;</span><span class="p">:</span> <span class="kc">True</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;btn_icon&quot;</span><span class="p">:</span> <span class="s2">&quot;icon_widgets.svg&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;btn_id&quot;</span><span class="p">:</span> <span class="s2">&quot;btn_widgets&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;btn_text&quot;</span><span class="p">:</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                    <span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Compare database&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;btn_tooltip&quot;</span><span class="p">:</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                    <span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Compare database&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;show_top&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&quot;is_active&quot;</span><span class="p">:</span> <span class="kc">False</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;btn_icon&quot;</span><span class="p">:</span> <span class="s2">&quot;icon_add_user.svg&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;btn_id&quot;</span><span class="p">:</span> <span class="s2">&quot;btn_add_user&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;btn_text&quot;</span><span class="p">:</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;New connection&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;btn_tooltip&quot;</span><span class="p">:</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                    <span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Add a new connection&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;show_top&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&quot;is_active&quot;</span><span class="p">:</span> <span class="kc">False</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;btn_icon&quot;</span><span class="p">:</span> <span class="s2">&quot;icon_info.svg&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;btn_id&quot;</span><span class="p">:</span> <span class="s2">&quot;btn_info&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;btn_text&quot;</span><span class="p">:</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Information&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;btn_tooltip&quot;</span><span class="p">:</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                    <span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Open informations&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;show_top&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                <span class="s2">&quot;is_active&quot;</span><span class="p">:</span> <span class="kc">False</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;btn_icon&quot;</span><span class="p">:</span> <span class="s2">&quot;icon_settings.svg&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;btn_id&quot;</span><span class="p">:</span> <span class="s2">&quot;btn_settings&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;btn_text&quot;</span><span class="p">:</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Settings&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;btn_tooltip&quot;</span><span class="p">:</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Open settings&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;show_top&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                <span class="s2">&quot;is_active&quot;</span><span class="p">:</span> <span class="kc">False</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_title_bar_menus</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;btn_icon&quot;</span><span class="p">:</span> <span class="s2">&quot;icon_search.svg&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;btn_id&quot;</span><span class="p">:</span> <span class="s2">&quot;btn_search&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;btn_tooltip&quot;</span><span class="p">:</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Search&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;is_active&quot;</span><span class="p">:</span> <span class="kc">False</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;btn_icon&quot;</span><span class="p">:</span> <span class="s2">&quot;icon_settings.svg&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;btn_id&quot;</span><span class="p">:</span> <span class="s2">&quot;btn_top_settings&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;btn_tooltip&quot;</span><span class="p">:</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                    <span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Others settings&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;is_active&quot;</span><span class="p">:</span> <span class="kc">False</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">setup_ui</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setup_gui</span><span class="p">()</span>
@@ -404,7 +422,8 @@
         <span class="n">functions</span><span class="o">.</span><span class="n">set_left_column_menu</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">menu</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">left_column</span><span class="o">.</span><span class="n">menus</span><span class="o">.</span><span class="n">menu_1</span><span class="p">,</span>
-            <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Settings Left Column&quot;</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Settings&quot;</span><span class="p">),</span>
             <span class="n">icon_path</span><span class="o">=</span><span class="n">common</span><span class="o">.</span><span class="n">set_svg_icon</span><span class="p">(</span><span class="s2">&quot;icon_settings.svg&quot;</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="n">functions</span><span class="o">.</span><span class="n">set_right_column_menu</span><span class="p">(</span>
@@ -421,7 +440,7 @@
 <a class="viewcode-back" href="../../../source/gui.views.html#gui.views.ui_main.UI_MainWindow.setup_page2">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">setup_page2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">label_db1</span> <span class="o">=</span> <span class="n">py_label</span><span class="o">.</span><span class="n">PyLabel</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Database 1&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Database 1&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
@@ -450,7 +469,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">setDB1</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">label_db2</span> <span class="o">=</span> <span class="n">py_label</span><span class="o">.</span><span class="n">PyLabel</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Database 2&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Database 2&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
@@ -478,8 +497,67 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">setDB2</span><span class="o">.</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setDB2</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">select_all</span> <span class="o">=</span> <span class="n">py_push_button</span><span class="o">.</span><span class="n">PyPushButton</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Select all&quot;</span><span class="p">),</span>
+            <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
+            <span class="n">bg_color</span><span class="o">=</span><span class="s2">&quot;transparent&quot;</span><span class="p">,</span>
+            <span class="n">bg_color_hover</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;dark_three&quot;</span><span class="p">],</span>
+            <span class="n">bg_color_pressed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;dark_four&quot;</span><span class="p">],</span>
+            <span class="n">bg_color_disabled</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;grey&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">select_all</span><span class="o">.</span><span class="n">setMinimumHeight</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">select_all</span><span class="o">.</span><span class="n">setMaximumHeight</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">select_all</span><span class="o">.</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">select_all</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">unselect_all</span> <span class="o">=</span> <span class="n">py_push_button</span><span class="o">.</span><span class="n">PyPushButton</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Unselect all&quot;</span><span class="p">),</span>
+            <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
+            <span class="n">bg_color</span><span class="o">=</span><span class="s2">&quot;transparent&quot;</span><span class="p">,</span>
+            <span class="n">bg_color_hover</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;dark_three&quot;</span><span class="p">],</span>
+            <span class="n">bg_color_pressed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;dark_four&quot;</span><span class="p">],</span>
+            <span class="n">bg_color_disabled</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;grey&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unselect_all</span><span class="o">.</span><span class="n">setMinimumHeight</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unselect_all</span><span class="o">.</span><span class="n">setMaximumHeight</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unselect_all</span><span class="o">.</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unselect_all</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tableWidget</span> <span class="o">=</span> <span class="n">py_table_widget</span><span class="o">.</span><span class="n">PyTableWidget</span><span class="p">(</span>
+            <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
+            <span class="n">selection_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;context_color&quot;</span><span class="p">],</span>
+            <span class="n">bg_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;bg_two&quot;</span><span class="p">],</span>
+            <span class="n">header_horizontal_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;dark_two&quot;</span><span class="p">],</span>
+            <span class="n">header_vertical_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;bg_three&quot;</span><span class="p">],</span>
+            <span class="n">bottom_line_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;bg_three&quot;</span><span class="p">],</span>
+            <span class="n">grid_line_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;bg_one&quot;</span><span class="p">],</span>
+            <span class="n">scroll_bar_bg_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;bg_one&quot;</span><span class="p">],</span>
+            <span class="n">scroll_bar_btn_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;dark_four&quot;</span><span class="p">],</span>
+            <span class="n">context_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;context_color&quot;</span><span class="p">],</span>
+            <span class="n">headers</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Status&quot;</span><span class="p">),</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Table name&quot;</span><span class="p">),</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Size in DB1&quot;</span><span class="p">),</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Size in DB2&quot;</span><span class="p">),</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Cols in DB1&quot;</span><span class="p">),</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Cols in DB2&quot;</span><span class="p">),</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Rows in DB1&quot;</span><span class="p">),</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Rows in DB2&quot;</span><span class="p">)</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tableWidget</span><span class="o">.</span><span class="n">horizontalHeader</span><span class="p">()</span><span class="o">.</span><span class="n">setSectionResizeMode</span><span class="p">(</span>
+            <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHeaderView</span><span class="o">.</span><span class="n">Stretch</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tableWidget</span><span class="o">.</span><span class="n">setSelectionMode</span><span class="p">(</span>
+            <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAbstractItemView</span><span class="o">.</span><span class="n">ExtendedSelection</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tableWidget</span><span class="o">.</span><span class="n">setSelectionBehavior</span><span class="p">(</span>
+            <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAbstractItemView</span><span class="o">.</span><span class="n">SelectRows</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">label_extraction</span> <span class="o">=</span> <span class="n">py_label</span><span class="o">.</span><span class="n">PyLabel</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Multiple queries&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Multiple queries&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
@@ -505,7 +583,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">setExtractionType</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">label_segment</span> <span class="o">=</span> <span class="n">py_label</span><span class="o">.</span><span class="n">PyLabel</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Segment length&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Segment length&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
@@ -520,24 +599,25 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">label_segment</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">setSegmentLength</span> <span class="o">=</span> <span class="n">py_line_edit</span><span class="o">.</span><span class="n">PyLineEdit</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="n">place_holder_text</span><span class="o">=</span><span class="s2">&quot;setSegmentLength&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;100000&quot;</span><span class="p">,</span>
+            <span class="n">place_holder_text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
             <span class="n">selection_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;white&quot;</span><span class="p">],</span>
             <span class="n">bg_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;dark_one&quot;</span><span class="p">],</span>
             <span class="n">bg_color_active</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;dark_three&quot;</span><span class="p">],</span>
-            <span class="n">context_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;context_color&quot;</span><span class="p">]</span>
+            <span class="n">context_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;context_color&quot;</span><span class="p">],</span>
+            <span class="n">active</span><span class="o">=</span><span class="kc">False</span>
+
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setSegmentLength</span><span class="o">.</span><span class="n">setMinimumHeight</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setSegmentLength</span><span class="o">.</span><span class="n">setMaximumHeight</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setSegmentLength</span><span class="o">.</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setSegmentLength</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setSegmentLength</span><span class="o">.</span><span class="n">setDisabled</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">label_fetch</span> <span class="o">=</span> <span class="n">py_label</span><span class="o">.</span><span class="n">PyLabel</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Fetch Size&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Fetch Size&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
@@ -552,8 +632,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">label_fetch</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">setFetchSize</span> <span class="o">=</span> <span class="n">py_line_edit</span><span class="o">.</span><span class="n">PyLineEdit</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="n">place_holder_text</span><span class="o">=</span><span class="s2">&quot;setFetchSize&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;10000&quot;</span><span class="p">,</span>
+            <span class="n">place_holder_text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
@@ -567,7 +647,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">setFetchSize</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">hashmode</span> <span class="o">=</span> <span class="n">py_radio_button</span><span class="o">.</span><span class="n">PyRadioButton</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;By hash&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;By hash&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
@@ -582,7 +662,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">hashmode</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">linemode</span> <span class="o">=</span> <span class="n">py_radio_button</span><span class="o">.</span><span class="n">PyRadioButton</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;By lines&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;By lines&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
@@ -597,7 +677,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">linemode</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">columnmode</span> <span class="o">=</span> <span class="n">py_radio_button</span><span class="o">.</span><span class="n">PyRadioButton</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;By columns (Experimental)&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;By columns (Experimental)&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
@@ -612,7 +693,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">columnmode</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">clear_data</span> <span class="o">=</span> <span class="n">py_push_button</span><span class="o">.</span><span class="n">PyPushButton</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Clear&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Clear&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
             <span class="n">bg_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;dark_one&quot;</span><span class="p">],</span>
@@ -627,7 +708,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">clear_data</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">compare</span> <span class="o">=</span> <span class="n">py_push_button</span><span class="o">.</span><span class="n">PyPushButton</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Compare&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Compare&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
             <span class="n">bg_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;dark_one&quot;</span><span class="p">],</span>
@@ -651,7 +732,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">row_3_groupbox</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;&quot;&quot;border-radius: 8px;</span>
 <span class="s2">            border: 2px solid </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;grey&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2">;&quot;&quot;&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">authentification</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">authentication</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;&quot;&quot;border-radius: 8px;</span>
 <span class="s2">            border: 2px solid </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;grey&quot;</span><span class="p">]</span><span class="si">}</span><span class="s2">;&quot;&quot;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">extraction</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">label_extraction</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -664,10 +745,20 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">processing</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hashmode</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">processing</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">linemode</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">processing</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">columnmode</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">row_4_layout</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignRight</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">row_4_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clear_data</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">row_4_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">compare</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">description_label</span><span class="o">.</span><span class="n">setMaximumHeight</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">row_5_layout</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignRight</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">row_5_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clear_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">row_5_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">compare</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">description_label</span><span class="o">.</span><span class="n">setMaximumHeight</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">table_buttons</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">select_all</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">table_buttons</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unselect_all</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">table_buttons</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignRight</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">table_filter</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;&quot;&quot;QGroupBox </span><span class="se">{{</span><span class="s2">border-radius: 8px;</span>
+<span class="s2">            border: 2px solid </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;grey&quot;</span><span class="p">]</span><span class="si">}</span><span class="se">}}</span><span class="s2">;&quot;&quot;&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">table_filter_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tableWidget</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="UI_MainWindow.setup_page3">
@@ -711,7 +802,7 @@
 <a class="viewcode-back" href="../../../source/gui.views.html#gui.views.ui_main.UI_MainWindow.settings_oracle">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">settings_oracle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">labelHostOracle</span> <span class="o">=</span> <span class="n">py_label</span><span class="o">.</span><span class="n">PyLabel</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Host&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Host and Port&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
@@ -726,8 +817,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">labelHostOracle</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">setHostOracle</span> <span class="o">=</span> <span class="n">py_line_edit</span><span class="o">.</span><span class="n">PyLineEdit</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="n">place_holder_text</span><span class="o">=</span><span class="s2">&quot;ip or address&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+            <span class="n">place_holder_text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Host&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
@@ -742,7 +834,8 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">setPortOracle</span> <span class="o">=</span> <span class="n">py_line_edit</span><span class="o">.</span><span class="n">PyLineEdit</span><span class="p">(</span>
             <span class="n">text</span><span class="o">=</span><span class="s2">&quot;1521&quot;</span><span class="p">,</span>
-            <span class="n">place_holder_text</span><span class="o">=</span><span class="s2">&quot;Port&quot;</span><span class="p">,</span>
+            <span class="n">place_holder_text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Port&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
@@ -758,7 +851,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">setPortOracle</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">labelDBOracle</span> <span class="o">=</span> <span class="n">py_label</span><span class="o">.</span><span class="n">PyLabel</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Database&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Database&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
@@ -773,7 +866,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">labelDBOracle</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">setDBOracle</span> <span class="o">=</span> <span class="n">py_line_edit</span><span class="o">.</span><span class="n">PyLineEdit</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;ORCL&quot;</span><span class="p">,</span>
             <span class="n">place_holder_text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
@@ -815,7 +908,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">setSIDOracle</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">labelAuthOracle</span> <span class="o">=</span> <span class="n">py_label</span><span class="o">.</span><span class="n">PyLabel</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Authentification&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;authentication&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
@@ -829,7 +923,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">labelAuthOracle</span><span class="o">.</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">labelAuthOracle</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">setAuthentification</span> <span class="o">=</span> <span class="n">py_combobox</span><span class="o">.</span><span class="n">PyComboBox</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setauthentication</span> <span class="o">=</span> <span class="n">py_combobox</span><span class="o">.</span><span class="n">PyComboBox</span><span class="p">(</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
@@ -838,14 +932,14 @@
             <span class="n">bg_color_active</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;dark_three&quot;</span><span class="p">],</span>
             <span class="n">context_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;context_color&quot;</span><span class="p">]</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setAuthentification</span><span class="o">.</span><span class="n">setMinimumHeight</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setAuthentification</span><span class="o">.</span><span class="n">setMaximumHeight</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setAuthentification</span><span class="o">.</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setAuthentification</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setAuthentification</span><span class="o">.</span><span class="n">addItems</span><span class="p">([</span><span class="s2">&quot;Oracle Database Native&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setauthentication</span><span class="o">.</span><span class="n">setMinimumHeight</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setauthentication</span><span class="o">.</span><span class="n">setMaximumHeight</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setauthentication</span><span class="o">.</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setauthentication</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setauthentication</span><span class="o">.</span><span class="n">addItems</span><span class="p">([</span><span class="s2">&quot;Oracle Database Native&quot;</span><span class="p">])</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">labelUserOracle</span> <span class="o">=</span> <span class="n">py_label</span><span class="o">.</span><span class="n">PyLabel</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Username&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Username&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
@@ -860,8 +954,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">labelUserOracle</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">setUsernameOracle</span> <span class="o">=</span> <span class="n">py_line_edit</span><span class="o">.</span><span class="n">PyLineEdit</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="n">place_holder_text</span><span class="o">=</span><span class="s2">&quot;username&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;system&quot;</span><span class="p">,</span>
+            <span class="n">place_holder_text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;username&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
@@ -876,7 +971,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">setUsernameOracle</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">labelPwdOracle</span> <span class="o">=</span> <span class="n">py_label</span><span class="o">.</span><span class="n">PyLabel</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Password&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Password&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
@@ -892,7 +987,8 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">setPasswordOracle</span> <span class="o">=</span> <span class="n">py_line_edit</span><span class="o">.</span><span class="n">PyLineEdit</span><span class="p">(</span>
             <span class="n">text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="n">place_holder_text</span><span class="o">=</span><span class="s2">&quot;password&quot;</span><span class="p">,</span>
+            <span class="n">place_holder_text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Password&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
@@ -908,7 +1004,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">setPasswordOracle</span><span class="o">.</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">isSavePwdOracle</span> <span class="o">=</span> <span class="n">py_radio_button</span><span class="o">.</span><span class="n">PyRadioButton</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Save password&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Save password&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
@@ -922,24 +1018,25 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">isSavePwdOracle</span><span class="o">.</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">isSavePwdOracle</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">authentification_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">authentication_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">labelAuthOracle</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">authentification_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">setAuthentification</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">authentication_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setauthentication</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">authentification_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">authentication_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">labelUserOracle</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">authentification_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">authentication_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">setUsernameOracle</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">authentification_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">authentication_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">labelPwdOracle</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">authentification_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">authentication_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">setPasswordOracle</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">authentification_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">authentication_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">isSavePwdOracle</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">labelCustomName</span> <span class="o">=</span> <span class="n">py_label</span><span class="o">.</span><span class="n">PyLabel</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Connexion name&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Connection name&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
@@ -954,8 +1051,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">labelCustomName</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">setCustomName</span> <span class="o">=</span> <span class="n">py_line_edit</span><span class="o">.</span><span class="n">PyLineEdit</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="n">place_holder_text</span><span class="o">=</span><span class="s2">&quot;custom name&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;ORCL&quot;</span><span class="p">,</span>
+            <span class="n">place_holder_text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Custom name&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
@@ -977,7 +1075,8 @@
 <a class="viewcode-back" href="../../../source/gui.views.html#gui.views.ui_main.UI_MainWindow.settings_DB_buttons">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">settings_DB_buttons</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">testDB</span> <span class="o">=</span> <span class="n">py_push_button</span><span class="o">.</span><span class="n">PyPushButton</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Connection test&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Connection test&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
             <span class="n">bg_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;dark_one&quot;</span><span class="p">],</span>
@@ -992,7 +1091,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">testDB</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">clearDB</span> <span class="o">=</span> <span class="n">py_push_button</span><span class="o">.</span><span class="n">PyPushButton</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Clear&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Clear&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
             <span class="n">bg_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;dark_one&quot;</span><span class="p">],</span>
@@ -1007,7 +1106,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">clearDB</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">saveDB</span> <span class="o">=</span> <span class="n">py_push_button</span><span class="o">.</span><span class="n">PyPushButton</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Save&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Save&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
             <span class="n">bg_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;dark_one&quot;</span><span class="p">],</span>
@@ -1035,14 +1134,48 @@
 <div class="viewcode-block" id="UI_MainWindow.settings_left_column">
 <a class="viewcode-back" href="../../../source/gui.views.html#gui.views.ui_main.UI_MainWindow.settings_left_column">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">settings_left_column</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">pass</span></div>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">labelLocale</span> <span class="o">=</span> <span class="n">py_label</span><span class="o">.</span><span class="n">PyLabel</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Language&quot;</span><span class="p">),</span>
+            <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+            <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
+            <span class="n">selection_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;white&quot;</span><span class="p">],</span>
+            <span class="n">bg_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;bg_two&quot;</span><span class="p">],</span>
+            <span class="n">bg_color_active</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;dark_three&quot;</span><span class="p">],</span>
+            <span class="n">context_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;context_color&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">labelLocale</span><span class="o">.</span><span class="n">setMinimumHeight</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">labelLocale</span><span class="o">.</span><span class="n">setMaximumHeight</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">labelLocale</span><span class="o">.</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">labelLocale</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setlocale</span> <span class="o">=</span> <span class="n">py_combobox</span><span class="o">.</span><span class="n">PyComboBox</span><span class="p">(</span>
+            <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+            <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
+            <span class="n">selection_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;white&quot;</span><span class="p">],</span>
+            <span class="n">bg_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;dark_one&quot;</span><span class="p">],</span>
+            <span class="n">bg_color_active</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;dark_three&quot;</span><span class="p">],</span>
+            <span class="n">context_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;context_color&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setlocale</span><span class="o">.</span><span class="n">setMinimumHeight</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setlocale</span><span class="o">.</span><span class="n">setMaximumHeight</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setlocale</span><span class="o">.</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setlocale</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setlocale</span><span class="o">.</span><span class="n">addItems</span><span class="p">(</span><span class="n">common</span><span class="o">.</span><span class="n">get_all_locales</span><span class="p">())</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">left_column</span><span class="o">.</span><span class="n">menus</span><span class="o">.</span><span class="n">settingsLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">labelLocale</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left_column</span><span class="o">.</span><span class="n">menus</span><span class="o">.</span><span class="n">settingsLayout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">setlocale</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="UI_MainWindow.settings_right_column">
 <a class="viewcode-back" href="../../../source/gui.views.html#gui.views.ui_main.UI_MainWindow.settings_right_column">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">settings_right_column</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">right_btn1</span> <span class="o">=</span> <span class="n">py_push_button</span><span class="o">.</span><span class="n">PyPushButton</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Show Menu 2&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Show Menu 2&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
             <span class="n">bg_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;dark_one&quot;</span><span class="p">],</span>
@@ -1055,7 +1188,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">right_column</span><span class="o">.</span><span class="n">btn_1_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">right_btn1</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">right_btn2</span> <span class="o">=</span> <span class="n">py_push_button</span><span class="o">.</span><span class="n">PyPushButton</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Show Menu 1&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Show Menu 1&quot;</span><span class="p">),</span>
             <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
             <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
             <span class="n">bg_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;dark_one&quot;</span><span class="p">],</span>

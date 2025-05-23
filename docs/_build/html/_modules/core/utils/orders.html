@@ -105,7 +105,7 @@
 <div class="viewcode-block" id="compare_db">
 <a class="viewcode-back" href="../../../source/core.utils.html#core.utils.orders.compare_db">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compare_db</span><span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">settings_db1</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">settings_db2</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
-               <span class="n">segment</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fetch</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+               <span class="n">segment</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">tables</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">fetch</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Execute database comparaison</span>
 
@@ -114,10 +114,12 @@
 <span class="sd">        settings_db1 (list): Database connection parameters</span>
 <span class="sd">        settings_db2 (list): Database connection parameters</span>
 <span class="sd">        segment (int | None): Segment size</span>
+<span class="sd">        tables (int): List of tables to compare</span>
 <span class="sd">        fetch (int): Fetch size</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        exceptions.Warn: code 300 (data gap)</span>
+<span class="sd">        exceptions.Error: code 603 (No tables to compare)</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        int: code 201 (No data gap)</span>
@@ -134,8 +136,8 @@
 
     <span class="n">warn</span> <span class="o">=</span> <span class="kc">False</span>
 
-    <span class="n">tables</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_common_tables</span><span class="p">(</span>
-        <span class="n">settings_db1</span><span class="p">,</span> <span class="n">settings_db2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tables</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">603</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
         <span class="n">common</span><span class="o">.</span><span class="n">extract_to_csv</span><span class="p">(</span>
@@ -170,14 +172,14 @@
                 <span class="n">differences</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">find_most_similar_pairs</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">differences</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="n">path_outfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                        <span class="n">outfile_folder</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;gap_</span><span class="si">{</span><span class="n">table</span><span class="si">}</span><span class="s2">.txt&quot;</span><span class="p">)</span>
+                        <span class="n">outfile_folder</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;column-mode_gap_</span><span class="si">{</span><span class="n">table</span><span class="si">}</span><span class="s2">.txt&quot;</span><span class="p">)</span>
                     <span class="n">common</span><span class="o">.</span><span class="n">create_gap_files</span><span class="p">(</span><span class="n">path_outfile</span><span class="p">,</span> <span class="n">differences</span><span class="p">)</span>
                     <span class="n">warn</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
                     <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
                         <span class="n">path_outfile</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                            <span class="n">outfile_folder</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;gap_</span><span class="si">{</span><span class="n">table</span><span class="si">}</span><span class="s2">.csv&quot;</span><span class="p">)</span>
+                            <span class="n">outfile_folder</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;line-mode_gap_</span><span class="si">{</span><span class="n">table</span><span class="si">}</span><span class="s2">.csv&quot;</span><span class="p">)</span>
                         <span class="n">common</span><span class="o">.</span><span class="n">create_gap_files</span><span class="p">(</span><span class="n">path_outfile</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
                         <span class="n">warn</span> <span class="o">=</span> <span class="kc">True</span>
 

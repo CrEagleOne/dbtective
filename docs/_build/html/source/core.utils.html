@@ -114,6 +114,7 @@ Date: 2025-05-07</p>
 <li><p>QtWidgets (PySide6)</p></li>
 <li><p>oracle.py</p></li>
 <li><p>exceptions.py</p></li>
+<li><p>config.py</p></li>
 </ul>
 </dd>
 <dt>Usage Example:</dt><dd><p>update_style(widget, “border”, “2px solid red”)</p>
@@ -229,6 +230,23 @@ Levenshtein distance</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="core.utils.common.get_all_locales">
+<span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">get_all_locales</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'src/gui/locales'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="../_modules/core/utils/common.html#get_all_locales"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.get_all_locales" title="Link to this definition"></a></dt>
+<dd><p>Retrieves all available locales from the specified directory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – The path to the directory containing locale files</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of available locales, with the current locale first</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="core.utils.common.get_common_tables">
 <span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">get_common_tables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/core/utils/common.html#get_common_tables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.get_common_tables" title="Link to this definition"></a></dt>
 <dd><p>Retrieve the common tables of 2 bases</p>
@@ -244,6 +262,20 @@ Levenshtein distance</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="core.utils.common.get_current_locale">
+<span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">get_current_locale</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/core/utils/common.html#get_current_locale"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.get_current_locale" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the current locale setting from the configuration</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The current locale setting</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -423,6 +455,18 @@ resource files</p>
 <span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">set_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/core/utils/common.html#set_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.set_image" title="Link to this definition"></a></dt>
 <dd><p>Returns the absolute path to an image used in the graphical
 user interface</p>
+<dl class="simple">
+<dt>Parameters :</dt><dd><p>icon_name (str) : The name of the icon.</p>
+</dd>
+<dt>Returns :</dt><dd><p>str : The path to the image.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="core.utils.common.set_locale">
+<span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">set_locale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">translate_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/core/utils/common.html#set_locale"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.set_locale" title="Link to this definition"></a></dt>
+<dd><p>Returns the absolute path of the application translation file</p>
 <dl class="simple">
 <dt>Parameters :</dt><dd><p>icon_name (str) : The name of the icon.</p>
 </dd>
@@ -689,11 +733,31 @@ of the time to include. Valid options are ‘auto’, ‘hours’, ‘minutes’
 <span class="sig-prename descclassname"><span class="pre">core.utils.config.</span></span><span class="sig-name descname"><span class="pre">get_list_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="../_modules/core/utils/config.html#get_list_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.config.get_list_data" title="Link to this definition"></a></dt>
 <dd><p>Recover saved database settings</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Query result</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>query</strong> (<em>str</em>) – Query to perform</p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tuple</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Query result</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="core.utils.config.get_settings">
+<span class="sig-prename descclassname"><span class="pre">core.utils.config.</span></span><span class="sig-name descname"><span class="pre">get_settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/core/utils/config.html#get_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.config.get_settings" title="Link to this definition"></a></dt>
+<dd><p>Retrieves the language</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>query</strong> (<em>str</em>) – Query to perform</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Query result</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
 </dd>
 </dl>
 </dd></dl>
@@ -728,6 +792,20 @@ of the time to include. Valid options are ‘auto’, ‘hours’, ‘minutes’
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="core.utils.config.update_settings">
+<span class="sig-prename descclassname"><span class="pre">core.utils.config.</span></span><span class="sig-name descname"><span class="pre">update_settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/core/utils/config.html#update_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.config.update_settings" title="Link to this definition"></a></dt>
+<dd><p>Updates the language</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em>) – Query to perform</p></li>
+<li><p><strong>args</strong> (<em>tuple</em>) – Query args</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -770,6 +848,49 @@ Date: 2025-05-07</p>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
 <p>Custom exception class that integrates logging and Qt
 error signaling</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="core.utils.exceptions.Error.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">system</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/core/utils/exceptions.html#Error.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.exceptions.Error.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the exception with an error message and triggers
+error logging</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>code</strong> (<em>str</em>) – <p>The error code used to fetch the corresponding message</p>
+<dl class="simple">
+<dt>Possible values:</dt><dd><ul>
+<li><p>400: Poorly formed or invalid SQL query</p></li>
+<li><p>401: An error was occured</p></li>
+<li><p>402: UNIQUE constraint failed</p></li>
+<li><p>403: Syntax error</p></li>
+<li><p>404: Table or column not found</p></li>
+<li><p>405: Incorrect database config</p></li>
+<li><p>406: Data type mismatch</p></li>
+<li><p>407: Conversion error</p></li>
+<li><p>408: Transaction error</p></li>
+<li><p>500: Failed to connect to database</p></li>
+<li><p>501: Database temporarily unavailable</p></li>
+<li><p>502: Out of memory error</p></li>
+<li><p>503: Disk I/O error</p></li>
+<li><p>504: No active Oracle listener</p></li>
+<li><p>505: Account locked</p></li>
+<li><p>506: Incorrect username or password</p></li>
+<li><p>600: System not supported</p></li>
+<li><p>601: Settings file not found</p></li>
+<li><p>602: Themes file not found</p></li>
+<li><p>603: No tables to compare</p></li>
+<li><p>604: Error occurring during data extraction</p></li>
+<li><p>999: Unanticipated error - check logs</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>system</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – System context for logging</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -811,11 +932,56 @@ error signaling</p>
 
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="core.utils.exceptions.INFO">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.utils.exceptions.</span></span><span class="sig-name descname"><span class="pre">INFO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/core/utils/exceptions.html#INFO"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.exceptions.INFO" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="core.utils.exceptions.INFO.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/core/utils/exceptions.html#INFO.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.exceptions.INFO.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the info with a message and triggers
+info signaling</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>code</strong> (<em>str</em>) – <p>The info code used to fetch the corresponding message</p>
+<dl class="simple">
+<dt>Possible values:</dt><dd><ul class="simple">
+<li><p>100: Backup successfully</p></li>
+<li><p>101: Backup successfully</p></li>
+<li><p>200: Treatment completed successfully</p></li>
+<li><p>201: No discrepancies were found</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py exception">
 <dt class="sig sig-object py" id="core.utils.exceptions.Warn">
 <em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">core.utils.exceptions.</span></span><span class="sig-name descname"><span class="pre">Warn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/core/utils/exceptions.html#Warn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.exceptions.Warn" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
 <p>Custom warning exception that integrates logging and Qt warning signaling</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="core.utils.exceptions.Warn.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/core/utils/exceptions.html#Warn.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.exceptions.Warn.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the warning exception with a message and triggers
+warning signaling</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>code</strong> (<em>str</em>) – <p>The warn code used to fetch the corresponding message</p>
+<dl class="simple">
+<dt>Possible values:</dt><dd><p>300: Discrepancies were found</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -1039,7 +1205,7 @@ Date: 2025-05-07</p>
 </ul>
 <dl class="py function">
 <dt class="sig sig-object py" id="core.utils.orders.compare_db">
-<span class="sig-prename descclassname"><span class="pre">core.utils.orders.</span></span><span class="sig-name descname"><span class="pre">compare_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settings_db1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settings_db2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fetch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/core/utils/orders.html#compare_db"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.orders.compare_db" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">core.utils.orders.</span></span><span class="sig-name descname"><span class="pre">compare_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settings_db1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">settings_db2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tables</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fetch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/core/utils/orders.html#compare_db"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.orders.compare_db" title="Link to this definition"></a></dt>
 <dd><p>Execute database comparaison</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1048,11 +1214,15 @@ Date: 2025-05-07</p>
 <li><p><strong>settings_db1</strong> (<em>list</em>) – Database connection parameters</p></li>
 <li><p><strong>settings_db2</strong> (<em>list</em>) – Database connection parameters</p></li>
 <li><p><strong>segment</strong> (<em>int</em><em> | </em><em>None</em>) – Segment size</p></li>
+<li><p><strong>tables</strong> (<em>int</em>) – List of tables to compare</p></li>
 <li><p><strong>fetch</strong> (<em>int</em>) – Fetch size</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="#core.utils.exceptions.Warn" title="core.utils.exceptions.Warn"><strong>exceptions.Warn</strong></a> – code 300 (data gap)</p>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#core.utils.exceptions.Warn" title="core.utils.exceptions.Warn"><strong>exceptions.Warn</strong></a> – code 300 (data gap)</p></li>
+<li><p><a class="reference internal" href="#core.utils.exceptions.Error" title="core.utils.exceptions.Error"><strong>exceptions.Error</strong></a> – code 603 (No tables to compare)</p></li>
+</ul>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>code 201 (No data gap)</p>
