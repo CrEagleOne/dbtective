@@ -1,3 +1,9 @@
+## [1.1.1](https://github.com/creagleone/dbtective/compare/v1.1.0...v1.1.1) (2025-05-23)
+
+### 🐛 Bug Fixes
+
+* Fixed a block when the comparison ends without differences ([2e238ac](https://github.com/creagleone/dbtective/commit/2e238ac45ceeaed4fe236dd9dbb7711b77f4b81f))
+
 ## [1.1.0](https://github.com/creagleone/dbtective/compare/v1.0.0...v1.1.0) (2025-05-23)
 
 ### ✨ Features
