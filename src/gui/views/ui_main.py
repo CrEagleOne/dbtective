@@ -11,68 +11,86 @@ from core.utils import common
 
 
 class UI_MainWindow(object):
-    add_left_menus = [
-        {
-            "btn_icon": "icon_home.svg",
-            "btn_id": "btn_home",
-            "btn_text": "Home",
-            "btn_tooltip": "Home page",
-            "show_top": True,
-            "is_active": True
-        },
-        {
-            "btn_icon": "icon_widgets.svg",
-            "btn_id": "btn_widgets",
-            "btn_text": "Compare database",
-            "btn_tooltip": "Compare database",
-            "show_top": True,
-            "is_active": False
-        },
-        {
-            "btn_icon": "icon_add_user.svg",
-            "btn_id": "btn_add_user",
-            "btn_text": "Add a new config",
-            "btn_tooltip": "Add DB config",
-            "show_top": True,
-            "is_active": False
-        },
-        {
-            "btn_icon": "icon_info.svg",
-            "btn_id": "btn_info",
-            "btn_text": "Information",
-            "btn_tooltip": "Open informations",
-            "show_top": False,
-            "is_active": False
-        },
-        {
-            "btn_icon": "icon_settings.svg",
-            "btn_id": "btn_settings",
-            "btn_text": "Settings",
-            "btn_tooltip": "Open settings",
-            "show_top": False,
-            "is_active": False
-        }
-    ]
-
-    add_title_bar_menus = [
-        {
-            "btn_icon": "icon_search.svg",
-            "btn_id": "btn_search",
-            "btn_tooltip": "Search",
-            "is_active": False
-        },
-        {
-            "btn_icon": "icon_settings.svg",
-            "btn_id": "btn_top_settings",
-            "btn_tooltip": "Top settings",
-            "is_active": False
-        }
-    ]
 
     def __init__(self, parent):
         self.settings = settings.Settings().get_settings()
         self.themes = themes.Themes().get_theme()
         self.parent = parent
+
+        self.add_left_menus = [
+            {
+                "btn_icon": "icon_home.svg",
+                "btn_id": "btn_home",
+                "btn_text":
+                QtCore.QCoreApplication.translate("ui_main", "Home"),
+                "btn_tooltip":
+                QtCore.QCoreApplication.translate("ui_main", "Home page"),
+                "show_top": True,
+                "is_active": True
+            },
+            {
+                "btn_icon": "icon_widgets.svg",
+                "btn_id": "btn_widgets",
+                "btn_text":
+                QtCore.QCoreApplication.translate(
+                    "ui_main", "Compare database"),
+                "btn_tooltip":
+                QtCore.QCoreApplication.translate(
+                    "ui_main", "Compare database"),
+                "show_top": True,
+                "is_active": False
+            },
+            {
+                "btn_icon": "icon_add_user.svg",
+                "btn_id": "btn_add_user",
+                "btn_text":
+                QtCore.QCoreApplication.translate("ui_main", "New connection"),
+                "btn_tooltip":
+                QtCore.QCoreApplication.translate(
+                    "ui_main", "Add a new connection"),
+                "show_top": True,
+                "is_active": False
+            },
+            {
+                "btn_icon": "icon_info.svg",
+                "btn_id": "btn_info",
+                "btn_text":
+                QtCore.QCoreApplication.translate("ui_main", "Information"),
+                "btn_tooltip":
+                QtCore.QCoreApplication.translate(
+                    "ui_main", "Open informations"),
+                "show_top": False,
+                "is_active": False
+            },
+            {
+                "btn_icon": "icon_settings.svg",
+                "btn_id": "btn_settings",
+                "btn_text":
+                QtCore.QCoreApplication.translate("ui_main", "Settings"),
+                "btn_tooltip":
+                QtCore.QCoreApplication.translate("ui_main", "Open settings"),
+                "show_top": False,
+                "is_active": False
+            }
+        ]
+
+        self.add_title_bar_menus = [
+            {
+                "btn_icon": "icon_search.svg",
+                "btn_id": "btn_search",
+                "btn_tooltip":
+                QtCore.QCoreApplication.translate("ui_main", "Search"),
+                "is_active": False
+            },
+            {
+                "btn_icon": "icon_settings.svg",
+                "btn_id": "btn_top_settings",
+                "btn_tooltip":
+                QtCore.QCoreApplication.translate(
+                    "ui_main", "Others settings"),
+                "is_active": False
+            }
+        ]
 
         self.setup_ui()
         self.setup_gui()
@@ -326,7 +344,8 @@ class UI_MainWindow(object):
         functions.set_left_column_menu(
             self,
             menu=self.left_column.menus.menu_1,
-            title="Settings Left Column",
+            title=QtCore.QCoreApplication.translate(
+                "ui_main", "Settings"),
             icon_path=common.set_svg_icon("icon_settings.svg")
         )
         functions.set_right_column_menu(
@@ -340,7 +359,7 @@ class UI_MainWindow(object):
 
     def setup_page2(self):
         self.label_db1 = py_label.PyLabel(
-            text="Database 1",
+            text=QtCore.QCoreApplication.translate("ui_main", "Database 1"),
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],
@@ -369,7 +388,7 @@ class UI_MainWindow(object):
         self.setDB1.setMaximumWidth(200)
 
         self.label_db2 = py_label.PyLabel(
-            text="Database 2",
+            text=QtCore.QCoreApplication.translate("ui_main", "Database 2"),
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],
@@ -398,7 +417,7 @@ class UI_MainWindow(object):
         self.setDB2.setMaximumWidth(200)
 
         self.select_all = py_push_button.PyPushButton(
-            text="Select all",
+            text=QtCore.QCoreApplication.translate("ui_main", "Select all"),
             radius=8,
             color=self.themes["app_color"]["text_foreground"],
             bg_color="transparent",
@@ -412,7 +431,7 @@ class UI_MainWindow(object):
         self.select_all.setMaximumWidth(100)
 
         self.unselect_all = py_push_button.PyPushButton(
-            text="Unselect all",
+            text=QtCore.QCoreApplication.translate("ui_main", "Unselect all"),
             radius=8,
             color=self.themes["app_color"]["text_foreground"],
             bg_color="transparent",
@@ -437,9 +456,16 @@ class UI_MainWindow(object):
             scroll_bar_bg_color=self.themes["app_color"]["bg_one"],
             scroll_bar_btn_color=self.themes["app_color"]["dark_four"],
             context_color=self.themes["app_color"]["context_color"],
-            headers=["Status", "Table name", "Size in DB1", "Size in DB2",
-                     "Cols in DB1", "Cols in DB2", "Rows in DB1",
-                     "Rows in DB2"]
+            headers=[
+                QtCore.QCoreApplication.translate("ui_main", "Status"),
+                QtCore.QCoreApplication.translate("ui_main", "Table name"),
+                QtCore.QCoreApplication.translate("ui_main", "Size in DB1"),
+                QtCore.QCoreApplication.translate("ui_main", "Size in DB2"),
+                QtCore.QCoreApplication.translate("ui_main", "Cols in DB1"),
+                QtCore.QCoreApplication.translate("ui_main", "Cols in DB2"),
+                QtCore.QCoreApplication.translate("ui_main", "Rows in DB1"),
+                QtCore.QCoreApplication.translate("ui_main", "Rows in DB2")
+            ]
         )
         self.tableWidget.horizontalHeader().setSectionResizeMode(
             QtWidgets.QHeaderView.Stretch)
@@ -449,7 +475,8 @@ class UI_MainWindow(object):
             QtWidgets.QAbstractItemView.SelectRows)
 
         self.label_extraction = py_label.PyLabel(
-            text="Multiple queries",
+            text=QtCore.QCoreApplication.translate(
+                "ui_main", "Multiple queries"),
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],
@@ -475,7 +502,8 @@ class UI_MainWindow(object):
         self.setExtractionType.setMaximumWidth(50)
 
         self.label_segment = py_label.PyLabel(
-            text="Segment length",
+            text=QtCore.QCoreApplication.translate(
+                "ui_main", "Segment length"),
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],
@@ -490,8 +518,8 @@ class UI_MainWindow(object):
         self.label_segment.setMaximumWidth(200)
 
         self.setSegmentLength = py_line_edit.PyLineEdit(
-            text="",
-            place_holder_text="setSegmentLength",
+            text="100000",
+            place_holder_text="",
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],
@@ -508,7 +536,7 @@ class UI_MainWindow(object):
         self.setSegmentLength.setMaximumWidth(200)
 
         self.label_fetch = py_label.PyLabel(
-            text="Fetch Size",
+            text=QtCore.QCoreApplication.translate("ui_main", "Fetch Size"),
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],
@@ -523,8 +551,8 @@ class UI_MainWindow(object):
         self.label_fetch.setMaximumWidth(200)
 
         self.setFetchSize = py_line_edit.PyLineEdit(
-            text="",
-            place_holder_text="setFetchSize",
+            text="10000",
+            place_holder_text="",
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],
@@ -538,7 +566,7 @@ class UI_MainWindow(object):
         self.setFetchSize.setMaximumWidth(200)
 
         self.hashmode = py_radio_button.PyRadioButton(
-            text="By hash",
+            text=QtCore.QCoreApplication.translate("ui_main", "By hash"),
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],
@@ -553,7 +581,7 @@ class UI_MainWindow(object):
         self.hashmode.setMaximumWidth(200)
 
         self.linemode = py_radio_button.PyRadioButton(
-            text="By lines",
+            text=QtCore.QCoreApplication.translate("ui_main", "By lines"),
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],
@@ -568,7 +596,8 @@ class UI_MainWindow(object):
         self.linemode.setMaximumWidth(200)
 
         self.columnmode = py_radio_button.PyRadioButton(
-            text="By columns (Experimental)",
+            text=QtCore.QCoreApplication.translate(
+                "ui_main", "By columns (Experimental)"),
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],
@@ -583,7 +612,7 @@ class UI_MainWindow(object):
         self.columnmode.setMaximumWidth(200)
 
         self.clear_data = py_push_button.PyPushButton(
-            text="Clear",
+            text=QtCore.QCoreApplication.translate("ui_main", "Clear"),
             radius=8,
             color=self.themes["app_color"]["text_foreground"],
             bg_color=self.themes["app_color"]["dark_one"],
@@ -598,7 +627,7 @@ class UI_MainWindow(object):
         self.clear_data.setMaximumWidth(150)
 
         self.compare = py_push_button.PyPushButton(
-            text="Compare",
+            text=QtCore.QCoreApplication.translate("ui_main", "Compare"),
             radius=8,
             color=self.themes["app_color"]["text_foreground"],
             bg_color=self.themes["app_color"]["dark_one"],
@@ -622,7 +651,7 @@ class UI_MainWindow(object):
         self.load_pages.row_3_groupbox.setStyleSheet(
             f"""border-radius: 8px;
             border: 2px solid {self.themes["app_color"]["grey"]};""")
-        self.load_pages.authentification.setStyleSheet(
+        self.load_pages.authentication.setStyleSheet(
             f"""border-radius: 8px;
             border: 2px solid {self.themes["app_color"]["grey"]};""")
         self.load_pages.extraction.addWidget(self.label_extraction, 0, 0)
@@ -686,7 +715,7 @@ class UI_MainWindow(object):
 
     def settings_oracle(self):
         self.labelHostOracle = py_label.PyLabel(
-            text="Host",
+            text=QtCore.QCoreApplication.translate("ui_main", "Host and Port"),
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],
@@ -701,8 +730,9 @@ class UI_MainWindow(object):
         self.labelHostOracle.setMaximumWidth(200)
 
         self.setHostOracle = py_line_edit.PyLineEdit(
-            text="",
-            place_holder_text="ip or address",
+            text="localhost",
+            place_holder_text=QtCore.QCoreApplication.translate(
+                "ui_main", "Host"),
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],
@@ -717,7 +747,8 @@ class UI_MainWindow(object):
 
         self.setPortOracle = py_line_edit.PyLineEdit(
             text="1521",
-            place_holder_text="Port",
+            place_holder_text=QtCore.QCoreApplication.translate(
+                "ui_main", "Port"),
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],
@@ -733,7 +764,7 @@ class UI_MainWindow(object):
         self.setPortOracle.setMaximumWidth(100)
 
         self.labelDBOracle = py_label.PyLabel(
-            text="Database",
+            text=QtCore.QCoreApplication.translate("ui_main", "Database"),
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],
@@ -748,7 +779,7 @@ class UI_MainWindow(object):
         self.labelDBOracle.setMaximumWidth(200)
 
         self.setDBOracle = py_line_edit.PyLineEdit(
-            text="",
+            text="ORCL",
             place_holder_text="",
             radius=8,
             border_size=2,
@@ -790,7 +821,8 @@ class UI_MainWindow(object):
             self.setSIDOracle, 1, 2)
 
         self.labelAuthOracle = py_label.PyLabel(
-            text="Authentification",
+            text=QtCore.QCoreApplication.translate(
+                "ui_main", "authentication"),
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],
@@ -804,7 +836,7 @@ class UI_MainWindow(object):
         self.labelAuthOracle.setMinimumWidth(200)
         self.labelAuthOracle.setMaximumWidth(200)
 
-        self.setAuthentification = py_combobox.PyComboBox(
+        self.setauthentication = py_combobox.PyComboBox(
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],
@@ -813,14 +845,14 @@ class UI_MainWindow(object):
             bg_color_active=self.themes["app_color"]["dark_three"],
             context_color=self.themes["app_color"]["context_color"]
         )
-        self.setAuthentification.setMinimumHeight(40)
-        self.setAuthentification.setMaximumHeight(40)
-        self.setAuthentification.setMinimumWidth(200)
-        self.setAuthentification.setMaximumWidth(200)
-        self.setAuthentification.addItems(["Oracle Database Native"])
+        self.setauthentication.setMinimumHeight(40)
+        self.setauthentication.setMaximumHeight(40)
+        self.setauthentication.setMinimumWidth(200)
+        self.setauthentication.setMaximumWidth(200)
+        self.setauthentication.addItems(["Oracle Database Native"])
 
         self.labelUserOracle = py_label.PyLabel(
-            text="Username",
+            text=QtCore.QCoreApplication.translate("ui_main", "Username"),
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],
@@ -835,8 +867,9 @@ class UI_MainWindow(object):
         self.labelUserOracle.setMaximumWidth(200)
 
         self.setUsernameOracle = py_line_edit.PyLineEdit(
-            text="",
-            place_holder_text="username",
+            text="system",
+            place_holder_text=QtCore.QCoreApplication.translate(
+                "ui_main", "username"),
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],
@@ -851,7 +884,7 @@ class UI_MainWindow(object):
         self.setUsernameOracle.setMaximumWidth(200)
 
         self.labelPwdOracle = py_label.PyLabel(
-            text="Password",
+            text=QtCore.QCoreApplication.translate("ui_main", "Password"),
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],
@@ -867,7 +900,8 @@ class UI_MainWindow(object):
 
         self.setPasswordOracle = py_line_edit.PyLineEdit(
             text="",
-            place_holder_text="password",
+            place_holder_text=QtCore.QCoreApplication.translate(
+                "ui_main", "Password"),
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],
@@ -883,7 +917,7 @@ class UI_MainWindow(object):
         self.setPasswordOracle.setMinimumWidth(200)
 
         self.isSavePwdOracle = py_radio_button.PyRadioButton(
-            text="Save password",
+            text=QtCore.QCoreApplication.translate("ui_main", "Save password"),
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],
@@ -897,24 +931,25 @@ class UI_MainWindow(object):
         self.isSavePwdOracle.setMinimumWidth(200)
         self.isSavePwdOracle.setMaximumWidth(200)
 
-        self.load_pages.authentification_layout.addWidget(
+        self.load_pages.authentication_layout.addWidget(
             self.labelAuthOracle, 0, 0)
-        self.load_pages.authentification_layout.addWidget(
-            self.setAuthentification, 0, 1)
+        self.load_pages.authentication_layout.addWidget(
+            self.setauthentication, 0, 1)
 
-        self.load_pages.authentification_layout.addWidget(
+        self.load_pages.authentication_layout.addWidget(
             self.labelUserOracle, 1, 0)
-        self.load_pages.authentification_layout.addWidget(
+        self.load_pages.authentication_layout.addWidget(
             self.setUsernameOracle, 1, 1)
-        self.load_pages.authentification_layout.addWidget(
+        self.load_pages.authentication_layout.addWidget(
             self.labelPwdOracle, 2, 0)
-        self.load_pages.authentification_layout.addWidget(
+        self.load_pages.authentication_layout.addWidget(
             self.setPasswordOracle, 2, 1)
-        self.load_pages.authentification_layout.addWidget(
+        self.load_pages.authentication_layout.addWidget(
             self.isSavePwdOracle, 2, 2)
 
         self.labelCustomName = py_label.PyLabel(
-            text="Connection name",
+            text=QtCore.QCoreApplication.translate(
+                "ui_main", "Connection name"),
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],
@@ -929,8 +964,9 @@ class UI_MainWindow(object):
         self.labelCustomName.setMaximumWidth(200)
 
         self.setCustomName = py_line_edit.PyLineEdit(
-            text="",
-            place_holder_text="custom name",
+            text="ORCL",
+            place_holder_text=QtCore.QCoreApplication.translate(
+                "ui_main", "Custom name"),
             radius=8,
             border_size=2,
             color=self.themes["app_color"]["text_foreground"],
@@ -949,7 +985,8 @@ class UI_MainWindow(object):
 
     def settings_DB_buttons(self):
         self.testDB = py_push_button.PyPushButton(
-            text="Connection test",
+            text=QtCore.QCoreApplication.translate(
+                "ui_main", "Connection test"),
             radius=8,
             color=self.themes["app_color"]["text_foreground"],
             bg_color=self.themes["app_color"]["dark_one"],
@@ -964,7 +1001,7 @@ class UI_MainWindow(object):
         self.testDB.setMaximumWidth(150)
 
         self.clearDB = py_push_button.PyPushButton(
-            text="Clear",
+            text=QtCore.QCoreApplication.translate("ui_main", "Clear"),
             radius=8,
             color=self.themes["app_color"]["text_foreground"],
             bg_color=self.themes["app_color"]["dark_one"],
@@ -979,7 +1016,7 @@ class UI_MainWindow(object):
         self.clearDB.setMaximumWidth(150)
 
         self.saveDB = py_push_button.PyPushButton(
-            text="Save",
+            text=QtCore.QCoreApplication.translate("ui_main", "Save"),
             radius=8,
             color=self.themes["app_color"]["text_foreground"],
             bg_color=self.themes["app_color"]["dark_one"],
@@ -1004,11 +1041,45 @@ class UI_MainWindow(object):
         self.load_pages.settings_buttons.addWidget(self.saveDB)
 
     def settings_left_column(self):
-        pass
+
+        self.labelLocale = py_label.PyLabel(
+            text=QtCore.QCoreApplication.translate(
+                "ui_main", "Language"),
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            selection_color=self.themes["app_color"]["white"],
+            bg_color=self.themes["app_color"]["bg_two"],
+            bg_color_active=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"]
+        )
+        self.labelLocale.setMinimumHeight(40)
+        self.labelLocale.setMaximumHeight(40)
+        self.labelLocale.setMinimumWidth(200)
+        self.labelLocale.setMaximumWidth(200)
+
+        self.setlocale = py_combobox.PyComboBox(
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            selection_color=self.themes["app_color"]["white"],
+            bg_color=self.themes["app_color"]["dark_one"],
+            bg_color_active=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"]
+        )
+        self.setlocale.setMinimumHeight(40)
+        self.setlocale.setMaximumHeight(40)
+        self.setlocale.setMinimumWidth(200)
+        self.setlocale.setMaximumWidth(200)
+
+        self.setlocale.addItems(common.get_all_locales())
+
+        self.left_column.menus.settingsLayout.addWidget(self.labelLocale)
+        self.left_column.menus.settingsLayout.addWidget(self.setlocale)
 
     def settings_right_column(self):
         self.right_btn1 = py_push_button.PyPushButton(
-            text="Show Menu 2",
+            text=QtCore.QCoreApplication.translate("ui_main", "Show Menu 2"),
             radius=8,
             color=self.themes["app_color"]["text_foreground"],
             bg_color=self.themes["app_color"]["dark_one"],
@@ -1021,7 +1092,7 @@ class UI_MainWindow(object):
         self.right_column.btn_1_layout.addWidget(self.right_btn1)
 
         self.right_btn2 = py_push_button.PyPushButton(
-            text="Show Menu 1",
+            text=QtCore.QCoreApplication.translate("ui_main", "Show Menu 1"),
             radius=8,
             color=self.themes["app_color"]["text_foreground"],
             bg_color=self.themes["app_color"]["dark_one"],

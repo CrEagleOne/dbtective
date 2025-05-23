@@ -152,7 +152,7 @@ def get_data_by_segment(_db_config, segment_size: int,
         query (str): Query to perform
 
     Raises:
-        exceptions.Error: code 100
+        exceptions.Error: code 604
 
     Yields:
         list: Segment data
@@ -202,7 +202,7 @@ def get_data_by_segment(_db_config, segment_size: int,
             yield current_segment
 
     except oracledb.Error as e:
-        raise exceptions.Error(100, e)
+        raise exceptions.Error(604, e)
     finally:
         cursor.close()
 

@@ -23,6 +23,7 @@ Dependencies:
     - QtWidgets (PySide6)
     - oracle.py
     - exceptions.py
+    - config.py
 
 Usage Example:
     update_style(widget, "border", "2px solid red")
@@ -44,10 +45,7 @@ import subprocess
 import pandas
 from PySide6 import QtWidgets
 from core.database import oracle
-from core.utils import exceptions
-
-sys.path.append(os.path.abspath(os.path.join(
-    os.path.dirname(__file__), "..", "..")))
+from core.utils import exceptions, config
 
 
 def get_file_size(filepath: str) -> str:
@@ -228,8 +226,6 @@ def resource_path(relative_path: str) -> str:
         base_path = os.path.abspath(os.path.join(
             os.path.dirname(__file__), '..', '..', '..'))
 
-    # base_path = sys._MEIPASS if hasattr(
-    #     sys, "_MEIPASS") else os.path.abspath(".")
     full_path = os.path.join(base_path, relative_path)
 
     if not os.path.exists(full_path):
@@ -481,3 +477,33 @@ def find_most_similar_pairs(df: pandas.DataFrame,
 
     differences = compare_pairs(list(pairs))
     return differences
+
+
+def get_current_locale() -> str:
+    """
+    Retrieves the current locale setting from the configuration
+
+    Returns:
+        str: The current locale setting
+    """
+    query = "SELECT [values] from settings where [key] = ?"
+    return config.get_settings(query, ("locale",))
+
+
+def get_all_locales(path="src/gui/locales") -> list:
+    """
+    Retrieves all available locales from the specified directory
+
+    Args:
+        path (str, optional): The path to the directory containing locale files
+
+    Returns:
+        list: A list of available locales, with the current locale first
+    """
+    locale = get_current_locale()
+    translations = ["en_US"] + [os.path.splitext(f)[0] for f in os.listdir(
+        path) if f.endswith(".qm")]
+
+    translations = [f for f in translations if f != locale]
+
+    return [locale] + translations

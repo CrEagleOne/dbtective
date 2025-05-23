@@ -95,9 +95,59 @@ def insert_query_db(query: str, args: tuple, **kwargs) -> int:
 
 
 @_sqlite
+def update_settings(query, args: tuple, **kwargs):
+    """
+    Updates the language
+
+    Args:
+        query (str): Query to perform
+        args (tuple): Query args
+    """
+    try:
+        conn = kwargs.get('conn')
+        cursor = conn.cursor()
+        cursor.execute(query, args)
+    except sqlite3.OperationalError as e:
+        if "no such" in str(e).lower():
+            raise exceptions.Error(404, e)
+        if "syntax error" in str(e).lower():
+            raise exceptions.Error(403, e)
+        raise exceptions.Error(401, e)
+
+
+@_sqlite
+def get_settings(query, args: tuple, **kwargs):
+    """
+    Retrieves the language
+
+    Args:
+        query (str): Query to perform
+
+    Returns:
+        tuple: Query result
+    """
+    try:
+        conn = kwargs.get('conn')
+        cursor = conn.cursor()
+
+        cursor.execute(query, args)
+        return cursor.fetchone()[0]
+
+    except sqlite3.OperationalError as e:
+        if "no such" in str(e).lower():
+            raise exceptions.Error(404, e)
+        if "syntax error" in str(e).lower():
+            raise exceptions.Error(403, e)
+        raise exceptions.Error(401, e)
+
+
+@_sqlite
 def get_list_data(query, **kwargs) -> tuple:
     """
     Recover saved database settings
+
+    Args:
+        query (str): Query to perform
 
     Returns:
         tuple: Query result
@@ -138,6 +188,15 @@ def setup_db(**kwargs) -> int:
                                         DEFAULT ('{}'),
             date_creation     DATETIME     NOT NULL,
             date_modification DATETIME
+        );"""
+    cursor.execute(query)
+    query = """
+        CREATE TABLE IF NOT EXISTS settings (
+            id       INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT
+                            NOT NULL ON CONFLICT ROLLBACK,
+            [key]            UNIQUE ON CONFLICT ROLLBACK
+                            NOT NULL ON CONFLICT ROLLBACK,
+            [values]         NOT NULL ON CONFLICT ROLLBACK
         );"""
     cursor.execute(query)
     return 200
