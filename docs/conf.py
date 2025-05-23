@@ -15,7 +15,8 @@ copyright = f'{datetime.now().year}, CrEagleOne'
 author = 'CrEagleOne'
 release = '1.0.0'
 
-sys.path.insert(0, os.path.abspath('..'))
+sys.path.insert(0, os.path.abspath("../src"))
+sys.path.insert(1, os.path.abspath('..'))
 
 autodoc_default_options = {
     "special-members": "__init__",

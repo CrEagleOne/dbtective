@@ -45,6 +45,13 @@ Database compare tool (Preview)
 | Compare by Line | Retrieve the lines in deviations via the except clause (Depends on the size of the databases to be compared) |
 | Compare by Column | Retrieve the columns in deviations via the Levenshtein distance (Depends on the size of the databases to be compared) |
 
+# Translations
+| Language | Status |
+|--|--|
+| English | ✅ |
+| French | 🔄 |
+| Others | ❌ |
+
 # Documentations
 WIP
 

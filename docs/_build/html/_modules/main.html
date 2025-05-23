@@ -86,10 +86,13 @@
 <span class="k">class</span><span class="w"> </span><span class="nc">MainWindow</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMainWindow</span><span class="p">):</span>
     <span class="n">error_signal</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Signal</span><span class="p">(</span><span class="nb">tuple</span><span class="p">)</span>
 
+<div class="viewcode-block" id="MainWindow.__init__">
+<a class="viewcode-back" href="../source/main.html#main.MainWindow.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ui</span> <span class="o">=</span> <span class="n">ui_main</span><span class="o">.</span><span class="n">UI_MainWindow</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">main_event</span> <span class="o">=</span> <span class="n">events</span><span class="o">.</span><span class="n">MainEventHandler</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main_event</span> <span class="o">=</span> <span class="n">events</span><span class="o">.</span><span class="n">MainEventHandler</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="MainWindow.btn_clicked">
 <a class="viewcode-back" href="../source/main.html#main.MainWindow.btn_clicked">[docs]</a>

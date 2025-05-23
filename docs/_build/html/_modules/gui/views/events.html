@@ -116,8 +116,11 @@
 <span class="k">class</span><span class="w"> </span><span class="nc">KeyEventFilter</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">):</span>
     <span class="n">key_pressed</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Signal</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="p">)</span>
 
+<div class="viewcode-block" id="KeyEventFilter.__init__">
+<a class="viewcode-back" href="../../../source/gui.views.html#gui.views.events.KeyEventFilter.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="KeyEventFilter.eventFilter">
 <a class="viewcode-back" href="../../../source/gui.views.html#gui.views.events.KeyEventFilter.eventFilter">[docs]</a>
@@ -133,6 +136,8 @@
 <div class="viewcode-block" id="MainEventHandler">
 <a class="viewcode-back" href="../../../source/gui.views.html#gui.views.events.MainEventHandler">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MainEventHandler</span><span class="p">():</span>
+<div class="viewcode-block" id="MainEventHandler.__init__">
+<a class="viewcode-back" href="../../../source/gui.views.html#gui.views.events.MainEventHandler.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">root</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ui</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">ui</span>
@@ -230,7 +235,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">select_all</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">add_all_table</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">unselect_all</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ignore_all_table</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">testDB</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">test_db</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">testDB</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">test_db</span><span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="MainEventHandler.on_cell_clicked">
 <a class="viewcode-back" href="../../../source/gui.views.html#gui.views.events.MainEventHandler.on_cell_clicked">[docs]</a>
@@ -591,9 +597,12 @@
 <span class="k">class</span><span class="w"> </span><span class="nc">TestThread</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QThread</span><span class="p">):</span>
     <span class="n">signal_update</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Signal</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
 
+<div class="viewcode-block" id="TestThread.__init__">
+<a class="viewcode-back" href="../../../source/gui.views.html#gui.views.events.TestThread.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="n">settings</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="n">settings</span></div>
+
 
 <div class="viewcode-block" id="TestThread.run">
 <a class="viewcode-back" href="../../../source/gui.views.html#gui.views.events.TestThread.run">[docs]</a>
@@ -620,8 +629,9 @@
 <a class="viewcode-back" href="../../../source/gui.views.html#gui.views.events.FiltersTablesThread">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FiltersTablesThread</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QThread</span><span class="p">):</span>
     <span class="n">signal_update</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Signal</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
-    <span class="c1"># show_signal = QtCore.Signal()</span>
 
+<div class="viewcode-block" id="FiltersTablesThread.__init__">
+<a class="viewcode-back" href="../../../source/gui.views.html#gui.views.events.FiltersTablesThread.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">settings_db1</span><span class="p">,</span> <span class="n">settings_db2</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">table_list</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">settings_db1</span> <span class="o">=</span> <span class="n">settings_db1</span>
@@ -629,7 +639,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">content</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tables_list</span> <span class="o">=</span> <span class="n">table_list</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">signal_update</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">show_error</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">signal_update</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">show_error</span><span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="FiltersTablesThread.show_error">
 <a class="viewcode-back" href="../../../source/gui.views.html#gui.views.events.FiltersTablesThread.show_error">[docs]</a>
@@ -671,12 +682,9 @@
                         <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
 
         <span class="k">except</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="c1"># self.show_error()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">signal_update</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">)</span></div>
 </div>
 
-        <span class="c1"># else:</span>
-        <span class="c1">#     self.show_signal.emit()</span>
 
 
 <div class="viewcode-block" id="WorkerThread">
@@ -684,6 +692,8 @@
 <span class="k">class</span><span class="w"> </span><span class="nc">WorkerThread</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QThread</span><span class="p">):</span>
     <span class="n">signal_update</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Signal</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
 
+<div class="viewcode-block" id="WorkerThread.__init__">
+<a class="viewcode-back" href="../../../source/gui.views.html#gui.views.events.WorkerThread.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">settings_db1</span><span class="p">,</span> <span class="n">settings_db2</span><span class="p">,</span> <span class="n">segment</span><span class="p">,</span>
                  <span class="n">compare_tables</span><span class="p">,</span> <span class="n">fetch</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -692,7 +702,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">settings_db2</span> <span class="o">=</span> <span class="n">settings_db2</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">segment</span> <span class="o">=</span> <span class="n">segment</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">compare_tables</span> <span class="o">=</span> <span class="n">compare_tables</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fetch</span> <span class="o">=</span> <span class="n">fetch</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fetch</span> <span class="o">=</span> <span class="n">fetch</span></div>
+
 
 <div class="viewcode-block" id="WorkerThread.run">
 <a class="viewcode-back" href="../../../source/gui.views.html#gui.views.events.WorkerThread.run">[docs]</a>
@@ -708,10 +719,7 @@
         <span class="k">except</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Warn</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">signal_update</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="s2">&quot;warn&quot;</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">message</span> <span class="o">=</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">MESSAGES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-                <span class="nb">int</span><span class="p">(</span><span class="n">resultat</span><span class="p">),</span>
-                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-                    <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Unknown code&quot;</span><span class="p">))</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">exceptions</span><span class="o">.</span><span class="n">INFO</span><span class="p">(</span><span class="n">resultat</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">signal_update</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="s2">&quot;info&quot;</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span></div>
 </div>
 

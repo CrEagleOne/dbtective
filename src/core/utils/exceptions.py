@@ -220,13 +220,13 @@ class Warn(Exception):
 
 
 class INFO:
-    def __init__(self, code: str) -> None:
+    def __init__(self, code: int) -> None:
         """
         Initializes the info with a message and triggers
         info signaling
 
         Args:
-            code (str): The info code used to fetch the corresponding message
+            code (int): The info code used to fetch the corresponding message
 
                 Possible values:
                     - 100: Backup successfully

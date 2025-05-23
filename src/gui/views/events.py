@@ -484,7 +484,6 @@ class TestThread(QtCore.QThread):
 
 class FiltersTablesThread(QtCore.QThread):
     signal_update = QtCore.Signal(str, str)
-    # show_signal = QtCore.Signal()
 
     def __init__(self, settings_db1, settings_db2, content, table_list):
         super().__init__()
@@ -530,10 +529,7 @@ class FiltersTablesThread(QtCore.QThread):
                         QtWidgets.QTableWidgetItem(str(value)))
 
         except exceptions.Error as e:
-            # self.show_error()
             self.signal_update.emit("error", e.message)
-        # else:
-        #     self.show_signal.emit()
 
 
 class WorkerThread(QtCore.QThread):
@@ -561,8 +557,5 @@ class WorkerThread(QtCore.QThread):
         except exceptions.Warn as e:
             self.signal_update.emit("warn", e.message)
         else:
-            message = exceptions.MESSAGES.get(
-                int(resultat),
-                QtCore.QCoreApplication.translate(
-                    "exceptions", "Unknown code"))
+            message = str(exceptions.INFO(resultat))
             self.signal_update.emit("info", message)

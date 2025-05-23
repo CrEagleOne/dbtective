@@ -427,8 +427,8 @@ class UI_MainWindow(object):
         )
         self.select_all.setMinimumHeight(30)
         self.select_all.setMaximumHeight(30)
-        self.select_all.setMinimumWidth(100)
-        self.select_all.setMaximumWidth(100)
+        self.select_all.setMinimumWidth(200)
+        self.select_all.setMaximumWidth(200)
 
         self.unselect_all = py_push_button.PyPushButton(
             text=QtCore.QCoreApplication.translate("ui_main", "Unselect all"),
@@ -441,8 +441,8 @@ class UI_MainWindow(object):
         )
         self.unselect_all.setMinimumHeight(30)
         self.unselect_all.setMaximumHeight(30)
-        self.unselect_all.setMinimumWidth(100)
-        self.unselect_all.setMaximumWidth(100)
+        self.unselect_all.setMinimumWidth(200)
+        self.unselect_all.setMaximumWidth(200)
 
         self.tableWidget = py_table_widget.PyTableWidget(
             radius=8,
