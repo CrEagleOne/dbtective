@@ -2,7 +2,7 @@ name: Complete Pipeline
 
 permissions:
   id-token: write
-  contents: read
+  contents: write
   pages: write
 
 on:
