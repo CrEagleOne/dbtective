@@ -1,0 +1,158 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, CrEagleOne
+# This file is distributed under the same license as the DBtective package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: DBtective \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-03 12:04+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../source/gui.widgets.rst:2
+msgid "gui.widgets package"
+msgstr ""
+
+#: ../source/gui.widgets.rst:5
+msgid "Submodules"
+msgstr ""
+
+#: ../source/gui.widgets.rst:8
+msgid "gui.widgets.py\\_checkbox module"
+msgstr ""
+
+#: ../../src/gui/widgets/py_checkbox.py:docstring of gui.widgets.py_checkbox.PyCheckBox:1
+#: ../../src/gui/widgets/py_toggle.py:docstring of gui.widgets.py_toggle.PyToggle:1
+msgid "Bases: :py:class:`~PySide6.QtWidgets.QCheckBox`"
+msgstr ""
+
+#: ../source/gui.widgets.rst:16
+msgid "gui.widgets.py\\_circular\\_progress module"
+msgstr ""
+
+#: ../../src/gui/widgets/py_circular_progress.py:docstring of gui.widgets.py_circular_progress.PyCircularProgress:1
+#: ../../src/gui/widgets/py_grips.py:docstring of gui.widgets.py_grips.PyGrips:1
+#: ../../src/gui/widgets/py_left_column.py:docstring of gui.widgets.py_left_column.PyIcon:1
+#: ../../src/gui/widgets/py_left_column.py:docstring of gui.widgets.py_left_column.PyLeftColumn:1
+#: ../../src/gui/widgets/py_left_menu.py:docstring of gui.widgets.py_left_menu.PyDiv:1
+#: ../../src/gui/widgets/py_left_menu.py:docstring of gui.widgets.py_left_menu.PyLeftMenu:1
+#: ../../src/gui/widgets/py_logbar.py:docstring of gui.widgets.py_logbar.PyLogBar:1
+#: ../../src/gui/widgets/py_title_bar.py:docstring of gui.widgets.py_title_bar.PyDiv:1
+#: ../../src/gui/widgets/py_title_bar.py:docstring of gui.widgets.py_title_bar.PyTitleBar:1
+msgid "Bases: :py:class:`~PySide6.QtWidgets.QWidget`"
+msgstr ""
+
+#: ../source/gui.widgets.rst:24
+msgid "gui.widgets.py\\_combobox module"
+msgstr ""
+
+#: ../../src/gui/widgets/py_combobox.py:docstring of gui.widgets.py_combobox.PyComboBox:1
+msgid "Bases: :py:class:`~PySide6.QtWidgets.QComboBox`"
+msgstr ""
+
+#: ../source/gui.widgets.rst:32
+msgid "gui.widgets.py\\_grips module"
+msgstr ""
+
+#: ../source/gui.widgets.rst:40
+msgid "gui.widgets.py\\_icon\\_button module"
+msgstr ""
+
+#: ../../src/gui/widgets/py_icon_button.py:docstring of gui.widgets.py_icon_button.PyIconButton:1
+#: ../../src/gui/widgets/py_left_column.py:docstring of gui.widgets.py_left_column.PyLeftButton:1
+#: ../../src/gui/widgets/py_left_menu.py:docstring of gui.widgets.py_left_menu.PyLeftMenuButton:1
+#: ../../src/gui/widgets/py_push_button.py:docstring of gui.widgets.py_push_button.PyPushButton:1
+#: ../../src/gui/widgets/py_title_bar.py:docstring of gui.widgets.py_title_bar.PyTitleButton:1
+msgid "Bases: :py:class:`~PySide6.QtWidgets.QPushButton`"
+msgstr ""
+
+#: ../source/gui.widgets.rst:48
+msgid "gui.widgets.py\\_label module"
+msgstr ""
+
+#: ../../src/gui/widgets/py_label.py:docstring of gui.widgets.py_label.PyLabel:1
+msgid "Bases: :py:class:`~PySide6.QtWidgets.QLabel`"
+msgstr ""
+
+#: ../source/gui.widgets.rst:56
+msgid "gui.widgets.py\\_left\\_column module"
+msgstr ""
+
+#: ../source/gui.widgets.rst:64
+msgid "gui.widgets.py\\_left\\_menu module"
+msgstr ""
+
+#: ../source/gui.widgets.rst:72
+msgid "gui.widgets.py\\_line\\_edit module"
+msgstr ""
+
+#: ../../src/gui/widgets/py_line_edit.py:docstring of gui.widgets.py_line_edit.PyLineEdit:1
+msgid "Bases: :py:class:`~PySide6.QtWidgets.QLineEdit`"
+msgstr ""
+
+#: ../source/gui.widgets.rst:80
+msgid "gui.widgets.py\\_logbar module"
+msgstr ""
+
+#: ../source/gui.widgets.rst:88
+msgid "gui.widgets.py\\_push\\_button module"
+msgstr ""
+
+#: ../source/gui.widgets.rst:96
+msgid "gui.widgets.py\\_radio\\_button module"
+msgstr ""
+
+#: ../../src/gui/widgets/py_radio_button.py:docstring of gui.widgets.py_radio_button.PyRadioButton:1
+msgid "Bases: :py:class:`~PySide6.QtWidgets.QRadioButton`"
+msgstr ""
+
+#: ../source/gui.widgets.rst:104
+msgid "gui.widgets.py\\_slider module"
+msgstr ""
+
+#: ../../src/gui/widgets/py_slider.py:docstring of gui.widgets.py_slider.PySlider:1
+msgid "Bases: :py:class:`~PySide6.QtWidgets.QSlider`"
+msgstr ""
+
+#: ../source/gui.widgets.rst:112
+msgid "gui.widgets.py\\_table\\_widget module"
+msgstr ""
+
+#: ../../src/gui/widgets/py_table_widget.py:docstring of gui.widgets.py_table_widget.PyTableWidget:1
+msgid "Bases: :py:class:`~PySide6.QtWidgets.QTableWidget`"
+msgstr ""
+
+#: ../source/gui.widgets.rst:120
+msgid "gui.widgets.py\\_title\\_bar module"
+msgstr ""
+
+#: ../source/gui.widgets.rst:128
+msgid "gui.widgets.py\\_toggle module"
+msgstr ""
+
+#: ../source/gui.widgets.rst:136
+msgid "gui.widgets.py\\_tool\\_button module"
+msgstr ""
+
+#: ../../src/gui/widgets/py_tool_button.py:docstring of gui.widgets.py_tool_button.PyToolButton:1
+msgid "Bases: :py:class:`~PySide6.QtWidgets.QToolButton`"
+msgstr ""
+
+#: ../source/gui.widgets.rst:144
+msgid "gui.widgets.py\\_window module"
+msgstr ""
+
+#: ../../src/gui/widgets/py_window.py:docstring of gui.widgets.py_window.PyWindow:1
+msgid "Bases: :py:class:`~PySide6.QtWidgets.QFrame`"
+msgstr ""
+
+#: ../source/gui.widgets.rst:152
+msgid "Module contents"
+msgstr ""

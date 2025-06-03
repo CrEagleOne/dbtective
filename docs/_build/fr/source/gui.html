@@ -1,0 +1,557 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Package gui &mdash; Documentation DBtective 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/style.css?v=8399456f" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=05dadb3a"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/translations.js?v=e6b791cb"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Package gui.core" href="gui.core.html" />
+    <link rel="prev" title="Package core.utils" href="core.utils.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            DBtective
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation utilisateur:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user.html">Fonctionnalités</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation technique:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="core.html">Package Core</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Package gui</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Sous-packages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.core.html">Package gui.core</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html">Package gui.views</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html">Package gui.widgets</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-gui">Contenu des modules</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">Module main</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DBtective</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">src</a></li>
+      <li class="breadcrumb-item active">Package gui</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/gui.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gui-package">
+<h1>Package gui<a class="headerlink" href="#gui-package" title="Lien vers cette rubrique"></a></h1>
+<section id="subpackages">
+<h2>Sous-packages<a class="headerlink" href="#subpackages" title="Lien vers cette rubrique"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="gui.core.html">Package gui.core</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gui.core.html#submodules">Sous-modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gui.core.html#module-gui.core.functions">Module gui.core.functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.core.html#gui.core.functions.get_left_menu_btn"><code class="docutils literal notranslate"><span class="pre">get_left_menu_btn()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.core.html#gui.core.functions.get_title_bar_btn"><code class="docutils literal notranslate"><span class="pre">get_title_bar_btn()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.core.html#gui.core.functions.left_column_is_visible"><code class="docutils literal notranslate"><span class="pre">left_column_is_visible()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.core.html#gui.core.functions.right_column_is_visible"><code class="docutils literal notranslate"><span class="pre">right_column_is_visible()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.core.html#gui.core.functions.set_left_column_menu"><code class="docutils literal notranslate"><span class="pre">set_left_column_menu()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.core.html#gui.core.functions.set_page"><code class="docutils literal notranslate"><span class="pre">set_page()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.core.html#gui.core.functions.set_right_column_menu"><code class="docutils literal notranslate"><span class="pre">set_right_column_menu()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.core.html#gui.core.functions.start_box_animation"><code class="docutils literal notranslate"><span class="pre">start_box_animation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.core.html#gui.core.functions.toggle_left_column"><code class="docutils literal notranslate"><span class="pre">toggle_left_column()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.core.html#gui.core.functions.toggle_right_column"><code class="docutils literal notranslate"><span class="pre">toggle_right_column()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.core.html#module-gui.core.settings">Module gui.core.settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.core.html#gui.core.settings.Settings"><code class="docutils literal notranslate"><span class="pre">Settings</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.core.html#gui.core.settings.Settings.__init__"><code class="docutils literal notranslate"><span class="pre">Settings.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.core.html#gui.core.settings.Settings.deserialize"><code class="docutils literal notranslate"><span class="pre">Settings.deserialize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.core.html#gui.core.settings.Settings.get_settings"><code class="docutils literal notranslate"><span class="pre">Settings.get_settings()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.core.html#gui.core.settings.Settings.serialize"><code class="docutils literal notranslate"><span class="pre">Settings.serialize()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.core.html#module-gui.core.themes">Module gui.core.themes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.core.html#gui.core.themes.Themes"><code class="docutils literal notranslate"><span class="pre">Themes</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.core.html#gui.core.themes.Themes.__init__"><code class="docutils literal notranslate"><span class="pre">Themes.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.core.html#gui.core.themes.Themes.deserialize"><code class="docutils literal notranslate"><span class="pre">Themes.deserialize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.core.html#gui.core.themes.Themes.get_theme"><code class="docutils literal notranslate"><span class="pre">Themes.get_theme()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.core.html#gui.core.themes.Themes.serialize"><code class="docutils literal notranslate"><span class="pre">Themes.serialize()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.core.html#module-gui.core">Contenu des modules</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gui.views.html">Package gui.views</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gui.views.html#submodules">Sous-modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gui.views.html#module-gui.views.controls">Module gui.views.controls</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.views.html#gui.views.controls.db_compare"><code class="docutils literal notranslate"><span class="pre">db_compare()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.views.html#gui.views.controls.init_db_compare"><code class="docutils literal notranslate"><span class="pre">init_db_compare()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.views.html#gui.views.controls.init_oracle"><code class="docutils literal notranslate"><span class="pre">init_oracle()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.views.html#gui.views.controls.oracle"><code class="docutils literal notranslate"><span class="pre">oracle()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.views.html#module-gui.views.events">Module gui.views.events</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.views.html#gui.views.events.FiltersTablesThread"><code class="docutils literal notranslate"><span class="pre">FiltersTablesThread</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.FiltersTablesThread.__init__"><code class="docutils literal notranslate"><span class="pre">FiltersTablesThread.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.FiltersTablesThread.run"><code class="docutils literal notranslate"><span class="pre">FiltersTablesThread.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.FiltersTablesThread.show_error"><code class="docutils literal notranslate"><span class="pre">FiltersTablesThread.show_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.FiltersTablesThread.signal_update"><code class="docutils literal notranslate"><span class="pre">FiltersTablesThread.signal_update</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.FiltersTablesThread.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">FiltersTablesThread.staticMetaObject</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gui.views.html#gui.views.events.KeyEventFilter"><code class="docutils literal notranslate"><span class="pre">KeyEventFilter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.KeyEventFilter.__init__"><code class="docutils literal notranslate"><span class="pre">KeyEventFilter.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.KeyEventFilter.eventFilter"><code class="docutils literal notranslate"><span class="pre">KeyEventFilter.eventFilter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.KeyEventFilter.key_pressed"><code class="docutils literal notranslate"><span class="pre">KeyEventFilter.key_pressed</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.KeyEventFilter.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">KeyEventFilter.staticMetaObject</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gui.views.html#gui.views.events.MainEventHandler"><code class="docutils literal notranslate"><span class="pre">MainEventHandler</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.MainEventHandler.__init__"><code class="docutils literal notranslate"><span class="pre">MainEventHandler.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.MainEventHandler.add_all_table"><code class="docutils literal notranslate"><span class="pre">MainEventHandler.add_all_table()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.MainEventHandler.clear_data"><code class="docutils literal notranslate"><span class="pre">MainEventHandler.clear_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.MainEventHandler.clear_db"><code class="docutils literal notranslate"><span class="pre">MainEventHandler.clear_db()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.MainEventHandler.clear_oracle_data"><code class="docutils literal notranslate"><span class="pre">MainEventHandler.clear_oracle_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.MainEventHandler.execute_order_66"><code class="docutils literal notranslate"><span class="pre">MainEventHandler.execute_order_66()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.MainEventHandler.handle_key_press"><code class="docutils literal notranslate"><span class="pre">MainEventHandler.handle_key_press()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.MainEventHandler.handle_toggle"><code class="docutils literal notranslate"><span class="pre">MainEventHandler.handle_toggle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.MainEventHandler.ignore_all_table"><code class="docutils literal notranslate"><span class="pre">MainEventHandler.ignore_all_table()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.MainEventHandler.on_cell_clicked"><code class="docutils literal notranslate"><span class="pre">MainEventHandler.on_cell_clicked()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.MainEventHandler.on_db_changed"><code class="docutils literal notranslate"><span class="pre">MainEventHandler.on_db_changed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.MainEventHandler.on_locale_changed"><code class="docutils literal notranslate"><span class="pre">MainEventHandler.on_locale_changed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.MainEventHandler.oracle_view"><code class="docutils literal notranslate"><span class="pre">MainEventHandler.oracle_view()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.MainEventHandler.popup"><code class="docutils literal notranslate"><span class="pre">MainEventHandler.popup()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.MainEventHandler.save_db"><code class="docutils literal notranslate"><span class="pre">MainEventHandler.save_db()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.MainEventHandler.test_db"><code class="docutils literal notranslate"><span class="pre">MainEventHandler.test_db()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.MainEventHandler.update_db_list"><code class="docutils literal notranslate"><span class="pre">MainEventHandler.update_db_list()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gui.views.html#gui.views.events.TestThread"><code class="docutils literal notranslate"><span class="pre">TestThread</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.TestThread.__init__"><code class="docutils literal notranslate"><span class="pre">TestThread.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.TestThread.run"><code class="docutils literal notranslate"><span class="pre">TestThread.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.TestThread.signal_update"><code class="docutils literal notranslate"><span class="pre">TestThread.signal_update</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.TestThread.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">TestThread.staticMetaObject</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gui.views.html#gui.views.events.WorkerThread"><code class="docutils literal notranslate"><span class="pre">WorkerThread</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.WorkerThread.__init__"><code class="docutils literal notranslate"><span class="pre">WorkerThread.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.WorkerThread.run"><code class="docutils literal notranslate"><span class="pre">WorkerThread.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.WorkerThread.signal_update"><code class="docutils literal notranslate"><span class="pre">WorkerThread.signal_update</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.events.WorkerThread.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">WorkerThread.staticMetaObject</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.views.html#module-gui.views.popups">Module gui.views.popups</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.views.html#gui.views.popups.display_error"><code class="docutils literal notranslate"><span class="pre">display_error()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.views.html#gui.views.popups.display_info"><code class="docutils literal notranslate"><span class="pre">display_info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.views.html#gui.views.popups.display_warn"><code class="docutils literal notranslate"><span class="pre">display_warn()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.views.html#gui.views.popups.input_value"><code class="docutils literal notranslate"><span class="pre">input_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui.views.html#gui.views.popups.select_files"><code class="docutils literal notranslate"><span class="pre">select_files()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.views.html#module-gui.views.ui_main">Module gui.views.ui_main</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.views.html#gui.views.ui_main.UI_MainWindow"><code class="docutils literal notranslate"><span class="pre">UI_MainWindow</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.ui_main.UI_MainWindow.__init__"><code class="docutils literal notranslate"><span class="pre">UI_MainWindow.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.ui_main.UI_MainWindow.get_self"><code class="docutils literal notranslate"><span class="pre">UI_MainWindow.get_self()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.ui_main.UI_MainWindow.resize_grips"><code class="docutils literal notranslate"><span class="pre">UI_MainWindow.resize_grips()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.ui_main.UI_MainWindow.settings_DB_buttons"><code class="docutils literal notranslate"><span class="pre">UI_MainWindow.settings_DB_buttons()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.ui_main.UI_MainWindow.settings_left_column"><code class="docutils literal notranslate"><span class="pre">UI_MainWindow.settings_left_column()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.ui_main.UI_MainWindow.settings_oracle"><code class="docutils literal notranslate"><span class="pre">UI_MainWindow.settings_oracle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.ui_main.UI_MainWindow.settings_right_column"><code class="docutils literal notranslate"><span class="pre">UI_MainWindow.settings_right_column()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.ui_main.UI_MainWindow.setup_gui"><code class="docutils literal notranslate"><span class="pre">UI_MainWindow.setup_gui()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.ui_main.UI_MainWindow.setup_page2"><code class="docutils literal notranslate"><span class="pre">UI_MainWindow.setup_page2()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.ui_main.UI_MainWindow.setup_page3"><code class="docutils literal notranslate"><span class="pre">UI_MainWindow.setup_page3()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.views.html#gui.views.ui_main.UI_MainWindow.setup_ui"><code class="docutils literal notranslate"><span class="pre">UI_MainWindow.setup_ui()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.views.html#module-gui.views">Contenu des modules</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gui.widgets.html">Package gui.widgets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gui.widgets.html#submodules">Sous-modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gui.widgets.html#module-gui.widgets.py_checkbox">Module gui.widgets.py_checkbox</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_checkbox.PyCheckBox"><code class="docutils literal notranslate"><span class="pre">PyCheckBox</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_checkbox.PyCheckBox.__init__"><code class="docutils literal notranslate"><span class="pre">PyCheckBox.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_checkbox.PyCheckBox.set_stylesheet"><code class="docutils literal notranslate"><span class="pre">PyCheckBox.set_stylesheet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_checkbox.PyCheckBox.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">PyCheckBox.staticMetaObject</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_checkbox.PyCheckBox.style"><code class="docutils literal notranslate"><span class="pre">PyCheckBox.style</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.widgets.html#module-gui.widgets.py_circular_progress">Module gui.widgets.py_circular_progress</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_circular_progress.PyCircularProgress"><code class="docutils literal notranslate"><span class="pre">PyCircularProgress</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_circular_progress.PyCircularProgress.__init__"><code class="docutils literal notranslate"><span class="pre">PyCircularProgress.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_circular_progress.PyCircularProgress.add_shadow"><code class="docutils literal notranslate"><span class="pre">PyCircularProgress.add_shadow()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_circular_progress.PyCircularProgress.paintEvent"><code class="docutils literal notranslate"><span class="pre">PyCircularProgress.paintEvent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_circular_progress.PyCircularProgress.set_value"><code class="docutils literal notranslate"><span class="pre">PyCircularProgress.set_value()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_circular_progress.PyCircularProgress.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">PyCircularProgress.staticMetaObject</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.widgets.html#module-gui.widgets.py_combobox">Module gui.widgets.py_combobox</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_combobox.PyComboBox"><code class="docutils literal notranslate"><span class="pre">PyComboBox</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_combobox.PyComboBox.__init__"><code class="docutils literal notranslate"><span class="pre">PyComboBox.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_combobox.PyComboBox.set_stylesheet"><code class="docutils literal notranslate"><span class="pre">PyComboBox.set_stylesheet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_combobox.PyComboBox.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">PyComboBox.staticMetaObject</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_combobox.PyComboBox.style"><code class="docutils literal notranslate"><span class="pre">PyComboBox.style</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.widgets.html#module-gui.widgets.py_grips">Module gui.widgets.py_grips</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_grips.PyGrips"><code class="docutils literal notranslate"><span class="pre">PyGrips</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_grips.PyGrips.__init__"><code class="docutils literal notranslate"><span class="pre">PyGrips.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_grips.PyGrips.bottom"><code class="docutils literal notranslate"><span class="pre">PyGrips.bottom()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_grips.PyGrips.bottom_left"><code class="docutils literal notranslate"><span class="pre">PyGrips.bottom_left()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_grips.PyGrips.bottom_right"><code class="docutils literal notranslate"><span class="pre">PyGrips.bottom_right()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_grips.PyGrips.left"><code class="docutils literal notranslate"><span class="pre">PyGrips.left()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_grips.PyGrips.mouseReleaseEvent"><code class="docutils literal notranslate"><span class="pre">PyGrips.mouseReleaseEvent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_grips.PyGrips.resizeEvent"><code class="docutils literal notranslate"><span class="pre">PyGrips.resizeEvent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_grips.PyGrips.right"><code class="docutils literal notranslate"><span class="pre">PyGrips.right()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_grips.PyGrips.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">PyGrips.staticMetaObject</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_grips.PyGrips.top"><code class="docutils literal notranslate"><span class="pre">PyGrips.top()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_grips.PyGrips.top_left"><code class="docutils literal notranslate"><span class="pre">PyGrips.top_left()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_grips.PyGrips.top_right"><code class="docutils literal notranslate"><span class="pre">PyGrips.top_right()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.widgets.html#module-gui.widgets.py_icon_button">Module gui.widgets.py_icon_button</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_icon_button.PyIconButton"><code class="docutils literal notranslate"><span class="pre">PyIconButton</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_icon_button.PyIconButton.__init__"><code class="docutils literal notranslate"><span class="pre">PyIconButton.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_icon_button.PyIconButton.change_style"><code class="docutils literal notranslate"><span class="pre">PyIconButton.change_style()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_icon_button.PyIconButton.enterEvent"><code class="docutils literal notranslate"><span class="pre">PyIconButton.enterEvent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_icon_button.PyIconButton.icon_paint"><code class="docutils literal notranslate"><span class="pre">PyIconButton.icon_paint()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_icon_button.PyIconButton.is_active"><code class="docutils literal notranslate"><span class="pre">PyIconButton.is_active()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_icon_button.PyIconButton.leaveEvent"><code class="docutils literal notranslate"><span class="pre">PyIconButton.leaveEvent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_icon_button.PyIconButton.mousePressEvent"><code class="docutils literal notranslate"><span class="pre">PyIconButton.mousePressEvent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_icon_button.PyIconButton.mouseReleaseEvent"><code class="docutils literal notranslate"><span class="pre">PyIconButton.mouseReleaseEvent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_icon_button.PyIconButton.move_tooltip"><code class="docutils literal notranslate"><span class="pre">PyIconButton.move_tooltip()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_icon_button.PyIconButton.paintEvent"><code class="docutils literal notranslate"><span class="pre">PyIconButton.paintEvent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_icon_button.PyIconButton.set_active"><code class="docutils literal notranslate"><span class="pre">PyIconButton.set_active()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_icon_button.PyIconButton.set_icon"><code class="docutils literal notranslate"><span class="pre">PyIconButton.set_icon()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_icon_button.PyIconButton.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">PyIconButton.staticMetaObject</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.widgets.html#module-gui.widgets.py_label">Module gui.widgets.py_label</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_label.PyLabel"><code class="docutils literal notranslate"><span class="pre">PyLabel</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_label.PyLabel.__init__"><code class="docutils literal notranslate"><span class="pre">PyLabel.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_label.PyLabel.set_stylesheet"><code class="docutils literal notranslate"><span class="pre">PyLabel.set_stylesheet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_label.PyLabel.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">PyLabel.staticMetaObject</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_label.PyLabel.style"><code class="docutils literal notranslate"><span class="pre">PyLabel.style</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.widgets.html#module-gui.widgets.py_left_column">Module gui.widgets.py_left_column</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyIcon"><code class="docutils literal notranslate"><span class="pre">PyIcon</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyIcon.__init__"><code class="docutils literal notranslate"><span class="pre">PyIcon.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyIcon.set_icon"><code class="docutils literal notranslate"><span class="pre">PyIcon.set_icon()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyIcon.setup_ui"><code class="docutils literal notranslate"><span class="pre">PyIcon.setup_ui()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyIcon.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">PyIcon.staticMetaObject</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyLeftButton"><code class="docutils literal notranslate"><span class="pre">PyLeftButton</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyLeftButton.__init__"><code class="docutils literal notranslate"><span class="pre">PyLeftButton.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyLeftButton.change_style"><code class="docutils literal notranslate"><span class="pre">PyLeftButton.change_style()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyLeftButton.enterEvent"><code class="docutils literal notranslate"><span class="pre">PyLeftButton.enterEvent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyLeftButton.icon_paint"><code class="docutils literal notranslate"><span class="pre">PyLeftButton.icon_paint()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyLeftButton.is_active"><code class="docutils literal notranslate"><span class="pre">PyLeftButton.is_active()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyLeftButton.leaveEvent"><code class="docutils literal notranslate"><span class="pre">PyLeftButton.leaveEvent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyLeftButton.mousePressEvent"><code class="docutils literal notranslate"><span class="pre">PyLeftButton.mousePressEvent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyLeftButton.mouseReleaseEvent"><code class="docutils literal notranslate"><span class="pre">PyLeftButton.mouseReleaseEvent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyLeftButton.move_tooltip"><code class="docutils literal notranslate"><span class="pre">PyLeftButton.move_tooltip()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyLeftButton.paintEvent"><code class="docutils literal notranslate"><span class="pre">PyLeftButton.paintEvent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyLeftButton.set_active"><code class="docutils literal notranslate"><span class="pre">PyLeftButton.set_active()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyLeftButton.set_icon"><code class="docutils literal notranslate"><span class="pre">PyLeftButton.set_icon()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyLeftButton.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">PyLeftButton.staticMetaObject</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyLeftColumn"><code class="docutils literal notranslate"><span class="pre">PyLeftColumn</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyLeftColumn.__init__"><code class="docutils literal notranslate"><span class="pre">PyLeftColumn.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyLeftColumn.btn_clicked"><code class="docutils literal notranslate"><span class="pre">PyLeftColumn.btn_clicked()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyLeftColumn.btn_released"><code class="docutils literal notranslate"><span class="pre">PyLeftColumn.btn_released()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyLeftColumn.clicked"><code class="docutils literal notranslate"><span class="pre">PyLeftColumn.clicked</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyLeftColumn.released"><code class="docutils literal notranslate"><span class="pre">PyLeftColumn.released</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyLeftColumn.setup_ui"><code class="docutils literal notranslate"><span class="pre">PyLeftColumn.setup_ui()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_column.PyLeftColumn.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">PyLeftColumn.staticMetaObject</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.widgets.html#module-gui.widgets.py_left_menu">Module gui.widgets.py_left_menu</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyDiv"><code class="docutils literal notranslate"><span class="pre">PyDiv</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyDiv.__init__"><code class="docutils literal notranslate"><span class="pre">PyDiv.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyDiv.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">PyDiv.staticMetaObject</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenu"><code class="docutils literal notranslate"><span class="pre">PyLeftMenu</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenu.__init__"><code class="docutils literal notranslate"><span class="pre">PyLeftMenu.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenu.add_menus"><code class="docutils literal notranslate"><span class="pre">PyLeftMenu.add_menus()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenu.btn_clicked"><code class="docutils literal notranslate"><span class="pre">PyLeftMenu.btn_clicked()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenu.btn_released"><code class="docutils literal notranslate"><span class="pre">PyLeftMenu.btn_released()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenu.clicked"><code class="docutils literal notranslate"><span class="pre">PyLeftMenu.clicked</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenu.deselect_all"><code class="docutils literal notranslate"><span class="pre">PyLeftMenu.deselect_all()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenu.deselect_all_tab"><code class="docutils literal notranslate"><span class="pre">PyLeftMenu.deselect_all_tab()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenu.released"><code class="docutils literal notranslate"><span class="pre">PyLeftMenu.released</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenu.select_only_one"><code class="docutils literal notranslate"><span class="pre">PyLeftMenu.select_only_one()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenu.select_only_one_tab"><code class="docutils literal notranslate"><span class="pre">PyLeftMenu.select_only_one_tab()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenu.setup_ui"><code class="docutils literal notranslate"><span class="pre">PyLeftMenu.setup_ui()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenu.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">PyLeftMenu.staticMetaObject</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenu.toggle_animation"><code class="docutils literal notranslate"><span class="pre">PyLeftMenu.toggle_animation()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenuButton"><code class="docutils literal notranslate"><span class="pre">PyLeftMenuButton</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenuButton.__init__"><code class="docutils literal notranslate"><span class="pre">PyLeftMenuButton.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenuButton.change_style"><code class="docutils literal notranslate"><span class="pre">PyLeftMenuButton.change_style()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenuButton.enterEvent"><code class="docutils literal notranslate"><span class="pre">PyLeftMenuButton.enterEvent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenuButton.icon_active"><code class="docutils literal notranslate"><span class="pre">PyLeftMenuButton.icon_active()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenuButton.icon_paint"><code class="docutils literal notranslate"><span class="pre">PyLeftMenuButton.icon_paint()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenuButton.is_active"><code class="docutils literal notranslate"><span class="pre">PyLeftMenuButton.is_active()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenuButton.is_active_tab"><code class="docutils literal notranslate"><span class="pre">PyLeftMenuButton.is_active_tab()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenuButton.leaveEvent"><code class="docutils literal notranslate"><span class="pre">PyLeftMenuButton.leaveEvent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenuButton.mousePressEvent"><code class="docutils literal notranslate"><span class="pre">PyLeftMenuButton.mousePressEvent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenuButton.mouseReleaseEvent"><code class="docutils literal notranslate"><span class="pre">PyLeftMenuButton.mouseReleaseEvent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenuButton.move_tooltip"><code class="docutils literal notranslate"><span class="pre">PyLeftMenuButton.move_tooltip()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenuButton.paintEvent"><code class="docutils literal notranslate"><span class="pre">PyLeftMenuButton.paintEvent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenuButton.set_active"><code class="docutils literal notranslate"><span class="pre">PyLeftMenuButton.set_active()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenuButton.set_active_tab"><code class="docutils literal notranslate"><span class="pre">PyLeftMenuButton.set_active_tab()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenuButton.set_active_toggle"><code class="docutils literal notranslate"><span class="pre">PyLeftMenuButton.set_active_toggle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenuButton.set_icon"><code class="docutils literal notranslate"><span class="pre">PyLeftMenuButton.set_icon()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_left_menu.PyLeftMenuButton.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">PyLeftMenuButton.staticMetaObject</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.widgets.html#module-gui.widgets.py_line_edit">Module gui.widgets.py_line_edit</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_line_edit.PyLineEdit"><code class="docutils literal notranslate"><span class="pre">PyLineEdit</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_line_edit.PyLineEdit.__init__"><code class="docutils literal notranslate"><span class="pre">PyLineEdit.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_line_edit.PyLineEdit.set_stylesheet"><code class="docutils literal notranslate"><span class="pre">PyLineEdit.set_stylesheet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_line_edit.PyLineEdit.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">PyLineEdit.staticMetaObject</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_line_edit.PyLineEdit.style"><code class="docutils literal notranslate"><span class="pre">PyLineEdit.style</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.widgets.html#module-gui.widgets.py_logbar">Module gui.widgets.py_logbar</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_logbar.PyLogBar"><code class="docutils literal notranslate"><span class="pre">PyLogBar</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_logbar.PyLogBar.__init__"><code class="docutils literal notranslate"><span class="pre">PyLogBar.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_logbar.PyLogBar.setup_ui"><code class="docutils literal notranslate"><span class="pre">PyLogBar.setup_ui()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_logbar.PyLogBar.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">PyLogBar.staticMetaObject</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_logbar.PyLogBar.style"><code class="docutils literal notranslate"><span class="pre">PyLogBar.style</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.widgets.html#module-gui.widgets.py_push_button">Module gui.widgets.py_push_button</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_push_button.PyPushButton"><code class="docutils literal notranslate"><span class="pre">PyPushButton</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_push_button.PyPushButton.__init__"><code class="docutils literal notranslate"><span class="pre">PyPushButton.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_push_button.PyPushButton.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">PyPushButton.staticMetaObject</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_push_button.PyPushButton.style"><code class="docutils literal notranslate"><span class="pre">PyPushButton.style</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.widgets.html#module-gui.widgets.py_radio_button">Module gui.widgets.py_radio_button</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_radio_button.PyRadioButton"><code class="docutils literal notranslate"><span class="pre">PyRadioButton</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_radio_button.PyRadioButton.__init__"><code class="docutils literal notranslate"><span class="pre">PyRadioButton.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_radio_button.PyRadioButton.set_stylesheet"><code class="docutils literal notranslate"><span class="pre">PyRadioButton.set_stylesheet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_radio_button.PyRadioButton.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">PyRadioButton.staticMetaObject</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_radio_button.PyRadioButton.style"><code class="docutils literal notranslate"><span class="pre">PyRadioButton.style</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.widgets.html#module-gui.widgets.py_slider">Module gui.widgets.py_slider</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_slider.PySlider"><code class="docutils literal notranslate"><span class="pre">PySlider</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_slider.PySlider.__init__"><code class="docutils literal notranslate"><span class="pre">PySlider.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_slider.PySlider.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">PySlider.staticMetaObject</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_slider.PySlider.style"><code class="docutils literal notranslate"><span class="pre">PySlider.style</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.widgets.html#module-gui.widgets.py_table_widget">Module gui.widgets.py_table_widget</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_table_widget.PyTableWidget"><code class="docutils literal notranslate"><span class="pre">PyTableWidget</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_table_widget.PyTableWidget.__init__"><code class="docutils literal notranslate"><span class="pre">PyTableWidget.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_table_widget.PyTableWidget.set_stylesheet"><code class="docutils literal notranslate"><span class="pre">PyTableWidget.set_stylesheet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_table_widget.PyTableWidget.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">PyTableWidget.staticMetaObject</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_table_widget.PyTableWidget.style"><code class="docutils literal notranslate"><span class="pre">PyTableWidget.style</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.widgets.html#module-gui.widgets.py_title_bar">Module gui.widgets.py_title_bar</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyDiv"><code class="docutils literal notranslate"><span class="pre">PyDiv</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyDiv.__init__"><code class="docutils literal notranslate"><span class="pre">PyDiv.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyDiv.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">PyDiv.staticMetaObject</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyTitleBar"><code class="docutils literal notranslate"><span class="pre">PyTitleBar</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyTitleBar.__init__"><code class="docutils literal notranslate"><span class="pre">PyTitleBar.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyTitleBar.add_menus"><code class="docutils literal notranslate"><span class="pre">PyTitleBar.add_menus()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyTitleBar.btn_clicked"><code class="docutils literal notranslate"><span class="pre">PyTitleBar.btn_clicked()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyTitleBar.btn_released"><code class="docutils literal notranslate"><span class="pre">PyTitleBar.btn_released()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyTitleBar.clicked"><code class="docutils literal notranslate"><span class="pre">PyTitleBar.clicked</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyTitleBar.maximize_restore"><code class="docutils literal notranslate"><span class="pre">PyTitleBar.maximize_restore()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyTitleBar.released"><code class="docutils literal notranslate"><span class="pre">PyTitleBar.released</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyTitleBar.set_title"><code class="docutils literal notranslate"><span class="pre">PyTitleBar.set_title()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyTitleBar.setup_ui"><code class="docutils literal notranslate"><span class="pre">PyTitleBar.setup_ui()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyTitleBar.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">PyTitleBar.staticMetaObject</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton"><code class="docutils literal notranslate"><span class="pre">PyTitleButton</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton.__init__"><code class="docutils literal notranslate"><span class="pre">PyTitleButton.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton.change_style"><code class="docutils literal notranslate"><span class="pre">PyTitleButton.change_style()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton.enterEvent"><code class="docutils literal notranslate"><span class="pre">PyTitleButton.enterEvent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton.icon_paint"><code class="docutils literal notranslate"><span class="pre">PyTitleButton.icon_paint()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton.is_active"><code class="docutils literal notranslate"><span class="pre">PyTitleButton.is_active()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton.leaveEvent"><code class="docutils literal notranslate"><span class="pre">PyTitleButton.leaveEvent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton.mousePressEvent"><code class="docutils literal notranslate"><span class="pre">PyTitleButton.mousePressEvent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton.mouseReleaseEvent"><code class="docutils literal notranslate"><span class="pre">PyTitleButton.mouseReleaseEvent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton.move_tooltip"><code class="docutils literal notranslate"><span class="pre">PyTitleButton.move_tooltip()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton.paintEvent"><code class="docutils literal notranslate"><span class="pre">PyTitleButton.paintEvent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton.set_active"><code class="docutils literal notranslate"><span class="pre">PyTitleButton.set_active()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton.set_icon"><code class="docutils literal notranslate"><span class="pre">PyTitleButton.set_icon()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">PyTitleButton.staticMetaObject</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.widgets.html#module-gui.widgets.py_toggle">Module gui.widgets.py_toggle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_toggle.PyToggle"><code class="docutils literal notranslate"><span class="pre">PyToggle</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_toggle.PyToggle.__init__"><code class="docutils literal notranslate"><span class="pre">PyToggle.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_toggle.PyToggle.hitButton"><code class="docutils literal notranslate"><span class="pre">PyToggle.hitButton()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_toggle.PyToggle.paintEvent"><code class="docutils literal notranslate"><span class="pre">PyToggle.paintEvent()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_toggle.PyToggle.position"><code class="docutils literal notranslate"><span class="pre">PyToggle.position</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_toggle.PyToggle.setup_animation"><code class="docutils literal notranslate"><span class="pre">PyToggle.setup_animation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_toggle.PyToggle.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">PyToggle.staticMetaObject</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.widgets.html#module-gui.widgets.py_tool_button">Module gui.widgets.py_tool_button</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_tool_button.PyToolButton"><code class="docutils literal notranslate"><span class="pre">PyToolButton</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_tool_button.PyToolButton.__init__"><code class="docutils literal notranslate"><span class="pre">PyToolButton.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_tool_button.PyToolButton.set_stylesheet"><code class="docutils literal notranslate"><span class="pre">PyToolButton.set_stylesheet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_tool_button.PyToolButton.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">PyToolButton.staticMetaObject</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_tool_button.PyToolButton.style"><code class="docutils literal notranslate"><span class="pre">PyToolButton.style</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.widgets.html#module-gui.widgets.py_window">Module gui.widgets.py_window</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_window.PyWindow"><code class="docutils literal notranslate"><span class="pre">PyWindow</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_window.PyWindow.__init__"><code class="docutils literal notranslate"><span class="pre">PyWindow.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_window.PyWindow.bg_style"><code class="docutils literal notranslate"><span class="pre">PyWindow.bg_style</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_window.PyWindow.set_stylesheet"><code class="docutils literal notranslate"><span class="pre">PyWindow.set_stylesheet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="gui.widgets.html#gui.widgets.py_window.PyWindow.staticMetaObject"><code class="docutils literal notranslate"><span class="pre">PyWindow.staticMetaObject</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.widgets.html#module-gui.widgets">Contenu des modules</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-gui">
+<span id="module-contents"></span><h2>Contenu des modules<a class="headerlink" href="#module-gui" title="Lien vers cette rubrique"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="core.utils.html" class="btn btn-neutral float-left" title="Package core.utils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="gui.core.html" class="btn btn-neutral float-right" title="Package gui.core" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2025, CrEagleOne.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

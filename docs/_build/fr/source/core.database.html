@@ -1,0 +1,380 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Package core.database &mdash; Documentation DBtective 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/style.css?v=8399456f" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=05dadb3a"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/translations.js?v=e6b791cb"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Package core.utils" href="core.utils.html" />
+    <link rel="prev" title="Package Core" href="core.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            DBtective
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation utilisateur:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user.html">Fonctionnalités</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation technique:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="core.html">Package Core</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="core.html#subpackages">Sous-packages</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Package core.database</a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.utils.html">Package core.utils</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="core.html#module-core">Contenu des modules</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gui.html">Package gui</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">Module main</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DBtective</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">src</a></li>
+          <li class="breadcrumb-item"><a href="core.html">Package Core</a></li>
+      <li class="breadcrumb-item active">Package core.database</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/core.database.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="core-database-package">
+<h1>Package core.database<a class="headerlink" href="#core-database-package" title="Lien vers cette rubrique"></a></h1>
+<section id="submodules">
+<h2>Sous-modules<a class="headerlink" href="#submodules" title="Lien vers cette rubrique"></a></h2>
+</section>
+<section id="module-core.database.duck">
+<span id="core-database-duck-module"></span><h2>Module core.database.duck<a class="headerlink" href="#module-core.database.duck" title="Lien vers cette rubrique"></a></h2>
+<p>Module: duckdb
+Author: creagleone
+Date: 2025-05-07</p>
+<dl class="simple">
+<dt>Description:</dt><dd><p>Ce module contient les fonctions permettant de charger et de traiter des données de comparaison</p>
+</dd>
+<dt>Dépendances:</dt><dd><ul class="simple">
+<li><p>os</p></li>
+<li><p>wraps (functools)</p></li>
+<li><p>duckdb</p></li>
+<li><p>pandas</p></li>
+<li><p>settings.py</p></li>
+<li><p>common.py</p></li>
+<li><p>exceptions.py</p></li>
+</ul>
+</dd>
+<dt>Exemple d’utilisation:</dt><dd><p>N/A</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Ce module utilise DuckDB pour un traitement SQL efficace en mémoire.</p></li>
+<li><p>Conçu pour gérer efficacement de grands ensembles de données.</p></li>
+</ul>
+<dl class="py function">
+<dt class="sig sig-object py" id="core.database.duck.delete_tmp_db">
+<span class="sig-prename descclassname"><span class="pre">core.database.duck.</span></span><span class="sig-name descname"><span class="pre">delete_tmp_db</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/core/database/duck.html#delete_tmp_db"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.database.duck.delete_tmp_db" title="Lien vers cette définition"></a></dt>
+<dd><p>Supprimer la base de données temporaire de duckDB</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="core.database.duck.get_datas_by_fetchall">
+<span class="sig-prename descclassname"><span class="pre">core.database.duck.</span></span><span class="sig-name descname"><span class="pre">get_datas_by_fetchall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/core/database/duck.html#get_datas_by_fetchall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.database.duck.get_datas_by_fetchall" title="Lien vers cette définition"></a></dt>
+<dd><p>Récupère toutes les lignes sous forme de trame de données</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em>) – Requête SQL</p></li>
+<li><p><strong>arg</strong> (<em>optional</em><em>, </em><em>Tuple</em>) – Arguments de requête</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>Résultat de requête</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="core.database.duck.get_datas_by_fetchdf">
+<span class="sig-prename descclassname"><span class="pre">core.database.duck.</span></span><span class="sig-name descname"><span class="pre">get_datas_by_fetchdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/core/database/duck.html#get_datas_by_fetchdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.database.duck.get_datas_by_fetchdf" title="Lien vers cette définition"></a></dt>
+<dd><p>Récupère toutes les lignes sous forme de trame de données</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> (<em>str</em>) – Requête SQL</p></li>
+<li><p><strong>arg</strong> (<em>optional</em><em>, </em><em>Tuple</em>) – Arguments de requête</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>Résultat de requête</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="core.database.duck.load_file_data">
+<span class="sig-prename descclassname"><span class="pre">core.database.duck.</span></span><span class="sig-name descname"><span class="pre">load_file_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tablename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../_modules/core/database/duck.html#load_file_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.database.duck.load_file_data" title="Lien vers cette définition"></a></dt>
+<dd><p>Charger le contenu d’un fichier dans la base de données</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – Nom du fichier</p></li>
+<li><p><strong>tablename</strong> (<em>str</em>) – Nom de la table</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>Vrai en cas de succès, Faux sinon</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="core.database.duck.retrieve_file_delimiter">
+<span class="sig-prename descclassname"><span class="pre">core.database.duck.</span></span><span class="sig-name descname"><span class="pre">retrieve_file_delimiter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/core/database/duck.html#retrieve_file_delimiter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.database.duck.retrieve_file_delimiter" title="Lien vers cette définition"></a></dt>
+<dd><p>Récupère le délimiteur CSV du fichier</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – Nom du fichier</p>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>Délimiteur</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="core.database.duck.wraps">
+<span class="sig-prename descclassname"><span class="pre">core.database.duck.</span></span><span class="sig-name descname"><span class="pre">wraps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wrapped</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assigned</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('__module__',</span> <span class="pre">'__name__',</span> <span class="pre">'__qualname__',</span> <span class="pre">'__doc__',</span> <span class="pre">'__annotations__',</span> <span class="pre">'__type_params__')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">updated</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('__dict__',)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/functools.html#wraps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.database.duck.wraps" title="Lien vers cette définition"></a></dt>
+<dd><p>Decorator factory to apply update_wrapper() to a wrapper function</p>
+<p>Returns a decorator that invokes update_wrapper() with the decorated
+function as the wrapper argument and the arguments to wraps() as the
+remaining arguments. Default arguments are as for update_wrapper().
+This is a convenience function to simplify applying partial() to
+update_wrapper().</p>
+</dd></dl>
+
+</section>
+<section id="module-core.database.oracle">
+<span id="core-database-oracle-module"></span><h2>Module core.database.oracle<a class="headerlink" href="#module-core.database.oracle" title="Lien vers cette rubrique"></a></h2>
+<p>Module: oracle
+Author: creagleone
+Date: 2025-05-07</p>
+<dl class="simple">
+<dt>Description:</dt><dd><p>Ce module contient les fonctions permettant de récupérer des données à partir d’une base de données oracle</p>
+</dd>
+<dt>Dépendances:</dt><dd><ul class="simple">
+<li><p>socket</p></li>
+<li><p>wraps (functools)</p></li>
+<li><p>oracledb</p></li>
+<li><p>exceptions.py</p></li>
+</ul>
+</dd>
+<dt>Exemple d’utilisation:</dt><dd><p>N/A</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Ce module utilise le mode thin oracledb</p></li>
+<li><p>Conçu pour gérer efficacement de grands ensembles de données</p></li>
+</ul>
+<dl class="py function">
+<dt class="sig sig-object py" id="core.database.oracle.get_data_by_segment">
+<span class="sig-prename descclassname"><span class="pre">core.database.oracle.</span></span><span class="sig-name descname"><span class="pre">get_data_by_segment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_db_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fetch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/core/database/oracle.html#get_data_by_segment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.database.oracle.get_data_by_segment" title="Lien vers cette définition"></a></dt>
+<dd><p>Récupérez toutes les données d’une requête à l’aide de segment et fetch</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_config</strong> (<em>list</em>) – Connexion à la base de données</p></li>
+<li><p><strong>segment_size</strong> (<em>int</em><em> | </em><em>None</em>) – Combien de lignes sont lues par segment</p></li>
+<li><p><strong>fetch</strong> (<em>int</em>) – Nombre de lignes à récupérer par lecture</p></li>
+<li><p><strong>query</strong> (<em>str</em>) – Requête à effectuer</p></li>
+</ul>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="core.utils.html#core.utils.exceptions.Error" title="core.utils.exceptions.Error"><strong>exceptions.Error</strong></a> – code 604</p>
+</dd>
+<dt class="field-odd">Retourne<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>liste</em> – Données du segment</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="core.database.oracle.get_list_data">
+<span class="sig-prename descclassname"><span class="pre">core.database.oracle.</span></span><span class="sig-name descname"><span class="pre">get_list_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_db_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="../_modules/core/database/oracle.html#get_list_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.database.oracle.get_list_data" title="Lien vers cette définition"></a></dt>
+<dd><p>Récupérer toutes les données d’une requête</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_config</strong> (<em>list</em>) – Connexion à la base de données</p></li>
+<li><p><strong>query</strong> (<em>str</em>) – Requête à effectuer</p></li>
+</ul>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="core.utils.html#core.utils.exceptions.Error" title="core.utils.exceptions.Error"><strong>exceptions.Error</strong></a> – liste des codes d’erreur</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Résultat de requête</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="core.database.oracle.get_unique_data">
+<span class="sig-prename descclassname"><span class="pre">core.database.oracle.</span></span><span class="sig-name descname"><span class="pre">get_unique_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_db_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="../_modules/core/database/oracle.html#get_unique_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.database.oracle.get_unique_data" title="Lien vers cette définition"></a></dt>
+<dd><p>Récupérer le premier résultat d’une requête</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db_config</strong> (<em>list</em>) – Connexion à la base de données</p></li>
+<li><p><strong>query</strong> (<em>str</em>) – Requête à effectuer</p></li>
+</ul>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="core.utils.html#core.utils.exceptions.Error" title="core.utils.exceptions.Error"><strong>exceptions.Error</strong></a> – liste des codes d’erreur</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Résultat de requête</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="core.database.oracle.is_still_active">
+<span class="sig-prename descclassname"><span class="pre">core.database.oracle.</span></span><span class="sig-name descname"><span class="pre">is_still_active</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_db_config</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/core/database/oracle.html#is_still_active"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.database.oracle.is_still_active" title="Lien vers cette définition"></a></dt>
+<dd><p>Vérifie si la connexion à la base de données est toujours active</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_db_config</strong> (<em>Any</em>) – Configuration de la base de données (inutilisée mais incluse pour des raisons de compatibilité)</p></li>
+<li><p><strong>**kwargs</strong> (<em>Any</em>) – Arguments supplémentaires, attendue une clé « conn »</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>Vrai si la connexion est active, Faux sinon</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="core.database.oracle.wraps">
+<span class="sig-prename descclassname"><span class="pre">core.database.oracle.</span></span><span class="sig-name descname"><span class="pre">wraps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wrapped</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assigned</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('__module__',</span> <span class="pre">'__name__',</span> <span class="pre">'__qualname__',</span> <span class="pre">'__doc__',</span> <span class="pre">'__annotations__',</span> <span class="pre">'__type_params__')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">updated</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('__dict__',)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/functools.html#wraps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.database.oracle.wraps" title="Lien vers cette définition"></a></dt>
+<dd><p>Decorator factory to apply update_wrapper() to a wrapper function</p>
+<p>Returns a decorator that invokes update_wrapper() with the decorated
+function as the wrapper argument and the arguments to wraps() as the
+remaining arguments. Default arguments are as for update_wrapper().
+This is a convenience function to simplify applying partial() to
+update_wrapper().</p>
+</dd></dl>
+
+</section>
+<section id="module-core.database">
+<span id="module-contents"></span><h2>Contenu des modules<a class="headerlink" href="#module-core.database" title="Lien vers cette rubrique"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="core.html" class="btn btn-neutral float-left" title="Package Core" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="core.utils.html" class="btn btn-neutral float-right" title="Package core.utils" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2025, CrEagleOne.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

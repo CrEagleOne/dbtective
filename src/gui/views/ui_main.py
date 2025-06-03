@@ -29,8 +29,8 @@ class UI_MainWindow(object):
                 "is_active": True
             },
             {
-                "btn_icon": "icon_widgets.svg",
-                "btn_id": "btn_widgets",
+                "btn_icon": "icon_compare.svg",
+                "btn_id": "btn_compare",
                 "btn_text":
                 QtCore.QCoreApplication.translate(
                     "ui_main", "Compare database"),
@@ -41,8 +41,8 @@ class UI_MainWindow(object):
                 "is_active": False
             },
             {
-                "btn_icon": "icon_add_user.svg",
-                "btn_id": "btn_add_user",
+                "btn_icon": "icon_widgets.svg",
+                "btn_id": "btn_add_connection",
                 "btn_text":
                 QtCore.QCoreApplication.translate("ui_main", "New connection"),
                 "btn_tooltip":
@@ -986,7 +986,7 @@ class UI_MainWindow(object):
     def settings_DB_buttons(self):
         self.testDB = py_push_button.PyPushButton(
             text=QtCore.QCoreApplication.translate(
-                "ui_main", "Connection test"),
+                "ui_main", "Test Connection"),
             radius=8,
             color=self.themes["app_color"]["text_foreground"],
             bg_color=self.themes["app_color"]["dark_one"],

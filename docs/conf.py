@@ -17,6 +17,13 @@ release = '1.0.0'
 
 sys.path.insert(0, os.path.abspath("../src"))
 sys.path.insert(1, os.path.abspath('..'))
+sys.path.insert(2, os.path.abspath('../..'))
+
+locale_dirs = ['_build/locale/']
+gettext_compact = False
+language = 'en'
+supported_languages = ['en', 'fr']
+html_output_encoding = 'utf-8'
 
 autodoc_default_options = {
     "special-members": "__init__",
@@ -32,6 +39,7 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.napoleon",  # Support Google & NumPy docstrings
     "sphinx.ext.viewcode",  # Adds a link to the source code
+    'myst_parser'
 ]
 
 templates_path = ['_templates']
@@ -43,3 +51,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 html_theme = "sphinx_rtd_theme"
 html_static_path = ['_static']
+
+
+def setup(app):
+    app.add_css_file('style.css')

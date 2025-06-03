@@ -1,0 +1,167 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, CrEagleOne
+# This file is distributed under the same license as the DBtective package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: DBtective \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-03 13:50+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: fr\n"
+"Language-Team: fr <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../source/compare.md:1
+msgid "Compare data from 2 databases"
+msgstr "Comparer les données de 2 bases de données"
+
+#: ../source/compare.md:7
+msgid "Configuring Compare Settings"
+msgstr "Configuration des paramètres de comparaison"
+
+#: ../source/compare.md
+msgid "Settings"
+msgstr "Paramètres"
+
+#: ../source/compare.md
+msgid "Description"
+msgstr "Description"
+
+#: ../source/compare.md
+msgid "Database 1 and Database 2"
+msgstr "Base de données 1 et 2"
+
+#: ../source/compare.md
+msgid "Choose the databases to compare"
+msgstr "Choisissez les bases de données à comparer"
+
+#: ../source/compare.md
+msgid "Multiple queries"
+msgstr "Requêtes multiples"
+
+#: ../source/compare.md
+msgid "Defines the method of data extraction (Single query if off)"
+msgstr "Définit la méthode d'extraction des données (requête unique si désactivée)"
+
+#: ../source/compare.md
+msgid "Segment length"
+msgstr "Taille du segment"
+
+#: ../source/compare.md
+msgid ""
+"The size of data segments to be extracted at a time (active if multiple "
+"queries is on)"
+msgstr ""
+"La taille des segments de données à extraire à la fois (actifs s'ils sont"
+" multiplesles requêtes sont activées)"
+
+#: ../source/compare.md
+msgid "Fetch Size"
+msgstr "Taille du fetch"
+
+#: ../source/compare.md
+msgid "Number of rows the driver retrieves in one batch from the database"
+msgstr ""
+"Nombre de lignes récupérées par le pilote dans un lot de la base de "
+"données"
+
+#: ../source/compare.md
+msgid "Processing mode"
+msgstr "Mode de traitement"
+
+#: ../source/compare.md
+msgid "Choice of treatment method (see processing below)"
+msgstr "Choix de la méthode de traitement (voir traitement ci-dessous)"
+
+#: ../source/compare.md
+msgid "List of tables"
+msgstr "Liste des tables"
+
+#: ../source/compare.md
+msgid "Contents of a database (see details below)"
+msgstr "Contenu d'une base de données (voir détails ci-dessous)"
+
+#: ../source/compare.md:19
+msgid "Processing"
+msgstr "Traitement"
+
+#: ../source/compare.md:21
+msgid "By hash"
+msgstr "Par hachage"
+
+#: ../source/compare.md:23
+msgid ""
+"Each extracted line will be hashed and update a hashed value. No details "
+"possible, it will just be possible to know if there were any "
+"discrepancies or not."
+msgstr ""
+"Chaque ligne extraite sera hachée et mettra à jour une valeur hachée. Pas"
+" de détails possible, il sera juste possible de savoir s'il y a eu des "
+"écarts."
+
+#: ../source/compare.md:26
+msgid "By lines"
+msgstr "Par lignes"
+
+#: ../source/compare.md:28
+msgid ""
+"Each extracted line will be added to a temporary database (via duckDB) "
+"and the comparison query will be launched. For each table with at least "
+"one data gap, a csv format file will be generated."
+msgstr ""
+"Chaque ligne extraite sera ajoutée à une base de données temporaire (via "
+"duckDB)et la requête de comparaison sera lancée. Pour chaque table avec "
+"au moins  un écart dans les données, un fichier au format csv sera "
+"généré. "
+
+#: ../source/compare.md:31
+msgid "By columns"
+msgstr "Par colonnes"
+
+#: ../source/compare.md:33
+msgid ""
+"Same as for the process « By lines », but using the « Levenshtein "
+"distance » to retrieve data peers."
+msgstr ""
+"Identique au processus « Par lignes », mais en utilisant la « distance de"
+" Levenshtein »pour récupérer les données qui vont de pairs."
+
+#: ../source/compare.md:35
+msgid ""
+"It is a mathematical distance between 2 character strings, defined as the"
+" minimum number of single-character modifications (insertions, deletions "
+"or substitutions) necessary to change one sequence to another."
+msgstr ""
+"Il s'agit d'une distance mathématique entre 2 chaînes de caractères, "
+"définie comme le  nombre minimum de modifications à un seul caractère "
+"(insertions, suppressions  ou des substitutions) nécessaires pour changer"
+" une séquence en une autre. "
+
+#: ../source/compare.md:38
+msgid "Details"
+msgstr "Détails"
+
+#: ../source/compare.md:40
+msgid "Displays the list of common tables between the 2 selected databases."
+msgstr ""
+"Affiche la liste des tables communes entre les 2 bases de données "
+"sélectionnées."
+
+#: ../source/compare.md:42
+msgid ""
+"By pressing \"DELETE\" on the keyboard, the table associated with the "
+"selected row will not be compared. To add the table again, press "
+"\"Backspace\"."
+msgstr ""
+"En appuyant sur \"DELETE\" sur le clavier, la table associée à la ligne "
+"sélectionnée ne sera pas comparée. Pour ajouter à nouveau la table, "
+"appuyez sur \"Retour arrière\"."
+

@@ -1,0 +1,103 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, CrEagleOne
+# This file is distributed under the same license as the DBtective package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: DBtective \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-03 12:31+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: fr\n"
+"Language-Team: fr <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../source/new_connection.md:1
+msgid "Create a new connection"
+msgstr "Créer une nouvelle connexion"
+
+#: ../source/new_connection.md:7
+msgid "Configuring Connection Settings"
+msgstr "Configuration des paramètres de connexion"
+
+#: ../source/new_connection.md:9
+msgid "For all connections :"
+msgstr "Pour toutes les connexions :"
+
+#: ../source/new_connection.md:10
+msgid ""
+"Test the Connection: Click Test Connection to verify if the connection "
+"works"
+msgstr ""
+"Tester la connexion : Cliquer sur Tester la connexion pour vérifier si la"
+" connexion fonctionne"
+
+#: ../source/new_connection.md:11
+msgid "Save: Click Save. The connection appears in the database choices"
+msgstr ""
+"Enregistrer : Cliquer sur Enregistrer pour faire apparaître la connexion dans les "
+"choix de la base de données"
+
+#: ../source/new_connection.md:13
+msgid "Oracle connection settings"
+msgstr "Paramètres de connexion Oracle"
+
+#: ../source/new_connection.md
+msgid "Settings"
+msgstr "Paramètres"
+
+#: ../source/new_connection.md
+msgid "Description"
+msgstr "Description"
+
+#: ../source/new_connection.md
+msgid "Host"
+msgstr "Hôte"
+
+#: ../source/new_connection.md
+msgid "IP Address or Host Name"
+msgstr "Adresse IP ou nom de l'hôte"
+
+#: ../source/new_connection.md
+msgid "Port"
+msgstr "Port"
+
+#: ../source/new_connection.md
+msgid "The port number for the connection (1521 by default)"
+msgstr "Le numéro de port pour la connexion (1521 par défaut)"
+
+#: ../source/new_connection.md
+msgid "Database"
+msgstr "Base de données"
+
+#: ../source/new_connection.md
+msgid "The name of the specific database you want to connect to"
+msgstr ""
+"Le nom de la base de données spécifique à laquelle vous souhaitez vous "
+"connecter"
+
+#: ../source/new_connection.md
+msgid "Username and Password"
+msgstr "Nom d'utilisateur et mot de passe"
+
+#: ../source/new_connection.md
+msgid "The credentials required for authentication"
+msgstr "Les informations d'identification requises pour l'authentification"
+
+#: ../source/new_connection.md
+msgid "Connection name"
+msgstr "Nom de la connexion"
+
+#: ../source/new_connection.md
+msgid "Assign a specific name to the connection for easier identification"
+msgstr ""
+"Attribuer un nom spécifique à la connexion pour une identification plus "
+"facile"
+

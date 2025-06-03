@@ -2,7 +2,7 @@
 
 """
 Module: common
-Auteur: creagleone
+Author: creagleone
 Date: 2025-05-07
 
 Description:
@@ -101,8 +101,8 @@ def get_hash_file(filepath: str, hash_algorithm: str = 'sha256') -> str:
     Calculate the hash of a file using the specified algorithm
 
     Args:
-        filepath (str): File path.
-        hash_algorithm (str): Hash algorithm to use. Defaults to 'sha256'.
+        filepath (str): File path
+        hash_algorithm (str): Hash algorithm to use. Defaults to 'sha256'
 
     Returns:
         str: File hash
@@ -215,10 +215,10 @@ def resource_path(relative_path: str) -> str:
     resource files
 
     Parameters :
-        relative_path (str) : The relative path of a resource file.
+        relative_path (str) : The relative path of a resource file
 
     Returns :
-        str : The absolute path to a resource file.
+        str : The absolute path to a resource file
     """
     if hasattr(sys, "_MEIPASS"):
         base_path = sys._MEIPASS
@@ -237,13 +237,13 @@ def resource_path(relative_path: str) -> str:
 
 def set_svg_icon(icon_name: str) -> str:
     """
-    Returns the absolute path to an SVG used as an icon.
+    Returns the absolute path to an SVG used as an icon
 
     Parameters :
-        icon_name (str) : The name of the icon.
+        icon_name (str) : The name of the icon
 
     Returns :
-        str : The path to the SVG icon.
+        str : The path to the SVG icon
     """
     folder = "src/gui/images/svg_icons/"
     path = resource_path(folder)
@@ -257,10 +257,10 @@ def set_svg_image(icon_name: str) -> str:
     user interface
 
     Parameters :
-        icon_name (str) : The name of the icon.
+        icon_name (str) : The name of the icon
 
     Returns :
-        str : The path to the SVG image.
+        str : The path to the SVG image
     """
     folder = "src/gui/images/svg_images/"
     path = resource_path(folder)
@@ -274,7 +274,7 @@ def set_image(image_name: str) -> str:
     user interface
 
     Parameters :
-        icon_name (str) : The name of the icon.
+        icon_name (str) : The name of the icon
 
     Returns :
         str : The path to the image.
@@ -290,7 +290,7 @@ def set_locale(translate_name: str) -> str:
     Returns the absolute path of the application translation file
 
     Parameters :
-        icon_name (str) : The name of the icon.
+        icon_name (str) : The name of the icon
 
     Returns :
         str : The path to the image.
@@ -368,10 +368,10 @@ def delete_work_folder(path: str):
 
 def open_folders(folder: str):
     """
-    Ouvrir un fichier avec un éditeur de fichier
+    Open a file with a file editor
 
     Args:
-        filename (str): Nom du fichier.
+        filename (str): File name
     """
     system = platform.system()
 

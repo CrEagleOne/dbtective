@@ -1,0 +1,125 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, CrEagleOne
+# This file is distributed under the same license as the DBtective package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: DBtective \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-03 13:50+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../source/compare.md:1
+msgid "Compare data from 2 databases"
+msgstr ""
+
+#: ../source/compare.md:7
+msgid "Configuring Compare Settings"
+msgstr ""
+
+#: ../source/compare.md:0
+msgid "Settings"
+msgstr ""
+
+#: ../source/compare.md:0
+msgid "Description"
+msgstr ""
+
+#: ../source/compare.md:0
+msgid "Database 1 and Database 2"
+msgstr ""
+
+#: ../source/compare.md:0
+msgid "Choose the databases to compare"
+msgstr ""
+
+#: ../source/compare.md:0
+msgid "Multiple queries"
+msgstr ""
+
+#: ../source/compare.md:0
+msgid "Defines the method of data extraction (Single query if off)"
+msgstr ""
+
+#: ../source/compare.md:0
+msgid "Segment length"
+msgstr ""
+
+#: ../source/compare.md:0
+msgid "The size of data segments to be extracted at a time (active if multiple queries is on)"
+msgstr ""
+
+#: ../source/compare.md:0
+msgid "Fetch Size"
+msgstr ""
+
+#: ../source/compare.md:0
+msgid "Number of rows the driver retrieves in one batch from the database"
+msgstr ""
+
+#: ../source/compare.md:0
+msgid "Processing mode"
+msgstr ""
+
+#: ../source/compare.md:0
+msgid "Choice of treatment method (see processing below)"
+msgstr ""
+
+#: ../source/compare.md:0
+msgid "List of tables"
+msgstr ""
+
+#: ../source/compare.md:0
+msgid "Contents of a database (see details below)"
+msgstr ""
+
+#: ../source/compare.md:19
+msgid "Processing"
+msgstr ""
+
+#: ../source/compare.md:21
+msgid "By hash"
+msgstr ""
+
+#: ../source/compare.md:23
+msgid "Each extracted line will be hashed and update a hashed value. No details possible, it will just be possible to know if there were any discrepancies or not."
+msgstr ""
+
+#: ../source/compare.md:26
+msgid "By lines"
+msgstr ""
+
+#: ../source/compare.md:28
+msgid "Each extracted line will be added to a temporary database (via duckDB) and the comparison query will be launched. For each table with at least one data gap, a csv format file will be generated."
+msgstr ""
+
+#: ../source/compare.md:31
+msgid "By columns"
+msgstr ""
+
+#: ../source/compare.md:33
+msgid "Same as for the process « By lines », but using the « Levenshtein distance » to retrieve data peers."
+msgstr ""
+
+#: ../source/compare.md:35
+msgid "It is a mathematical distance between 2 character strings, defined as the minimum number of single-character modifications (insertions, deletions or substitutions) necessary to change one sequence to another."
+msgstr ""
+
+#: ../source/compare.md:38
+msgid "Details"
+msgstr ""
+
+#: ../source/compare.md:40
+msgid "Displays the list of common tables between the 2 selected databases."
+msgstr ""
+
+#: ../source/compare.md:42
+msgid "By pressing \"DELETE\" on the keyboard, the table associated with the selected row will not be compared. To add the table again, press \"Backspace\"."
+msgstr ""

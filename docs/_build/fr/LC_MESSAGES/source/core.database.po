@@ -1,0 +1,276 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, CrEagleOne
+# This file is distributed under the same license as the DBtective package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: DBtective \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-02 16:02+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: fr\n"
+"Language-Team: fr <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../source/core.database.rst:2
+msgid "core.database package"
+msgstr ""
+
+#: ../source/core.database.rst:5
+msgid "Submodules"
+msgstr ""
+
+#: ../source/core.database.rst:8
+msgid "core.database.duck module"
+msgstr ""
+
+#: core.database.duck:1 of
+msgid "Module: duckdb Auteur: creagleone Date: 2025-05-07"
+msgstr ""
+
+#: core.database.duck:5 core.database.oracle:5 of
+msgid "Description:"
+msgstr ""
+
+#: core.database.duck:6 of
+msgid "This module contains the functions to load and process comparison data"
+msgstr ""
+
+#: core.database.duck:8 core.database.oracle:9 of
+msgid "Dependencies:"
+msgstr ""
+
+#: core.database.duck:9 of
+msgid "os"
+msgstr ""
+
+#: core.database.duck:10 core.database.oracle:11 of
+msgid "wraps (functools)"
+msgstr ""
+
+#: core.database.duck:11 of
+msgid "duckdb"
+msgstr ""
+
+#: core.database.duck:12 of
+msgid "pandas"
+msgstr ""
+
+#: core.database.duck:13 of
+msgid "settings.py"
+msgstr ""
+
+#: core.database.duck:14 of
+msgid "common.py"
+msgstr ""
+
+#: core.database.duck:15 core.database.oracle:13 of
+msgid "exceptions.py"
+msgstr ""
+
+#: core.database.duck:17 core.database.oracle:15 of
+msgid "Usage Example:"
+msgstr ""
+
+#: core.database.duck:18 core.database.oracle:16 of
+msgid "N/A"
+msgstr ""
+
+#: core.database.duck:21 core.database.oracle:19 of
+msgid "Notes"
+msgstr ""
+
+#: core.database.duck:22 of
+msgid "This module uses DuckDB for efficient in-memory SQL processing."
+msgstr ""
+
+#: core.database.duck:23 of
+msgid "Designed for handling large datasets efficiently."
+msgstr ""
+
+#: core.database.duck.delete_tmp_db:1 of
+msgid "Delete tmp duckDB database"
+msgstr ""
+
+#: core.database.duck.get_datas_by_fetchall:1
+#: core.database.duck.get_datas_by_fetchdf:1 of
+msgid "Retrieves all rows as a data frame"
+msgstr ""
+
+#: ../source/core.database.rst
+msgid "Paramètres"
+msgstr ""
+
+#: core.database.duck.get_datas_by_fetchall:3
+#: core.database.duck.get_datas_by_fetchdf:3 of
+msgid "SQL query"
+msgstr ""
+
+#: core.database.duck.get_datas_by_fetchall:5
+#: core.database.duck.get_datas_by_fetchdf:5 of
+msgid "Query args"
+msgstr ""
+
+#: ../source/core.database.rst
+msgid "Renvoie"
+msgstr ""
+
+#: core.database.duck.get_datas_by_fetchall:8
+#: core.database.duck.get_datas_by_fetchdf:8
+#: core.database.oracle.get_list_data:10
+#: core.database.oracle.get_unique_data:10 of
+msgid "Query result"
+msgstr ""
+
+#: ../source/core.database.rst
+msgid "Type renvoyé"
+msgstr ""
+
+#: core.database.duck.load_file_data:1 of
+msgid "Load the contents of a file into the database"
+msgstr ""
+
+#: core.database.duck.load_file_data:3
+#: core.database.duck.retrieve_file_delimiter:3 of
+msgid "Filename"
+msgstr ""
+
+#: core.database.duck.load_file_data:5 of
+msgid "Name of the table"
+msgstr ""
+
+#: core.database.duck.load_file_data:8 of
+msgid "True if successful, False otherwise"
+msgstr ""
+
+#: core.database.duck.retrieve_file_delimiter:1 of
+msgid "Retrieves the CSV delimiter from the file"
+msgstr ""
+
+#: core.database.duck.retrieve_file_delimiter:6 of
+msgid "Delimiter"
+msgstr ""
+
+#: functools.wraps:1 of
+msgid "Decorator factory to apply update_wrapper() to a wrapper function"
+msgstr ""
+
+#: functools.wraps:3 of
+msgid ""
+"Returns a decorator that invokes update_wrapper() with the decorated "
+"function as the wrapper argument and the arguments to wraps() as the "
+"remaining arguments. Default arguments are as for update_wrapper(). This "
+"is a convenience function to simplify applying partial() to "
+"update_wrapper()."
+msgstr ""
+
+#: ../source/core.database.rst:16
+msgid "core.database.oracle module"
+msgstr ""
+
+#: core.database.oracle:1 of
+msgid "Module: oracle Auteur: creagleone Date: 2025-05-07"
+msgstr ""
+
+#: core.database.oracle:6 of
+msgid ""
+"This module contains the functions allowing you to retrieve data from an "
+"oracle database"
+msgstr ""
+
+#: core.database.oracle:10 of
+msgid "socket"
+msgstr ""
+
+#: core.database.oracle:12 of
+msgid "oracledb"
+msgstr ""
+
+#: core.database.oracle:20 of
+msgid "This module uses oracledb thin mode"
+msgstr ""
+
+#: core.database.oracle:21 of
+msgid "Designed for handling large datasets efficiently"
+msgstr ""
+
+#: core.database.oracle.get_data_by_segment:1 of
+msgid "Retrieve all datas from a query using segment and fetch"
+msgstr ""
+
+#: core.database.oracle.get_data_by_segment:3
+#: core.database.oracle.get_list_data:3 core.database.oracle.get_unique_data:3
+#: of
+msgid "Database connection"
+msgstr ""
+
+#: core.database.oracle.get_data_by_segment:5 of
+msgid "How many rows are read per segment"
+msgstr ""
+
+#: core.database.oracle.get_data_by_segment:7 of
+msgid "Number of rows to fetch per reading"
+msgstr ""
+
+#: core.database.oracle.get_data_by_segment:9
+#: core.database.oracle.get_list_data:5 core.database.oracle.get_unique_data:5
+#: of
+msgid "Query to perform"
+msgstr ""
+
+#: ../source/core.database.rst
+msgid "Lève"
+msgstr ""
+
+#: core.database.oracle.get_data_by_segment:12 of
+msgid "code 604"
+msgstr ""
+
+#: core.database.oracle.get_data_by_segment of
+msgid "Yields"
+msgstr ""
+
+#: core.database.oracle.get_data_by_segment:14 of
+msgid "*list* -- Segment data"
+msgstr ""
+
+#: core.database.oracle.get_list_data:1 of
+msgid "Retrieve all datas from a query"
+msgstr ""
+
+#: core.database.oracle.get_list_data:8 core.database.oracle.get_unique_data:8
+#: of
+msgid "list of error codes"
+msgstr ""
+
+#: core.database.oracle.get_unique_data:1 of
+msgid "Retrieve the first result of a query"
+msgstr ""
+
+#: core.database.oracle.is_still_active:1 of
+msgid "Checks if the database connection is still active"
+msgstr ""
+
+#: core.database.oracle.is_still_active:3 of
+msgid "Database configuration (unused but included for compatibility)"
+msgstr ""
+
+#: core.database.oracle.is_still_active:6 of
+msgid "Additional arguments, expecting a 'conn' key"
+msgstr ""
+
+#: core.database.oracle.is_still_active:9 of
+msgid "True if the connection is active, False otherwise"
+msgstr ""
+
+#: ../source/core.database.rst:24
+msgid "Module contents"
+msgstr ""
+

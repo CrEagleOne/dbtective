@@ -1,0 +1,249 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, CrEagleOne
+# This file is distributed under the same license as the DBtective package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: DBtective \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-02 16:02+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: fr\n"
+"Language-Team: fr <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../source/gui.views.rst:2
+msgid "gui.views package"
+msgstr ""
+
+#: ../source/gui.views.rst:5
+msgid "Submodules"
+msgstr ""
+
+#: ../source/gui.views.rst:8
+msgid "gui.views.controls module"
+msgstr ""
+
+#: gui.views.controls:1 of
+msgid "Module: controls Auteur: creagleone Date: 2025-05-07"
+msgstr ""
+
+#: gui.views.controls:5 gui.views.events:5 gui.views.popups:5 of
+msgid "Description:"
+msgstr ""
+
+#: gui.views.controls:6 of
+msgid "This module contains functions to controls input datas"
+msgstr ""
+
+#: gui.views.controls:8 of
+msgid "Dependencies:"
+msgstr ""
+
+#: gui.views.controls:9 gui.views.events:13 gui.views.popups:10 of
+msgid "QtCore (PySide6)"
+msgstr ""
+
+#: gui.views.controls:10 gui.views.events:21 of
+msgid "common.py"
+msgstr ""
+
+#: gui.views.controls:12 gui.views.events:24 gui.views.popups:12 of
+msgid "Usage Example:"
+msgstr ""
+
+#: gui.views.controls:13 gui.views.controls:17 gui.views.events:25
+#: gui.views.events:29 gui.views.popups:17 of
+msgid "N/A"
+msgstr ""
+
+#: gui.views.controls:16 gui.views.events:28 gui.views.popups:16 of
+msgid "Notes"
+msgstr ""
+
+#: gui.views.controls.db_compare:1 of
+msgid "Control the input data for database comparison"
+msgstr ""
+
+#: gui.views.controls.init_db_compare:1 of
+msgid "Init UI of the input data for database comparison"
+msgstr ""
+
+#: gui.views.controls.init_oracle:1 of
+msgid "Init UI of the input data for oracle settings"
+msgstr ""
+
+#: gui.views.controls.oracle:1 of
+msgid "Control the input data for oracle settings"
+msgstr ""
+
+#: ../source/gui.views.rst:16
+msgid "gui.views.events module"
+msgstr ""
+
+#: gui.views.events:1 of
+msgid "Module: events Auteur: creagleone Date: 2025-05-07"
+msgstr ""
+
+#: gui.views.events:6 of
+msgid "This module contains functions to manage events handler"
+msgstr ""
+
+#: gui.views.events:8 gui.views.popups:8 of
+msgid "Dépendances:"
+msgstr ""
+
+#: gui.views.events:9 of
+msgid "ast"
+msgstr ""
+
+#: gui.views.events:10 of
+msgid "time"
+msgstr ""
+
+#: gui.views.events:11 gui.views.popups:9 of
+msgid "QtWidgets (PySide6)"
+msgstr ""
+
+#: gui.views.events:12 of
+msgid "QtGui (PySide6)"
+msgstr ""
+
+#: gui.views.events:14 of
+msgid "popups.py"
+msgstr ""
+
+#: gui.views.events:15 of
+msgid "controls.py"
+msgstr ""
+
+#: gui.views.events:16 of
+msgid "functions.py"
+msgstr ""
+
+#: gui.views.events:17 of
+msgid "themes.py"
+msgstr ""
+
+#: gui.views.events:18 of
+msgid "config.py"
+msgstr ""
+
+#: gui.views.events:19 of
+msgid "exceptions.py"
+msgstr ""
+
+#: gui.views.events:20 of
+msgid "orders.py"
+msgstr ""
+
+#: gui.views.events:22 of
+msgid "oracle.py"
+msgstr ""
+
+#: gui.views.events.FiltersTablesThread:1 gui.views.events.TestThread:1
+#: gui.views.events.WorkerThread:1 of
+msgid "Bases : :py:class:`~PySide6.QtCore.QThread`"
+msgstr ""
+
+#: gui.views.events.KeyEventFilter:1 of
+msgid "Bases : :py:class:`~PySide6.QtWidgets.QWidget`"
+msgstr ""
+
+#: gui.views.events.MainEventHandler:1 gui.views.ui_main.UI_MainWindow:1 of
+msgid "Bases : :py:class:`object`"
+msgstr ""
+
+#: gui.views.events.MainEventHandler.clear_db:1 of
+msgid "Clear all fields of compare databases"
+msgstr ""
+
+#: gui.views.events.MainEventHandler.clear_oracle_data:1 of
+msgid "Clear all fields of oracle config"
+msgstr ""
+
+#: gui.views.events.MainEventHandler.save_db:1 of
+msgid "Save database config"
+msgstr ""
+
+#: gui.views.events.MainEventHandler.test_db:1 of
+msgid "Test the connection to a database"
+msgstr ""
+
+#: ../source/gui.views.rst:24
+msgid "gui.views.popups module"
+msgstr ""
+
+#: gui.views.popups:1 of
+msgid "Module: popups Auteur: creagleone Date: 2025-05-07"
+msgstr ""
+
+#: gui.views.popups:6 of
+msgid "This module contains functions to manage custom exceptions"
+msgstr ""
+
+#: gui.views.popups:13 of
+msgid "popups.give_error(title, message)"
+msgstr ""
+
+#: gui.views.popups.display_error:1 of
+msgid "Error popup"
+msgstr ""
+
+#: ../source/gui.views.rst
+msgid "Paramètres"
+msgstr ""
+
+#: gui.views.popups.display_error:3 gui.views.popups.display_info:3
+#: gui.views.popups.display_warn:3 gui.views.popups.input_value:3 of
+msgid "popup title"
+msgstr ""
+
+#: gui.views.popups.display_error:5 gui.views.popups.display_info:5
+#: gui.views.popups.display_warn:5 gui.views.popups.input_value:5 of
+msgid "popup message"
+msgstr ""
+
+#: gui.views.popups.display_info:1 of
+msgid "information popup"
+msgstr ""
+
+#: gui.views.popups.display_warn:1 of
+msgid "Warning popup"
+msgstr ""
+
+#: gui.views.popups.input_value:1 of
+msgid "Input popup"
+msgstr ""
+
+#: ../source/gui.views.rst
+msgid "Renvoie"
+msgstr ""
+
+#: gui.views.popups.input_value:8 gui.views.popups.select_files:3 of
+msgid "if OK else None"
+msgstr ""
+
+#: ../source/gui.views.rst
+msgid "Type renvoyé"
+msgstr ""
+
+#: gui.views.popups.select_files:1 of
+msgid "File selection popup"
+msgstr ""
+
+#: ../source/gui.views.rst:40
+msgid "gui.views.ui\\_main module"
+msgstr ""
+
+#: ../source/gui.views.rst:64
+msgid "Module contents"
+msgstr ""
+

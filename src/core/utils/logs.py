@@ -2,7 +2,7 @@
 
 """
 Module: logs
-Auteur: creagleone
+Author: creagleone
 Date: 2025-05-07
 
 Description:
@@ -36,9 +36,6 @@ def log_config() -> None:
     - Retrieves the log level from the settings
     - Creates a temporary directory for log storage
     - Sets up logging with file and console handlers
-
-    The log file is stored in the system's temporary directory
-    under `dbtective/app.log`
 
     Returns:
         None

@@ -1,0 +1,266 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, CrEagleOne
+# This file is distributed under the same license as the DBtective package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: DBtective \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-03 12:04+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../source/gui.views.rst:2
+msgid "gui.views package"
+msgstr ""
+
+#: ../source/gui.views.rst:5
+msgid "Submodules"
+msgstr ""
+
+#: ../source/gui.views.rst:8
+msgid "gui.views.controls module"
+msgstr ""
+
+#: ../../src/gui/views/controls.py:docstring of gui.views.controls:1
+msgid "Module: controls Author: creagleone Date: 2025-05-07"
+msgstr ""
+
+#: ../../src/gui/views/controls.py:docstring of gui.views.controls:5
+#: ../../src/gui/views/events.py:docstring of gui.views.events:5
+#: ../../src/gui/views/popups.py:docstring of gui.views.popups:5
+msgid "Description:"
+msgstr ""
+
+#: ../../src/gui/views/controls.py:docstring of gui.views.controls:6
+msgid "This module contains functions to controls input datas"
+msgstr ""
+
+#: ../../src/gui/views/controls.py:docstring of gui.views.controls:8
+#: ../../src/gui/views/events.py:docstring of gui.views.events:8
+msgid "Dependencies:"
+msgstr ""
+
+#: ../../src/gui/views/controls.py:docstring of gui.views.controls:9
+#: ../../src/gui/views/events.py:docstring of gui.views.events:13
+#: ../../src/gui/views/popups.py:docstring of gui.views.popups:10
+msgid "QtCore (PySide6)"
+msgstr ""
+
+#: ../../src/gui/views/controls.py:docstring of gui.views.controls:10
+#: ../../src/gui/views/events.py:docstring of gui.views.events:21
+msgid "common.py"
+msgstr ""
+
+#: ../../src/gui/views/controls.py:docstring of gui.views.controls:12
+#: ../../src/gui/views/events.py:docstring of gui.views.events:24
+#: ../../src/gui/views/popups.py:docstring of gui.views.popups:12
+msgid "Usage Example:"
+msgstr ""
+
+#: ../../src/gui/views/controls.py:docstring of gui.views.controls:13
+#: ../../src/gui/views/controls.py:docstring of gui.views.controls:17
+#: ../../src/gui/views/events.py:docstring of gui.views.events:25
+#: ../../src/gui/views/events.py:docstring of gui.views.events:29
+#: ../../src/gui/views/popups.py:docstring of gui.views.popups:17
+msgid "N/A"
+msgstr ""
+
+#: ../../src/gui/views/controls.py:docstring of gui.views.controls:16
+#: ../../src/gui/views/events.py:docstring of gui.views.events:28
+#: ../../src/gui/views/popups.py:docstring of gui.views.popups:16
+msgid "Notes"
+msgstr ""
+
+#: ../../src/gui/views/controls.py:docstring of gui.views.controls.db_compare:1
+msgid "Control the input data for database comparison"
+msgstr ""
+
+#: ../../src/gui/views/controls.py:docstring of gui.views.controls.init_db_compare:1
+msgid "Init UI of the input data for database comparison"
+msgstr ""
+
+#: ../../src/gui/views/controls.py:docstring of gui.views.controls.init_oracle:1
+msgid "Init UI of the input data for oracle settings"
+msgstr ""
+
+#: ../../src/gui/views/controls.py:docstring of gui.views.controls.oracle:1
+msgid "Control the input data for oracle settings"
+msgstr ""
+
+#: ../source/gui.views.rst:16
+msgid "gui.views.events module"
+msgstr ""
+
+#: ../../src/gui/views/events.py:docstring of gui.views.events:1
+msgid "Module: events Author: creagleone Date: 2025-05-07"
+msgstr ""
+
+#: ../../src/gui/views/events.py:docstring of gui.views.events:6
+msgid "This module contains functions to manage events handler"
+msgstr ""
+
+#: ../../src/gui/views/events.py:docstring of gui.views.events:9
+msgid "ast"
+msgstr ""
+
+#: ../../src/gui/views/events.py:docstring of gui.views.events:10
+msgid "time"
+msgstr ""
+
+#: ../../src/gui/views/events.py:docstring of gui.views.events:11
+#: ../../src/gui/views/popups.py:docstring of gui.views.popups:9
+msgid "QtWidgets (PySide6)"
+msgstr ""
+
+#: ../../src/gui/views/events.py:docstring of gui.views.events:12
+msgid "QtGui (PySide6)"
+msgstr ""
+
+#: ../../src/gui/views/events.py:docstring of gui.views.events:14
+msgid "popups.py"
+msgstr ""
+
+#: ../../src/gui/views/events.py:docstring of gui.views.events:15
+msgid "controls.py"
+msgstr ""
+
+#: ../../src/gui/views/events.py:docstring of gui.views.events:16
+msgid "functions.py"
+msgstr ""
+
+#: ../../src/gui/views/events.py:docstring of gui.views.events:17
+msgid "themes.py"
+msgstr ""
+
+#: ../../src/gui/views/events.py:docstring of gui.views.events:18
+msgid "config.py"
+msgstr ""
+
+#: ../../src/gui/views/events.py:docstring of gui.views.events:19
+msgid "exceptions.py"
+msgstr ""
+
+#: ../../src/gui/views/events.py:docstring of gui.views.events:20
+msgid "orders.py"
+msgstr ""
+
+#: ../../src/gui/views/events.py:docstring of gui.views.events:22
+msgid "oracle.py"
+msgstr ""
+
+#: ../../src/gui/views/events.py:docstring of gui.views.events.FiltersTablesThread:1
+#: ../../src/gui/views/events.py:docstring of gui.views.events.TestThread:1
+#: ../../src/gui/views/events.py:docstring of gui.views.events.WorkerThread:1
+msgid "Bases: :py:class:`~PySide6.QtCore.QThread`"
+msgstr ""
+
+#: ../../src/gui/views/events.py:docstring of gui.views.events.KeyEventFilter:1
+msgid "Bases: :py:class:`~PySide6.QtWidgets.QWidget`"
+msgstr ""
+
+#: ../../src/gui/views/events.py:docstring of gui.views.events.MainEventHandler:1
+#: ../../src/gui/views/ui_main.py:docstring of gui.views.ui_main.UI_MainWindow:1
+msgid "Bases: :py:class:`object`"
+msgstr ""
+
+#: ../../src/gui/views/events.py:docstring of gui.views.events.MainEventHandler.clear_db:1
+msgid "Clear all fields of compare databases"
+msgstr ""
+
+#: ../../src/gui/views/events.py:docstring of gui.views.events.MainEventHandler.clear_oracle_data:1
+msgid "Clear all fields of oracle config"
+msgstr ""
+
+#: ../../src/gui/views/events.py:docstring of gui.views.events.MainEventHandler.save_db:1
+msgid "Save database config"
+msgstr ""
+
+#: ../../src/gui/views/events.py:docstring of gui.views.events.MainEventHandler.test_db:1
+msgid "Test the connection to a database"
+msgstr ""
+
+#: ../source/gui.views.rst:24
+msgid "gui.views.popups module"
+msgstr ""
+
+#: ../../src/gui/views/popups.py:docstring of gui.views.popups:1
+msgid "Module: popups Author: creagleone Date: 2025-05-07"
+msgstr ""
+
+#: ../../src/gui/views/popups.py:docstring of gui.views.popups:6
+msgid "This module contains functions to manage custom exceptions"
+msgstr ""
+
+#: ../../src/gui/views/popups.py:docstring of gui.views.popups:8
+msgid "Dépendances:"
+msgstr ""
+
+#: ../../src/gui/views/popups.py:docstring of gui.views.popups:13
+msgid "popups.give_error(title, message)"
+msgstr ""
+
+#: ../../src/gui/views/popups.py:docstring of gui.views.popups.display_error:1
+msgid "Error popup"
+msgstr ""
+
+#: ../source/gui.views.rst:0
+msgid "Parameters"
+msgstr ""
+
+#: ../../src/gui/views/popups.py:docstring of gui.views.popups.display_error:3
+#: ../../src/gui/views/popups.py:docstring of gui.views.popups.display_info:3
+#: ../../src/gui/views/popups.py:docstring of gui.views.popups.display_warn:3
+#: ../../src/gui/views/popups.py:docstring of gui.views.popups.input_value:3
+msgid "popup title"
+msgstr ""
+
+#: ../../src/gui/views/popups.py:docstring of gui.views.popups.display_error:5
+#: ../../src/gui/views/popups.py:docstring of gui.views.popups.display_info:5
+#: ../../src/gui/views/popups.py:docstring of gui.views.popups.display_warn:5
+#: ../../src/gui/views/popups.py:docstring of gui.views.popups.input_value:5
+msgid "popup message"
+msgstr ""
+
+#: ../../src/gui/views/popups.py:docstring of gui.views.popups.display_info:1
+msgid "information popup"
+msgstr ""
+
+#: ../../src/gui/views/popups.py:docstring of gui.views.popups.display_warn:1
+msgid "Warning popup"
+msgstr ""
+
+#: ../../src/gui/views/popups.py:docstring of gui.views.popups.input_value:1
+msgid "Input popup"
+msgstr ""
+
+#: ../source/gui.views.rst:0
+msgid "Returns"
+msgstr ""
+
+#: ../../src/gui/views/popups.py:docstring of gui.views.popups.input_value:8
+#: ../../src/gui/views/popups.py:docstring of gui.views.popups.select_files:3
+msgid "if OK else None"
+msgstr ""
+
+#: ../source/gui.views.rst:0
+msgid "Return type"
+msgstr ""
+
+#: ../../src/gui/views/popups.py:docstring of gui.views.popups.select_files:1
+msgid "File selection popup"
+msgstr ""
+
+#: ../source/gui.views.rst:40
+msgid "gui.views.ui\\_main module"
+msgstr ""
+
+#: ../source/gui.views.rst:64
+msgid "Module contents"
+msgstr ""

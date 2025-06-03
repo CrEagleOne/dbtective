@@ -1,0 +1,172 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, CrEagleOne
+# This file is distributed under the same license as the DBtective package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: DBtective \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-03 12:04+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../source/gui.core.rst:2
+msgid "gui.core package"
+msgstr ""
+
+#: ../source/gui.core.rst:5
+msgid "Submodules"
+msgstr ""
+
+#: ../source/gui.core.rst:8
+msgid "gui.core.functions module"
+msgstr ""
+
+#: ../source/gui.core.rst:16
+msgid "gui.core.settings module"
+msgstr ""
+
+#: ../../src/gui/core/settings.py:docstring of gui.core.settings:1
+msgid "Module: settings Author: creagleone Date: 2025-05-07"
+msgstr ""
+
+#: ../../src/gui/core/settings.py:docstring of gui.core.settings:5
+#: ../../src/gui/core/themes.py:docstring of gui.core.themes:5
+msgid "Description:"
+msgstr ""
+
+#: ../../src/gui/core/settings.py:docstring of gui.core.settings:6
+msgid "This module contains functions to recover system settings"
+msgstr ""
+
+#: ../../src/gui/core/settings.py:docstring of gui.core.settings:8
+#: ../../src/gui/core/themes.py:docstring of gui.core.themes:8
+msgid "Dependencies:"
+msgstr ""
+
+#: ../../src/gui/core/settings.py:docstring of gui.core.settings:9
+#: ../../src/gui/core/themes.py:docstring of gui.core.themes:9
+msgid "os"
+msgstr ""
+
+#: ../../src/gui/core/settings.py:docstring of gui.core.settings:10
+#: ../../src/gui/core/themes.py:docstring of gui.core.themes:10
+msgid "json"
+msgstr ""
+
+#: ../../src/gui/core/settings.py:docstring of gui.core.settings:11
+#: ../../src/gui/core/themes.py:docstring of gui.core.themes:12
+msgid "common.py"
+msgstr ""
+
+#: ../../src/gui/core/settings.py:docstring of gui.core.settings:13
+#: ../../src/gui/core/themes.py:docstring of gui.core.themes:15
+msgid "Usage Example:"
+msgstr ""
+
+#: ../../src/gui/core/settings.py:docstring of gui.core.settings:14
+msgid "Settings().get_settings()"
+msgstr ""
+
+#: ../../src/gui/core/settings.py:docstring of gui.core.settings:15
+msgid "Settings().get_settings(\"key\")"
+msgstr ""
+
+#: ../../src/gui/core/settings.py:docstring of gui.core.settings:18
+#: ../../src/gui/core/themes.py:docstring of gui.core.themes:19
+msgid "Notes"
+msgstr ""
+
+#: ../../src/gui/core/settings.py:docstring of gui.core.settings:19
+#: ../../src/gui/core/themes.py:docstring of gui.core.themes:20
+msgid "N/A"
+msgstr ""
+
+#: ../../src/gui/core/settings.py:docstring of gui.core.settings.Settings:1
+#: ../../src/gui/core/themes.py:docstring of gui.core.themes.Themes:1
+msgid "Bases: :py:class:`object`"
+msgstr ""
+
+#: ../../src/gui/core/settings.py:docstring of gui.core.settings.Settings:1
+#: ../../src/gui/core/themes.py:docstring of gui.core.themes.Themes:1
+msgid "Manages application settings stored in a JSON file"
+msgstr ""
+
+#: ../../src/gui/core/settings.py:docstring of gui.core.settings.Settings.__init__:1
+#: ../../src/gui/core/themes.py:docstring of gui.core.themes.Themes.__init__:1
+msgid "Initializes the Settings class by loading existing settings"
+msgstr ""
+
+#: ../../src/gui/core/settings.py:docstring of gui.core.settings.Settings.deserialize:1
+#: ../../src/gui/core/themes.py:docstring of gui.core.themes.Themes.deserialize:1
+msgid "Loads settings from the JSON file and stores them in the `items` dictionary"
+msgstr ""
+
+#: ../../src/gui/core/settings.py:docstring of gui.core.settings.Settings.get_settings:1
+#: ../../src/gui/core/themes.py:docstring of gui.core.themes.Themes.get_theme:1
+msgid "Retrieves a specific setting or the entire settings dictionary"
+msgstr ""
+
+#: ../source/gui.core.rst:0
+msgid "Parameters"
+msgstr ""
+
+#: ../../src/gui/core/settings.py:docstring of gui.core.settings.Settings.get_settings:3
+msgid "The key to look up. Returns all settings if None"
+msgstr ""
+
+#: ../source/gui.core.rst:0
+msgid "Returns"
+msgstr ""
+
+#: ../../src/gui/core/settings.py:docstring of gui.core.settings.Settings.get_settings:6
+#: ../../src/gui/core/themes.py:docstring of gui.core.themes.Themes.get_theme:7
+msgid "The requested setting value or full settings dictionary"
+msgstr ""
+
+#: ../source/gui.core.rst:0
+msgid "Return type"
+msgstr ""
+
+#: ../../src/gui/core/settings.py:docstring of gui.core.settings.Settings.serialize:1
+#: ../../src/gui/core/themes.py:docstring of gui.core.themes.Themes.serialize:1
+msgid "Saves the current settings to the settings file in JSON format"
+msgstr ""
+
+#: ../source/gui.core.rst:24
+msgid "gui.core.themes module"
+msgstr ""
+
+#: ../../src/gui/core/themes.py:docstring of gui.core.themes:1
+msgid "Module: themes Author: creagleone Date: 2025-05-07"
+msgstr ""
+
+#: ../../src/gui/core/themes.py:docstring of gui.core.themes:6
+msgid "This module contains functions to recover theme settings"
+msgstr ""
+
+#: ../../src/gui/core/themes.py:docstring of gui.core.themes:11
+msgid "settings.py"
+msgstr ""
+
+#: ../../src/gui/core/themes.py:docstring of gui.core.themes:13
+msgid "exceptions.py"
+msgstr ""
+
+#: ../../src/gui/core/themes.py:docstring of gui.core.themes:16
+msgid "Themes().get_theme()"
+msgstr ""
+
+#: ../../src/gui/core/themes.py:docstring of gui.core.themes.Themes.get_theme:3
+msgid "The key to look up. Returns all"
+msgstr ""
+
+#: ../source/gui.core.rst:32
+msgid "Module contents"
+msgstr ""

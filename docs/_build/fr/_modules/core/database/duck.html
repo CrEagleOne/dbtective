@@ -1,0 +1,335 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>core.database.duck &mdash; Documentation DBtective 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=05dadb3a"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/translations.js?v=e6b791cb"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            DBtective
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation utilisateur:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/user.html">Fonctionnalités</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/user.html#images">Images</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation technique:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/modules.html">src</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">DBtective</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Code du module</a></li>
+      <li class="breadcrumb-item active">core.database.duck</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Code source de core.database.duck</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Module: duckdb</span>
+<span class="sd">Author: creagleone</span>
+<span class="sd">Date: 2025-05-07</span>
+
+<span class="sd">Description:</span>
+<span class="sd">    This module contains the functions to load and process comparison data</span>
+
+<span class="sd">Dependencies:</span>
+<span class="sd">    - os</span>
+<span class="sd">    - wraps (functools)</span>
+<span class="sd">    - duckdb</span>
+<span class="sd">    - pandas</span>
+<span class="sd">    - settings.py</span>
+<span class="sd">    - common.py</span>
+<span class="sd">    - exceptions.py</span>
+
+<span class="sd">Usage Example:</span>
+<span class="sd">    N/A</span>
+
+<span class="sd">Notes:</span>
+<span class="sd">    - This module uses DuckDB for efficient in-memory SQL processing.</span>
+<span class="sd">    - Designed for handling large datasets efficiently.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">wraps</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">duckdb</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gui.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">settings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">core.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">common</span><span class="p">,</span> <span class="n">exceptions</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_duckdb</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Manage connection to SQLite database</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        f (function): Function to perform</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        duckdbDuckDBPyConnection: Connection datas</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Database access</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            gerer_retour: Error(Erreurs duckDB)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            duckdbDuckDBPyConnection: Connection datas</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">tmp_db</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">Settings</span><span class="p">()</span><span class="o">.</span><span class="n">get_settings</span><span class="p">()[</span><span class="s2">&quot;workconfig&quot;</span><span class="p">][</span><span class="s2">&quot;db&quot;</span><span class="p">]</span>
+            <span class="n">db_path</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_work_files</span><span class="p">(</span><span class="n">tmp_db</span><span class="p">)</span>
+            <span class="n">cnn</span> <span class="o">=</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">database</span><span class="o">=</span><span class="n">db_path</span><span class="p">)</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;cnn&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cnn</span>
+            <span class="n">rv</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">Error</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">cnn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">rv</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+
+<div class="viewcode-block" id="retrieve_file_delimiter">
+<a class="viewcode-back" href="../../../source/core.database.html#core.database.duck.retrieve_file_delimiter">[docs]</a>
+<span class="nd">@_duckdb</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">retrieve_file_delimiter</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves the CSV delimiter from the file</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (str): Filename</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: Delimiter</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cnn</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cnn&#39;</span><span class="p">)</span>
+    <span class="n">req</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;SELECT delimiter FROM sniff_csv(&#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&#39;)&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">cnn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">req</span><span class="p">)</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">except</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">ParserException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="n">duckdb</span><span class="o">.</span><span class="n">CatalogException</span><span class="p">,</span>
+            <span class="n">duckdb</span><span class="o">.</span><span class="n">BinderException</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">TypeMismatchException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">406</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">ConversionException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">407</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">TransactionException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">408</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">IOException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">503</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+
+<div class="viewcode-block" id="load_file_data">
+<a class="viewcode-back" href="../../../source/core.database.html#core.database.duck.load_file_data">[docs]</a>
+<span class="nd">@_duckdb</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_file_data</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tablename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load the contents of a file into the database</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filename (str): Filename</span>
+<span class="sd">        tablename (str): Name of the table</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: True if successful, False otherwise</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cnn</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cnn&#39;</span><span class="p">)</span>
+    <span class="n">delimiter</span> <span class="o">=</span> <span class="n">retrieve_file_delimiter</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cnn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            CREATE OR REPLACE TABLE </span><span class="si">{</span><span class="n">tablename</span><span class="si">}</span><span class="s2"> AS</span>
+<span class="s2">            SELECT * FROM read_csv(&#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&#39;, delim=&#39;</span><span class="si">{</span><span class="n">delimiter</span><span class="si">}</span><span class="s2">&#39;,</span>
+<span class="s2">            all_varchar=True, header=True, store_rejects=True,</span>
+<span class="s2">            rejects_scan=&#39;rejects_scan&#39;, rejects_table=&#39;rejects_table&#39;)</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">ParserException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="n">duckdb</span><span class="o">.</span><span class="n">CatalogException</span><span class="p">,</span>
+            <span class="n">duckdb</span><span class="o">.</span><span class="n">BinderException</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">TypeMismatchException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">406</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">ConversionException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">407</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">TransactionException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">408</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">IOException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">503</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="kc">True</span></div>
+
+
+
+<div class="viewcode-block" id="get_datas_by_fetchall">
+<a class="viewcode-back" href="../../../source/core.database.html#core.database.duck.get_datas_by_fetchall">[docs]</a>
+<span class="nd">@_duckdb</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_datas_by_fetchall</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">arg</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                          <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves all rows as a data frame</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        query (str): SQL query</span>
+<span class="sd">        arg (optional, Tuple): Query args</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: Query result</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cnn</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cnn&#39;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">cnn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">ParserException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="n">duckdb</span><span class="o">.</span><span class="n">CatalogException</span><span class="p">,</span>
+            <span class="n">duckdb</span><span class="o">.</span><span class="n">BinderException</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">TypeMismatchException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">406</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">ConversionException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">407</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">TransactionException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">408</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">IOException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">503</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+
+<div class="viewcode-block" id="get_datas_by_fetchdf">
+<a class="viewcode-back" href="../../../source/core.database.html#core.database.duck.get_datas_by_fetchdf">[docs]</a>
+<span class="nd">@_duckdb</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_datas_by_fetchdf</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">arg</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                         <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves all rows as a data frame</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        query (str): SQL query</span>
+<span class="sd">        arg (optional, Tuple): Query args</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: Query result</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cnn</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cnn&#39;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">cnn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span><span class="o">.</span><span class="n">fetchdf</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">ParserException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="n">duckdb</span><span class="o">.</span><span class="n">CatalogException</span><span class="p">,</span>
+            <span class="n">duckdb</span><span class="o">.</span><span class="n">BinderException</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">404</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">TypeMismatchException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">406</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">ConversionException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">407</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">TransactionException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">408</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">duckdb</span><span class="o">.</span><span class="n">IOException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">503</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+
+<div class="viewcode-block" id="delete_tmp_db">
+<a class="viewcode-back" href="../../../source/core.database.html#core.database.duck.delete_tmp_db">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">delete_tmp_db</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Delete tmp duckDB database</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tmp_db</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">Settings</span><span class="p">()</span><span class="o">.</span><span class="n">get_settings</span><span class="p">()[</span><span class="s2">&quot;workconfig&quot;</span><span class="p">][</span><span class="s2">&quot;db&quot;</span><span class="p">]</span>
+    <span class="n">db_path</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_work_files</span><span class="p">(</span><span class="n">tmp_db</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">db_path</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2025, CrEagleOne.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
