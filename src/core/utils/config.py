@@ -2,7 +2,7 @@
 
 """
 Module: config
-Auteur: creagleone
+Author: creagleone
 Date: 2025-05-07
 
 Description:
@@ -198,5 +198,11 @@ def setup_db(**kwargs) -> int:
                             NOT NULL ON CONFLICT ROLLBACK,
             [values]         NOT NULL ON CONFLICT ROLLBACK
         );"""
+    cursor.execute(query)
+    query = """
+        INSERT INTO settings ([key], [values])
+        VALUES ('locale', 'en_US')
+        ON CONFLICT([key]) DO NOTHING;
+    """
     cursor.execute(query)
     return 200

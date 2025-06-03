@@ -2,7 +2,7 @@
 
 """
 Module: exceptions
-Auteur: creagleone
+Author: creagleone
 Date: 2025-05-07
 
 Description:

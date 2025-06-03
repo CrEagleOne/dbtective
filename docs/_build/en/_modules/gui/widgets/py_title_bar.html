@@ -1,0 +1,645 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gui.widgets.py_title_bar &mdash; DBtective 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            DBtective
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/user.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/user.html#images">Images</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Technical documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/modules.html">src</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">DBtective</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">gui.widgets.py_title_bar</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for gui.widgets.py_title_bar</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">PySide6</span><span class="w"> </span><span class="kn">import</span> <span class="n">QtWidgets</span><span class="p">,</span> <span class="n">QtGui</span><span class="p">,</span> <span class="n">QtCore</span><span class="p">,</span> <span class="n">QtSvgWidgets</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">core.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">common</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gui.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">settings</span>
+
+<span class="n">_is_maximized</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">_old_size</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QSize</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="PyTitleBar">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_title_bar.PyTitleBar">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PyTitleBar</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">):</span>
+    <span class="n">clicked</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Signal</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span>
+    <span class="n">released</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Signal</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PyTitleBar.__init__">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_title_bar.PyTitleBar.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">parent</span><span class="p">,</span>
+        <span class="n">app_parent</span><span class="p">,</span>
+        <span class="n">logo_image</span><span class="o">=</span><span class="s2">&quot;logo.svg&quot;</span><span class="p">,</span>
+        <span class="n">logo_width</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span>
+        <span class="n">buttons</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">dark_one</span><span class="o">=</span><span class="s2">&quot;#1b1e23&quot;</span><span class="p">,</span>
+        <span class="n">bg_color</span><span class="o">=</span><span class="s2">&quot;#343b48&quot;</span><span class="p">,</span>
+        <span class="n">div_color</span><span class="o">=</span><span class="s2">&quot;#3c4454&quot;</span><span class="p">,</span>
+        <span class="n">btn_bg_color</span><span class="o">=</span><span class="s2">&quot;#343b48&quot;</span><span class="p">,</span>
+        <span class="n">btn_bg_color_hover</span><span class="o">=</span><span class="s2">&quot;#3c4454&quot;</span><span class="p">,</span>
+        <span class="n">btn_bg_color_pressed</span><span class="o">=</span><span class="s2">&quot;#2c313c&quot;</span><span class="p">,</span>
+        <span class="n">icon_color</span><span class="o">=</span><span class="s2">&quot;#c3ccdf&quot;</span><span class="p">,</span>
+        <span class="n">icon_color_hover</span><span class="o">=</span><span class="s2">&quot;#dce1ec&quot;</span><span class="p">,</span>
+        <span class="n">icon_color_pressed</span><span class="o">=</span><span class="s2">&quot;#edf0f5&quot;</span><span class="p">,</span>
+        <span class="n">icon_color_active</span><span class="o">=</span><span class="s2">&quot;#f5f6f9&quot;</span><span class="p">,</span>
+        <span class="n">context_color</span><span class="o">=</span><span class="s2">&quot;#6c99f4&quot;</span><span class="p">,</span>
+        <span class="n">text_foreground</span><span class="o">=</span><span class="s2">&quot;#8a95aa&quot;</span><span class="p">,</span>
+        <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+        <span class="n">font_family</span><span class="o">=</span><span class="s2">&quot;Segoe UI&quot;</span><span class="p">,</span>
+        <span class="n">title_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="n">is_custom_title_bar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">settings</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">Settings</span><span class="p">()</span><span class="o">.</span><span class="n">get_settings</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_logo_image</span> <span class="o">=</span> <span class="n">logo_image</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dark_one</span> <span class="o">=</span> <span class="n">dark_one</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bg_color</span> <span class="o">=</span> <span class="n">bg_color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_div_color</span> <span class="o">=</span> <span class="n">div_color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span> <span class="o">=</span> <span class="n">parent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_app_parent</span> <span class="o">=</span> <span class="n">app_parent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_btn_bg_color</span> <span class="o">=</span> <span class="n">btn_bg_color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_btn_bg_color_hover</span> <span class="o">=</span> <span class="n">btn_bg_color_hover</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_btn_bg_color_pressed</span> <span class="o">=</span> <span class="n">btn_bg_color_pressed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_context_color</span> <span class="o">=</span> <span class="n">context_color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_icon_color</span> <span class="o">=</span> <span class="n">icon_color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_hover</span> <span class="o">=</span> <span class="n">icon_color_hover</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_pressed</span> <span class="o">=</span> <span class="n">icon_color_pressed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_active</span> <span class="o">=</span> <span class="n">icon_color_active</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_font_family</span> <span class="o">=</span> <span class="n">font_family</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_title_size</span> <span class="o">=</span> <span class="n">title_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_text_foreground</span> <span class="o">=</span> <span class="n">text_foreground</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_custom_title_bar</span> <span class="o">=</span> <span class="n">is_custom_title_bar</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_ui</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bg</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;background-color: </span><span class="si">{</span><span class="n">bg_color</span><span class="si">}</span><span class="s2">; border-radius: </span><span class="si">{</span><span class="n">radius</span><span class="si">}</span><span class="s2">px;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">top_logo</span><span class="o">.</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="n">logo_width</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">top_logo</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="n">logo_width</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">moveWindow</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">isMaximized</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">maximize_restore</span><span class="p">()</span>
+                <span class="n">curso_x</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">()</span>
+                <span class="n">curso_y</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">globalPos</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">-</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QCursor</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">()</span>
+                <span class="n">parent</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">curso_x</span><span class="p">,</span> <span class="n">curso_y</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">buttons</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">LeftButton</span><span class="p">:</span>
+                <span class="n">parent</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">parent</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span> <span class="o">+</span> <span class="n">event</span><span class="o">.</span><span class="n">globalPos</span><span class="p">()</span> <span class="o">-</span> <span class="n">parent</span><span class="o">.</span><span class="n">dragPos</span><span class="p">)</span>
+                <span class="n">parent</span><span class="o">.</span><span class="n">dragPos</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">globalPos</span><span class="p">()</span>
+                <span class="n">event</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">is_custom_title_bar</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">top_logo</span><span class="o">.</span><span class="n">mouseMoveEvent</span> <span class="o">=</span> <span class="n">moveWindow</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">div_1</span><span class="o">.</span><span class="n">mouseMoveEvent</span> <span class="o">=</span> <span class="n">moveWindow</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">title_label</span><span class="o">.</span><span class="n">mouseMoveEvent</span> <span class="o">=</span> <span class="n">moveWindow</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">div_2</span><span class="o">.</span><span class="n">mouseMoveEvent</span> <span class="o">=</span> <span class="n">moveWindow</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">div_3</span><span class="o">.</span><span class="n">mouseMoveEvent</span> <span class="o">=</span> <span class="n">moveWindow</span>
+
+        <span class="k">if</span> <span class="n">is_custom_title_bar</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">top_logo</span><span class="o">.</span><span class="n">mouseDoubleClickEvent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maximize_restore</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">div_1</span><span class="o">.</span><span class="n">mouseDoubleClickEvent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maximize_restore</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">title_label</span><span class="o">.</span><span class="n">mouseDoubleClickEvent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maximize_restore</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">div_2</span><span class="o">.</span><span class="n">mouseDoubleClickEvent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maximize_restore</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">bg_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">top_logo</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bg_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">div_1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bg_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">title_label</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bg_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">div_2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">minimize_button</span><span class="o">.</span><span class="n">released</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">parent</span><span class="o">.</span><span class="n">showMinimized</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maximize_restore_button</span><span class="o">.</span><span class="n">released</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">maximize_restore</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close_button</span><span class="o">.</span><span class="n">released</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">parent</span><span class="o">.</span><span class="n">close</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bg_layout</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_buttons_layout</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">is_custom_title_bar</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bg_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minimize_button</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bg_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">maximize_restore_button</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bg_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">close_button</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PyTitleBar.add_menus">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_title_bar.PyTitleBar.add_menus">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_menus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">parameters</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">parameter</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
+                <span class="n">_btn_icon</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">set_svg_icon</span><span class="p">(</span>
+                    <span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;btn_icon&#39;</span><span class="p">])</span>
+                <span class="n">_btn_id</span> <span class="o">=</span> <span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;btn_id&#39;</span><span class="p">]</span>
+                <span class="n">_btn_tooltip</span> <span class="o">=</span> <span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;btn_tooltip&#39;</span><span class="p">]</span>
+                <span class="n">_is_active</span> <span class="o">=</span> <span class="n">parameter</span><span class="p">[</span><span class="s1">&#39;is_active&#39;</span><span class="p">]</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">menu</span> <span class="o">=</span> <span class="n">PyTitleButton</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_app_parent</span><span class="p">,</span>
+                    <span class="n">btn_id</span><span class="o">=</span><span class="n">_btn_id</span><span class="p">,</span>
+                    <span class="n">tooltip_text</span><span class="o">=</span><span class="n">_btn_tooltip</span><span class="p">,</span>
+                    <span class="n">dark_one</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dark_one</span><span class="p">,</span>
+                    <span class="n">bg_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_bg_color</span><span class="p">,</span>
+                    <span class="n">bg_color_hover</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_btn_bg_color_hover</span><span class="p">,</span>
+                    <span class="n">bg_color_pressed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_btn_bg_color_pressed</span><span class="p">,</span>
+                    <span class="n">icon_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_icon_color</span><span class="p">,</span>
+                    <span class="n">icon_color_hover</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_active</span><span class="p">,</span>
+                    <span class="n">icon_color_pressed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_pressed</span><span class="p">,</span>
+                    <span class="n">icon_color_active</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_active</span><span class="p">,</span>
+                    <span class="n">context_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_context_color</span><span class="p">,</span>
+                    <span class="n">text_foreground</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_text_foreground</span><span class="p">,</span>
+                    <span class="n">icon_path</span><span class="o">=</span><span class="n">_btn_icon</span><span class="p">,</span>
+                    <span class="n">is_active</span><span class="o">=</span><span class="n">_is_active</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">btn_clicked</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="o">.</span><span class="n">released</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">btn_released</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">custom_buttons_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_custom_title_bar</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">custom_buttons_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">div_3</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PyTitleBar.btn_clicked">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_title_bar.PyTitleBar.btn_clicked">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">btn_clicked</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PyTitleBar.btn_released">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_title_bar.PyTitleBar.btn_released">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">btn_released</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">released</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PyTitleBar.set_title">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_title_bar.PyTitleBar.set_title">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_title</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title_label</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">title</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PyTitleBar.maximize_restore">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_title_bar.PyTitleBar.maximize_restore">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">maximize_restore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">global</span> <span class="n">_is_maximized</span>
+        <span class="k">global</span> <span class="n">_old_size</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">change_ui</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">_is_maximized</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">central_widget_layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span>
+                    <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">window</span><span class="o">.</span><span class="n">set_stylesheet</span><span class="p">(</span>
+                    <span class="n">border_radius</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">border_size</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">maximize_restore_button</span><span class="o">.</span><span class="n">set_icon</span><span class="p">(</span>
+                    <span class="n">common</span><span class="o">.</span><span class="n">set_svg_icon</span><span class="p">(</span><span class="s2">&quot;icon_restore.svg&quot;</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">central_widget_layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span>
+                    <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">window</span><span class="o">.</span><span class="n">set_stylesheet</span><span class="p">(</span>
+                    <span class="n">border_radius</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">maximize_restore_button</span><span class="o">.</span><span class="n">set_icon</span><span class="p">(</span>
+                    <span class="n">common</span><span class="o">.</span><span class="n">set_svg_icon</span><span class="p">(</span><span class="s2">&quot;icon_maximize.svg&quot;</span><span class="p">)</span>
+                <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span><span class="o">.</span><span class="n">isMaximized</span><span class="p">():</span>
+            <span class="n">_is_maximized</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span><span class="o">.</span><span class="n">showNormal</span><span class="p">()</span>
+            <span class="n">change_ui</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_is_maximized</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">_old_size</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QSize</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span><span class="o">.</span><span class="n">showMaximized</span><span class="p">()</span>
+            <span class="n">change_ui</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PyTitleBar.setup_ui">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_title_bar.PyTitleBar.setup_ui">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setup_ui</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title_bar_layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QVBoxLayout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title_bar_layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bg</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QFrame</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bg_layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHBoxLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bg_layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bg_layout</span><span class="o">.</span><span class="n">setSpacing</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">div_1</span> <span class="o">=</span> <span class="n">PyDiv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_div_color</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">div_2</span> <span class="o">=</span> <span class="n">PyDiv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_div_color</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">div_3</span> <span class="o">=</span> <span class="n">PyDiv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_div_color</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">top_logo</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">top_logo_layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QVBoxLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">top_logo</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">top_logo_layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo_svg</span> <span class="o">=</span> <span class="n">QtSvgWidgets</span><span class="o">.</span><span class="n">QSvgWidget</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo_svg</span><span class="o">.</span><span class="n">setFixedSize</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logo_svg</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">common</span><span class="o">.</span><span class="n">set_svg_image</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_logo_image</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">top_logo_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logo_svg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title_label</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title_label</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignVCenter</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title_label</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;font: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_title_size</span><span class="si">}</span><span class="s1">pt &quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_font_family</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">custom_buttons_layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHBoxLayout</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">custom_buttons_layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">custom_buttons_layout</span><span class="o">.</span><span class="n">setSpacing</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">minimize_button</span> <span class="o">=</span> <span class="n">PyTitleButton</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_app_parent</span><span class="p">,</span>
+            <span class="n">tooltip_text</span><span class="o">=</span><span class="s2">&quot;Close app&quot;</span><span class="p">,</span>
+            <span class="n">dark_one</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dark_one</span><span class="p">,</span>
+            <span class="n">bg_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_btn_bg_color</span><span class="p">,</span>
+            <span class="n">bg_color_hover</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_btn_bg_color_hover</span><span class="p">,</span>
+            <span class="n">bg_color_pressed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_btn_bg_color_pressed</span><span class="p">,</span>
+            <span class="n">icon_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_icon_color</span><span class="p">,</span>
+            <span class="n">icon_color_hover</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_hover</span><span class="p">,</span>
+            <span class="n">icon_color_pressed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_pressed</span><span class="p">,</span>
+            <span class="n">icon_color_active</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_active</span><span class="p">,</span>
+            <span class="n">context_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_context_color</span><span class="p">,</span>
+            <span class="n">text_foreground</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_text_foreground</span><span class="p">,</span>
+            <span class="n">radius</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+            <span class="n">icon_path</span><span class="o">=</span><span class="n">common</span><span class="o">.</span><span class="n">set_svg_icon</span><span class="p">(</span><span class="s2">&quot;icon_minimize.svg&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">maximize_restore_button</span> <span class="o">=</span> <span class="n">PyTitleButton</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_app_parent</span><span class="p">,</span>
+            <span class="n">tooltip_text</span><span class="o">=</span><span class="s2">&quot;Maximize app&quot;</span><span class="p">,</span>
+            <span class="n">dark_one</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dark_one</span><span class="p">,</span>
+            <span class="n">bg_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_btn_bg_color</span><span class="p">,</span>
+            <span class="n">bg_color_hover</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_btn_bg_color_hover</span><span class="p">,</span>
+            <span class="n">bg_color_pressed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_btn_bg_color_pressed</span><span class="p">,</span>
+            <span class="n">icon_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_icon_color</span><span class="p">,</span>
+            <span class="n">icon_color_hover</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_hover</span><span class="p">,</span>
+            <span class="n">icon_color_pressed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_pressed</span><span class="p">,</span>
+            <span class="n">icon_color_active</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_active</span><span class="p">,</span>
+            <span class="n">context_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_context_color</span><span class="p">,</span>
+            <span class="n">text_foreground</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_text_foreground</span><span class="p">,</span>
+            <span class="n">radius</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+            <span class="n">icon_path</span><span class="o">=</span><span class="n">common</span><span class="o">.</span><span class="n">set_svg_icon</span><span class="p">(</span><span class="s2">&quot;icon_maximize.svg&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">close_button</span> <span class="o">=</span> <span class="n">PyTitleButton</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_app_parent</span><span class="p">,</span>
+            <span class="n">tooltip_text</span><span class="o">=</span><span class="s2">&quot;Close app&quot;</span><span class="p">,</span>
+            <span class="n">dark_one</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dark_one</span><span class="p">,</span>
+            <span class="n">bg_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_btn_bg_color</span><span class="p">,</span>
+            <span class="n">bg_color_hover</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_btn_bg_color_hover</span><span class="p">,</span>
+            <span class="n">bg_color_pressed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_context_color</span><span class="p">,</span>
+            <span class="n">icon_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_icon_color</span><span class="p">,</span>
+            <span class="n">icon_color_hover</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_hover</span><span class="p">,</span>
+            <span class="n">icon_color_pressed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_active</span><span class="p">,</span>
+            <span class="n">icon_color_active</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_active</span><span class="p">,</span>
+            <span class="n">context_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_context_color</span><span class="p">,</span>
+            <span class="n">text_foreground</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_text_foreground</span><span class="p">,</span>
+            <span class="n">radius</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+            <span class="n">icon_path</span><span class="o">=</span><span class="n">common</span><span class="o">.</span><span class="n">set_svg_icon</span><span class="p">(</span><span class="s2">&quot;icon_close.svg&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">title_bar_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bg</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="PyDiv">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_title_bar.PyDiv">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PyDiv</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">):</span>
+<div class="viewcode-block" id="PyDiv.__init__">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_title_bar.PyDiv.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHBoxLayout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame_line</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QFrame</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame_line</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;background: </span><span class="si">{</span><span class="n">color</span><span class="si">}</span><span class="s2">;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame_line</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame_line</span><span class="o">.</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame_line</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="PyTitleButton">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PyTitleButton</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">):</span>
+<div class="viewcode-block" id="PyTitleButton.__init__">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">parent</span><span class="p">,</span>
+        <span class="n">app_parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">tooltip_text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">btn_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">width</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+        <span class="n">height</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+        <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+        <span class="n">bg_color</span><span class="o">=</span><span class="s2">&quot;#343b48&quot;</span><span class="p">,</span>
+        <span class="n">bg_color_hover</span><span class="o">=</span><span class="s2">&quot;#3c4454&quot;</span><span class="p">,</span>
+        <span class="n">bg_color_pressed</span><span class="o">=</span><span class="s2">&quot;#2c313c&quot;</span><span class="p">,</span>
+        <span class="n">icon_color</span><span class="o">=</span><span class="s2">&quot;#c3ccdf&quot;</span><span class="p">,</span>
+        <span class="n">icon_color_hover</span><span class="o">=</span><span class="s2">&quot;#dce1ec&quot;</span><span class="p">,</span>
+        <span class="n">icon_color_pressed</span><span class="o">=</span><span class="s2">&quot;#edf0f5&quot;</span><span class="p">,</span>
+        <span class="n">icon_color_active</span><span class="o">=</span><span class="s2">&quot;#f5f6f9&quot;</span><span class="p">,</span>
+        <span class="n">icon_path</span><span class="o">=</span><span class="s2">&quot;no_icon.svg&quot;</span><span class="p">,</span>
+        <span class="n">dark_one</span><span class="o">=</span><span class="s2">&quot;#1b1e23&quot;</span><span class="p">,</span>
+        <span class="n">context_color</span><span class="o">=</span><span class="s2">&quot;#568af2&quot;</span><span class="p">,</span>
+        <span class="n">text_foreground</span><span class="o">=</span><span class="s2">&quot;#8a95aa&quot;</span><span class="p">,</span>
+        <span class="n">is_active</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setFixedSize</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setCursor</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">PointingHandCursor</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setObjectName</span><span class="p">(</span><span class="n">btn_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bg_color</span> <span class="o">=</span> <span class="n">bg_color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bg_color_hover</span> <span class="o">=</span> <span class="n">bg_color_hover</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bg_color_pressed</span> <span class="o">=</span> <span class="n">bg_color_pressed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_icon_color</span> <span class="o">=</span> <span class="n">icon_color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_hover</span> <span class="o">=</span> <span class="n">icon_color_hover</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_pressed</span> <span class="o">=</span> <span class="n">icon_color_pressed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_active</span> <span class="o">=</span> <span class="n">icon_color_active</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_context_color</span> <span class="o">=</span> <span class="n">context_color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_top_margin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="mi">6</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_active</span> <span class="o">=</span> <span class="n">is_active</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_bg_color</span> <span class="o">=</span> <span class="n">bg_color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_icon_path</span> <span class="o">=</span> <span class="n">icon_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_icon_color</span> <span class="o">=</span> <span class="n">icon_color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_border_radius</span> <span class="o">=</span> <span class="n">radius</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span> <span class="o">=</span> <span class="n">parent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_app_parent</span> <span class="o">=</span> <span class="n">app_parent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tooltip_text</span> <span class="o">=</span> <span class="n">tooltip_text</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tooltip</span> <span class="o">=</span> <span class="n">_ToolTip</span><span class="p">(</span>
+            <span class="n">app_parent</span><span class="p">,</span>
+            <span class="n">tooltip_text</span><span class="p">,</span>
+            <span class="n">dark_one</span><span class="p">,</span>
+            <span class="n">context_color</span><span class="p">,</span>
+            <span class="n">text_foreground</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tooltip</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PyTitleButton.set_active">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton.set_active">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_active</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">is_active</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_active</span> <span class="o">=</span> <span class="n">is_active</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">repaint</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PyTitleButton.is_active">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton.is_active">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_active</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_active</span></div>
+
+
+<div class="viewcode-block" id="PyTitleButton.paintEvent">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton.paintEvent">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="n">paint</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPainter</span><span class="p">()</span>
+        <span class="n">paint</span><span class="o">.</span><span class="n">begin</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">paint</span><span class="o">.</span><span class="n">setRenderHint</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QPainter</span><span class="o">.</span><span class="n">RenderHint</span><span class="o">.</span><span class="n">Antialiasing</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_active</span><span class="p">:</span>
+            <span class="n">brush</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_context_color</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">brush</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_set_bg_color</span><span class="p">))</span>
+
+        <span class="n">rect</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
+        <span class="n">paint</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">NoPen</span><span class="p">)</span>
+        <span class="n">paint</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">brush</span><span class="p">)</span>
+        <span class="n">paint</span><span class="o">.</span><span class="n">drawRoundedRect</span><span class="p">(</span>
+            <span class="n">rect</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_border_radius</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_border_radius</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">icon_paint</span><span class="p">(</span><span class="n">paint</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_icon_path</span><span class="p">,</span> <span class="n">rect</span><span class="p">)</span>
+        <span class="n">paint</span><span class="o">.</span><span class="n">end</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PyTitleButton.change_style">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton.change_style">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">change_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">event</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="o">.</span><span class="n">Enter</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_bg_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bg_color_hover</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_icon_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_hover</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">repaint</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">event</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="o">.</span><span class="n">Leave</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_bg_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bg_color</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_icon_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_icon_color</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">repaint</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">event</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="o">.</span><span class="n">MouseButtonPress</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_bg_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bg_color_pressed</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_icon_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_pressed</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">repaint</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">event</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="o">.</span><span class="n">MouseButtonRelease</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_bg_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bg_color_hover</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_set_icon_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_hover</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">repaint</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PyTitleButton.enterEvent">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton.enterEvent">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">enterEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">change_style</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="o">.</span><span class="n">Enter</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">move_tooltip</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tooltip</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PyTitleButton.leaveEvent">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton.leaveEvent">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">leaveEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">change_style</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="o">.</span><span class="n">Leave</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">move_tooltip</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tooltip</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PyTitleButton.mousePressEvent">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton.mousePressEvent">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mousePressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">LeftButton</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">change_style</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="o">.</span><span class="n">MouseButtonPress</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PyTitleButton.mouseReleaseEvent">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton.mouseReleaseEvent">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mouseReleaseEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">LeftButton</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">change_style</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="o">.</span><span class="n">MouseButtonRelease</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">released</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PyTitleButton.icon_paint">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton.icon_paint">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">icon_paint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qp</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">rect</span><span class="p">):</span>
+        <span class="n">icon</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="n">painter</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPainter</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setCompositionMode</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QPainter</span><span class="o">.</span><span class="n">CompositionMode_SourceIn</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_active</span><span class="p">:</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span><span class="n">icon</span><span class="o">.</span><span class="n">rect</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_icon_color_active</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span><span class="n">icon</span><span class="o">.</span><span class="n">rect</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_icon_color</span><span class="p">)</span>
+        <span class="n">qp</span><span class="o">.</span><span class="n">drawPixmap</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="n">icon</span><span class="o">.</span><span class="n">width</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="n">icon</span><span class="o">.</span><span class="n">height</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="n">icon</span>
+        <span class="p">)</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">end</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PyTitleButton.set_icon">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton.set_icon">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon_path</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_icon_path</span> <span class="o">=</span> <span class="n">icon_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">repaint</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PyTitleButton.move_tooltip">
+<a class="viewcode-back" href="../../../source/gui.widgets.html#gui.widgets.py_title_bar.PyTitleButton.move_tooltip">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">move_tooltip</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">gp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapToGlobal</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QPoint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parent</span><span class="o">.</span><span class="n">mapFromGlobal</span><span class="p">(</span><span class="n">gp</span><span class="p">)</span>
+        <span class="n">pos_x</span> <span class="o">=</span> <span class="p">(</span><span class="n">pos</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tooltip</span><span class="o">.</span><span class="n">width</span><span class="p">())</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="mi">5</span>
+        <span class="n">pos_y</span> <span class="o">=</span> <span class="n">pos</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_top_margin</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tooltip</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">pos_x</span><span class="p">,</span> <span class="n">pos_y</span><span class="p">)</span></div>
+</div>
+
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_ToolTip</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">):</span>
+    <span class="n">style_tooltip</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    QLabel {{</span>
+<span class="s2">        background-color: </span><span class="si">{_dark_one}</span><span class="s2">;</span>
+<span class="s2">        color: </span><span class="si">{_text_foreground}</span><span class="s2">;</span>
+<span class="s2">        padding-left: 10px;</span>
+<span class="s2">        padding-right: 10px;</span>
+<span class="s2">        border-radius: 17px;</span>
+<span class="s2">        border: 0px solid transparent;</span>
+<span class="s2">        border-right: 3px solid </span><span class="si">{_context_color}</span><span class="s2">;</span>
+<span class="s2">        font: 800 9pt &quot;Segoe UI&quot;;</span>
+<span class="s2">    }}</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">parent</span><span class="p">,</span>
+        <span class="n">tooltip</span><span class="p">,</span>
+        <span class="n">dark_one</span><span class="p">,</span>
+        <span class="n">context_color</span><span class="p">,</span>
+        <span class="n">text_foreground</span>
+    <span class="p">):</span>
+        <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="n">style</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">style_tooltip</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">_dark_one</span><span class="o">=</span><span class="n">dark_one</span><span class="p">,</span>
+            <span class="n">_context_color</span><span class="o">=</span><span class="n">context_color</span><span class="p">,</span>
+            <span class="n">_text_foreground</span><span class="o">=</span><span class="n">text_foreground</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setObjectName</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;label_tooltip&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMinimumHeight</span><span class="p">(</span><span class="mi">34</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setParent</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">tooltip</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">adjustSize</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">shadow</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsDropShadowEffect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shadow</span><span class="o">.</span><span class="n">setBlurRadius</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shadow</span><span class="o">.</span><span class="n">setXOffset</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shadow</span><span class="o">.</span><span class="n">setYOffset</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shadow</span><span class="o">.</span><span class="n">setColor</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setGraphicsEffect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shadow</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, CrEagleOne.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

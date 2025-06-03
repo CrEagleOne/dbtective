@@ -13,8 +13,8 @@ Database compare tool (Preview)
 > OracleDB thin mode only
 
 <p align="center">
-  <img src="src\gui\images\screens\DBtective_compare-config.png" width="400">
-  <img src="src\gui\images\screens\DBtective_oracle-config.png" width="400">
+  <img src="src\gui\images\screens\compare_config.png" width="400">
+  <img src="src\gui\images\screens\oracle_config.png" width="400">
 </p>
 
 
@@ -49,11 +49,11 @@ Database compare tool (Preview)
 | Language | Status |
 |--|--|
 | English | ✅ |
-| French | 🔄 |
+| French | ✅ |
 | Others | ❌ |
 
 # Documentations
-WIP
+See [documentation](https://creagleone.github.io/dbtective/)
 
 # Downloads
 Click on [Github release](https://github.com/creagleone/dbtective/releases/latest)

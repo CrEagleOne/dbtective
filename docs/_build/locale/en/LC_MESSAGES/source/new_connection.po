@@ -1,0 +1,106 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, CrEagleOne
+# This file is distributed under the same license as the DBtective package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: DBtective \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-02 16:02+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../source/new_connection.md:1
+msgid "Create a new connection"
+msgstr ""
+
+#: ../source/new_connection.md:2
+msgid "Select a new connection from the choices displayed"
+msgstr ""
+
+#: ../source/new_connection.md:4
+msgid ""
+"Click on the **Add a new connection** button <img "
+"src=\"../../html/_images/new_connection_button.png\" width=\"20\"> in the"
+" left tyoolbar menu"
+msgstr ""
+
+#: ../source/new_connection.md:10
+msgid "Configuring Connection Settings"
+msgstr ""
+
+#: ../source/new_connection.md:12
+msgid "For all connections :"
+msgstr ""
+
+#: ../source/new_connection.md:13
+msgid ""
+"Test the Connection: Click Test Connection to verify if the connection "
+"works"
+msgstr ""
+
+#: ../source/new_connection.md:14
+msgid "Save: Click Save. The connection appears in the database choices"
+msgstr ""
+
+#: ../source/new_connection.md:16
+msgid "Oracle connection settings"
+msgstr ""
+
+#: ../source/new_connection.md
+msgid "Settings"
+msgstr ""
+
+#: ../source/new_connection.md
+msgid "Description"
+msgstr ""
+
+#: ../source/new_connection.md
+msgid "Host"
+msgstr ""
+
+#: ../source/new_connection.md
+msgid "IP Address or Host Name"
+msgstr ""
+
+#: ../source/new_connection.md
+msgid "Port"
+msgstr ""
+
+#: ../source/new_connection.md
+msgid "The port number for the connection (1521 by default)"
+msgstr ""
+
+#: ../source/new_connection.md
+msgid "Database"
+msgstr ""
+
+#: ../source/new_connection.md
+msgid "The name of the specific database you want to connect to"
+msgstr ""
+
+#: ../source/new_connection.md
+msgid "Username and Password"
+msgstr ""
+
+#: ../source/new_connection.md
+msgid "The credentials required for authentication"
+msgstr ""
+
+#: ../source/new_connection.md
+msgid "Connection name"
+msgstr ""
+
+#: ../source/new_connection.md
+msgid "Assign a specific name to the connection for easier identification"
+msgstr ""
+

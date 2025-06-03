@@ -32,11 +32,11 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.left_menu.select_only_one(btn.objectName())
             functions.set_page(self.ui, self.ui.load_pages.page_1)
 
-        if btn.objectName() == "btn_widgets":
+        if btn.objectName() == "btn_compare":
             self.ui.left_menu.select_only_one(btn.objectName())
             functions.set_page(self.ui, self.ui.load_pages.page_2)
 
-        if btn.objectName() == "btn_add_user":
+        if btn.objectName() == "btn_add_connection":
             self.ui.left_menu.select_only_one(btn.objectName())
             functions.set_page(self.ui, self.ui.load_pages.page_3)
 

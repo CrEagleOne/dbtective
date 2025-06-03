@@ -1,0 +1,1052 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, CrEagleOne
+# This file is distributed under the same license as the DBtective package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: DBtective \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-03 12:04+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../source/core.utils.rst:2
+msgid "core.utils package"
+msgstr ""
+
+#: ../source/core.utils.rst:5
+msgid "Submodules"
+msgstr ""
+
+#: ../source/core.utils.rst:8
+msgid "core.utils.common module"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common:1
+msgid "Module: common Author: creagleone Date: 2025-05-07"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common:5
+#: ../../src/core/utils/config.py:docstring of core.utils.config:5
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions:5
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs:5
+#: ../../src/core/utils/orders.py:docstring of core.utils.orders:5
+msgid "Description:"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common:6
+#: ../../src/core/utils/config.py:docstring of core.utils.config:6
+msgid "This module contains functions to manage technical tables"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common:8
+#: ../../src/core/utils/config.py:docstring of core.utils.config:8
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions:8
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs:8
+#: ../../src/core/utils/orders.py:docstring of core.utils.orders:8
+msgid "Dependencies:"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common:9
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs:9
+#: ../../src/core/utils/orders.py:docstring of core.utils.orders:9
+msgid "os"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common:10
+msgid "sys"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common:11
+msgid "shutil"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common:12
+msgid "re"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common:13
+msgid "hashlib"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common:14
+msgid "gzip"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common:15
+msgid "csv"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common:16
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs:11
+msgid "tempfile"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common:17
+msgid "platform"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common:18
+msgid "subprocess"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common:19
+#: ../../src/core/utils/orders.py:docstring of core.utils.orders:10
+msgid "pandas"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common:20
+msgid "QtWidgets (PySide6)"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common:21
+msgid "oracle.py"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common:22
+#: ../../src/core/utils/config.py:docstring of core.utils.config:12
+#: ../../src/core/utils/orders.py:docstring of core.utils.orders:12
+msgid "exceptions.py"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common:23
+msgid "config.py"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common:25
+#: ../../src/core/utils/config.py:docstring of core.utils.config:15
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions:12
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs:15
+#: ../../src/core/utils/orders.py:docstring of core.utils.orders:17
+msgid "Usage Example:"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common:26
+msgid "update_style(widget, \"border\", \"2px solid red\")"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common:29
+#: ../../src/core/utils/common.py:docstring of core.utils.common.update_style:11
+#: ../../src/core/utils/config.py:docstring of core.utils.config:19
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions:16
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs:19
+#: ../../src/core/utils/orders.py:docstring of core.utils.orders:21
+msgid "Notes"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common:30
+#: ../../src/core/utils/config.py:docstring of core.utils.config:16
+#: ../../src/core/utils/config.py:docstring of core.utils.config:20
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions:17
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs:20
+#: ../../src/core/utils/orders.py:docstring of core.utils.orders:18
+#: ../../src/core/utils/orders.py:docstring of core.utils.orders:22
+msgid "N/A"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.compare_pairs:1
+msgid "Compare pairs of comma-separated strings and return the symmetric difference between their elements"
+msgstr ""
+
+#: ../source/core.utils.rst:0
+msgid "Parameters"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.compare_pairs:4
+msgid "A list of tuples, where each tuple contains two comma-separated strings to compare"
+msgstr ""
+
+#: ../source/core.utils.rst:0
+msgid "Returns"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.compare_pairs:9
+#: ../../src/core/utils/common.py:docstring of core.utils.common.find_most_similar_pairs:9
+msgid "A list of tuples :         - The original pair of strings         - A set containing the symmetric difference between elements             of both strings"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.compare_pairs:11
+#: ../../src/core/utils/common.py:docstring of core.utils.common.find_most_similar_pairs:11
+msgid "A list of tuples :"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.compare_pairs:12
+#: ../../src/core/utils/common.py:docstring of core.utils.common.find_most_similar_pairs:12
+msgid "The original pair of strings"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.compare_pairs:13
+#: ../../src/core/utils/common.py:docstring of core.utils.common.find_most_similar_pairs:13
+msgid "A set containing the symmetric difference between elements"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.compare_pairs:14
+#: ../../src/core/utils/common.py:docstring of core.utils.common.find_most_similar_pairs:14
+msgid "of both strings"
+msgstr ""
+
+#: ../source/core.utils.rst:0
+msgid "Return type"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.create_gap_files:1
+msgid "Create a csv file containing the data discrepancies"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.create_gap_files:3
+msgid "Path of the file to write"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.create_gap_files:5
+msgid "Data to write"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.delete_work_folder:1
+msgid "Deletes all files and subdirectories inside a temporary work folder and recreates an empty version of it"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.delete_work_folder:4
+msgid "The relative path inside the 'dbtective' temp directory to be purged"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.extract_to_csv:1
+msgid "Extract data to a CSV file"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.extract_to_csv:3
+msgid "Database configuration"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.extract_to_csv:5
+msgid "Tablename"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.extract_to_csv:7
+msgid "Output file name"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.find_most_similar_pairs:1
+msgid "Finds the most similar pairs in a DataFrame column using Levenshtein distance"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.find_most_similar_pairs:4
+msgid "The DataFrame containing the column to compare"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.find_most_similar_pairs:6
+msgid "The name of the column, defaults to 'merged'"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_all_locales:1
+msgid "Retrieves all available locales from the specified directory"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_all_locales:3
+msgid "The path to the directory containing locale files"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_all_locales:6
+msgid "A list of available locales, with the current locale first"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_common_tables:1
+msgid "Retrieve the common tables of 2 bases"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_common_tables:3
+msgid "Database 1 configuration"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_common_tables:5
+msgid "Database 2 configuration"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_common_tables:8
+msgid "Common tables"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_current_locale:1
+msgid "Retrieves the current locale setting from the configuration"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_current_locale:3
+msgid "The current locale setting"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_file_size:1
+msgid "Retrieves the file size and dynamically chooses the most suitable unit"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_file_size:3
+msgid "Filenmae"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_file_size:6
+msgid "File size with the most suitable unit"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_hash_file:1
+msgid "Calculate the hash of a file using the specified algorithm"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_hash_file:3
+msgid "File path"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_hash_file:5
+msgid "Hash algorithm to use. Defaults to 'sha256'"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_hash_file:8
+msgid "File hash"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_tables_of_db:1
+msgid "Retrieve the list of tables, their size, the number of columns and rows"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_tables_of_db:3
+msgid "Database config"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_tables_of_db:6
+msgid "Database content"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_work_files:1
+msgid "Get the working file path inside the system's temporary directory"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_work_files:3
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_work_folder:4
+msgid "The relative path inside the work directory"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_work_files:6
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_work_folder:7
+msgid "The full path inside the temporary workspace"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_work_folder:1
+msgid "Get the working folder path inside the system's temporary directory Creates the folder if it does not exist"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.levenshtein_distance:1
+msgid "Calculate the Levenshtein distance between two strings"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.levenshtein_distance:3
+msgid "The Levenshtein distance is a measure of the difference between two sequences, which is defined as the minimum number of single-character edits (insertions, deletions, or substitutions) required to change one sequence into the other"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.levenshtein_distance:8
+msgid "Parameters: s1 (str): The first string to compare s2 (str): The second string to compare"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.levenshtein_distance:12
+msgid "Returns: int: The Levenshtein distance between s1 and s2"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.merge_columns:1
+msgid "Converts a pandas Series row into a comma-separated string"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.merge_columns:3
+msgid "A pandas row containing values to merge"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.merge_columns:6
+msgid "A single string with all row values joined by commas"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.merge_common_keys:1
+msgid "Merges data from 2 dict for each common key"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.merge_common_keys:3
+msgid "dict1"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.merge_common_keys:5
+msgid "dict2"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.merge_common_keys:8
+msgid "Merge dict"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.open_folders:1
+msgid "Open a file with a file editor"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.open_folders:3
+msgid "File name"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.resource_path:1
+msgid "Returns the absolute path to a resource file based on the current directory"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.resource_path:4
+msgid "If the application is built with PyInstaller, this function returns the path to the _MEIPASS folder to find resource files Otherwise, this function returns the path to the current directory to find resource files"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.resource_path:10
+#: ../../src/core/utils/common.py:docstring of core.utils.common.set_image:4
+#: ../../src/core/utils/common.py:docstring of core.utils.common.set_locale:3
+#: ../../src/core/utils/common.py:docstring of core.utils.common.set_svg_icon:3
+#: ../../src/core/utils/common.py:docstring of core.utils.common.set_svg_image:4
+msgid "Parameters :"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.resource_path:11
+msgid "relative_path (str) : The relative path of a resource file"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.resource_path:13
+#: ../../src/core/utils/common.py:docstring of core.utils.common.set_image:7
+#: ../../src/core/utils/common.py:docstring of core.utils.common.set_locale:6
+#: ../../src/core/utils/common.py:docstring of core.utils.common.set_svg_icon:6
+#: ../../src/core/utils/common.py:docstring of core.utils.common.set_svg_image:7
+msgid "Returns :"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.resource_path:14
+msgid "str : The absolute path to a resource file"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.set_image:1
+msgid "Returns the absolute path to an image used in the graphical user interface"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.set_image:5
+#: ../../src/core/utils/common.py:docstring of core.utils.common.set_locale:4
+#: ../../src/core/utils/common.py:docstring of core.utils.common.set_svg_icon:4
+#: ../../src/core/utils/common.py:docstring of core.utils.common.set_svg_image:5
+msgid "icon_name (str) : The name of the icon"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.set_image:8
+#: ../../src/core/utils/common.py:docstring of core.utils.common.set_locale:7
+msgid "str : The path to the image."
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.set_locale:1
+msgid "Returns the absolute path of the application translation file"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.set_svg_icon:1
+msgid "Returns the absolute path to an SVG used as an icon"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.set_svg_icon:7
+msgid "str : The path to the SVG icon"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.set_svg_image:1
+msgid "Returns the absolute path to an SVG image used in the graphical user interface"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.set_svg_image:8
+msgid "str : The path to the SVG image"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.update_style:1
+msgid "Modify a widget's stylesheet by updating or adding a CSS property"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.update_style:3
+msgid "Target widget to update"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.update_style:5
+msgid "CSS property name (e.g., \"background-color\")"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.update_style:7
+msgid "New value for the property (e.g., \"red\", \"20px\")"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.update_style:12
+msgid "If the property exists, its value is replaced"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.update_style:13
+msgid "If absent, the property is appended to the stylesheet"
+msgstr ""
+
+#: ../source/core.utils.rst:16
+msgid "core.utils.config module"
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config:1
+msgid "Module: config Author: creagleone Date: 2025-05-07"
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config:9
+msgid "sqlite3"
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config:10
+msgid "datetime (datetime)"
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config:11
+msgid "wraps (functools)"
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config:13
+#: ../../src/core/utils/orders.py:docstring of core.utils.orders:11
+msgid "common.py"
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of datetime.datetime:1
+msgid "Bases: :py:class:`~datetime.date`"
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of datetime.datetime:1
+msgid "The year, month and day arguments are required. tzinfo may be None, or an instance of a tzinfo subclass. The remaining arguments may be ints."
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.datetime.astimezone:1
+msgid "tz -> convert to local time in new timezone tz"
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.datetime.combine:1
+msgid "date, time -> datetime with same date and time fields"
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.datetime.ctime:1
+msgid "Return ctime() style string."
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.datetime.date:1
+msgid "Return date object with same year, month and day."
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.datetime.dst:1
+msgid "Return self.tzinfo.dst(self)."
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.datetime.fromisoformat:1
+msgid "string -> datetime from a string in most ISO 8601 formats"
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.datetime.fromtimestamp:1
+msgid "timestamp[, tz] -> tz's local time from POSIX timestamp."
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.datetime.isoformat:1
+msgid "[sep] -> string in ISO 8601 format, YYYY-MM-DDT[HH[:MM[:SS[.mmm[uuu]]]]][+HH:MM]. sep is used to separate the year from the time, and defaults to 'T'. The optional argument timespec specifies the number of additional terms of the time to include. Valid options are 'auto', 'hours', 'minutes', 'seconds', 'milliseconds' and 'microseconds'."
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.datetime.now:1
+msgid "Returns new datetime object representing current time local to tz."
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.datetime.now:3
+msgid "tz"
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.datetime.now:4
+msgid "Timezone object."
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.datetime.now:6
+msgid "If no tz is specified, uses local timezone."
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.datetime.replace:1
+msgid "Return datetime with new specified fields."
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.datetime.strptime:1
+msgid "string, format -> new datetime parsed from a string (like time.strptime())."
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.datetime.time:1
+msgid "Return time object with same time but with tzinfo=None."
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.datetime.timestamp:1
+msgid "Return POSIX timestamp as float."
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.datetime.timetuple:1
+msgid "Return time tuple, compatible with time.localtime()."
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.datetime.timetz:1
+msgid "Return time object with same time and tzinfo."
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.datetime.tzname:1
+msgid "Return self.tzinfo.tzname(self)."
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.datetime.utcfromtimestamp:1
+msgid "Construct a naive UTC datetime from a POSIX timestamp."
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.datetime.utcnow:1
+msgid "Return a new datetime representing UTC day and time."
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.datetime.utcoffset:1
+msgid "Return self.tzinfo.utcoffset(self)."
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.datetime.utctimetuple:1
+msgid "Return UTC time tuple, compatible with time.localtime()."
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.get_list_data:1
+msgid "Recover saved database settings"
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.get_list_data:3
+#: ../../src/core/utils/config.py:docstring of core.utils.config.get_settings:3
+#: ../../src/core/utils/config.py:docstring of core.utils.config.insert_query_db:3
+#: ../../src/core/utils/config.py:docstring of core.utils.config.update_settings:3
+msgid "Query to perform"
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.get_list_data:6
+#: ../../src/core/utils/config.py:docstring of core.utils.config.get_settings:6
+msgid "Query result"
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.get_settings:1
+msgid "Retrieves the language"
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.insert_query_db:1
+msgid "Insert a new database settings"
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.insert_query_db:5
+#: ../../src/core/utils/config.py:docstring of core.utils.config.update_settings:5
+msgid "Query args"
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.insert_query_db:8
+#: ../../src/core/utils/config.py:docstring of core.utils.config.setup_db:3
+msgid "Return code"
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.setup_db:1
+msgid "Prepare the app database"
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of core.utils.config.update_settings:1
+msgid "Updates the language"
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of functools.wraps:1
+msgid "Decorator factory to apply update_wrapper() to a wrapper function"
+msgstr ""
+
+#: ../../src/core/utils/config.py:docstring of functools.wraps:3
+msgid "Returns a decorator that invokes update_wrapper() with the decorated function as the wrapper argument and the arguments to wraps() as the remaining arguments. Default arguments are as for update_wrapper(). This is a convenience function to simplify applying partial() to update_wrapper()."
+msgstr ""
+
+#: ../source/core.utils.rst:24
+msgid "core.utils.exceptions module"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions:1
+msgid "Module: exceptions Author: creagleone Date: 2025-05-07"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions:6
+msgid "This module contains functions to manage custom exceptions"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions:9
+msgid "QtCore (PySide6)"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions:10
+#: ../../src/core/utils/orders.py:docstring of core.utils.orders:13
+msgid "logs.py"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions:13
+msgid "raise Error(100, \"texte\")"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error:1
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Warn:1
+msgid "Bases: :py:class:`Exception`"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error:1
+msgid "Custom exception class that integrates logging and Qt error signaling"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:1
+msgid "Initializes the exception with an error message and triggers error logging"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:4
+msgid "The error code used to fetch the corresponding message  Possible values:     - 400: Poorly formed or invalid SQL query     - 401: An error was occured     - 402: UNIQUE constraint failed     - 403: Syntax error     - 404: Table or column not found     - 405: Incorrect database config     - 406: Data type mismatch     - 407: Conversion error     - 408: Transaction error     - 500: Failed to connect to database     - 501: Database temporarily unavailable     - 502: Out of memory error     - 503: Disk I/O error     - 504: No active Oracle listener     - 505: Account locked     - 506: Incorrect username or password     - 600: System not supported     - 601: Settings file not found     - 602: Themes file not found     - 603: No tables to compare     - 604: Error occurring during data extraction     - 999: Unanticipated error - check logs"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:4
+msgid "The error code used to fetch the corresponding message"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:6
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.INFO.__init__:6
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Warn.__init__:6
+msgid "Possible values:"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:7
+msgid "400: Poorly formed or invalid SQL query"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:8
+msgid "401: An error was occured"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:9
+msgid "402: UNIQUE constraint failed"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:10
+msgid "403: Syntax error"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:11
+msgid "404: Table or column not found"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:12
+msgid "405: Incorrect database config"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:13
+msgid "406: Data type mismatch"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:14
+msgid "407: Conversion error"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:15
+msgid "408: Transaction error"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:16
+msgid "500: Failed to connect to database"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:17
+msgid "501: Database temporarily unavailable"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:18
+msgid "502: Out of memory error"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:19
+msgid "503: Disk I/O error"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:20
+msgid "504: No active Oracle listener"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:21
+msgid "505: Account locked"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:22
+msgid "506: Incorrect username or password"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:23
+msgid "600: System not supported"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:24
+msgid "601: Settings file not found"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:25
+msgid "602: Themes file not found"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:26
+msgid "603: No tables to compare"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:27
+msgid "604: Error occurring during data extraction"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:28
+msgid "999: Unanticipated error - check logs"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:30
+msgid "System context for logging"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.ErrorSignal:1
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.WarnSignal:1
+msgid "Bases: :py:class:`~PySide6.QtCore.QObject`"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.ErrorSignal:1
+msgid "A Qt object that provides an error signaling mechanism"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.ErrorSignal.emit_error:1
+msgid "Emits the error signal and logs the error message"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.ErrorSignal.emit_error:3
+msgid "The error message to emit and log"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.ErrorSignal.trigger_error:1
+msgid "Triggers an error signal with the given message"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.ErrorSignal.trigger_error:3
+msgid "The error message to send"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.INFO:1
+#: ../../src/core/utils/logs.py:docstring of functools.partial:1
+msgid "Bases: :py:class:`object`"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.INFO.__init__:1
+msgid "Initializes the info with a message and triggers info signaling"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.INFO.__init__:4
+msgid "The info code used to fetch the corresponding message  Possible values:     - 100: Backup successfully     - 101: Backup successfully     - 200: Treatment completed successfully     - 201: No discrepancies were found"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.INFO.__init__:4
+msgid "The info code used to fetch the corresponding message"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.INFO.__init__:7
+msgid "100: Backup successfully"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.INFO.__init__:8
+msgid "101: Backup successfully"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.INFO.__init__:9
+msgid "200: Treatment completed successfully"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.INFO.__init__:10
+msgid "201: No discrepancies were found"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Warn:1
+msgid "Custom warning exception that integrates logging and Qt warning signaling"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Warn.__init__:1
+msgid "Initializes the warning exception with a message and triggers warning signaling"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Warn.__init__:4
+msgid "The warn code used to fetch the corresponding message  Possible values:     300: Discrepancies were found"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Warn.__init__:4
+msgid "The warn code used to fetch the corresponding message"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Warn.__init__:7
+msgid "300: Discrepancies were found"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.WarnSignal:1
+msgid "A Qt object that provides a warning signaling mechanism"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.WarnSignal.emit_warn:1
+msgid "Emits the warning signal and logs the warning message"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.WarnSignal.emit_warn:3
+msgid "The warning message to emit and log"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.WarnSignal.trigger_warn:1
+msgid "Triggers a warning signal with the given message"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.WarnSignal.trigger_warn:3
+msgid "The warning message to send"
+msgstr ""
+
+#: ../source/core.utils.rst:32
+msgid "core.utils.logs module"
+msgstr ""
+
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs:1
+msgid "Module: logs Author: creagleone Date: 2025-05-07"
+msgstr ""
+
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs:6
+msgid "This module contains functions to manage logs"
+msgstr ""
+
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs:10
+msgid "logging"
+msgstr ""
+
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs:12
+msgid "partial (functools)"
+msgstr ""
+
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs:13
+#: ../../src/core/utils/orders.py:docstring of core.utils.orders:15
+msgid "settings.py"
+msgstr ""
+
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs:16
+msgid "log_error(message)"
+msgstr ""
+
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs.log_config:1
+msgid "Configures the logging system based on user settings"
+msgstr ""
+
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs.log_config:3
+msgid "Retrieves the log level from the settings"
+msgstr ""
+
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs.log_config:4
+msgid "Creates a temporary directory for log storage"
+msgstr ""
+
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs.log_config:5
+msgid "Sets up logging with file and console handlers"
+msgstr ""
+
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs.log_config:7
+msgid "None"
+msgstr ""
+
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs.log_critical:1
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs.log_debug:1
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs.log_error:1
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs.log_info:1
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs.log_message:1
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs.log_warn:1
+msgid "Log a message with the specified level"
+msgstr ""
+
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs.log_critical:3
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs.log_debug:3
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs.log_error:3
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs.log_info:3
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs.log_message:3
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs.log_warn:3
+msgid "Log level ('error', 'info', 'warning', 'debug')"
+msgstr ""
+
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs.log_critical:5
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs.log_debug:5
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs.log_error:5
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs.log_info:5
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs.log_message:5
+#: ../../src/core/utils/logs.py:docstring of core.utils.logs.log_warn:5
+msgid "Message text"
+msgstr ""
+
+#: ../../src/core/utils/logs.py:docstring of functools.partial:1
+msgid "Create a new function with partial application of the given arguments and keywords."
+msgstr ""
+
+#: ../../docstring of core.utils.logs.partial.args:1
+msgid "tuple of arguments to future partial calls"
+msgstr ""
+
+#: ../../docstring of core.utils.logs.partial.func:1
+msgid "function object to use in future partial calls"
+msgstr ""
+
+#: ../../docstring of core.utils.logs.partial.keywords:1
+msgid "dictionary of keyword arguments to future partial calls"
+msgstr ""
+
+#: ../source/core.utils.rst:40
+msgid "core.utils.orders module"
+msgstr ""
+
+#: ../../src/core/utils/orders.py:docstring of core.utils.orders:1
+msgid "Module: orders Author: creagleone Date: 2025-05-07"
+msgstr ""
+
+#: ../../src/core/utils/orders.py:docstring of core.utils.orders:6
+msgid "This module contains functions to execute database comparaison"
+msgstr ""
+
+#: ../../src/core/utils/orders.py:docstring of core.utils.orders:14
+msgid "duck.py"
+msgstr ""
+
+#: ../../src/core/utils/orders.py:docstring of core.utils.orders.compare_db:1
+msgid "Execute database comparaison"
+msgstr ""
+
+#: ../../src/core/utils/orders.py:docstring of core.utils.orders.compare_db:3
+msgid "Type of processing to perform"
+msgstr ""
+
+#: ../../src/core/utils/orders.py:docstring of core.utils.orders.compare_db:5
+#: ../../src/core/utils/orders.py:docstring of core.utils.orders.compare_db:7
+msgid "Database connection parameters"
+msgstr ""
+
+#: ../../src/core/utils/orders.py:docstring of core.utils.orders.compare_db:9
+msgid "Segment size"
+msgstr ""
+
+#: ../../src/core/utils/orders.py:docstring of core.utils.orders.compare_db:11
+msgid "List of tables to compare"
+msgstr ""
+
+#: ../../src/core/utils/orders.py:docstring of core.utils.orders.compare_db:13
+msgid "Fetch size"
+msgstr ""
+
+#: ../source/core.utils.rst:0
+msgid "Raises"
+msgstr ""
+
+#: ../../src/core/utils/orders.py:docstring of core.utils.orders.compare_db:16
+msgid "code 300 (data gap)"
+msgstr ""
+
+#: ../../src/core/utils/orders.py:docstring of core.utils.orders.compare_db:17
+msgid "code 603 (No tables to compare)"
+msgstr ""
+
+#: ../../src/core/utils/orders.py:docstring of core.utils.orders.compare_db:19
+msgid "code 201 (No data gap)"
+msgstr ""
+
+#: ../source/core.utils.rst:48
+msgid "Module contents"
+msgstr ""

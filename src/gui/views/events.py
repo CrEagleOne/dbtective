@@ -2,13 +2,13 @@
 
 """
 Module: events
-Auteur: creagleone
+Author: creagleone
 Date: 2025-05-07
 
 Description:
     This module contains functions to manage events handler
 
-Dépendances:
+Dependencies:
     - ast
     - time
     - QtWidgets (PySide6)

@@ -1,0 +1,31 @@
+Features
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   new_connection.md
+   compare.md
+
+
+Images
+------------------
+.. image:: ../../src/gui/images/screens/select_connection.png
+   :width: 400
+   :align: center
+
+.. image:: ../../src/gui/images/screens/oracle_config.png
+   :width: 400
+   :align: center
+
+.. image:: ../../src/gui/images/screens/compare_config.png
+   :width: 400
+   :align: center
+
+.. image:: ../../src/gui/images/screens/new_connection_button.png
+   :width: 400
+   :align: center
+
+.. image:: ../../src/gui/images/screens/compare_button.png
+   :width: 400
+   :align: center

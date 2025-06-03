@@ -2,7 +2,7 @@
 
 """
 Module: settings
-Auteur: creagleone
+Author: creagleone
 Date: 2025-05-07
 
 Description:
@@ -64,8 +64,7 @@ class Settings:
         Retrieves a specific setting or the entire settings dictionary
 
         Args:
-            key (str | None, optional): The key to look up. Returns all
-            settings if None
+            key (str | None): The key to look up. Returns all settings if None
 
         Returns:
             dict | str: The requested setting value or full
