@@ -36,7 +36,8 @@ class PyPushButton(QtWidgets.QPushButton):
         bg_color_disabled,
         parent=None,
         is_enabled=True,
-        icon_path=None
+        icon_path=None,
+        accept_drops=False
     ):
         super().__init__()
 
@@ -46,6 +47,8 @@ class PyPushButton(QtWidgets.QPushButton):
         self.setCursor(QtCore.Qt.PointingHandCursor)
 
         self.setEnabled(is_enabled)
+
+        self.setAcceptDrops(accept_drops)
 
         if icon_path:
             self.setIcon(QtGui.QIcon(

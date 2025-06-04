@@ -32,7 +32,7 @@
    <item>
     <widget class="QStackedWidget" name="pages">
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="page_1">
       <property name="styleSheet">
@@ -473,6 +473,34 @@
                    </widget>
                   </item>
                  </layout>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="CSV">
+             <item>
+              <widget class="QFrame" name="csv">
+               <property name="acceptDrops">
+                <bool>true</bool>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">border: 2px dashed black;</string>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::Shape::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Shadow::Raised</enum>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_7">
+                <item>
+                 <layout class="QVBoxLayout" name="csv_layout"/>
+                </item>
+                <item>
+                 <layout class="QGridLayout" name="list_files"/>
                 </item>
                </layout>
               </widget>

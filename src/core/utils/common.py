@@ -20,6 +20,7 @@ Dependencies:
     - platform
     - subprocess
     - pandas
+    - from_path (charset_normalizer)
     - QtWidgets (PySide6)
     - oracle.py
     - exceptions.py
@@ -43,6 +44,7 @@ import tempfile
 import platform
 import subprocess
 import pandas
+from charset_normalizer import from_path
 from PySide6 import QtWidgets
 from core.database import oracle
 from core.utils import exceptions, config
@@ -307,7 +309,7 @@ def create_gap_files(filename: str, data: pandas.DataFrame):
 
     Args:
         filename (str): Path of the file to write
-        data (pd.DataFrame): Data to write
+        data (pandas.DataFrame): Data to write
     """
     if filename.endswith('csv'):
         data.to_csv(filename, header=True, index=False, mode='w')
@@ -524,3 +526,65 @@ def get_all_locales(path="src/gui/locales") -> list:
     translations = [f for f in translations if f != locale]
 
     return [locale] + translations
+
+
+def is_data_table(file_path):
+    """Check if the given file is a valid data table.
+
+    This function attempts to read the file using pandas and checks whether 
+    it contains both columns and rows.
+
+    Args:
+        file_path (str): Path to the data file
+
+    Returns:
+        bool: True if the file is a valid data table, False otherwise
+    """
+    try:
+        result = from_path(file_path)
+        encoding = result.best().encoding if result.best() else "ISO-8859-1"
+
+        df = pandas.read_csv(file_path, sep=None,
+                             engine="python", encoding=encoding)
+
+        if not df.empty and not df.columns.empty:
+            return True
+
+        return False
+    except Exception as e:
+        print(f"Error reading the file: {e}")
+        return False
+
+
+def find_matching_table(file_path, connection_string):
+    """Find the Oracle table that matches the CSV file structure.
+
+    Args:
+        file_path (str): Path to the CSV file.
+        connection_string (str): Oracle connection string (e.g., "user/password@host/service_name").
+
+    Returns:
+        str: Name of the matching table or None if no match is found.
+    """
+    import oracledb
+    df = pandas.read_csv(file_path, sep=None, engine="python")
+    csv_columns = set(df.columns)
+
+    oracledb.init_oracle_client()
+    conn = oracledb.connect(connection_string)
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT table_name FROM user_tables")
+    tables = [row[0] for row in cursor.fetchall()]
+
+    for table in tables:
+        cursor.execute(
+            f"SELECT column_name FROM user_tab_columns WHERE table_name = '{table}'")
+        db_columns = {row[0] for row in cursor.fetchall()}
+
+        if csv_columns.issubset(db_columns):
+            print(f"Matching table found: {table}")
+            return table
+
+    print("No matching table found.")
+    return None

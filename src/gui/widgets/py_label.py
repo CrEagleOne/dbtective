@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from PySide6 import QtWidgets
+from PySide6 import QtWidgets, QtGui, QtCore
+from core.utils import common
 
 
 class PyLabel(QtWidgets.QLabel):
@@ -33,12 +34,23 @@ class PyLabel(QtWidgets.QLabel):
         bg_color="#333",
         bg_color_active="#222",
         context_color="#00ABE8",
-        font_size="12px"
+        font_size="12px",
+        icon_path=None,
+        accept_drops=False,
     ):
         super().__init__()
 
         if text:
             self.setText(text)
+
+        self.setAcceptDrops(accept_drops)
+
+        if icon_path:
+            icon = QtGui.QIcon(
+                common.set_svg_icon(icon_path))
+            pixmap = icon.pixmap(100, 100)
+
+            self.setPixmap(pixmap)
 
         self.set_stylesheet(
             radius,
@@ -73,3 +85,8 @@ class PyLabel(QtWidgets.QLabel):
             _font_size=font_size
         )
         self.setStyleSheet(style_format)
+
+    def setText(self, text):
+        super().setText(text)
+        # Enable rich text rendering
+        self.setTextFormat(QtCore.Qt.RichText)

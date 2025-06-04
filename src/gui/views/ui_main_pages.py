@@ -275,6 +275,32 @@ class Ui_MainPages(object):
 
         self.verticalLayout_3.addLayout(self.Oracle)
 
+        self.CSV = QHBoxLayout()
+        self.CSV.setObjectName(u"CSV")
+        self.csv = QFrame(self.contents_2)
+        self.csv.setObjectName(u"csv")
+        self.csv.setAcceptDrops(True)
+        self.csv.setStyleSheet(u"border: 2px dashed black;")
+        self.csv.setFrameShape(QFrame.Shape.StyledPanel)
+        self.csv.setFrameShadow(QFrame.Shadow.Raised)
+        self.verticalLayout_7 = QVBoxLayout(self.csv)
+        self.verticalLayout_7.setObjectName(u"verticalLayout_7")
+        self.csv_layout = QVBoxLayout()
+        self.csv_layout.setObjectName(u"csv_layout")
+
+        self.verticalLayout_7.addLayout(self.csv_layout)
+
+        self.list_files = QGridLayout()
+        self.list_files.setObjectName(u"list_files")
+
+        self.verticalLayout_7.addLayout(self.list_files)
+
+
+        self.CSV.addWidget(self.csv)
+
+
+        self.verticalLayout_3.addLayout(self.CSV)
+
         self.Settings = QHBoxLayout()
         self.Settings.setObjectName(u"Settings")
         self.settings = QFrame(self.contents_2)
@@ -315,7 +341,7 @@ class Ui_MainPages(object):
 
         self.retranslateUi(MainPages)
 
-        self.pages.setCurrentIndex(1)
+        self.pages.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainPages)

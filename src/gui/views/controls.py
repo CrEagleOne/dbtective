@@ -22,6 +22,48 @@ from PySide6 import QtCore
 from core.utils import common
 
 
+def init_csv(self):
+    """
+    Init UI of the input data for CSV settings
+    """
+    self.ui.saveDB.setEnabled(False)
+    self.ui.testDB.setEnabled(False)
+    common.update_style(self.ui.logbar.log_label, "color",
+                        self.themes["app_color"]["text_description"])
+    common.update_style(self.ui.setCustomName, "border",
+                        "2px solid transparent")
+    common.update_style(self.ui.load_pages.csv, "border",
+                        "2px dashed black;")
+
+
+def csv(self):
+    """
+    Control the input data for csv settings
+    """
+    if self.current_choice != "CSV":
+        return
+    init_csv(self)
+    error = False
+
+    if not self.ui.setCustomName.text():
+        common.update_style(self.ui.setCustomName,
+                            "border", "2px solid red")
+        error = True
+
+    if not self.csv_files:
+        common.update_style(self.ui.load_pages.csv, "border",
+                            "2px solid red;")
+        error = True
+
+    if not error:
+        self.ui.saveDB.setEnabled(True)
+        return
+    text = QtCore.QCoreApplication.translate(
+        "exceptions", "Correct errors")
+    self.ui.logbar.log_label.setText(text)
+    common.update_style(self.ui.logbar.log_label, "color", "red")
+
+
 def init_oracle(self):
     """
     Init UI of the input data for oracle settings
@@ -52,6 +94,8 @@ def oracle(self):
     """
     Control the input data for oracle settings
     """
+    if self.current_choice != "Oracle":
+        return
     init_oracle(self)
     error = False
     if not self.ui.setHostOracle.text():
@@ -94,7 +138,9 @@ def oracle(self):
     if not error:
         self.ui.saveDB.setEnabled(True)
         return
-    self.ui.logbar.log_label.setText("Corriger les erreurs")
+    text = QtCore.QCoreApplication.translate(
+        "exceptions", "Correct errors")
+    self.ui.logbar.log_label.setText(text)
     common.update_style(self.ui.logbar.log_label, "color", "red")
 
 
@@ -178,8 +224,8 @@ def db_compare(self):
         self.ui.compare.setEnabled(True)
         return
 
-    texte = QtCore.QCoreApplication.translate(
+    text = QtCore.QCoreApplication.translate(
         "exceptions", "Correct errors")
-    self.ui.logbar.log_label.setText(texte)
+    self.ui.logbar.log_label.setText(text)
 
     common.update_style(self.ui.logbar.log_label, "color", "red")
