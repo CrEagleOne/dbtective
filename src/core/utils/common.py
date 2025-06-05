@@ -71,13 +71,13 @@ def get_file_size(filepath: str) -> str:
     return f"{taille_octets / (1024**3):.2f} Go"
 
 
-def merge_common_keys(dict1: list, dict2: list) -> dict:
+def merge_common_keys(dict1: tuple, dict2: tuple) -> dict:
     """
     Merges data from 2 dict for each common key
 
     Args:
-        dict1 (list): dict1
-        dict2 (list): dict2
+        dict1 (tuple): dict1
+        dict2 (tuple): dict2
 
     Returns:
         dict: Merge dict
@@ -117,7 +117,7 @@ def get_hash_file(filepath: str, hash_algorithm: str = 'sha256') -> str:
     return hasher.hexdigest()
 
 
-def get_tables_of_db(db_config: list) -> tuple:
+def get_tables_of_db(db_config: list) -> list:
     """
     Retrieve the list of tables, their size, the number of columns and rows
 
@@ -125,25 +125,33 @@ def get_tables_of_db(db_config: list) -> tuple:
         db_config (list): Database config
 
     Returns:
-        dict: Database content
+        list: Database content
     """
+    result = []
     if db_config[0] == "Oracle":
         query = """
             SELECT
                 ut.TABLE_NAME,
-                ut.NUM_ROWS AS "Nombre de lignes",
-                COUNT(utc.COLUMN_NAME) AS "Nombre de colonnes",
-                ut.BLOCKS * ut.AVG_ROW_LEN AS "Taille estimée (octets)"
+                ut.NUM_ROWS,
+                COUNT(utc.COLUMN_NAME),
+                ut.BLOCKS * ut.AVG_ROW_LEN
             FROM USER_TABLES ut
             LEFT JOIN USER_TAB_COLUMNS utc ON ut.TABLE_NAME = utc.TABLE_NAME
             GROUP BY ut.TABLE_NAME, ut.NUM_ROWS, ut.BLOCKS, ut.AVG_ROW_LEN"""
-        return oracle.get_list_data(db_config[1], query)
-    raise exceptions.Error(405)
+        result = oracle.get_list_data(db_config[1], query)
+    elif db_config[0] == "CSV":
+        for file_path in db_config[1]["files"]:
+            result.append(analyze_file(file_path))
+    else:
+        raise exceptions.Error(405)
+
+    return result
 
 
 def get_common_tables(db1: list, db2: list) -> dict:
     """
-    Retrieve the common tables of 2 bases
+    Retrieve common tables from 2 data sources
+    Tables must have the same name, including CSV files.
 
     Args:
         db1 (list): Database 1 configuration
@@ -158,7 +166,7 @@ def get_common_tables(db1: list, db2: list) -> dict:
     return merge_common_keys(db1_tables, db2_tables)
 
 
-def extract_to_csv(db: list, table: str, file: str, segment_size: int | None,
+def oracle_to_csv(db: list, table: str, file: str, segment_size: int | None,
                    fetch_size: int):
     """
     Extract data to a CSV file
@@ -178,6 +186,72 @@ def extract_to_csv(db: list, table: str, file: str, segment_size: int | None,
         for data_block in datas:
             writer.writerows(data_block)
 
+def convert_to_csv(src_file: str, dest_dir: str):
+    """
+    Copies a file to a specified directory
+    and converts it to CSV format if necessary.
+
+    Args:
+        src_file (str): The full path to the source file to be copied.
+                        Supported formats: .txt, .xlsx, .csv
+        dest_dir (str): The path to the destination directory
+    """
+    file_extension = os.path.splitext(src_file)[1].lower()
+    dest_file = os.path.join(dest_dir, os.path.splitext(os.path.basename(src_file))[0] + '.csv')
+
+    if file_extension == '.txt':
+        with open(src_file, 'r') as f:
+            content = f.read()
+        with open(dest_file, 'w') as f:
+            f.write(content)
+    elif file_extension == '.xlsx':
+        df = pd.read_excel(src_file, engine='openpyxl')
+        df.to_csv(dest_file, index=False)
+    elif file_extension == '.csv':
+        df = pd.read_csv(src_file)
+        df.to_csv(dest_file, index=False)
+    else:
+        raise exceptions.Error(605, file_extension)
+
+def analyze_file(file_path: str) -> tuple:
+    """
+    Analyze file to extract some datas
+
+    Args:
+        file_path (str): Path of file
+                        Supported formats: .txt, .xlsx, .csv
+
+    Raises:
+        exceptions.Error: 605 or 606
+
+    Returns:
+        tuple: datas
+    """
+    file_size = os.path.getsize(file_path)
+    ext = os.path.splitext(file_path)[1].lower()
+
+    if ext == '.csv':
+        df = pd.read_csv(file_path, header='infer')
+    elif ext == '.txt':
+        try:
+            df = pd.read_csv(file_path, delimiter=None, engine='python')
+        except Exception:
+            df = pd.read_csv(file_path, delimiter='\t', engine='python')
+    elif ext == '.xlsx':
+        df = pd.read_excel(file_path, engine='openpyxl')
+    else:
+        raise exceptions.Error(605)
+
+    num_rows, num_cols = df.shape
+    if df.columns.to_list() == list(range(len(df.columns))):
+        raise exceptions.Error(606)
+
+    return (
+        os.path.splitext(os.path.basename(file_path))[0],
+        file_size,
+        num_rows,
+        num_cols
+    )
 
 def update_style(widget: QtWidgets.QWidget, property_name: str,
                  new_value: str):
@@ -320,22 +394,7 @@ def create_gap_files(filename: str, data: pandas.DataFrame):
                 f.write(f"Paire: {pair}\n")
                 f.write(f"Différences: {diff_set}\n\n")
 
-
-def get_work_files(path: str) -> str:
-    """
-    Get the working file path inside the system's temporary directory
-
-    Args:
-        path (str): The relative path inside the work directory
-
-    Returns:
-        str: The full path inside the temporary workspace
-    """
-    temp_dir = tempfile.gettempdir()
-    return os.path.join(temp_dir, "dbtective", path)
-
-
-def get_work_folder(path: str) -> str:
+def get_file_in_work_folder(path: str) -> str:
     """
     Get the working folder path inside the system's temporary directory
     Creates the folder if it does not exist
@@ -347,10 +406,10 @@ def get_work_folder(path: str) -> str:
         str: The full path inside the temporary workspace
     """
     temp_dir = tempfile.gettempdir()
-    work_folder = os.path.join(temp_dir, "dbtective", path)
+    work_folder = os.path.join(temp_dir, "dbtective")
     os.makedirs(work_folder, exist_ok=True)
 
-    return work_folder
+    return os.path.join(work_folder, path)
 
 
 def delete_work_folder(path: str):
@@ -397,11 +456,11 @@ def levenshtein_distance(s1: str, s2: str) -> int:
     required to change one sequence into the other
 
     Parameters:
-    s1 (str): The first string to compare
-    s2 (str): The second string to compare
+        s1 (str): The first string to compare
+        s2 (str): The second string to compare
 
     Returns:
-    int: The Levenshtein distance between s1 and s2
+        int: The Levenshtein distance between s1 and s2
     """
     if len(s1) < len(s2):
         s1, s2 = s2, s1
@@ -554,37 +613,3 @@ def is_data_table(file_path):
     except Exception as e:
         print(f"Error reading the file: {e}")
         return False
-
-
-def find_matching_table(file_path, connection_string):
-    """Find the Oracle table that matches the CSV file structure.
-
-    Args:
-        file_path (str): Path to the CSV file.
-        connection_string (str): Oracle connection string (e.g., "user/password@host/service_name").
-
-    Returns:
-        str: Name of the matching table or None if no match is found.
-    """
-    import oracledb
-    df = pandas.read_csv(file_path, sep=None, engine="python")
-    csv_columns = set(df.columns)
-
-    oracledb.init_oracle_client()
-    conn = oracledb.connect(connection_string)
-    cursor = conn.cursor()
-
-    cursor.execute("SELECT table_name FROM user_tables")
-    tables = [row[0] for row in cursor.fetchall()]
-
-    for table in tables:
-        cursor.execute(
-            f"SELECT column_name FROM user_tab_columns WHERE table_name = '{table}'")
-        db_columns = {row[0] for row in cursor.fetchall()}
-
-        if csv_columns.issubset(db_columns):
-            print(f"Matching table found: {table}")
-            return table
-
-    print("No matching table found.")
-    return None

@@ -117,6 +117,8 @@ class Error(Exception):
                     - 602: Themes file not found
                     - 603: No tables to compare
                     - 604: Error occurring during data extraction
+                    - 605: Unsupported file type
+                    - 606: The file does not appear to contain a header row
 
             system (str | None, optional): System context for logging
         """
@@ -166,6 +168,10 @@ class Error(Exception):
                 "exceptions", "No tables to compare"),
             604: QtCore.QCoreApplication.translate(
                 "exceptions", "Error occurring during data extraction"),
+            605: QtCore.QCoreApplication.translate(
+                "exceptions", "Unsupported file type"),
+            606: QtCore.QCoreApplication.translate(
+                "exceptions", "The file does not appear to contain a header row"),
         }
 
         self.message = self.errors.get(

@@ -628,7 +628,7 @@ class MainEventHandler():
             else:
                 rtn = popups.display_warn(text)
                 if rtn:
-                    folder_path = common.get_work_folder("gap")
+                    folder_path = common.get_file_in_work_folder("gap")
                     common.open_folders(folder_path)
         else:
             popups.display_info(text)

@@ -40,7 +40,7 @@ def _sqlite(f):
     """
     @wraps(f)
     def wrapper(*args, **kwargs):
-        db_path = common.get_work_files("database.db")
+        db_path = common.get_file_in_work_folder("database.db")
         conn = None
         try:
             conn = sqlite3.connect(db_path)

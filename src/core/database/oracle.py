@@ -107,7 +107,7 @@ def get_unique_data(_db_config: list, query: str, **kwargs) -> tuple:
 
 
 @_oracle
-def get_list_data(_db_config, query, **kwargs) -> tuple:
+def get_list_data(_db_config, query, **kwargs) -> list:
     """
     Retrieve all datas from a query
 
@@ -119,7 +119,7 @@ def get_list_data(_db_config, query, **kwargs) -> tuple:
         exceptions.Error: list of error codes
 
     Returns:
-        tuple: Query result
+        list: Query result
     """
     try:
         conn = kwargs.get('conn')
