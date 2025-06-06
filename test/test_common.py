@@ -16,14 +16,28 @@ def test_get_file_size(mock_getsize):
 
 
 def test_merge_common_keys():
-
     assert not common.merge_common_keys({}, {})
 
-    dict1 = [('Table1', 'text', 4), ('Table2', 'texte', 5)]
-    dict2 = [('Table2', 23, 'value'), ('Table3', 'result', 5)]
+    dict1 = (
+        ('key1', 100, 200, 300),
+        ('key2', 150, 250, 350),
+        ('key3', 400, 500, 600)
+    )
 
-    merged_dict = common.merge_common_keys(dict1, dict2)
-    assert merged_dict == {'Table2': ['texte', 23, 5, 'value']}
+    dict2 = (
+        ('key1', 120, 220, 320),
+        ('key2', 170, 270, 370),
+        ('key4', 450, 550, 650)
+    )
+
+    result = common.merge_common_keys(dict1, dict2)
+
+    expected_result = {
+        'key1': ['20 octets', 20, 20],
+        'key2': ['20 octets', 20, 20]
+    }
+
+    assert result == expected_result
 
 
 @patch('hashlib.new')
@@ -77,12 +91,42 @@ def test_levenshtein_distance(s1, s2, expected):
     assert common.levenshtein_distance(s1, s2) == expected
 
 
-@pytest.mark.parametrize("pairs, expected", [
-    ([("a,b,c", "b,c,d")], [(("a,b,c", "b,c,d"), {"a", "d"})]),
-    ([("x,y,z", "x,y")], [(("x,y,z", "x,y"), {"z"})]),
-    ([("1,2,3", "2,3,4")], [(("1,2,3", "2,3,4"), {"1", "4"})]),
-    ([("", "")], [(("", ""), set())]),
-    ([("same,same", "same,same")], [(("same,same", "same,same"), set())]),
+@pytest.mark.parametrize("pairs, expected_result", [
+    (
+        [(",apple,banana,cherry", ",banana,cherry,date")],
+        [((",apple,banana,cherry", ",banana,cherry,date"), {'apple', 'date'})]
+    ),
+    (
+        [(",apple,banana", ",cherry,date")],
+        [((",apple,banana", ",cherry,date"), {
+          'apple', 'banana', 'cherry', 'date'})]
+    ),
+    (
+        [(",apple,banana,cherry,date", ",apple,banana,cherry,date")],
+        [((",apple,banana,cherry,date", ",apple,banana,cherry,date"), set())]
+    ),
+    (
+        [(",apple", ",banana")],
+        [((",apple", ",banana"), {'apple', 'banana'})]
+    ),
+    (
+        [(",a,b,c", ",b,c,d"), (",e,f", ",f,g")],
+        [
+            ((",a,b,c", ",b,c,d"), {'a', 'd'}),
+            ((",e,f", ",f,g"), {'e', 'g'})
+        ]
+    )
 ])
-def test_compare_pairs(pairs, expected):
-    assert common.compare_pairs(pairs) == expected
+def test_compare_pairs(pairs, expected_result):
+    assert common.compare_pairs(pairs) == expected_result
+
+
+def test_get_suitable_unit_for_size():
+    assert common.get_suitable_unit_for_size(100) == "100 octets"
+    assert common.get_suitable_unit_for_size(1500) == "1.46 Ko"
+    assert common.get_suitable_unit_for_size(1500000) == "1.43 Mo"
+    assert common.get_suitable_unit_for_size(1500000000) == "1.40 Go"
+    assert common.get_suitable_unit_for_size(1023) == "1023 octets"
+    assert common.get_suitable_unit_for_size(1024) == "1.00 Ko"
+    assert common.get_suitable_unit_for_size(1024**2) == "1.00 Mo"
+    assert common.get_suitable_unit_for_size(1024**3) == "1.00 Go"

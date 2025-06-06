@@ -460,12 +460,9 @@ class UI_MainWindow(object):
             headers=[
                 QtCore.QCoreApplication.translate("ui_main", "Status"),
                 QtCore.QCoreApplication.translate("ui_main", "Table name"),
-                QtCore.QCoreApplication.translate("ui_main", "Size in DB1"),
-                QtCore.QCoreApplication.translate("ui_main", "Size in DB2"),
-                QtCore.QCoreApplication.translate("ui_main", "Cols in DB1"),
-                QtCore.QCoreApplication.translate("ui_main", "Cols in DB2"),
-                QtCore.QCoreApplication.translate("ui_main", "Rows in DB1"),
-                QtCore.QCoreApplication.translate("ui_main", "Rows in DB2")
+                QtCore.QCoreApplication.translate("ui_main", "Size gap"),
+                QtCore.QCoreApplication.translate("ui_main", "Col gap"),
+                QtCore.QCoreApplication.translate("ui_main", "Row gap")
             ]
         )
         self.tableWidget.horizontalHeader().setSectionResizeMode(

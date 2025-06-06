@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DBtective \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-03 13:50+0200\n"
+"POT-Creation-Date: 2025-06-06 15:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -41,7 +41,7 @@ msgstr "Base de données 1 et 2"
 
 #: ../source/compare.md
 msgid "Choose the databases to compare"
-msgstr "Choisissez les bases de données à comparer"
+msgstr "Choisisser les bases de données à comparer"
 
 #: ../source/compare.md
 msgid "Multiple queries"
@@ -149,13 +149,13 @@ msgstr ""
 msgid "Details"
 msgstr "Détails"
 
-#: ../source/compare.md:40
+#: ../source/compare.md:39
 msgid "Displays the list of common tables between the 2 selected databases."
 msgstr ""
 "Affiche la liste des tables communes entre les 2 bases de données "
 "sélectionnées."
 
-#: ../source/compare.md:42
+#: ../source/compare.md:41
 msgid ""
 "By pressing \"DELETE\" on the keyboard, the table associated with the "
 "selected row will not be compared. To add the table again, press "
@@ -163,5 +163,36 @@ msgid ""
 msgstr ""
 "En appuyant sur \"DELETE\" sur le clavier, la table associée à la ligne "
 "sélectionnée ne sera pas comparée. Pour ajouter à nouveau la table, "
-"appuyez sur \"Retour arrière\"."
+"appuyer sur \"Retour arrière\"."
+
+#: ../source/compare.md:45
+msgid "CSV files"
+msgstr "Fichiers CSV"
+
+#: ../source/compare.md:46
+msgid ""
+"Each CSV file to be processed in the comparison must adhere to the "
+"following rules:"
+msgstr ""
+"Chaque fichier CSV à traiter lors de la comparaison doit respecter les règles suivantes:"
+
+#: ../source/compare.md:47
+msgid "The file name must be identical"
+msgstr "Le nom du fichier doit être identique"
+
+#: ../source/compare.md:48
+msgid "To the name of the table to be compared for a database comparison"
+msgstr "Au nom de la table à comparer pour une comparaison de base de données"
+
+#: ../source/compare.md:49
+msgid "To the name of the other file for a comparison with another file"
+msgstr "Au nom de l'autre fichier pour une comparaison avec un autre fichier"
+
+#: ../source/compare.md:50
+msgid "Must contain the column names in the header"
+msgstr "Doit contenir les noms de colonnes dans l'en-tête"
+
+#: ../source/compare.md:51
+msgid "Ensure the consistency of the exported data"
+msgstr "S'assurer de la cohérence des données exportées"
 

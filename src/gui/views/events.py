@@ -11,7 +11,6 @@ Description:
 Dependencies:
     - ast
     - time
-    - datetime
     - QtWidgets (PySide6)
     - QtGui (PySide6)
     - QtCore (PySide6)
@@ -34,7 +33,6 @@ Notes:
 
 import ast
 import time
-from datetime import datetime
 from PySide6 import QtWidgets, QtGui, QtCore
 from gui.views import popups, controls
 from gui.core import functions, themes
@@ -168,6 +166,9 @@ class MainEventHandler():
         self.ui.tableWidget.installEventFilter(self.key_event_filter)
         self.ui.select_all.clicked.connect(self.add_all_table)
         self.ui.unselect_all.clicked.connect(self.ignore_all_table)
+
+        self.ui.tableWidget.cellChanged.connect(
+            lambda: controls.db_compare(self))
 
         self.ui.testDB.clicked.connect(self.test_db)
 
@@ -371,8 +372,8 @@ class MainEventHandler():
         self.ui.setDB2.setCurrentIndex(-1)
         self.ui.setExtractionType.setChecked(False)
         self.ui.setExtractionType.setup_animation(0)
-        self.ui.setSegmentLength.setText("")
-        self.ui.setFetchSize.setText("")
+        self.ui.setSegmentLength.setText("100000")
+        self.ui.setFetchSize.setText("10000")
 
         for btn in self.ui.load_pages.contents.findChildren(
                 QtWidgets.QRadioButton):
@@ -538,14 +539,11 @@ class MainEventHandler():
             self.ui.setSegmentLength.setEnabled(False)
 
     def on_locale_changed(self):
-        current_datetime = datetime.now()
-        formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
         query = """UPDATE settings
             SET [values] = ?, updated_at = ? where [key] = ?"""
 
         config.update_settings(
-            query, (self.ui.setlocale.currentText(),
-                    formatted_datetime, "locale",))
+            query, (self.ui.setlocale.currentText(), "locale",))
 
     def on_db_changed(self, db):
         title = QtCore.QCoreApplication.translate(
@@ -559,7 +557,8 @@ class MainEventHandler():
                  for key, db_type, settings in self.config_list
                  if key == self.ui.setDB1.currentText()), None)
 
-            if not self.settings_db1[1].get("password"):
+            if not self.settings_db1[1].get("password") and \
+                    self.settings_db1[0] != "CSV":
                 password = popups.input_value(title, message)
                 if password:
                     self.settings_db1[1]["password"] = password
@@ -570,7 +569,8 @@ class MainEventHandler():
                  for key, db_type, settings in self.config_list
                  if key == self.ui.setDB2.currentText()), None)
 
-            if not self.settings_db2[1].get("password"):
+            if not self.settings_db2[1].get("password") and \
+                    self.settings_db2[0] != "CSV":
                 password = popups.input_value(title, message)
                 if password:
                     self.settings_db2[1]["password"] = password
@@ -692,20 +692,28 @@ class FiltersTablesThread(QtCore.QThread):
             self.content.tableWidget.setRowCount(0)
             data = common.get_common_tables(
                 self.settings_db1, self.settings_db2)
+            if not data:
+                raise exceptions.Error(607)
             self.content.tableWidget.setRowCount(len(data))
             for row_idx, (key, values) in enumerate(data.items()):
                 text = QtCore.QCoreApplication.translate(
                     "events", "Compare")
+                item = QtWidgets.QTableWidgetItem(text)
+                item.setTextAlignment(QtCore.Qt.AlignCenter)
                 self.content.tableWidget.setItem(
-                    row_idx, 0, QtWidgets.QTableWidgetItem(text))
+                    row_idx, 0, item)
                 self.content.tableWidget.setItem(
                     row_idx, 1, QtWidgets.QTableWidgetItem(key))
                 self.tables_list.append(key)
 
                 for col_idx, value in enumerate(values):
+                    item = QtWidgets.QTableWidgetItem(str(value))
+                    item.setTextAlignment(QtCore.Qt.AlignCenter)
                     self.content.tableWidget.setItem(
-                        row_idx, col_idx + 2,
-                        QtWidgets.QTableWidgetItem(str(value)))
+                        row_idx, col_idx + 2, item)
+
+            self.content.tableWidget.horizontalHeader().setSectionResizeMode(1,
+                                                                             QtWidgets.QHeaderView.ResizeToContents)
 
         except exceptions.Error as e:
             self.signal_update.emit("error", e.message)

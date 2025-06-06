@@ -119,6 +119,8 @@ class Error(Exception):
                     - 604: Error occurring during data extraction
                     - 605: Unsupported file type
                     - 606: The file does not appear to contain a header row
+                    - 607: No common tables found
+                    - 608: File not found
 
             system (str | None, optional): System context for logging
         """
@@ -172,6 +174,10 @@ class Error(Exception):
                 "exceptions", "Unsupported file type"),
             606: QtCore.QCoreApplication.translate(
                 "exceptions", "The file does not appear to contain a header row"),
+            607: QtCore.QCoreApplication.translate(
+                "exceptions", "No common tables found"),
+            608: QtCore.QCoreApplication.translate(
+                "exceptions", "File not found")
         }
 
         self.message = self.errors.get(

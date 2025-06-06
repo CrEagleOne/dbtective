@@ -52,23 +52,36 @@ from core.utils import exceptions, config
 
 def get_file_size(filepath: str) -> str:
     """
-    Retrieves the file size and dynamically chooses the most suitable unit
+    Retrieves the file size
 
     Args:
-        filepath (str): Filenmae
+        filepath (str): Path of file
 
     Returns:
         str: File size with the most suitable unit
     """
-    taille_octets = os.path.getsize(filepath)
+    size = os.path.getsize(filepath)
 
-    if taille_octets < 1024:
-        return f"{taille_octets} octets"
-    if taille_octets < 1024**2:
-        return f"{taille_octets / 1024:.2f} Ko"
-    if taille_octets < 1024**3:
-        return f"{taille_octets / (1024**2):.2f} Mo"
-    return f"{taille_octets / (1024**3):.2f} Go"
+    return get_suitable_unit_for_size(size)
+
+
+def get_suitable_unit_for_size(size: int) -> str:
+    """
+    Dynamically chooses the most suitable unit
+
+    Args:
+        size (int): Size value
+
+    Returns:
+        str: File size with the most suitable unit
+    """
+    if size < 1024:
+        return f"{size} octets"
+    if size < 1024**2:
+        return f"{size / 1024:.2f} Ko"
+    if size < 1024**3:
+        return f"{size / (1024**2):.2f} Mo"
+    return f"{size / (1024**3):.2f} Go"
 
 
 def merge_common_keys(dict1: tuple, dict2: tuple) -> dict:
@@ -92,7 +105,8 @@ def merge_common_keys(dict1: tuple, dict2: tuple) -> dict:
     for key in common_keys:
         values1 = dict1_tmp[key]
         values2 = dict2_tmp[key]
-        merged_values = [val for pair in zip(values1, values2) for val in pair]
+        merged_values = [abs(v1 - v2) for v1, v2 in zip(values1, values2)]
+        merged_values[0] = get_suitable_unit_for_size(int(merged_values[0]))
         merged_dict[key] = merged_values
 
     return merged_dict
@@ -132,15 +146,15 @@ def get_tables_of_db(db_config: list) -> list:
         query = """
             SELECT
                 ut.TABLE_NAME,
-                ut.NUM_ROWS,
+                ut.BLOCKS * ut.AVG_ROW_LEN,
                 COUNT(utc.COLUMN_NAME),
-                ut.BLOCKS * ut.AVG_ROW_LEN
+                ut.NUM_ROWS
             FROM USER_TABLES ut
             LEFT JOIN USER_TAB_COLUMNS utc ON ut.TABLE_NAME = utc.TABLE_NAME
             GROUP BY ut.TABLE_NAME, ut.NUM_ROWS, ut.BLOCKS, ut.AVG_ROW_LEN"""
         result = oracle.get_list_data(db_config[1], query)
     elif db_config[0] == "CSV":
-        for file_path in db_config[1]["files"]:
+        for file_path in db_config[1]["file"]:
             result.append(analyze_file(file_path))
     else:
         raise exceptions.Error(405)
@@ -167,7 +181,7 @@ def get_common_tables(db1: list, db2: list) -> dict:
 
 
 def oracle_to_csv(db: list, table: str, file: str, segment_size: int | None,
-                   fetch_size: int):
+                  fetch_size: int):
     """
     Extract data to a CSV file
 
@@ -177,7 +191,7 @@ def oracle_to_csv(db: list, table: str, file: str, segment_size: int | None,
         file (str): Output file name
 
     """
-    query = f"SELECT * FROM {table}"
+    query = f"""SELECT * FROM {table}"""
 
     with open(file, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
@@ -186,7 +200,8 @@ def oracle_to_csv(db: list, table: str, file: str, segment_size: int | None,
         for data_block in datas:
             writer.writerows(data_block)
 
-def convert_to_csv(src_file: str, dest_dir: str):
+
+def convert_to_csv(src_file: str, dest_file: str):
     """
     Copies a file to a specified directory
     and converts it to CSV format if necessary.
@@ -194,24 +209,28 @@ def convert_to_csv(src_file: str, dest_dir: str):
     Args:
         src_file (str): The full path to the source file to be copied.
                         Supported formats: .txt, .xlsx, .csv
-        dest_dir (str): The path to the destination directory
+        dest_file (str): The path to the destination directory
     """
     file_extension = os.path.splitext(src_file)[1].lower()
-    dest_file = os.path.join(dest_dir, os.path.splitext(os.path.basename(src_file))[0] + '.csv')
 
     if file_extension == '.txt':
-        with open(src_file, 'r') as f:
+        with open(src_file, 'r', encoding='UTF-8') as f:
             content = f.read()
-        with open(dest_file, 'w') as f:
+        with open(dest_file, 'w', encoding='UTF-8') as f:
             f.write(content)
     elif file_extension == '.xlsx':
-        df = pd.read_excel(src_file, engine='openpyxl')
+        df = pandas.read_excel(src_file, header='infer',
+                               engine='openpyxl', dtype=str,
+                               na_values=[], keep_default_na=False)
         df.to_csv(dest_file, index=False)
     elif file_extension == '.csv':
-        df = pd.read_csv(src_file)
+        df = pandas.read_csv(src_file, sep=None,
+                             header='infer', engine='python', dtype=str,
+                             na_values=[], keep_default_na=False)
         df.to_csv(dest_file, index=False)
     else:
         raise exceptions.Error(605, file_extension)
+
 
 def analyze_file(file_path: str) -> tuple:
     """
@@ -227,18 +246,20 @@ def analyze_file(file_path: str) -> tuple:
     Returns:
         tuple: datas
     """
-    file_size = os.path.getsize(file_path)
+    try:
+        file_size = os.path.getsize(file_path)
+    except FileNotFoundError:
+        raise exceptions.Error(608)
     ext = os.path.splitext(file_path)[1].lower()
 
     if ext == '.csv':
-        df = pd.read_csv(file_path, header='infer')
+        df = pandas.read_csv(file_path, sep=None,
+                             header='infer', engine='python')
     elif ext == '.txt':
-        try:
-            df = pd.read_csv(file_path, delimiter=None, engine='python')
-        except Exception:
-            df = pd.read_csv(file_path, delimiter='\t', engine='python')
+        df = pandas.read_csv(file_path, sep=None,
+                             header='infer', engine='python')
     elif ext == '.xlsx':
-        df = pd.read_excel(file_path, engine='openpyxl')
+        df = pandas.read_excel(file_path, header='infer', engine='openpyxl')
     else:
         raise exceptions.Error(605)
 
@@ -249,9 +270,10 @@ def analyze_file(file_path: str) -> tuple:
     return (
         os.path.splitext(os.path.basename(file_path))[0],
         file_size,
-        num_rows,
-        num_cols
+        num_cols,
+        num_rows
     )
+
 
 def update_style(widget: QtWidgets.QWidget, property_name: str,
                  new_value: str):
@@ -394,6 +416,7 @@ def create_gap_files(filename: str, data: pandas.DataFrame):
                 f.write(f"Paire: {pair}\n")
                 f.write(f"Différences: {diff_set}\n\n")
 
+
 def get_file_in_work_folder(path: str) -> str:
     """
     Get the working folder path inside the system's temporary directory
@@ -500,8 +523,8 @@ def compare_pairs(pairs: list) -> list:
     differences = []
     for pair in pairs:
         s1, s2 = pair
-        set1 = set(s1.split(','))
-        set2 = set(s2.split(','))
+        set1 = set(s1.split(',')[1:])
+        set2 = set(s2.split(',')[1:])
         diff = set1.symmetric_difference(set2)
         differences.append((pair, diff))
     return differences
@@ -591,7 +614,7 @@ def is_data_table(file_path):
     """Check if the given file is a valid data table.
 
     This function attempts to read the file using pandas and checks whether 
-    it contains both columns and rows.
+    it contains both columns and rows. (CSV only)
 
     Args:
         file_path (str): Path to the data file
@@ -600,6 +623,8 @@ def is_data_table(file_path):
         bool: True if the file is a valid data table, False otherwise
     """
     try:
+        if os.path.splitext(file_path)[1].lower() != ".csv":
+            return False
         result = from_path(file_path)
         encoding = result.best().encoding if result.best() else "ISO-8859-1"
 

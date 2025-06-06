@@ -1,23 +1,25 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="'fr'" data-content_root="../../../">
+<html class="writer-html5" lang="fr" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>gui.views.ui_main &mdash; DBtective 1.0.0 documentation</title>
+  <title>gui.views.ui_main &mdash; Documentation DBtective 1.0.0</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=8399456f" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../../_static/documentation_options.js?v=66b7f8cd"></script>
+      <script src="../../../_static/documentation_options.js?v=05dadb3a"></script>
       <script src="../../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/translations.js?v=e6b791cb"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../search.html" /> 
+    <link rel="search" title="Recherche" href="../../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -33,18 +35,17 @@
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">User documentation:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Documentation utilisateur:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../source/user.html">Features</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../source/user.html#images">Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/user.html">Fonctionnalités</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Technical documentation:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Documentation technique:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../source/modules.html">src</a></li>
 </ul>
@@ -63,7 +64,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Code du module</a></li>
       <li class="breadcrumb-item active">gui.views.ui_main</li>
       <li class="wy-breadcrumbs-aside">
       </li>
@@ -73,7 +74,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for gui.views.ui_main</h1><div class="highlight"><pre>
+  <h1>Code source de gui.views.ui_main</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">PySide6</span><span class="w"> </span><span class="kn">import</span> <span class="n">QtCore</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="p">,</span> <span class="n">QtSvgWidgets</span>
@@ -180,7 +181,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">settings_left_column</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">settings_right_column</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">settings_oracle</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">settings_DB_buttons</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">settings_csv</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">settings_config</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="UI_MainWindow.setup_ui">
@@ -548,12 +550,9 @@
             <span class="n">headers</span><span class="o">=</span><span class="p">[</span>
                 <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Status&quot;</span><span class="p">),</span>
                 <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Table name&quot;</span><span class="p">),</span>
-                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Size in DB1&quot;</span><span class="p">),</span>
-                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Size in DB2&quot;</span><span class="p">),</span>
-                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Cols in DB1&quot;</span><span class="p">),</span>
-                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Cols in DB2&quot;</span><span class="p">),</span>
-                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Rows in DB1&quot;</span><span class="p">),</span>
-                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Rows in DB2&quot;</span><span class="p">)</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Size gap&quot;</span><span class="p">),</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Col gap&quot;</span><span class="p">),</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Row gap&quot;</span><span class="p">)</span>
             <span class="p">]</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tableWidget</span><span class="o">.</span><span class="n">horizontalHeader</span><span class="p">()</span><span class="o">.</span><span class="n">setSectionResizeMode</span><span class="p">(</span>
@@ -773,6 +772,7 @@
 <a class="viewcode-back" href="../../../source/gui.views.html#gui.views.ui_main.UI_MainWindow.setup_page3">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">setup_page3</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">oracle</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">title_label_2</span><span class="o">.</span><span class="n">setMaximumHeight</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">description_label_2</span><span class="o">.</span><span class="n">setMaximumHeight</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
@@ -790,15 +790,14 @@
         <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">csv_selector</span> <span class="o">=</span> <span class="n">py_tool_button</span><span class="o">.</span><span class="n">PyToolButton</span><span class="p">(</span>
-            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;CSV (WIP)&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;CSV file&quot;</span><span class="p">,</span>
             <span class="n">icon_path</span><span class="o">=</span><span class="s2">&quot;csv.svg&quot;</span><span class="p">,</span>
             <span class="n">bg_color</span><span class="o">=</span><span class="s2">&quot;transparent&quot;</span><span class="p">,</span>
             <span class="n">border_size</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
             <span class="n">bg_color_checked</span><span class="o">=</span><span class="s2">&quot;#182ACC&quot;</span><span class="p">,</span>
             <span class="n">bg_color_hover</span><span class="o">=</span><span class="s2">&quot;#182ACC&quot;</span><span class="p">,</span>
             <span class="n">is_checkable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="n">is_autoexclusive</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="n">is_enabled</span><span class="o">=</span><span class="kc">False</span>
+            <span class="n">is_autoexclusive</span><span class="o">=</span><span class="kc">True</span>
 
         <span class="p">)</span>
 
@@ -1040,8 +1039,77 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">authentication_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">setPasswordOracle</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">authentication_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">isSavePwdOracle</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">isSavePwdOracle</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span></div>
 
+
+<div class="viewcode-block" id="UI_MainWindow.settings_csv">
+<a class="viewcode-back" href="../../../source/gui.views.html#gui.views.ui_main.UI_MainWindow.settings_csv">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">settings_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">imagedragzone</span> <span class="o">=</span> <span class="n">py_label</span><span class="o">.</span><span class="n">PyLabel</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+            <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
+            <span class="n">selection_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;white&quot;</span><span class="p">],</span>
+            <span class="n">bg_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;bg_one&quot;</span><span class="p">],</span>
+            <span class="n">bg_color_active</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;dark_three&quot;</span><span class="p">],</span>
+            <span class="n">context_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;context_color&quot;</span><span class="p">],</span>
+            <span class="n">icon_path</span><span class="o">=</span><span class="s2">&quot;icon_upload.svg&quot;</span><span class="p">,</span>
+            <span class="n">accept_drops</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imagedragzone</span><span class="o">.</span><span class="n">setMinimumHeight</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imagedragzone</span><span class="o">.</span><span class="n">setMaximumHeight</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+        <span class="n">text_1</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+            <span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Drag &amp; Drop here&quot;</span><span class="p">)</span>
+        <span class="n">text_2</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+            <span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;or&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">labeldragzone</span> <span class="o">=</span> <span class="n">py_label</span><span class="o">.</span><span class="n">PyLabel</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            &lt;b&gt;&lt;font size=&quot;16&quot;&gt;</span><span class="si">{</span><span class="n">text_1</span><span class="si">}</span><span class="s2">&lt;/font&gt;&lt;/b&gt;</span>
+<span class="s2">            &lt;br&gt;&lt;i&gt;&lt;p align=&quot;center&quot;&gt;&lt;font size=&quot;6&quot;&gt;</span>
+<span class="s2">            </span><span class="si">{</span><span class="n">text_2</span><span class="si">}</span><span class="s2">&lt;/font&gt;&lt;/p&gt;&lt;/i&gt;&lt;br&gt;&quot;&quot;&quot;</span><span class="p">,</span>
+            <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+            <span class="n">border_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;text_foreground&quot;</span><span class="p">],</span>
+            <span class="n">selection_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;white&quot;</span><span class="p">],</span>
+            <span class="n">bg_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;bg_one&quot;</span><span class="p">],</span>
+            <span class="n">bg_color_active</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;dark_three&quot;</span><span class="p">],</span>
+            <span class="n">context_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;context_color&quot;</span><span class="p">],</span>
+            <span class="n">accept_drops</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">labeldragzone</span><span class="o">.</span><span class="n">setMinimumHeight</span><span class="p">(</span><span class="mi">110</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">labeldragzone</span><span class="o">.</span><span class="n">setMaximumHeight</span><span class="p">(</span><span class="mi">110</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">drag_button</span> <span class="o">=</span> <span class="n">py_push_button</span><span class="o">.</span><span class="n">PyPushButton</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Browse file&quot;</span><span class="p">),</span>
+            <span class="n">radius</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;white&quot;</span><span class="p">],</span>
+            <span class="n">bg_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;lightblue&quot;</span><span class="p">],</span>
+            <span class="n">bg_color_hover</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;dark_three&quot;</span><span class="p">],</span>
+            <span class="n">bg_color_pressed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;dark_four&quot;</span><span class="p">],</span>
+            <span class="n">bg_color_disabled</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">themes</span><span class="p">[</span><span class="s2">&quot;app_color&quot;</span><span class="p">][</span><span class="s2">&quot;grey&quot;</span><span class="p">],</span>
+            <span class="n">accept_drops</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drag_button</span><span class="o">.</span><span class="n">setMinimumHeight</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drag_button</span><span class="o">.</span><span class="n">setMaximumHeight</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drag_button</span><span class="o">.</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drag_button</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">csv_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">imagedragzone</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">csv_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">labeldragzone</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">csv_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">drag_button</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UI_MainWindow.settings_config">
+<a class="viewcode-back" href="../../../source/gui.views.html#gui.views.ui_main.UI_MainWindow.settings_config">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">settings_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">labelCustomName</span> <span class="o">=</span> <span class="n">py_label</span><span class="o">.</span><span class="n">PyLabel</span><span class="p">(</span>
             <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
                 <span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Connection name&quot;</span><span class="p">),</span>
@@ -1076,12 +1144,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">setCustomName</span><span class="o">.</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">settings_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">labelCustomName</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">settings_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">setCustomName</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">settings_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">setCustomName</span><span class="p">)</span>
 
-
-<div class="viewcode-block" id="UI_MainWindow.settings_DB_buttons">
-<a class="viewcode-back" href="../../../source/gui.views.html#gui.views.ui_main.UI_MainWindow.settings_DB_buttons">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">settings_DB_buttons</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">testDB</span> <span class="o">=</span> <span class="n">py_push_button</span><span class="o">.</span><span class="n">PyPushButton</span><span class="p">(</span>
             <span class="n">text</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
                 <span class="s2">&quot;ui_main&quot;</span><span class="p">,</span> <span class="s2">&quot;Test Connection&quot;</span><span class="p">),</span>
@@ -1243,12 +1307,12 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2025, CrEagleOne.</p>
+    <p>&#169; Droits d'auteur 2025, CrEagleOne.</p>
   </div>
 
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
    
 
 </footer>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DBtective \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-03 12:04+0200\n"
+"POT-Creation-Date: 2025-06-06 15:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,8 +78,16 @@ msgstr ""
 msgid "Notes"
 msgstr ""
 
+#: ../../src/gui/views/controls.py:docstring of gui.views.controls.csv:1
+msgid "Control the input data for csv settings"
+msgstr ""
+
 #: ../../src/gui/views/controls.py:docstring of gui.views.controls.db_compare:1
 msgid "Control the input data for database comparison"
+msgstr ""
+
+#: ../../src/gui/views/controls.py:docstring of gui.views.controls.init_csv:1
+msgid "Init UI of the input data for CSV settings"
 msgstr ""
 
 #: ../../src/gui/views/controls.py:docstring of gui.views.controls.init_db_compare:1
@@ -168,6 +176,10 @@ msgstr ""
 #: ../../src/gui/views/events.py:docstring of gui.views.events.MainEventHandler:1
 #: ../../src/gui/views/ui_main.py:docstring of gui.views.ui_main.UI_MainWindow:1
 msgid "Bases: :py:class:`object`"
+msgstr ""
+
+#: ../../src/gui/views/events.py:docstring of gui.views.events.MainEventHandler.clear_csv_data:1
+msgid "Clear all import files of csv config"
 msgstr ""
 
 #: ../../src/gui/views/events.py:docstring of gui.views.events.MainEventHandler.clear_db:1

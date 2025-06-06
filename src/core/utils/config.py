@@ -106,6 +106,9 @@ def update_settings(query, args: tuple, **kwargs):
     try:
         conn = kwargs.get('conn')
         cursor = conn.cursor()
+        current_datetime = datetime.now()
+        formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
+        args = (args[0], formatted_datetime, args[1])
         cursor.execute(query, args)
     except sqlite3.OperationalError as e:
         if "no such" in str(e).lower():

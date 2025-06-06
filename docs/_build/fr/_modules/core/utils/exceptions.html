@@ -8,6 +8,7 @@
   <title>core.utils.exceptions &mdash; Documentation DBtective 1.0.0</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=8399456f" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
@@ -43,7 +44,6 @@
               <p class="caption" role="heading"><span class="caption-text">Documentation utilisateur:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../source/user.html">Fonctionnalités</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../source/user.html#images">Images</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Documentation technique:</span></p>
 <ul>
@@ -90,7 +90,7 @@
 <span class="sd">    - logs.py</span>
 
 <span class="sd">Usage Example:</span>
-<span class="sd">    raise Error(100, &quot;texte&quot;)</span>
+<span class="sd">    raise Error(400, &quot;text&quot;)</span>
 
 <span class="sd">Notes:</span>
 <span class="sd">    - N/A</span>
@@ -216,7 +216,10 @@
 <span class="sd">                    - 602: Themes file not found</span>
 <span class="sd">                    - 603: No tables to compare</span>
 <span class="sd">                    - 604: Error occurring during data extraction</span>
-<span class="sd">                    - 999: Unanticipated error - check logs</span>
+<span class="sd">                    - 605: Unsupported file type</span>
+<span class="sd">                    - 606: The file does not appear to contain a header row</span>
+<span class="sd">                    - 607: No common tables found</span>
+<span class="sd">                    - 608: File not found</span>
 
 <span class="sd">            system (str | None, optional): System context for logging</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -266,9 +269,14 @@
                 <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;No tables to compare&quot;</span><span class="p">),</span>
             <span class="mi">604</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
                 <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Error occurring during data extraction&quot;</span><span class="p">),</span>
-
-            <span class="mi">999</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Unanticipated error - check logs&quot;</span><span class="p">),</span>
+            <span class="mi">605</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Unsupported file type&quot;</span><span class="p">),</span>
+            <span class="mi">606</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;The file does not appear to contain a header row&quot;</span><span class="p">),</span>
+            <span class="mi">607</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;No common tables found&quot;</span><span class="p">),</span>
+            <span class="mi">608</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;File not found&quot;</span><span class="p">)</span>
         <span class="p">}</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
@@ -341,20 +349,20 @@
 
 <span class="sd">                Possible values:</span>
 <span class="sd">                    - 100: Backup successfully</span>
-<span class="sd">                    - 101: Backup successfully</span>
 <span class="sd">                    - 200: Treatment completed successfully</span>
 <span class="sd">                    - 201: No discrepancies were found</span>
+<span class="sd">                    - 999: Unanticipated error - check logs</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">info</span> <span class="o">=</span> <span class="p">{</span>
             <span class="mi">100</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
                 <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Backup successfully&quot;</span><span class="p">),</span>
-            <span class="mi">101</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Backup successfully&quot;</span><span class="p">),</span>
             <span class="mi">200</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
                 <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Treatment completed successfully&quot;</span><span class="p">),</span>
             <span class="mi">201</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
                 <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;No discrepancies were found&quot;</span><span class="p">),</span>
+            <span class="mi">999</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;Unanticipated error - check logs&quot;</span><span class="p">),</span>
         <span class="p">}</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>

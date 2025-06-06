@@ -4,46 +4,46 @@
 <context>
     <name>events</name>
     <message>
-        <location filename="../views/events.py" line="192"/>
-        <location filename="../views/events.py" line="220"/>
+        <location filename="../views/events.py" line="195"/>
+        <location filename="../views/events.py" line="223"/>
         <source>At least one file is invalid and has been ignored</source>
         <translation>Au moins un fichier n&apos;est pas valide et a été ignoré</translation>
     </message>
     <message>
-        <location filename="../views/events.py" line="310"/>
-        <location filename="../views/events.py" line="345"/>
+        <location filename="../views/events.py" line="313"/>
+        <location filename="../views/events.py" line="348"/>
         <source>Ignore</source>
         <translation>Ignorer</translation>
     </message>
     <message>
-        <location filename="../views/events.py" line="321"/>
-        <location filename="../views/events.py" line="335"/>
-        <location filename="../views/events.py" line="699"/>
+        <location filename="../views/events.py" line="324"/>
+        <location filename="../views/events.py" line="338"/>
+        <location filename="../views/events.py" line="706"/>
         <source>Compare</source>
         <translation>Comparer</translation>
     </message>
     <message>
-        <location filename="../views/events.py" line="553"/>
+        <location filename="../views/events.py" line="556"/>
         <source>Input password</source>
         <translation>Saisir un mot de passe</translation>
     </message>
     <message>
-        <location filename="../views/events.py" line="555"/>
+        <location filename="../views/events.py" line="558"/>
         <source>Please enter a password</source>
         <translation>Veuillez saisir un mot de passe</translation>
     </message>
     <message>
-        <location filename="../views/events.py" line="592"/>
+        <location filename="../views/events.py" line="597"/>
         <source>Processing in progress...</source>
         <translation>Traitement en cours...</translation>
     </message>
     <message>
-        <location filename="../views/events.py" line="621"/>
+        <location filename="../views/events.py" line="626"/>
         <source>End of treatment</source>
         <translation>Fin du traitement</translation>
     </message>
     <message>
-        <location filename="../views/events.py" line="658"/>
+        <location filename="../views/events.py" line="663"/>
         <source>Server : {content} 
 
             Ping response time : {ping_time:.2f} ms</source>
@@ -52,7 +52,7 @@
             Temps de réponse Ping : {ping_time:.2f} ms</translation>
     </message>
     <message>
-        <location filename="../views/events.py" line="681"/>
+        <location filename="../views/events.py" line="686"/>
         <source>Unable to retrieve common tables</source>
         <translation>Récupération des tables communes impossible</translation>
     </message>
@@ -60,146 +60,166 @@
 <context>
     <name>exceptions</name>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="238"/>
+        <location filename="../../core/utils/exceptions.py" line="250"/>
         <source>Treatment completed successfully</source>
         <translation>Traitement terminé avec succès</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="126"/>
+        <location filename="../../core/utils/exceptions.py" line="130"/>
         <source>Poorly formed or invalid SQL query</source>
         <translation>Requête SQL mal formée ou non valide</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="128"/>
+        <location filename="../../core/utils/exceptions.py" line="132"/>
         <source>An error was occured</source>
         <translation>Une erreur s&apos;est produite</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="130"/>
+        <location filename="../../core/utils/exceptions.py" line="134"/>
         <source>UNIQUE constraint failed</source>
         <translation>Violation de contrainte unique</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="132"/>
+        <location filename="../../core/utils/exceptions.py" line="136"/>
         <source>Syntax error</source>
         <translation>Erreur de syntaxe</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="134"/>
+        <location filename="../../core/utils/exceptions.py" line="138"/>
         <source>Table or column not found</source>
         <translation>Tableau ou colonne introuvable</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="136"/>
+        <location filename="../../core/utils/exceptions.py" line="140"/>
         <source>Incorrect database config</source>
         <translation>Configuration incorrecte de la base de données</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="138"/>
+        <location filename="../../core/utils/exceptions.py" line="142"/>
         <source>Data type mismatch</source>
         <translation>Incompatibilité de type de données</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="140"/>
+        <location filename="../../core/utils/exceptions.py" line="144"/>
         <source>Conversion error</source>
         <translation>Erreur de conversion</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="142"/>
+        <location filename="../../core/utils/exceptions.py" line="146"/>
         <source>Transaction error</source>
         <translation>Erreur de transaction</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="145"/>
+        <location filename="../../core/utils/exceptions.py" line="149"/>
         <source>Failed to connect to database</source>
         <translation>Impossible de se connecter à la base de données</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="162"/>
+        <location filename="../../core/utils/exceptions.py" line="166"/>
         <source>Settings file not found</source>
         <translation>Fichier de paramètres introuvable</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="164"/>
+        <location filename="../../core/utils/exceptions.py" line="168"/>
         <source>Themes file not found</source>
         <translation>Fichier de thèmes introuvable</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="147"/>
+        <location filename="../../core/utils/exceptions.py" line="151"/>
         <source>Database temporarily unavailable</source>
         <translation>Base de données temporairement indisponible</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="236"/>
+        <location filename="../../core/utils/exceptions.py" line="248"/>
         <source>Backup successfully</source>
         <translation>Sauvegarde avec succès</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="240"/>
+        <location filename="../../core/utils/exceptions.py" line="252"/>
         <source>No discrepancies were found</source>
         <translation>Aucune écart n&apos;a été trouvé</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="205"/>
+        <location filename="../../core/utils/exceptions.py" line="217"/>
         <source>Discrepancies were found</source>
         <translation>Des écarts ont été trouvés</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="149"/>
+        <location filename="../../core/utils/exceptions.py" line="153"/>
         <source>Out of memory error</source>
         <translation>Erreur de manque de mémoire</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="151"/>
+        <location filename="../../core/utils/exceptions.py" line="155"/>
         <source>Disk I/O error</source>
         <translation>Erreur d&apos;E/S du disque</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="153"/>
+        <location filename="../../core/utils/exceptions.py" line="157"/>
         <source>No active Oracle listener</source>
         <translation>Aucun auditeur Oracle actif</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="155"/>
+        <location filename="../../core/utils/exceptions.py" line="159"/>
         <source>Account locked</source>
         <translation>Compte verrouillé</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="157"/>
+        <location filename="../../core/utils/exceptions.py" line="161"/>
         <source>Incorrect username or password</source>
         <translation>Nom d&apos;utilisateur ou mot de passe incorrect</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="160"/>
+        <location filename="../../core/utils/exceptions.py" line="164"/>
         <source>System not supported</source>
         <translation>Système non pris en charge</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="166"/>
+        <location filename="../../core/utils/exceptions.py" line="170"/>
         <source>No tables to compare</source>
         <translation>Pas de tables  à comparer</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="168"/>
+        <location filename="../../core/utils/exceptions.py" line="172"/>
         <source>Error occurring during data extraction</source>
         <translation>Erreur  lors de l&apos;extraction des données</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="242"/>
+        <location filename="../../core/utils/exceptions.py" line="174"/>
+        <source>Unsupported file type</source>
+        <translation>Type de fichier non supporté</translation>
+    </message>
+    <message>
+        <location filename="../../core/utils/exceptions.py" line="176"/>
+        <source>The file does not appear to contain a header row</source>
+        <translation>Le fichier ne semble pas contenir de ligne d&apos;en-tête</translation>
+    </message>
+    <message>
+        <location filename="../../core/utils/exceptions.py" line="178"/>
+        <source>No common tables found</source>
+        <translation>Aucune table commune trouvée</translation>
+    </message>
+    <message>
+        <location filename="../../core/utils/exceptions.py" line="183"/>
+        <source>File not found</source>
+        <translation>Fichier introuvable</translation>
+    </message>
+    <message>
+        <location filename="../../core/utils/exceptions.py" line="254"/>
         <source>Unanticipated error - check logs</source>
         <translation>Erreur imprévue - vérifiez les logs</translation>
     </message>
     <message>
-        <location filename="../../core/utils/exceptions.py" line="175"/>
-        <location filename="../../core/utils/exceptions.py" line="212"/>
-        <location filename="../../core/utils/exceptions.py" line="249"/>
+        <location filename="../../core/utils/exceptions.py" line="187"/>
+        <location filename="../../core/utils/exceptions.py" line="224"/>
+        <location filename="../../core/utils/exceptions.py" line="261"/>
         <source>Unknown code</source>
         <translation>Erreur inconnue</translation>
     </message>
     <message>
         <location filename="../views/controls.py" line="63"/>
         <location filename="../views/controls.py" line="143"/>
-        <location filename="../views/controls.py" line="229"/>
+        <location filename="../views/controls.py" line="234"/>
         <source>Correct errors</source>
         <translation>Corrigez les erreurs</translation>
     </message>
@@ -310,168 +330,153 @@
     </message>
     <message>
         <location filename="../views/ui_main.py" line="463"/>
-        <source>Size in DB1</source>
-        <translation>Taille dans DB1</translation>
+        <source>Size gap</source>
+        <translation>Ecart de taille</translation>
     </message>
     <message>
         <location filename="../views/ui_main.py" line="464"/>
-        <source>Size in DB2</source>
-        <translation>Taille dans DB2</translation>
-    </message>
-    <message>
-        <location filename="../views/ui_main.py" line="465"/>
-        <source>Cols in DB1</source>
-        <translation>Colonnes dans DB1</translation>
-    </message>
-    <message>
-        <location filename="../views/ui_main.py" line="466"/>
-        <source>Cols in DB2</source>
-        <translation>Colonnes dans DB2</translation>
+        <source>Col gap</source>
+        <translation>Ecart de colonnes</translation>
     </message>
     <message>
         <location filename="../views/ui_main.py" line="467"/>
-        <source>Rows in DB1</source>
-        <translation>Lignes dans DB1</translation>
+        <source>Row gap</source>
+        <translation>Ecart de ligne</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="470"/>
-        <source>Rows in DB2</source>
-        <translation>Lignes dans DB2</translation>
-    </message>
-    <message>
-        <location filename="../views/ui_main.py" line="480"/>
+        <location filename="../views/ui_main.py" line="477"/>
         <source>Multiple queries</source>
         <translation>Requêtes multiples</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="507"/>
+        <location filename="../views/ui_main.py" line="504"/>
         <source>Segment length</source>
         <translation>Longueur du segment</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="540"/>
+        <location filename="../views/ui_main.py" line="537"/>
         <source>Fetch Size</source>
         <translation>Taille de récupération</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="570"/>
+        <location filename="../views/ui_main.py" line="567"/>
         <source>By hash</source>
         <translation>Par hachage</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="585"/>
+        <location filename="../views/ui_main.py" line="582"/>
         <source>By lines</source>
         <translation>Par lignes</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="601"/>
+        <location filename="../views/ui_main.py" line="598"/>
         <source>By columns (Experimental)</source>
         <translation>Par colonnes (Expérimental)</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="616"/>
-        <location filename="../views/ui_main.py" line="1067"/>
+        <location filename="../views/ui_main.py" line="613"/>
+        <location filename="../views/ui_main.py" line="1064"/>
         <source>Clear</source>
         <translation>Effacer</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="631"/>
+        <location filename="../views/ui_main.py" line="628"/>
         <source>Compare</source>
         <translation>Comparer</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="719"/>
+        <location filename="../views/ui_main.py" line="716"/>
         <source>Host and Port</source>
         <translation>Hôte et Port</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="736"/>
+        <location filename="../views/ui_main.py" line="733"/>
         <source>Host</source>
         <translation>Hôte</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="752"/>
+        <location filename="../views/ui_main.py" line="749"/>
         <source>Port</source>
         <translation>Port</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="768"/>
+        <location filename="../views/ui_main.py" line="765"/>
         <source>Database</source>
         <translation>Base de données</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="826"/>
+        <location filename="../views/ui_main.py" line="823"/>
         <source>authentication</source>
         <translation>Authentification</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="856"/>
+        <location filename="../views/ui_main.py" line="853"/>
         <source>Username</source>
         <translation>Nom d&apos;utilisateur</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="873"/>
+        <location filename="../views/ui_main.py" line="870"/>
         <source>username</source>
         <translation>Nom d&apos;utilisateur</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="888"/>
-        <location filename="../views/ui_main.py" line="905"/>
+        <location filename="../views/ui_main.py" line="885"/>
+        <location filename="../views/ui_main.py" line="902"/>
         <source>Password</source>
         <translation>Mot de passe</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="921"/>
+        <location filename="../views/ui_main.py" line="918"/>
         <source>Save password</source>
         <translation>Enregistrer le mot de passe</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="970"/>
+        <location filename="../views/ui_main.py" line="967"/>
         <source>Drag &amp; Drop here</source>
         <translation>Glisser-déposer ici</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="973"/>
+        <location filename="../views/ui_main.py" line="970"/>
         <source>or</source>
         <translation>ou</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="992"/>
+        <location filename="../views/ui_main.py" line="989"/>
         <source>Browse file</source>
         <translation>Choisir un fichier</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="1016"/>
+        <location filename="../views/ui_main.py" line="1013"/>
         <source>Connection name</source>
         <translation>Nom de la connexion</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="1033"/>
+        <location filename="../views/ui_main.py" line="1030"/>
         <source>Custom name</source>
         <translation>Nom custom</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="1052"/>
+        <location filename="../views/ui_main.py" line="1049"/>
         <source>Test Connection</source>
         <translation>Tester la connexion</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="1082"/>
+        <location filename="../views/ui_main.py" line="1079"/>
         <source>Save</source>
         <translation>Sauvegarder</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="1110"/>
+        <location filename="../views/ui_main.py" line="1107"/>
         <source>Language</source>
         <translation>Langage</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="1145"/>
+        <location filename="../views/ui_main.py" line="1142"/>
         <source>Show Menu 2</source>
         <translation>Voir le menu 2</translation>
     </message>
     <message>
-        <location filename="../views/ui_main.py" line="1158"/>
+        <location filename="../views/ui_main.py" line="1155"/>
         <source>Show Menu 1</source>
         <translation>Voir le menu 1</translation>
     </message>

@@ -1,0 +1,778 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>charset_normalizer.api &mdash; Documentation DBtective 1.0.0</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=8399456f" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=05dadb3a"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/translations.js?v=e6b791cb"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            DBtective
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation utilisateur:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/user.html">Fonctionnalités</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation technique:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/modules.html">src</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">DBtective</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Code du module</a></li>
+      <li class="breadcrumb-item active">charset_normalizer.api</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Code source de charset_normalizer.api</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">PathLike</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">BinaryIO</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.cd</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">coherence_ratio</span><span class="p">,</span>
+    <span class="n">encoding_languages</span><span class="p">,</span>
+    <span class="n">mb_encoding_languages</span><span class="p">,</span>
+    <span class="n">merge_coherence_ratios</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.constant</span><span class="w"> </span><span class="kn">import</span> <span class="n">IANA_SUPPORTED</span><span class="p">,</span> <span class="n">TOO_BIG_SEQUENCE</span><span class="p">,</span> <span class="n">TOO_SMALL_SEQUENCE</span><span class="p">,</span> <span class="n">TRACE</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.md</span><span class="w"> </span><span class="kn">import</span> <span class="n">mess_ratio</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CharsetMatch</span><span class="p">,</span> <span class="n">CharsetMatches</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.utils</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">any_specified_encoding</span><span class="p">,</span>
+    <span class="n">cut_sequence_chunks</span><span class="p">,</span>
+    <span class="n">iana_name</span><span class="p">,</span>
+    <span class="n">identify_sig_or_bom</span><span class="p">,</span>
+    <span class="n">is_cp_similar</span><span class="p">,</span>
+    <span class="n">is_multi_byte_encoding</span><span class="p">,</span>
+    <span class="n">should_strip_sig_or_bom</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;charset_normalizer&quot;</span><span class="p">)</span>
+<span class="n">explain_handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
+<span class="n">explain_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> | </span><span class="si">%(levelname)s</span><span class="s2"> | </span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">from_bytes</span><span class="p">(</span>
+    <span class="n">sequences</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="nb">bytearray</span><span class="p">,</span>
+    <span class="n">steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="n">chunk_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">512</span><span class="p">,</span>
+    <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
+    <span class="n">cp_isolation</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">cp_exclusion</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">preemptive_behaviour</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">explain</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">language_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">enable_fallback</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CharsetMatches</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given a raw bytes sequence, return the best possibles charset usable to render str objects.</span>
+<span class="sd">    If there is no results, it is a strong indicator that the source is binary/not text.</span>
+<span class="sd">    By default, the process will extract 5 blocks of 512o each to assess the mess and coherence of a given sequence.</span>
+<span class="sd">    And will give up a particular code page after 20% of measured mess. Those criteria are customizable at will.</span>
+
+<span class="sd">    The preemptive behavior DOES NOT replace the traditional detection workflow, it prioritize a particular code page</span>
+<span class="sd">    but never take it for granted. Can improve the performance.</span>
+
+<span class="sd">    You may want to focus your attention to some code page or/and not others, use cp_isolation and cp_exclusion for that</span>
+<span class="sd">    purpose.</span>
+
+<span class="sd">    This function will strip the SIG in the payload/sequence every time except on UTF-16, UTF-32.</span>
+<span class="sd">    By default the library does not setup any handler other than the NullHandler, if you choose to set the &#39;explain&#39;</span>
+<span class="sd">    toggle to True it will alter the logger configuration to add a StreamHandler that is suitable for debugging.</span>
+<span class="sd">    Custom logging format and handler can be set manually.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sequences</span><span class="p">,</span> <span class="p">(</span><span class="nb">bytearray</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+            <span class="s2">&quot;Expected object of type bytes or bytearray, got: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="nb">type</span><span class="p">(</span><span class="n">sequences</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">explain</span><span class="p">:</span>
+        <span class="n">previous_logger_level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">logger</span><span class="o">.</span><span class="n">level</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">explain_handler</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">TRACE</span><span class="p">)</span>
+
+    <span class="n">length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sequences</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Encoding detection on empty bytes, assuming utf_8 intention.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">explain</span><span class="p">:</span>  <span class="c1"># Defensive: ensure exit path clean handler</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">removeHandler</span><span class="p">(</span><span class="n">explain_handler</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">previous_logger_level</span> <span class="ow">or</span> <span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">CharsetMatches</span><span class="p">([</span><span class="n">CharsetMatch</span><span class="p">(</span><span class="n">sequences</span><span class="p">,</span> <span class="s2">&quot;utf_8&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="p">[],</span> <span class="s2">&quot;&quot;</span><span class="p">)])</span>
+
+    <span class="k">if</span> <span class="n">cp_isolation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+            <span class="n">TRACE</span><span class="p">,</span>
+            <span class="s2">&quot;cp_isolation is set. use this flag for debugging purpose. &quot;</span>
+            <span class="s2">&quot;limited list of encoding allowed : </span><span class="si">%s</span><span class="s2">.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cp_isolation</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="n">cp_isolation</span> <span class="o">=</span> <span class="p">[</span><span class="n">iana_name</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="k">for</span> <span class="n">cp</span> <span class="ow">in</span> <span class="n">cp_isolation</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">cp_isolation</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="n">cp_exclusion</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+            <span class="n">TRACE</span><span class="p">,</span>
+            <span class="s2">&quot;cp_exclusion is set. use this flag for debugging purpose. &quot;</span>
+            <span class="s2">&quot;limited list of encoding excluded : </span><span class="si">%s</span><span class="s2">.&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cp_exclusion</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="n">cp_exclusion</span> <span class="o">=</span> <span class="p">[</span><span class="n">iana_name</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="k">for</span> <span class="n">cp</span> <span class="ow">in</span> <span class="n">cp_exclusion</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">cp_exclusion</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="n">length</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">chunk_size</span> <span class="o">*</span> <span class="n">steps</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+            <span class="n">TRACE</span><span class="p">,</span>
+            <span class="s2">&quot;override steps (</span><span class="si">%i</span><span class="s2">) and chunk_size (</span><span class="si">%i</span><span class="s2">) as content does not fit (</span><span class="si">%i</span><span class="s2"> byte(s) given) parameters.&quot;</span><span class="p">,</span>
+            <span class="n">steps</span><span class="p">,</span>
+            <span class="n">chunk_size</span><span class="p">,</span>
+            <span class="n">length</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">steps</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">chunk_size</span> <span class="o">=</span> <span class="n">length</span>
+
+    <span class="k">if</span> <span class="n">steps</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">length</span> <span class="o">/</span> <span class="n">steps</span> <span class="o">&lt;</span> <span class="n">chunk_size</span><span class="p">:</span>
+        <span class="n">chunk_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">length</span> <span class="o">/</span> <span class="n">steps</span><span class="p">)</span>
+
+    <span class="n">is_too_small_sequence</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sequences</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">TOO_SMALL_SEQUENCE</span>
+    <span class="n">is_too_large_sequence</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sequences</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">TOO_BIG_SEQUENCE</span>
+
+    <span class="k">if</span> <span class="n">is_too_small_sequence</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+            <span class="n">TRACE</span><span class="p">,</span>
+            <span class="s2">&quot;Trying to detect encoding from a tiny portion of (</span><span class="si">{}</span><span class="s2">) byte(s).&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">length</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">is_too_large_sequence</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+            <span class="n">TRACE</span><span class="p">,</span>
+            <span class="s2">&quot;Using lazy str decoding because the payload is quite large, (</span><span class="si">{}</span><span class="s2">) byte(s).&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">length</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+
+    <span class="n">prioritized_encodings</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">specified_encoding</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">any_specified_encoding</span><span class="p">(</span><span class="n">sequences</span><span class="p">)</span> <span class="k">if</span> <span class="n">preemptive_behaviour</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">specified_encoding</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">prioritized_encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">specified_encoding</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+            <span class="n">TRACE</span><span class="p">,</span>
+            <span class="s2">&quot;Detected declarative mark in sequence. Priority +1 given for </span><span class="si">%s</span><span class="s2">.&quot;</span><span class="p">,</span>
+            <span class="n">specified_encoding</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="n">tested</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">tested_but_hard_failure</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">tested_but_soft_failure</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">fallback_ascii</span><span class="p">:</span> <span class="n">CharsetMatch</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">fallback_u8</span><span class="p">:</span> <span class="n">CharsetMatch</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">fallback_specified</span><span class="p">:</span> <span class="n">CharsetMatch</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">results</span><span class="p">:</span> <span class="n">CharsetMatches</span> <span class="o">=</span> <span class="n">CharsetMatches</span><span class="p">()</span>
+
+    <span class="n">early_stop_results</span><span class="p">:</span> <span class="n">CharsetMatches</span> <span class="o">=</span> <span class="n">CharsetMatches</span><span class="p">()</span>
+
+    <span class="n">sig_encoding</span><span class="p">,</span> <span class="n">sig_payload</span> <span class="o">=</span> <span class="n">identify_sig_or_bom</span><span class="p">(</span><span class="n">sequences</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">sig_encoding</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">prioritized_encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sig_encoding</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+            <span class="n">TRACE</span><span class="p">,</span>
+            <span class="s2">&quot;Detected a SIG or BOM mark on first </span><span class="si">%i</span><span class="s2"> byte(s). Priority +1 given for </span><span class="si">%s</span><span class="s2">.&quot;</span><span class="p">,</span>
+            <span class="nb">len</span><span class="p">(</span><span class="n">sig_payload</span><span class="p">),</span>
+            <span class="n">sig_encoding</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="n">prioritized_encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s2">&quot;utf_8&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">prioritized_encodings</span><span class="p">:</span>
+        <span class="n">prioritized_encodings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;utf_8&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">encoding_iana</span> <span class="ow">in</span> <span class="n">prioritized_encodings</span> <span class="o">+</span> <span class="n">IANA_SUPPORTED</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">cp_isolation</span> <span class="ow">and</span> <span class="n">encoding_iana</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cp_isolation</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="k">if</span> <span class="n">cp_exclusion</span> <span class="ow">and</span> <span class="n">encoding_iana</span> <span class="ow">in</span> <span class="n">cp_exclusion</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="k">if</span> <span class="n">encoding_iana</span> <span class="ow">in</span> <span class="n">tested</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="n">tested</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">encoding_iana</span><span class="p">)</span>
+
+        <span class="n">decoded_payload</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">bom_or_sig_available</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">sig_encoding</span> <span class="o">==</span> <span class="n">encoding_iana</span>
+        <span class="n">strip_sig_or_bom</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">bom_or_sig_available</span> <span class="ow">and</span> <span class="n">should_strip_sig_or_bom</span><span class="p">(</span>
+            <span class="n">encoding_iana</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">encoding_iana</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;utf_16&quot;</span><span class="p">,</span> <span class="s2">&quot;utf_32&quot;</span><span class="p">}</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">bom_or_sig_available</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+                <span class="n">TRACE</span><span class="p">,</span>
+                <span class="s2">&quot;Encoding </span><span class="si">%s</span><span class="s2"> won&#39;t be tested as-is because it require a BOM. Will try some sub-encoder LE/BE.&quot;</span><span class="p">,</span>
+                <span class="n">encoding_iana</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">encoding_iana</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;utf_7&quot;</span><span class="p">}</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">bom_or_sig_available</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+                <span class="n">TRACE</span><span class="p">,</span>
+                <span class="s2">&quot;Encoding </span><span class="si">%s</span><span class="s2"> won&#39;t be tested as-is because detection is unreliable without BOM/SIG.&quot;</span><span class="p">,</span>
+                <span class="n">encoding_iana</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">is_multi_byte_decoder</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">is_multi_byte_encoding</span><span class="p">(</span><span class="n">encoding_iana</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">ModuleNotFoundError</span><span class="p">,</span> <span class="ne">ImportError</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+                <span class="n">TRACE</span><span class="p">,</span>
+                <span class="s2">&quot;Encoding </span><span class="si">%s</span><span class="s2"> does not provide an IncrementalDecoder&quot;</span><span class="p">,</span>
+                <span class="n">encoding_iana</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">is_too_large_sequence</span> <span class="ow">and</span> <span class="n">is_multi_byte_decoder</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="nb">str</span><span class="p">(</span>
+                    <span class="p">(</span>
+                        <span class="n">sequences</span><span class="p">[:</span> <span class="nb">int</span><span class="p">(</span><span class="mf">50e4</span><span class="p">)]</span>
+                        <span class="k">if</span> <span class="n">strip_sig_or_bom</span> <span class="ow">is</span> <span class="kc">False</span>
+                        <span class="k">else</span> <span class="n">sequences</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">sig_payload</span><span class="p">)</span> <span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="mf">50e4</span><span class="p">)]</span>
+                    <span class="p">),</span>
+                    <span class="n">encoding</span><span class="o">=</span><span class="n">encoding_iana</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">decoded_payload</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span>
+                    <span class="p">(</span>
+                        <span class="n">sequences</span>
+                        <span class="k">if</span> <span class="n">strip_sig_or_bom</span> <span class="ow">is</span> <span class="kc">False</span>
+                        <span class="k">else</span> <span class="n">sequences</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">sig_payload</span><span class="p">)</span> <span class="p">:]</span>
+                    <span class="p">),</span>
+                    <span class="n">encoding</span><span class="o">=</span><span class="n">encoding_iana</span><span class="p">,</span>
+                <span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">UnicodeDecodeError</span><span class="p">,</span> <span class="ne">LookupError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="ne">LookupError</span><span class="p">):</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+                    <span class="n">TRACE</span><span class="p">,</span>
+                    <span class="s2">&quot;Code page </span><span class="si">%s</span><span class="s2"> does not fit given bytes sequence at ALL. </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+                    <span class="n">encoding_iana</span><span class="p">,</span>
+                    <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
+                <span class="p">)</span>
+            <span class="n">tested_but_hard_failure</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">encoding_iana</span><span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="n">similar_soft_failure_test</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">for</span> <span class="n">encoding_soft_failed</span> <span class="ow">in</span> <span class="n">tested_but_soft_failure</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">is_cp_similar</span><span class="p">(</span><span class="n">encoding_iana</span><span class="p">,</span> <span class="n">encoding_soft_failed</span><span class="p">):</span>
+                <span class="n">similar_soft_failure_test</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">break</span>
+
+        <span class="k">if</span> <span class="n">similar_soft_failure_test</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+                <span class="n">TRACE</span><span class="p">,</span>
+                <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> is deemed too similar to code page </span><span class="si">%s</span><span class="s2"> and was consider unsuited already. Continuing!&quot;</span><span class="p">,</span>
+                <span class="n">encoding_iana</span><span class="p">,</span>
+                <span class="n">encoding_soft_failed</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="n">r_</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span>
+            <span class="mi">0</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">bom_or_sig_available</span> <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="n">sig_payload</span><span class="p">),</span>
+            <span class="n">length</span><span class="p">,</span>
+            <span class="nb">int</span><span class="p">(</span><span class="n">length</span> <span class="o">/</span> <span class="n">steps</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="n">multi_byte_bonus</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">is_multi_byte_decoder</span>
+            <span class="ow">and</span> <span class="n">decoded_payload</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">decoded_payload</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">length</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">multi_byte_bonus</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+                <span class="n">TRACE</span><span class="p">,</span>
+                <span class="s2">&quot;Code page </span><span class="si">%s</span><span class="s2"> is a multi byte encoding table and it appear that at least one character &quot;</span>
+                <span class="s2">&quot;was encoded using n-bytes.&quot;</span><span class="p">,</span>
+                <span class="n">encoding_iana</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="n">max_chunk_gave_up</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">r_</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span>
+
+        <span class="n">max_chunk_gave_up</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_chunk_gave_up</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">early_stop_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">lazy_str_hard_failure</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="n">md_chunks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">md_ratios</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">cut_sequence_chunks</span><span class="p">(</span>
+                <span class="n">sequences</span><span class="p">,</span>
+                <span class="n">encoding_iana</span><span class="p">,</span>
+                <span class="n">r_</span><span class="p">,</span>
+                <span class="n">chunk_size</span><span class="p">,</span>
+                <span class="n">bom_or_sig_available</span><span class="p">,</span>
+                <span class="n">strip_sig_or_bom</span><span class="p">,</span>
+                <span class="n">sig_payload</span><span class="p">,</span>
+                <span class="n">is_multi_byte_decoder</span><span class="p">,</span>
+                <span class="n">decoded_payload</span><span class="p">,</span>
+            <span class="p">):</span>
+                <span class="n">md_chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+
+                <span class="n">md_ratios</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">mess_ratio</span><span class="p">(</span>
+                        <span class="n">chunk</span><span class="p">,</span>
+                        <span class="n">threshold</span><span class="p">,</span>
+                        <span class="n">explain</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cp_isolation</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">md_ratios</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">:</span>
+                    <span class="n">early_stop_count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="n">early_stop_count</span> <span class="o">&gt;=</span> <span class="n">max_chunk_gave_up</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span>
+                    <span class="n">bom_or_sig_available</span> <span class="ow">and</span> <span class="n">strip_sig_or_bom</span> <span class="ow">is</span> <span class="kc">False</span>
+                <span class="p">):</span>
+                    <span class="k">break</span>
+        <span class="k">except</span> <span class="p">(</span>
+            <span class="ne">UnicodeDecodeError</span>
+        <span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># Lazy str loading may have missed something there</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+                <span class="n">TRACE</span><span class="p">,</span>
+                <span class="s2">&quot;LazyStr Loading: After MD chunk decode, code page </span><span class="si">%s</span><span class="s2"> does not fit given bytes sequence at ALL. </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="n">encoding_iana</span><span class="p">,</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
+            <span class="p">)</span>
+            <span class="n">early_stop_count</span> <span class="o">=</span> <span class="n">max_chunk_gave_up</span>
+            <span class="n">lazy_str_hard_failure</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="c1"># We might want to check the sequence again with the whole content</span>
+        <span class="c1"># Only if initial MD tests passes</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="ow">not</span> <span class="n">lazy_str_hard_failure</span>
+            <span class="ow">and</span> <span class="n">is_too_large_sequence</span>
+            <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_multi_byte_decoder</span>
+        <span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">sequences</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="mf">50e3</span><span class="p">)</span> <span class="p">:]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">encoding_iana</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;strict&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">UnicodeDecodeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+                    <span class="n">TRACE</span><span class="p">,</span>
+                    <span class="s2">&quot;LazyStr Loading: After final lookup, code page </span><span class="si">%s</span><span class="s2"> does not fit given bytes sequence at ALL. </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+                    <span class="n">encoding_iana</span><span class="p">,</span>
+                    <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
+                <span class="p">)</span>
+                <span class="n">tested_but_hard_failure</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">encoding_iana</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+        <span class="n">mean_mess_ratio</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">md_ratios</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">md_ratios</span><span class="p">)</span> <span class="k">if</span> <span class="n">md_ratios</span> <span class="k">else</span> <span class="mf">0.0</span>
+        <span class="k">if</span> <span class="n">mean_mess_ratio</span> <span class="o">&gt;=</span> <span class="n">threshold</span> <span class="ow">or</span> <span class="n">early_stop_count</span> <span class="o">&gt;=</span> <span class="n">max_chunk_gave_up</span><span class="p">:</span>
+            <span class="n">tested_but_soft_failure</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">encoding_iana</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+                <span class="n">TRACE</span><span class="p">,</span>
+                <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> was excluded because of initial chaos probing. Gave up </span><span class="si">%i</span><span class="s2"> time(s). &quot;</span>
+                <span class="s2">&quot;Computed mean chaos is </span><span class="si">%f</span><span class="s2"> </span><span class="si">%%</span><span class="s2">.&quot;</span><span class="p">,</span>
+                <span class="n">encoding_iana</span><span class="p">,</span>
+                <span class="n">early_stop_count</span><span class="p">,</span>
+                <span class="nb">round</span><span class="p">(</span><span class="n">mean_mess_ratio</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
+            <span class="p">)</span>
+            <span class="c1"># Preparing those fallbacks in case we got nothing.</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="n">enable_fallback</span>
+                <span class="ow">and</span> <span class="n">encoding_iana</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;ascii&quot;</span><span class="p">,</span> <span class="s2">&quot;utf_8&quot;</span><span class="p">,</span> <span class="n">specified_encoding</span><span class="p">]</span>
+                <span class="ow">and</span> <span class="ow">not</span> <span class="n">lazy_str_hard_failure</span>
+            <span class="p">):</span>
+                <span class="n">fallback_entry</span> <span class="o">=</span> <span class="n">CharsetMatch</span><span class="p">(</span>
+                    <span class="n">sequences</span><span class="p">,</span>
+                    <span class="n">encoding_iana</span><span class="p">,</span>
+                    <span class="n">threshold</span><span class="p">,</span>
+                    <span class="kc">False</span><span class="p">,</span>
+                    <span class="p">[],</span>
+                    <span class="n">decoded_payload</span><span class="p">,</span>
+                    <span class="n">preemptive_declaration</span><span class="o">=</span><span class="n">specified_encoding</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="n">encoding_iana</span> <span class="o">==</span> <span class="n">specified_encoding</span><span class="p">:</span>
+                    <span class="n">fallback_specified</span> <span class="o">=</span> <span class="n">fallback_entry</span>
+                <span class="k">elif</span> <span class="n">encoding_iana</span> <span class="o">==</span> <span class="s2">&quot;ascii&quot;</span><span class="p">:</span>
+                    <span class="n">fallback_ascii</span> <span class="o">=</span> <span class="n">fallback_entry</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">fallback_u8</span> <span class="o">=</span> <span class="n">fallback_entry</span>
+            <span class="k">continue</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+            <span class="n">TRACE</span><span class="p">,</span>
+            <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> passed initial chaos probing. Mean measured chaos is </span><span class="si">%f</span><span class="s2"> </span><span class="si">%%</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">encoding_iana</span><span class="p">,</span>
+            <span class="nb">round</span><span class="p">(</span><span class="n">mean_mess_ratio</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_multi_byte_decoder</span><span class="p">:</span>
+            <span class="n">target_languages</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">encoding_languages</span><span class="p">(</span><span class="n">encoding_iana</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">target_languages</span> <span class="o">=</span> <span class="n">mb_encoding_languages</span><span class="p">(</span><span class="n">encoding_iana</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">target_languages</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+                <span class="n">TRACE</span><span class="p">,</span>
+                <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> should target any language(s) of </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">encoding_iana</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">target_languages</span><span class="p">)</span>
+                <span class="p">),</span>
+            <span class="p">)</span>
+
+        <span class="n">cd_ratios</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># We shall skip the CD when its about ASCII</span>
+        <span class="c1"># Most of the time its not relevant to run &quot;language-detection&quot; on it.</span>
+        <span class="k">if</span> <span class="n">encoding_iana</span> <span class="o">!=</span> <span class="s2">&quot;ascii&quot;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">md_chunks</span><span class="p">:</span>
+                <span class="n">chunk_languages</span> <span class="o">=</span> <span class="n">coherence_ratio</span><span class="p">(</span>
+                    <span class="n">chunk</span><span class="p">,</span>
+                    <span class="n">language_threshold</span><span class="p">,</span>
+                    <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">target_languages</span><span class="p">)</span> <span class="k">if</span> <span class="n">target_languages</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="p">)</span>
+
+                <span class="n">cd_ratios</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chunk_languages</span><span class="p">)</span>
+
+        <span class="n">cd_ratios_merged</span> <span class="o">=</span> <span class="n">merge_coherence_ratios</span><span class="p">(</span><span class="n">cd_ratios</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">cd_ratios_merged</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+                <span class="n">TRACE</span><span class="p">,</span>
+                <span class="s2">&quot;We detected language </span><span class="si">{}</span><span class="s2"> using </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">cd_ratios_merged</span><span class="p">,</span> <span class="n">encoding_iana</span>
+                <span class="p">),</span>
+            <span class="p">)</span>
+
+        <span class="n">current_match</span> <span class="o">=</span> <span class="n">CharsetMatch</span><span class="p">(</span>
+            <span class="n">sequences</span><span class="p">,</span>
+            <span class="n">encoding_iana</span><span class="p">,</span>
+            <span class="n">mean_mess_ratio</span><span class="p">,</span>
+            <span class="n">bom_or_sig_available</span><span class="p">,</span>
+            <span class="n">cd_ratios_merged</span><span class="p">,</span>
+            <span class="p">(</span>
+                <span class="n">decoded_payload</span>
+                <span class="k">if</span> <span class="p">(</span>
+                    <span class="n">is_too_large_sequence</span> <span class="ow">is</span> <span class="kc">False</span>
+                    <span class="ow">or</span> <span class="n">encoding_iana</span> <span class="ow">in</span> <span class="p">[</span><span class="n">specified_encoding</span><span class="p">,</span> <span class="s2">&quot;ascii&quot;</span><span class="p">,</span> <span class="s2">&quot;utf_8&quot;</span><span class="p">]</span>
+                <span class="p">)</span>
+                <span class="k">else</span> <span class="kc">None</span>
+            <span class="p">),</span>
+            <span class="n">preemptive_declaration</span><span class="o">=</span><span class="n">specified_encoding</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_match</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">encoding_iana</span> <span class="ow">in</span> <span class="p">[</span><span class="n">specified_encoding</span><span class="p">,</span> <span class="s2">&quot;ascii&quot;</span><span class="p">,</span> <span class="s2">&quot;utf_8&quot;</span><span class="p">]</span>
+            <span class="ow">and</span> <span class="n">mean_mess_ratio</span> <span class="o">&lt;</span> <span class="mf">0.1</span>
+        <span class="p">):</span>
+            <span class="c1"># If md says nothing to worry about, then... stop immediately!</span>
+            <span class="k">if</span> <span class="n">mean_mess_ratio</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                    <span class="s2">&quot;Encoding detection: </span><span class="si">%s</span><span class="s2"> is most likely the one.&quot;</span><span class="p">,</span>
+                    <span class="n">current_match</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="n">explain</span><span class="p">:</span>  <span class="c1"># Defensive: ensure exit path clean handler</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">removeHandler</span><span class="p">(</span><span class="n">explain_handler</span><span class="p">)</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">previous_logger_level</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">CharsetMatches</span><span class="p">([</span><span class="n">current_match</span><span class="p">])</span>
+
+            <span class="n">early_stop_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_match</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="nb">len</span><span class="p">(</span><span class="n">early_stop_results</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="p">(</span><span class="n">specified_encoding</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">specified_encoding</span> <span class="ow">in</span> <span class="n">tested</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="s2">&quot;ascii&quot;</span> <span class="ow">in</span> <span class="n">tested</span>
+            <span class="ow">and</span> <span class="s2">&quot;utf_8&quot;</span> <span class="ow">in</span> <span class="n">tested</span>
+        <span class="p">):</span>
+            <span class="n">probable_result</span><span class="p">:</span> <span class="n">CharsetMatch</span> <span class="o">=</span> <span class="n">early_stop_results</span><span class="o">.</span><span class="n">best</span><span class="p">()</span>  <span class="c1"># type: ignore[assignment]</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                <span class="s2">&quot;Encoding detection: </span><span class="si">%s</span><span class="s2"> is most likely the one.&quot;</span><span class="p">,</span>
+                <span class="n">probable_result</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">explain</span><span class="p">:</span>  <span class="c1"># Defensive: ensure exit path clean handler</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">removeHandler</span><span class="p">(</span><span class="n">explain_handler</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">previous_logger_level</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">CharsetMatches</span><span class="p">([</span><span class="n">probable_result</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">encoding_iana</span> <span class="o">==</span> <span class="n">sig_encoding</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                <span class="s2">&quot;Encoding detection: </span><span class="si">%s</span><span class="s2"> is most likely the one as we detected a BOM or SIG within &quot;</span>
+                <span class="s2">&quot;the beginning of the sequence.&quot;</span><span class="p">,</span>
+                <span class="n">encoding_iana</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">explain</span><span class="p">:</span>  <span class="c1"># Defensive: ensure exit path clean handler</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">removeHandler</span><span class="p">(</span><span class="n">explain_handler</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">previous_logger_level</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">CharsetMatches</span><span class="p">([</span><span class="n">results</span><span class="p">[</span><span class="n">encoding_iana</span><span class="p">]])</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">fallback_u8</span> <span class="ow">or</span> <span class="n">fallback_ascii</span> <span class="ow">or</span> <span class="n">fallback_specified</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+                <span class="n">TRACE</span><span class="p">,</span>
+                <span class="s2">&quot;Nothing got out of the detection process. Using ASCII/UTF-8/Specified fallback.&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">fallback_specified</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                <span class="s2">&quot;Encoding detection: </span><span class="si">%s</span><span class="s2"> will be used as a fallback match&quot;</span><span class="p">,</span>
+                <span class="n">fallback_specified</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fallback_specified</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span>
+            <span class="p">(</span><span class="n">fallback_u8</span> <span class="ow">and</span> <span class="n">fallback_ascii</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="ow">or</span> <span class="p">(</span>
+                <span class="n">fallback_u8</span>
+                <span class="ow">and</span> <span class="n">fallback_ascii</span>
+                <span class="ow">and</span> <span class="n">fallback_u8</span><span class="o">.</span><span class="n">fingerprint</span> <span class="o">!=</span> <span class="n">fallback_ascii</span><span class="o">.</span><span class="n">fingerprint</span>
+            <span class="p">)</span>
+            <span class="ow">or</span> <span class="p">(</span><span class="n">fallback_u8</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Encoding detection: utf_8 will be used as a fallback match&quot;</span><span class="p">)</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fallback_u8</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">fallback_ascii</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Encoding detection: ascii will be used as a fallback match&quot;</span><span class="p">)</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fallback_ascii</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">results</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="s2">&quot;Encoding detection: Found </span><span class="si">%s</span><span class="s2"> as plausible (best-candidate) for content. With </span><span class="si">%i</span><span class="s2"> alternatives.&quot;</span><span class="p">,</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">best</span><span class="p">()</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
+            <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Encoding detection: Unable to determine any suitable charset.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">explain</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">removeHandler</span><span class="p">(</span><span class="n">explain_handler</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">previous_logger_level</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">results</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">from_fp</span><span class="p">(</span>
+    <span class="n">fp</span><span class="p">:</span> <span class="n">BinaryIO</span><span class="p">,</span>
+    <span class="n">steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="n">chunk_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">512</span><span class="p">,</span>
+    <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.20</span><span class="p">,</span>
+    <span class="n">cp_isolation</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">cp_exclusion</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">preemptive_behaviour</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">explain</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">language_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">enable_fallback</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CharsetMatches</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Same thing than the function from_bytes but using a file pointer that is already ready.</span>
+<span class="sd">    Will not close the file pointer.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">from_bytes</span><span class="p">(</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span>
+        <span class="n">steps</span><span class="p">,</span>
+        <span class="n">chunk_size</span><span class="p">,</span>
+        <span class="n">threshold</span><span class="p">,</span>
+        <span class="n">cp_isolation</span><span class="p">,</span>
+        <span class="n">cp_exclusion</span><span class="p">,</span>
+        <span class="n">preemptive_behaviour</span><span class="p">,</span>
+        <span class="n">explain</span><span class="p">,</span>
+        <span class="n">language_threshold</span><span class="p">,</span>
+        <span class="n">enable_fallback</span><span class="p">,</span>
+    <span class="p">)</span>
+
+
+<div class="viewcode-block" id="from_path">
+<a class="viewcode-back" href="../../source/core.utils.html#core.utils.common.from_path">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">from_path</span><span class="p">(</span>
+    <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="n">PathLike</span><span class="p">,</span>  <span class="c1"># type: ignore[type-arg]</span>
+    <span class="n">steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="n">chunk_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">512</span><span class="p">,</span>
+    <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.20</span><span class="p">,</span>
+    <span class="n">cp_isolation</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">cp_exclusion</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">preemptive_behaviour</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">explain</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">language_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">enable_fallback</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CharsetMatches</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Same thing than the function from_bytes but with one extra step. Opening and reading given file path in binary mode.</span>
+<span class="sd">    Can raise IOError.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">from_fp</span><span class="p">(</span>
+            <span class="n">fp</span><span class="p">,</span>
+            <span class="n">steps</span><span class="p">,</span>
+            <span class="n">chunk_size</span><span class="p">,</span>
+            <span class="n">threshold</span><span class="p">,</span>
+            <span class="n">cp_isolation</span><span class="p">,</span>
+            <span class="n">cp_exclusion</span><span class="p">,</span>
+            <span class="n">preemptive_behaviour</span><span class="p">,</span>
+            <span class="n">explain</span><span class="p">,</span>
+            <span class="n">language_threshold</span><span class="p">,</span>
+            <span class="n">enable_fallback</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">is_binary</span><span class="p">(</span>
+    <span class="n">fp_or_path_or_payload</span><span class="p">:</span> <span class="n">PathLike</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">BinaryIO</span> <span class="o">|</span> <span class="nb">bytes</span><span class="p">,</span>  <span class="c1"># type: ignore[type-arg]</span>
+    <span class="n">steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="n">chunk_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">512</span><span class="p">,</span>
+    <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.20</span><span class="p">,</span>
+    <span class="n">cp_isolation</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">cp_exclusion</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">preemptive_behaviour</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">explain</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">language_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">enable_fallback</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Detect if the given input (file, bytes, or path) points to a binary file. aka. not a string.</span>
+<span class="sd">    Based on the same main heuristic algorithms and default kwargs at the sole exception that fallbacks match</span>
+<span class="sd">    are disabled to be stricter around ASCII-compatible but unlikely to be a string.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fp_or_path_or_payload</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">PathLike</span><span class="p">)):</span>
+        <span class="n">guesses</span> <span class="o">=</span> <span class="n">from_path</span><span class="p">(</span>
+            <span class="n">fp_or_path_or_payload</span><span class="p">,</span>
+            <span class="n">steps</span><span class="o">=</span><span class="n">steps</span><span class="p">,</span>
+            <span class="n">chunk_size</span><span class="o">=</span><span class="n">chunk_size</span><span class="p">,</span>
+            <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span>
+            <span class="n">cp_isolation</span><span class="o">=</span><span class="n">cp_isolation</span><span class="p">,</span>
+            <span class="n">cp_exclusion</span><span class="o">=</span><span class="n">cp_exclusion</span><span class="p">,</span>
+            <span class="n">preemptive_behaviour</span><span class="o">=</span><span class="n">preemptive_behaviour</span><span class="p">,</span>
+            <span class="n">explain</span><span class="o">=</span><span class="n">explain</span><span class="p">,</span>
+            <span class="n">language_threshold</span><span class="o">=</span><span class="n">language_threshold</span><span class="p">,</span>
+            <span class="n">enable_fallback</span><span class="o">=</span><span class="n">enable_fallback</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span>
+        <span class="n">fp_or_path_or_payload</span><span class="p">,</span>
+        <span class="p">(</span>
+            <span class="nb">bytes</span><span class="p">,</span>
+            <span class="nb">bytearray</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">):</span>
+        <span class="n">guesses</span> <span class="o">=</span> <span class="n">from_bytes</span><span class="p">(</span>
+            <span class="n">fp_or_path_or_payload</span><span class="p">,</span>
+            <span class="n">steps</span><span class="o">=</span><span class="n">steps</span><span class="p">,</span>
+            <span class="n">chunk_size</span><span class="o">=</span><span class="n">chunk_size</span><span class="p">,</span>
+            <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span>
+            <span class="n">cp_isolation</span><span class="o">=</span><span class="n">cp_isolation</span><span class="p">,</span>
+            <span class="n">cp_exclusion</span><span class="o">=</span><span class="n">cp_exclusion</span><span class="p">,</span>
+            <span class="n">preemptive_behaviour</span><span class="o">=</span><span class="n">preemptive_behaviour</span><span class="p">,</span>
+            <span class="n">explain</span><span class="o">=</span><span class="n">explain</span><span class="p">,</span>
+            <span class="n">language_threshold</span><span class="o">=</span><span class="n">language_threshold</span><span class="p">,</span>
+            <span class="n">enable_fallback</span><span class="o">=</span><span class="n">enable_fallback</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">guesses</span> <span class="o">=</span> <span class="n">from_fp</span><span class="p">(</span>
+            <span class="n">fp_or_path_or_payload</span><span class="p">,</span>
+            <span class="n">steps</span><span class="o">=</span><span class="n">steps</span><span class="p">,</span>
+            <span class="n">chunk_size</span><span class="o">=</span><span class="n">chunk_size</span><span class="p">,</span>
+            <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span>
+            <span class="n">cp_isolation</span><span class="o">=</span><span class="n">cp_isolation</span><span class="p">,</span>
+            <span class="n">cp_exclusion</span><span class="o">=</span><span class="n">cp_exclusion</span><span class="p">,</span>
+            <span class="n">preemptive_behaviour</span><span class="o">=</span><span class="n">preemptive_behaviour</span><span class="p">,</span>
+            <span class="n">explain</span><span class="o">=</span><span class="n">explain</span><span class="p">,</span>
+            <span class="n">language_threshold</span><span class="o">=</span><span class="n">language_threshold</span><span class="p">,</span>
+            <span class="n">enable_fallback</span><span class="o">=</span><span class="n">enable_fallback</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="ow">not</span> <span class="n">guesses</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2025, CrEagleOne.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

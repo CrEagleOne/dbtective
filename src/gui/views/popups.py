@@ -34,7 +34,7 @@ def select_files():
     files, _ = QtWidgets.QFileDialog.getOpenFileNames(
         None, "Select files",
         QtCore.QDir.currentPath(),
-        "All files (*.*);;Text files (*.txt)",
+        "CSV files (*.csv)",
         options=options)
 
     return files

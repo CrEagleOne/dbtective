@@ -180,7 +180,8 @@ def db_compare(self):
         error = True
     else:
         try:
-            if not self.settings_db1[1].get("password"):
+            if not self.settings_db1[1].get("password") and \
+                    self.settings_db1[0] != "CSV":
                 common.update_style(self.ui.setDB1, "border", "2px solid red")
                 error = True
                 self.ui.setDB1.setCurrentIndex(-1)
@@ -193,7 +194,8 @@ def db_compare(self):
         error = True
     else:
         try:
-            if not self.settings_db2[1].get("password"):
+            if not self.settings_db2[1].get("password") and \
+                    self.settings_db2[0] != "CSV":
                 common.update_style(self.ui.setDB2, "border", "2px solid red")
                 error = True
                 self.ui.setDB2.setCurrentIndex(-1)
@@ -218,6 +220,9 @@ def db_compare(self):
     if self.ui.setFetchSize.text() in ["0", ""]:
         common.update_style(self.ui.setFetchSize,
                             "border", "2px solid red")
+        error = True
+
+    if self.ui.tableWidget.rowCount() == 0:
         error = True
 
     if not error:

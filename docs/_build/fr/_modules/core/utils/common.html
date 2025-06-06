@@ -8,6 +8,7 @@
   <title>core.utils.common &mdash; Documentation DBtective 1.0.0</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=8399456f" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
@@ -43,7 +44,6 @@
               <p class="caption" role="heading"><span class="caption-text">Documentation utilisateur:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../source/user.html">Fonctionnalités</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../source/user.html#images">Images</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Documentation technique:</span></p>
 <ul>
@@ -97,6 +97,7 @@
 <span class="sd">    - platform</span>
 <span class="sd">    - subprocess</span>
 <span class="sd">    - pandas</span>
+<span class="sd">    - from_path (charset_normalizer)</span>
 <span class="sd">    - QtWidgets (PySide6)</span>
 <span class="sd">    - oracle.py</span>
 <span class="sd">    - exceptions.py</span>
@@ -120,6 +121,7 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">platform</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">charset_normalizer</span><span class="w"> </span><span class="kn">import</span> <span class="n">from_path</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">PySide6</span><span class="w"> </span><span class="kn">import</span> <span class="n">QtWidgets</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">core.database</span><span class="w"> </span><span class="kn">import</span> <span class="n">oracle</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">core.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">exceptions</span><span class="p">,</span> <span class="n">config</span>
@@ -129,35 +131,51 @@
 <a class="viewcode-back" href="../../../source/core.utils.html#core.utils.common.get_file_size">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_file_size</span><span class="p">(</span><span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Retrieves the file size and dynamically chooses the most suitable unit</span>
+<span class="sd">    Retrieves the file size</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        filepath (str): Filenmae</span>
+<span class="sd">        filepath (str): Path of file</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        str: File size with the most suitable unit</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">taille_octets</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">taille_octets</span> <span class="o">&lt;</span> <span class="mi">1024</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">taille_octets</span><span class="si">}</span><span class="s2"> octets&quot;</span>
-    <span class="k">if</span> <span class="n">taille_octets</span> <span class="o">&lt;</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">taille_octets</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1024</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> Ko&quot;</span>
-    <span class="k">if</span> <span class="n">taille_octets</span> <span class="o">&lt;</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">3</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">taille_octets</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> Mo&quot;</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">taille_octets</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> Go&quot;</span></div>
+    <span class="k">return</span> <span class="n">get_suitable_unit_for_size</span><span class="p">(</span><span class="n">size</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="get_suitable_unit_for_size">
+<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.common.get_suitable_unit_for_size">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_suitable_unit_for_size</span><span class="p">(</span><span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dynamically chooses the most suitable unit</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        size (int): Size value</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: File size with the most suitable unit</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">size</span> <span class="o">&lt;</span> <span class="mi">1024</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2"> octets&quot;</span>
+    <span class="k">if</span> <span class="n">size</span> <span class="o">&lt;</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">size</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1024</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> Ko&quot;</span>
+    <span class="k">if</span> <span class="n">size</span> <span class="o">&lt;</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">size</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> Mo&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">size</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1024</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> Go&quot;</span></div>
 
 
 
 <div class="viewcode-block" id="merge_common_keys">
 <a class="viewcode-back" href="../../../source/core.utils.html#core.utils.common.merge_common_keys">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">merge_common_keys</span><span class="p">(</span><span class="n">dict1</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">dict2</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">merge_common_keys</span><span class="p">(</span><span class="n">dict1</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">dict2</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Merges data from 2 dict for each common key</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        dict1 (list): dict1</span>
-<span class="sd">        dict2 (list): dict2</span>
+<span class="sd">        dict1 (tuple): dict1</span>
+<span class="sd">        dict2 (tuple): dict2</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        dict: Merge dict</span>
@@ -172,7 +190,8 @@
     <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">common_keys</span><span class="p">:</span>
         <span class="n">values1</span> <span class="o">=</span> <span class="n">dict1_tmp</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
         <span class="n">values2</span> <span class="o">=</span> <span class="n">dict2_tmp</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-        <span class="n">merged_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">val</span> <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">values1</span><span class="p">,</span> <span class="n">values2</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">pair</span><span class="p">]</span>
+        <span class="n">merged_values</span> <span class="o">=</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">v1</span> <span class="o">-</span> <span class="n">v2</span><span class="p">)</span> <span class="k">for</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">values1</span><span class="p">,</span> <span class="n">values2</span><span class="p">)]</span>
+        <span class="n">merged_values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_suitable_unit_for_size</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">merged_values</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
         <span class="n">merged_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged_values</span>
 
     <span class="k">return</span> <span class="n">merged_dict</span></div>
@@ -203,7 +222,7 @@
 
 <div class="viewcode-block" id="get_tables_of_db">
 <a class="viewcode-back" href="../../../source/core.utils.html#core.utils.common.get_tables_of_db">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">get_tables_of_db</span><span class="p">(</span><span class="n">db_config</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_tables_of_db</span><span class="p">(</span><span class="n">db_config</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Retrieve the list of tables, their size, the number of columns and rows</span>
 
@@ -211,20 +230,27 @@
 <span class="sd">        db_config (list): Database config</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        dict: Database content</span>
+<span class="sd">        list: Database content</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">if</span> <span class="n">db_config</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Oracle&quot;</span><span class="p">:</span>
         <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">            SELECT</span>
 <span class="s2">                ut.TABLE_NAME,</span>
-<span class="s2">                ut.NUM_ROWS AS &quot;Nombre de lignes&quot;,</span>
-<span class="s2">                COUNT(utc.COLUMN_NAME) AS &quot;Nombre de colonnes&quot;,</span>
-<span class="s2">                ut.BLOCKS * ut.AVG_ROW_LEN AS &quot;Taille estimée (octets)&quot;</span>
+<span class="s2">                ut.BLOCKS * ut.AVG_ROW_LEN,</span>
+<span class="s2">                COUNT(utc.COLUMN_NAME),</span>
+<span class="s2">                ut.NUM_ROWS</span>
 <span class="s2">            FROM USER_TABLES ut</span>
 <span class="s2">            LEFT JOIN USER_TAB_COLUMNS utc ON ut.TABLE_NAME = utc.TABLE_NAME</span>
 <span class="s2">            GROUP BY ut.TABLE_NAME, ut.NUM_ROWS, ut.BLOCKS, ut.AVG_ROW_LEN&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">oracle</span><span class="o">.</span><span class="n">get_list_data</span><span class="p">(</span><span class="n">db_config</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">query</span><span class="p">)</span>
-    <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">405</span><span class="p">)</span></div>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">oracle</span><span class="o">.</span><span class="n">get_list_data</span><span class="p">(</span><span class="n">db_config</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">query</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">db_config</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;CSV&quot;</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="n">db_config</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;file&quot;</span><span class="p">]:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">analyze_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">405</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
 
 
 
@@ -232,7 +258,8 @@
 <a class="viewcode-back" href="../../../source/core.utils.html#core.utils.common.get_common_tables">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_common_tables</span><span class="p">(</span><span class="n">db1</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">db2</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Retrieve the common tables of 2 bases</span>
+<span class="sd">    Retrieve common tables from 2 data sources</span>
+<span class="sd">    Tables must have the same name, including CSV files.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        db1 (list): Database 1 configuration</span>
@@ -248,10 +275,10 @@
 
 
 
-<div class="viewcode-block" id="extract_to_csv">
-<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.common.extract_to_csv">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">extract_to_csv</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">segment_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
-                   <span class="n">fetch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<div class="viewcode-block" id="oracle_to_csv">
+<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.common.oracle_to_csv">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">oracle_to_csv</span><span class="p">(</span><span class="n">db</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">segment_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+                  <span class="n">fetch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Extract data to a CSV file</span>
 
@@ -261,7 +288,7 @@
 <span class="sd">        file (str): Output file name</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;SELECT * FROM </span><span class="si">{</span><span class="n">table</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;SELECT * FROM </span><span class="si">{</span><span class="n">table</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
 
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
@@ -269,6 +296,86 @@
             <span class="n">db</span><span class="p">,</span> <span class="n">segment_size</span><span class="p">,</span> <span class="n">fetch_size</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">data_block</span> <span class="ow">in</span> <span class="n">datas</span><span class="p">:</span>
             <span class="n">writer</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">data_block</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="convert_to_csv">
+<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.common.convert_to_csv">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">convert_to_csv</span><span class="p">(</span><span class="n">src_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dest_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Copies a file to a specified directory</span>
+<span class="sd">    and converts it to CSV format if necessary.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        src_file (str): The full path to the source file to be copied.</span>
+<span class="sd">                        Supported formats: .txt, .xlsx, .csv</span>
+<span class="sd">        dest_file (str): The path to the destination directory</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">file_extension</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">src_file</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">file_extension</span> <span class="o">==</span> <span class="s1">&#39;.txt&#39;</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">src_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dest_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">file_extension</span> <span class="o">==</span> <span class="s1">&#39;.xlsx&#39;</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">src_file</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="s1">&#39;infer&#39;</span><span class="p">,</span>
+                               <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;openpyxl&#39;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+                               <span class="n">na_values</span><span class="o">=</span><span class="p">[],</span> <span class="n">keep_default_na</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">dest_file</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">file_extension</span> <span class="o">==</span> <span class="s1">&#39;.csv&#39;</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">src_file</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                             <span class="n">header</span><span class="o">=</span><span class="s1">&#39;infer&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+                             <span class="n">na_values</span><span class="o">=</span><span class="p">[],</span> <span class="n">keep_default_na</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">dest_file</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">605</span><span class="p">,</span> <span class="n">file_extension</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="analyze_file">
+<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.common.analyze_file">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">analyze_file</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analyze file to extract some datas</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        file_path (str): Path of file</span>
+<span class="sd">                        Supported formats: .txt, .xlsx, .csv</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        exceptions.Error: 605 or 606</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: datas</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">file_size</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">608</span><span class="p">)</span>
+    <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">file_path</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">ext</span> <span class="o">==</span> <span class="s1">&#39;.csv&#39;</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                             <span class="n">header</span><span class="o">=</span><span class="s1">&#39;infer&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">ext</span> <span class="o">==</span> <span class="s1">&#39;.txt&#39;</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                             <span class="n">header</span><span class="o">=</span><span class="s1">&#39;infer&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">ext</span> <span class="o">==</span> <span class="s1">&#39;.xlsx&#39;</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="s1">&#39;infer&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;openpyxl&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">605</span><span class="p">)</span>
+
+    <span class="n">num_rows</span><span class="p">,</span> <span class="n">num_cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span> <span class="o">==</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">))):</span>
+        <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">606</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">file_path</span><span class="p">))[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">file_size</span><span class="p">,</span>
+        <span class="n">num_cols</span><span class="p">,</span>
+        <span class="n">num_rows</span>
+    <span class="p">)</span></div>
 
 
 
@@ -422,7 +529,7 @@
 
 <span class="sd">    Args:</span>
 <span class="sd">        filename (str): Path of the file to write</span>
-<span class="sd">        data (pd.DataFrame): Data to write</span>
+<span class="sd">        data (pandas.DataFrame): Data to write</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;csv&#39;</span><span class="p">):</span>
         <span class="n">data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
@@ -435,26 +542,9 @@
 
 
 
-<div class="viewcode-block" id="get_work_files">
-<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.common.get_work_files">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">get_work_files</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Get the working file path inside the system&#39;s temporary directory</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        path (str): The relative path inside the work directory</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        str: The full path inside the temporary workspace</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">temp_dir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">gettempdir</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_dir</span><span class="p">,</span> <span class="s2">&quot;dbtective&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span></div>
-
-
-
-<div class="viewcode-block" id="get_work_folder">
-<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.common.get_work_folder">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">get_work_folder</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<div class="viewcode-block" id="get_file_in_work_folder">
+<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.common.get_file_in_work_folder">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_file_in_work_folder</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get the working folder path inside the system&#39;s temporary directory</span>
 <span class="sd">    Creates the folder if it does not exist</span>
@@ -466,10 +556,10 @@
 <span class="sd">        str: The full path inside the temporary workspace</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">temp_dir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">gettempdir</span><span class="p">()</span>
-    <span class="n">work_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_dir</span><span class="p">,</span> <span class="s2">&quot;dbtective&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="n">work_folder</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_dir</span><span class="p">,</span> <span class="s2">&quot;dbtective&quot;</span><span class="p">)</span>
     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">work_folder</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">work_folder</span></div>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">work_folder</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span></div>
 
 
 
@@ -525,11 +615,11 @@
 <span class="sd">    required to change one sequence into the other</span>
 
 <span class="sd">    Parameters:</span>
-<span class="sd">    s1 (str): The first string to compare</span>
-<span class="sd">    s2 (str): The second string to compare</span>
+<span class="sd">        s1 (str): The first string to compare</span>
+<span class="sd">        s2 (str): The second string to compare</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">    int: The Levenshtein distance between s1 and s2</span>
+<span class="sd">        int: The Levenshtein distance between s1 and s2</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">s2</span><span class="p">):</span>
         <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">s2</span><span class="p">,</span> <span class="n">s1</span>
@@ -572,8 +662,8 @@
     <span class="n">differences</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">:</span>
         <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">pair</span>
-        <span class="n">set1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">))</span>
-        <span class="n">set2</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">))</span>
+        <span class="n">set1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="n">set2</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span>
         <span class="n">diff</span> <span class="o">=</span> <span class="n">set1</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span><span class="n">set2</span><span class="p">)</span>
         <span class="n">differences</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">pair</span><span class="p">,</span> <span class="n">diff</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">differences</span></div>
@@ -669,6 +759,37 @@
     <span class="n">translations</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">translations</span> <span class="k">if</span> <span class="n">f</span> <span class="o">!=</span> <span class="n">locale</span><span class="p">]</span>
 
     <span class="k">return</span> <span class="p">[</span><span class="n">locale</span><span class="p">]</span> <span class="o">+</span> <span class="n">translations</span></div>
+
+
+
+<div class="viewcode-block" id="is_data_table">
+<a class="viewcode-back" href="../../../source/core.utils.html#core.utils.common.is_data_table">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">is_data_table</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if the given file is a valid data table.</span>
+
+<span class="sd">    This function attempts to read the file using pandas and checks whether </span>
+<span class="sd">    it contains both columns and rows.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        file_path (str): Path to the data file</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        bool: True if the file is a valid data table, False otherwise</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">from_path</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+        <span class="n">encoding</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">best</span><span class="p">()</span><span class="o">.</span><span class="n">encoding</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">best</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;ISO-8859-1&quot;</span>
+
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                             <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;python&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">empty</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error reading the file: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
 
 </pre></div>
 

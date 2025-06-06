@@ -117,6 +117,7 @@ Date: 2025-05-07</p>
 <li><p>platform</p></li>
 <li><p>subprocess</p></li>
 <li><p>pandas</p></li>
+<li><p>from_path (charset_normalizer)</p></li>
 <li><p>QtWidgets (PySide6)</p></li>
 <li><p>oracle.py</p></li>
 <li><p>exceptions.py</p></li>
@@ -130,6 +131,26 @@ Date: 2025-05-07</p>
 <ul class="simple">
 <li><p>N/A</p></li>
 </ul>
+<dl class="py function">
+<dt class="sig sig-object py" id="core.utils.common.analyze_file">
+<span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">analyze_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="../_modules/core/utils/common.html#analyze_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.analyze_file" title="Lien vers cette définition"></a></dt>
+<dd><p>Analyser le fichier pour extraire certaines données</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_path</strong> (<em>str</em>) – Chemin du fichier. Formats pris en charge : .txt, .xlsx, .csv</p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#core.utils.exceptions.Error" title="core.utils.exceptions.Error"><strong>exceptions.Error</strong></a> – 605 ou 606</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>données</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="core.utils.common.compare_pairs">
 <span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">compare_pairs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pairs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="../_modules/core/utils/common.html#compare_pairs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.compare_pairs" title="Lien vers cette définition"></a></dt>
@@ -148,6 +169,20 @@ Date: 2025-05-07</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="core.utils.common.convert_to_csv">
+<span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">convert_to_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/core/utils/common.html#convert_to_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.convert_to_csv" title="Lien vers cette définition"></a></dt>
+<dd><p>Copie un fichier dans un répertoire spécifié et le convertit au format CSV si nécessaire.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>src_file</strong> (<em>str</em>) – Chemin d’accès complet au fichier source à copier. Formats pris en charge : .txt,.xlsx, .csv</p></li>
+<li><p><strong>dest_file</strong> (<em>str</em>) – Le chemin vers le répertoire de destination</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="core.utils.common.create_gap_files">
 <span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">create_gap_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/core/utils/common.html#create_gap_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.create_gap_files" title="Lien vers cette définition"></a></dt>
 <dd><p>Créer un fichier csv contenant les écarts de données</p>
@@ -155,7 +190,7 @@ Date: 2025-05-07</p>
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>filename</strong> (<em>str</em>) – Chemin du fichier de sortie</p></li>
-<li><p><strong>data</strong> (<em>pd.DataFrame</em>) – Données à écrire</p></li>
+<li><p><strong>data</strong> (<em>pandas.DataFrame</em>) – Données à écrire</p></li>
 </ul>
 </dd>
 </dl>
@@ -168,21 +203,6 @@ Date: 2025-05-07</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – Le chemin relatif à l’intérieur du répertoire temporaire “dbtective” à purger</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="core.utils.common.extract_to_csv">
-<span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">extract_to_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fetch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/core/utils/common.html#extract_to_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.extract_to_csv" title="Lien vers cette définition"></a></dt>
-<dd><p>Extraire des données dans un fichier CSV</p>
-<dl class="field-list simple">
-<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>db</strong> (<em>list</em>) – Configuration de la base de données</p></li>
-<li><p><strong>table</strong> (<em>str</em>) – Nom de la table</p></li>
-<li><p><strong>file</strong> (<em>str</em>) – Nom du fichier de sortie</p></li>
-</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -208,6 +228,12 @@ Date: 2025-05-07</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="core.utils.common.from_path">
+<span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">from_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bytes</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">PathLike</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">512</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cp_isolation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cp_exclusion</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preemptive_behaviour</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">explain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">enable_fallback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">CharsetMatches</span></span></span><a class="reference internal" href="../_modules/charset_normalizer/api.html#from_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.from_path" title="Lien vers cette définition"></a></dt>
+<dd><p>Même chose que la fonction from_bytes, mais avec une étape supplémentaire. Ouverture et lecture du chemin d’accès au fichier donné en mode binaire. Peut générer une erreur IOError.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="core.utils.common.get_all_locales">
 <span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">get_all_locales</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'src/gui/locales'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="../_modules/core/utils/common.html#get_all_locales"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.get_all_locales" title="Lien vers cette définition"></a></dt>
 <dd><p>Récupère toutes les traductions disponibles à partir du répertoire spécifié</p>
@@ -227,7 +253,7 @@ Date: 2025-05-07</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="core.utils.common.get_common_tables">
 <span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">get_common_tables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/core/utils/common.html#get_common_tables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.get_common_tables" title="Lien vers cette définition"></a></dt>
-<dd><p>Récupérer les tables communes de 2 bases</p>
+<dd><p>Récupérer les tables communes à partir de 2 sources de données Les tables doivent avoir les mêmes nom, y compris les fichiers CSV.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -259,12 +285,29 @@ Date: 2025-05-07</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="core.utils.common.get_file_size">
-<span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">get_file_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/core/utils/common.html#get_file_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.get_file_size" title="Lien vers cette définition"></a></dt>
-<dd><p>Retrieves the file size and dynamically chooses the most suitable unit</p>
+<dt class="sig sig-object py" id="core.utils.common.get_file_in_work_folder">
+<span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">get_file_in_work_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/core/utils/common.html#get_file_in_work_folder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.get_file_in_work_folder" title="Lien vers cette définition"></a></dt>
+<dd><p>Obtener le chemin du dossier de travail dans le répertoire temporaire du système Créer le dossier s’il n’existe pas</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>filepath</strong> (<em>str</em>) – Récupère la taille du fichier et choisit dynamiquement l’unité la plus appropriée</p>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – Le chemin relatif à l’intérieur du répertoire de travail</p>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>Le chemin relatif à l’intérieur du répertoire de travail</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="core.utils.common.get_file_size">
+<span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">get_file_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/core/utils/common.html#get_file_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.get_file_size" title="Lien vers cette définition"></a></dt>
+<dd><p>Retrieves the file size</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filepath</strong> (<em>str</em>) – Path of file</p>
 </dd>
 <dt class="field-even">Renvoie<span class="colon">:</span></dt>
 <dd class="field-even"><p>Taille du fichier avec l’unité la plus adaptée</p>
@@ -296,8 +339,25 @@ Date: 2025-05-07</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="core.utils.common.get_suitable_unit_for_size">
+<span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">get_suitable_unit_for_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/core/utils/common.html#get_suitable_unit_for_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.get_suitable_unit_for_size" title="Lien vers cette définition"></a></dt>
+<dd><p>Dynamically chooses the most suitable unit</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>size</strong> (<em>int</em>) – Size value</p>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>Taille du fichier avec l’unité la plus adaptée</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="core.utils.common.get_tables_of_db">
-<span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">get_tables_of_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="reference internal" href="../_modules/core/utils/common.html#get_tables_of_db"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.get_tables_of_db" title="Lien vers cette définition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">get_tables_of_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="../_modules/core/utils/common.html#get_tables_of_db"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.get_tables_of_db" title="Lien vers cette définition"></a></dt>
 <dd><p>Récupérer la liste des tables, leur taille, le nombre de colonnes et de lignes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
@@ -307,41 +367,26 @@ Date: 2025-05-07</p>
 <dd class="field-even"><p>Contenu de la base de données</p>
 </dd>
 <dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict</p>
+<dd class="field-odd"><p>list</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="core.utils.common.get_work_files">
-<span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">get_work_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/core/utils/common.html#get_work_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.get_work_files" title="Lien vers cette définition"></a></dt>
-<dd><p>Obtener le chemin du fichier de travail dans le répertoire temporaire du système</p>
+<dt class="sig sig-object py" id="core.utils.common.is_data_table">
+<span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">is_data_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/core/utils/common.html#is_data_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.is_data_table" title="Lien vers cette définition"></a></dt>
+<dd><p>Check if the given file is a valid data table.</p>
+<p>This function attempts to read the file using pandas and checks whether
+it contains both columns and rows.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – The relative path inside the work directory</p>
+<dd class="field-odd"><p><strong>file_path</strong> (<em>str</em>) – Path to the data file</p>
 </dd>
 <dt class="field-even">Renvoie<span class="colon">:</span></dt>
-<dd class="field-even"><p>Le chemin relatif à l’intérieur du répertoire de travail</p>
+<dd class="field-even"><p>True if the file is a valid data table, False otherwise</p>
 </dd>
 <dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="core.utils.common.get_work_folder">
-<span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">get_work_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/core/utils/common.html#get_work_folder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.get_work_folder" title="Lien vers cette définition"></a></dt>
-<dd><p>Obtener le chemin du dossier de travail dans le répertoire temporaire du système Créer le dossier s’il n’existe pas</p>
-<dl class="field-list simple">
-<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – The relative path inside the work directory</p>
-</dd>
-<dt class="field-even">Renvoie<span class="colon">:</span></dt>
-<dd class="field-even"><p>Le chemin relatif à l’intérieur du répertoire de travail</p>
-</dd>
-<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
+<dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
 </dd></dl>
@@ -351,8 +396,20 @@ Date: 2025-05-07</p>
 <span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">levenshtein_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/core/utils/common.html#levenshtein_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.levenshtein_distance" title="Lien vers cette définition"></a></dt>
 <dd><p>Calculer la distance de Levenshtein entre deux chaînes</p>
 <p>La distance de Levenshtein est une mesure de la différence entre deux séquences, qui sont définies comme le nombre minimum de caractères uniques modifications (insertions, suppressions ou substitutions) nécessaires pour modifier une séquence en une autre</p>
-<p>Paramètres : s1 (str) : La première chaîne pour comparer s2 (str) : La seconde chaîne à comparer</p>
-<p>Renvoie : int : La distance de Levenshtein entre s1 et s2</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s1</strong> (<em>str</em>) – The first string to compare</p></li>
+<li><p><strong>s2</strong> (<em>str</em>) – The second string to compare</p></li>
+</ul>
+</dd>
+<dt class="field-even">Renvoie<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Levenshtein distance between s1 and s2</p>
+</dd>
+<dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -374,17 +431,17 @@ Date: 2025-05-07</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="core.utils.common.merge_common_keys">
-<span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">merge_common_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/core/utils/common.html#merge_common_keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.merge_common_keys" title="Lien vers cette définition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">merge_common_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/core/utils/common.html#merge_common_keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.merge_common_keys" title="Lien vers cette définition"></a></dt>
 <dd><p>Fusionner les données de 2 dict pour chaque clé commune</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dict1</strong> (<em>list</em>) – dict1</p></li>
-<li><p><strong>dict2</strong> (<em>list</em>) – dict2</p></li>
+<li><p><strong>dict1</strong> (<em>tuple</em>) – dictionnaire 1</p></li>
+<li><p><strong>dict2</strong> (<em>tuple</em>) – dictionnaire 2</p></li>
 </ul>
 </dd>
 <dt class="field-even">Renvoie<span class="colon">:</span></dt>
-<dd class="field-even"><p>dict fusionné</p>
+<dd class="field-even"><p>dictionnaire fusionné</p>
 </dd>
 <dt class="field-odd">Type renvoyé<span class="colon">:</span></dt>
 <dd class="field-odd"><p>dict</p>
@@ -395,10 +452,25 @@ Date: 2025-05-07</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="core.utils.common.open_folders">
 <span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">open_folders</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/core/utils/common.html#open_folders"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.open_folders" title="Lien vers cette définition"></a></dt>
-<dd><p>Open a file with a file editor</p>
+<dd><p>Ouvrir un fichier avec un éditeur de fichiers</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – File name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="core.utils.common.oracle_to_csv">
+<span class="sig-prename descclassname"><span class="pre">core.utils.common.</span></span><span class="sig-name descname"><span class="pre">oracle_to_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segment_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fetch_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/core/utils/common.html#oracle_to_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#core.utils.common.oracle_to_csv" title="Lien vers cette définition"></a></dt>
+<dd><p>Extraire des données dans un fichier CSV</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>db</strong> (<em>list</em>) – Configuration de la base de données</p></li>
+<li><p><strong>table</strong> (<em>str</em>) – Nom de la table</p></li>
+<li><p><strong>file</strong> (<em>str</em>) – Nom du fichier de sortie</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -799,7 +871,7 @@ Date: 2025-05-07</p>
 <li><p>logs.py</p></li>
 </ul>
 </dd>
-<dt>Example d’utilisation:</dt><dd><p>raise Error(100, « texte »)</p>
+<dt>Example d’utilisation:</dt><dd><p>raise Error(400, « text »)</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
@@ -818,7 +890,38 @@ Date: 2025-05-07</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>code</strong> (<em>str</em>) – Le code d’erreur utilisé pour récupérer le message correspondant Valeurs possibles :  - 400 : Requête SQL mal formée ou non valide - 401 : Une erreur est survenue - 402 : échec de la contrainte UNIQUE - 403 : erreur de syntaxe - 404 : Table ou colonne introuvable - 405 : Configuration incorrecte de la base de données - 406 : Incompatibilité de type de données - 407 : Erreur de conversion - 408 :  Erreur de transaction - 500 : échec de connexion à la base de données - 501 :  Base de données temporairement indisponible - 502 : erreur de manque de mémoire -  503 : Erreur d’E/S de disque - 504 : Aucun port d’écoute Oracle actif - 505 : Compte verrouillé - 506 : Nom d’utilisateur ou mot de passe incorrect - 600 :  Système non pris en charge - 601 : Fichier de paramètres introuvable - 602 : Thème  introuvable - 603 : Pas de tables à comparer - 604 : Erreur survenant lors de l’extraction des données - 999 : Erreur imprévue - vérifier les logs</p></li>
+<li><p><strong>code</strong> (<em>str</em>) – <p>Le code d’erreur utilisé pour récupérer le message correspondant</p>
+<dl class="simple">
+<dt>Valeurs possibles :</dt><dd><ul>
+<li><p>400 : Requête SQL mal formée ou non valide</p></li>
+<li><p>401 : Une erreur est survenue</p></li>
+<li><p>402 : échec de la contrainte UNIQUE</p></li>
+<li><p>403 : erreur de syntaxe</p></li>
+<li><p>404 : Table ou colonne introuvable</p></li>
+<li><p>405 : Configuration incorrecte de la base de données</p></li>
+<li><p>406 : Incompatibilité de type de données</p></li>
+<li><p>407 : Erreur de conversion</p></li>
+<li><p>408: Erreur de transaction</p></li>
+<li><p>500 : échec de connexion à la base de données</p></li>
+<li><p>501: Base de données temporairement indisponible</p></li>
+<li><p>502 : erreur de manque de mémoire</p></li>
+<li><p>503 : Erreur d’E/S de disque</p></li>
+<li><p>504 : Aucun port d’écoute Oracle actif</p></li>
+<li><p>505: Compte verrouillé</p></li>
+<li><p>506 : Nom d’utilisateur ou mot de passe incorrect</p></li>
+<li><p>600: Système non pris en charge</p></li>
+<li><p>601 : Fichier de paramètres introuvable</p></li>
+<li><p>602: Thème introuvable</p></li>
+<li><p>603 : Pas de tables à comparer</p></li>
+<li><p>604: Erreur survenant lors de l’extraction des données</p></li>
+<li><p>605 : Type de fichier non pris en charge</p></li>
+<li><p>606 : Le fichier ne semble pas contenir de ligne d’en-tête</p></li>
+<li><p>607: No common tables found</p></li>
+<li><p>608: File not found</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
 <li><p><strong>system</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – Contexte système pour la journalisation</p></li>
 </ul>
 </dd>
@@ -876,7 +979,17 @@ Date: 2025-05-07</p>
 <dd><p>Initialise les informations avec un message et déclenche la signalisation des informations</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>code</strong> (<em>int</em>) – Le code d’information utilisé pour récupérer le message correspondant Valeurs possibles : - 100 : Sauvegarde réussie - 101 : Sauvegarde réussie - 200 : Traitement terminé avec succès - 201 : Aucune divergence n’a été constatée</p>
+<dd class="field-odd"><p><strong>code</strong> (<em>int</em>) – <p>Le code d’information utilisé pour récupérer le message correspondant</p>
+<dl class="simple">
+<dt>Valeurs possibles :</dt><dd><ul class="simple">
+<li><p>100 : Sauvegarde réussie</p></li>
+<li><p>200: Traitement terminé avec succès</p></li>
+<li><p>201 : Aucun écart n’a été constaté</p></li>
+<li><p>999 : Erreur imprévue - vérifier les logs</p></li>
+</ul>
+</dd>
+</dl>
+</p>
 </dd>
 </dl>
 </dd></dl>

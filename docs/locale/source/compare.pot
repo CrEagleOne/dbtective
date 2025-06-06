@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DBtective \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-03 13:50+0200\n"
+"POT-Creation-Date: 2025-06-06 15:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -116,10 +116,38 @@ msgstr ""
 msgid "Details"
 msgstr ""
 
-#: ../source/compare.md:40
+#: ../source/compare.md:39
 msgid "Displays the list of common tables between the 2 selected databases."
 msgstr ""
 
-#: ../source/compare.md:42
+#: ../source/compare.md:41
 msgid "By pressing \"DELETE\" on the keyboard, the table associated with the selected row will not be compared. To add the table again, press \"Backspace\"."
+msgstr ""
+
+#: ../source/compare.md:45
+msgid "CSV files"
+msgstr ""
+
+#: ../source/compare.md:46
+msgid "Each CSV file to be processed in the comparison must adhere to the following rules:"
+msgstr ""
+
+#: ../source/compare.md:47
+msgid "The file name must be identical"
+msgstr ""
+
+#: ../source/compare.md:48
+msgid "To the name of the table to be compared for a database comparison"
+msgstr ""
+
+#: ../source/compare.md:49
+msgid "To the name of the other file for a comparison with another file"
+msgstr ""
+
+#: ../source/compare.md:50
+msgid "Must contain the column names in the header"
+msgstr ""
+
+#: ../source/compare.md:51
+msgid "Ensure the consistency of the exported data"
 msgstr ""

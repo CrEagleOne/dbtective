@@ -85,6 +85,7 @@
 <li class="toctree-l2"><a class="reference internal" href="source/new_connection.html">Créer une nouvelle connexion</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="source/new_connection.html#configuring-connection-settings">Configuration des paramètres de connexion</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="source/new_connection.html#oracle-connection-settings">Paramètres de connexion Oracle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="source/new_connection.html#csv-connection-settings">Paramètres de connexion CSV</a></li>
 </ul>
 </li>
 </ul>
@@ -98,6 +99,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="source/compare.html#details">Détails</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source/compare.html#csv-files">Fichiers CSV</a></li>
 </ul>
 </li>
 </ul>
@@ -135,23 +137,27 @@
 <li class="toctree-l4"><a class="reference internal" href="source/core.utils.html">Package core.utils</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="source/core.utils.html#submodules">Sous-modules</a></li>
 <li class="toctree-l5"><a class="reference internal" href="source/core.utils.html#module-core.utils.common">Module core.utils.common</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.analyze_file"><code class="docutils literal notranslate"><span class="pre">analyze_file()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.compare_pairs"><code class="docutils literal notranslate"><span class="pre">compare_pairs()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.convert_to_csv"><code class="docutils literal notranslate"><span class="pre">convert_to_csv()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.create_gap_files"><code class="docutils literal notranslate"><span class="pre">create_gap_files()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.delete_work_folder"><code class="docutils literal notranslate"><span class="pre">delete_work_folder()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.extract_to_csv"><code class="docutils literal notranslate"><span class="pre">extract_to_csv()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.find_most_similar_pairs"><code class="docutils literal notranslate"><span class="pre">find_most_similar_pairs()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.from_path"><code class="docutils literal notranslate"><span class="pre">from_path()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.get_all_locales"><code class="docutils literal notranslate"><span class="pre">get_all_locales()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.get_common_tables"><code class="docutils literal notranslate"><span class="pre">get_common_tables()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.get_current_locale"><code class="docutils literal notranslate"><span class="pre">get_current_locale()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.get_file_in_work_folder"><code class="docutils literal notranslate"><span class="pre">get_file_in_work_folder()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.get_file_size"><code class="docutils literal notranslate"><span class="pre">get_file_size()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.get_hash_file"><code class="docutils literal notranslate"><span class="pre">get_hash_file()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.get_suitable_unit_for_size"><code class="docutils literal notranslate"><span class="pre">get_suitable_unit_for_size()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.get_tables_of_db"><code class="docutils literal notranslate"><span class="pre">get_tables_of_db()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.get_work_files"><code class="docutils literal notranslate"><span class="pre">get_work_files()</span></code></a></li>
-<li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.get_work_folder"><code class="docutils literal notranslate"><span class="pre">get_work_folder()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.is_data_table"><code class="docutils literal notranslate"><span class="pre">is_data_table()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.levenshtein_distance"><code class="docutils literal notranslate"><span class="pre">levenshtein_distance()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.merge_columns"><code class="docutils literal notranslate"><span class="pre">merge_columns()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.merge_common_keys"><code class="docutils literal notranslate"><span class="pre">merge_common_keys()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.open_folders"><code class="docutils literal notranslate"><span class="pre">open_folders()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.oracle_to_csv"><code class="docutils literal notranslate"><span class="pre">oracle_to_csv()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.resource_path"><code class="docutils literal notranslate"><span class="pre">resource_path()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.set_image"><code class="docutils literal notranslate"><span class="pre">set_image()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="source/core.utils.html#core.utils.common.set_locale"><code class="docutils literal notranslate"><span class="pre">set_locale()</span></code></a></li>
@@ -232,7 +238,9 @@
 <li class="toctree-l4"><a class="reference internal" href="source/gui.views.html">Package gui.views</a><ul>
 <li class="toctree-l5"><a class="reference internal" href="source/gui.views.html#submodules">Sous-modules</a></li>
 <li class="toctree-l5"><a class="reference internal" href="source/gui.views.html#module-gui.views.controls">Module gui.views.controls</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="source/gui.views.html#gui.views.controls.csv"><code class="docutils literal notranslate"><span class="pre">csv()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="source/gui.views.html#gui.views.controls.db_compare"><code class="docutils literal notranslate"><span class="pre">db_compare()</span></code></a></li>
+<li class="toctree-l6"><a class="reference internal" href="source/gui.views.html#gui.views.controls.init_csv"><code class="docutils literal notranslate"><span class="pre">init_csv()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="source/gui.views.html#gui.views.controls.init_db_compare"><code class="docutils literal notranslate"><span class="pre">init_db_compare()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="source/gui.views.html#gui.views.controls.init_oracle"><code class="docutils literal notranslate"><span class="pre">init_oracle()</span></code></a></li>
 <li class="toctree-l6"><a class="reference internal" href="source/gui.views.html#gui.views.controls.oracle"><code class="docutils literal notranslate"><span class="pre">oracle()</span></code></a></li>
