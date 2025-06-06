@@ -1,3 +1,13 @@
+## [1.2.0](https://github.com/creagleone/dbtective/compare/v1.1.2...v1.2.0) (2025-06-06)
+
+### ✨ Features
+
+* Add CSV source ([e3c9408](https://github.com/creagleone/dbtective/commit/e3c9408823ff08d634ba234ced23a4cd25a3dd6b))
+
+### 📚 Documentation
+
+* Setting up user documentation (English and French) ([#7](https://github.com/creagleone/dbtective/issues/7)) ([8ad2639](https://github.com/creagleone/dbtective/commit/8ad2639792252586c5272e05f513f71bc5b4381b))
+
 ## [1.1.2](https://github.com/creagleone/dbtective/compare/v1.1.1...v1.1.2) (2025-05-23)
 
 ### 🐛 Bug Fixes
