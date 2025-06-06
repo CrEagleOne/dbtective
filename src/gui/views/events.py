@@ -62,8 +62,16 @@ class MainEventHandler():
         self.use_segments = False
         self.worker = None
 
+        self.valid_mime_types = ["text/csv",
+                                 "application/vnd.ms-excel",
+                                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"]
+
         self.current_editable_row = -1
         self.tables_list = []
+
+        self.csv_files = {}
+        self.row = 0
+        self.col = 0
 
         self.current_choice = None
         self.db_query = None
@@ -114,6 +122,11 @@ class MainEventHandler():
         self.ui.columnmode.toggled.connect(lambda: controls.db_compare(self))
 
         self.ui.oracle_selector.clicked.connect(self.oracle_view)
+        self.ui.csv_selector.clicked.connect(self.csv_view)
+
+        self.ui.load_pages.csv.dragEnterEvent = self.dragEnterEvent
+        self.ui.load_pages.csv.dropEvent = self.dropEvent
+        self.ui.drag_button.clicked.connect(self.upload_files)
 
         self.ui.setExtractionType.stateChanged.connect(self.handle_toggle)
 
@@ -144,6 +157,9 @@ class MainEventHandler():
         self.ui.setCustomName.textChanged.connect(
             lambda: controls.oracle(self))
 
+        self.ui.setCustomName.textChanged.connect(
+            lambda: controls.csv(self))
+
         self.ui.tableWidget.cellClicked.connect(self.on_cell_clicked)
         self.key_event_filter = KeyEventFilter(self.ui.tableWidget)
         self.key_event_filter.key_pressed.connect(self.handle_key_press)
@@ -151,7 +167,138 @@ class MainEventHandler():
         self.ui.select_all.clicked.connect(self.add_all_table)
         self.ui.unselect_all.clicked.connect(self.ignore_all_table)
 
+        self.ui.tableWidget.cellChanged.connect(
+            lambda: controls.db_compare(self))
+
         self.ui.testDB.clicked.connect(self.test_db)
+
+    def upload_files(self):
+        warn = False
+        files = popups.select_files()
+        if files:
+            for file_path in files:
+                type_mime = QtCore.QMimeDatabase().mimeTypeForFile(file_path).name()
+                if type_mime in self.valid_mime_types and \
+                        common.is_data_table(file_path) and \
+                        file_path not in [
+                            path for key, path in self.csv_files.items()]:
+                    self.add_item_in_drop_zone(file_path, False)
+                else:
+                    warn = True
+
+        controls.csv(self)
+        if warn:
+            message = QtCore.QCoreApplication.translate(
+                "events", "At least one file is invalid and has been ignored")
+            popups.display_warn(message, test=False)
+
+    def dragEnterEvent(self, event: QtGui.QDragEnterEvent):
+        if event.mimeData().hasUrls():
+            event.acceptProposedAction()
+        else:
+            event.ignore()
+
+    def dropEvent(self, event: QtGui.QDropEvent):
+        warn = False
+        if event.mimeData().hasUrls():
+            urls = event.mimeData().urls()
+            for url in urls:
+                file_path = url.toLocalFile()
+                type_mime = QtCore.QMimeDatabase().mimeTypeForFile(file_path).name()
+                if type_mime in self.valid_mime_types and \
+                        common.is_data_table(file_path) and \
+                        file_path not in [
+                            path for key, path in self.csv_files.items()]:
+
+                    self.add_item_in_drop_zone(file_path, False)
+                else:
+                    warn = True
+
+        controls.csv(self)
+        if warn:
+            message = QtCore.QCoreApplication.translate(
+                "events", "At least one file is invalid and has been ignored")
+            popups.display_warn(message, test=False)
+
+    def add_item_in_drop_zone(self, file_path, isfolder):
+        file_frame = QtWidgets.QFrame()
+        file_frame.setFrameShape(QtWidgets.QFrame.Box)
+        file_frame.setMaximumWidth(300)
+        file_frame.setMaximumHeight(100)
+        file_frame.setStyleSheet(
+            "border: 1px solid #191b1c;")
+        file_frame.setToolTip(file_path)
+        file_layout = QtWidgets.QHBoxLayout()
+        image_label = QtWidgets.QLabel()
+        if isfolder:
+            pixmap = QtGui.QIcon(common.set_svg_icon("icon_folder_open.svg"))
+
+        else:
+            pixmap = QtGui.QIcon(common.set_svg_icon("csv.svg"))
+        pixmap_resized = pixmap.pixmap(60, 60)
+        image_label.setPixmap(pixmap_resized)
+        image_label.setStyleSheet("border: transparent;")
+        file_layout.addWidget(image_label)
+        file_name_label = QtWidgets.QLabel(file_path.split("/")[-1])
+        file_name_label.setStyleSheet(
+            """border: transparent;
+            font-size: 12px; color: gray; text-align: center;""")
+        file_layout.addWidget(file_name_label)
+        delete_button = QtWidgets.QPushButton()
+
+        icon = QtGui.QIcon(common.set_svg_icon("icon_close.svg"))
+        delete_button.setIcon(icon)
+        delete_button.clicked.connect(
+            lambda: self.remove_item_in_drop_zone(file_frame))
+        delete_button.setMinimumWidth(40)
+        delete_button.setMaximumWidth(40)
+        delete_button.setMinimumHeight(40)
+        delete_button.setMaximumHeight(40)
+        delete_button.setCursor(
+            QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        delete_button.setStyleSheet(
+            """QPushButton {border: transparent;}
+            QPushButton:hover {background-color: red;}
+            """
+        )
+        file_layout.addWidget(delete_button)
+        file_frame.setLayout(file_layout)
+        file_frame.setToolTip(str(file_name_label.text()))
+        self.ui.load_pages.list_files.addWidget(file_frame, self.row, self.col)
+        self.csv_files[file_frame] = file_path
+
+        self.col += 1
+        if self.col > 2:
+            self.col = 0
+            self.row += 1
+
+    def remove_item_in_drop_zone(self, file_frame):
+        file_frame.deleteLater()
+        self.csv_files.pop(file_frame)
+
+        for i in reversed(range(self.ui.load_pages.list_files.count())):
+            widget = self.ui.load_pages.list_files.itemAt(i).widget()
+            if widget and widget in self.csv_files:
+                self.ui.load_pages.list_files.removeWidget(widget)
+
+        self.col = 0
+        self.row = 0
+
+        for index, frame in enumerate(self.csv_files):
+            row = index // 3
+            col = index % 3
+            self.ui.load_pages.list_files.addWidget(frame, row, col)
+            self.col = col
+            self.row = row
+        if len(self.csv_files) == 0:
+            self.row = self.col = 0
+        else:
+            self.col += 1
+            if self.col > 2:
+                self.col = 0
+                self.row += 1
+
+        controls.csv(self)
 
     def on_cell_clicked(self, row, column):
         self.current_editable_row = row
@@ -201,7 +348,7 @@ class MainEventHandler():
                 row, 0, QtWidgets.QTableWidgetItem(text))
 
     def update_db_list(self):
-        self.db_query = "SELECT nom, connexion_type, settings FROM db_config"
+        self.db_query = "SELECT name, connection_type, settings FROM db_config"
         self.config_list = config.get_list_data(self.db_query)
         self.ui.setDB1.clear()
         self.ui.setDB2.clear()
@@ -225,8 +372,8 @@ class MainEventHandler():
         self.ui.setDB2.setCurrentIndex(-1)
         self.ui.setExtractionType.setChecked(False)
         self.ui.setExtractionType.setup_animation(0)
-        self.ui.setSegmentLength.setText("")
-        self.ui.setFetchSize.setText("")
+        self.ui.setSegmentLength.setText("100000")
+        self.ui.setFetchSize.setText("10000")
 
         for btn in self.ui.load_pages.contents.findChildren(
                 QtWidgets.QRadioButton):
@@ -286,8 +433,13 @@ class MainEventHandler():
                 "password": self.ui.setPasswordOracle.text()
                 if self.ui.isSavePwdOracle.isChecked() else ""
             }
-        query = '''INSERT INTO db_config (nom, connexion_type,
-        settings, date_creation) VALUES (?,?,?,?)'''
+        elif self.current_choice == "CSV":
+            settings = {
+                "file": [self.csv_files[key] for key in self.csv_files]
+            }
+
+        query = '''INSERT INTO db_config (name, connection_type,
+        settings, created_at) VALUES (?,?,?,?)'''
         args = (
             self.ui.setCustomName.text(), self.current_choice,
             str(settings)
@@ -309,7 +461,19 @@ class MainEventHandler():
         self.current_choice = None
         self.ui.load_pages.settings.hide()
         self.clear_oracle_data()
+        self.clear_csv_data()
         controls.init_oracle(self)
+
+    def clear_csv_data(self):
+        """
+        Clear all import files of csv config
+        """
+        self.ui.setCustomName.setText("CSV")
+
+        for file in self.csv_files.copy().items():
+            self.remove_item_in_drop_zone(file[0])
+
+        self.ui.load_pages.csv.hide()
 
     def clear_oracle_data(self):
         """
@@ -351,9 +515,22 @@ class MainEventHandler():
         self.ui.setCustomName.blockSignals(False)
 
     def oracle_view(self):
+        self.clear_db()
         self.ui.load_pages.oracle.show()
         self.ui.load_pages.settings.show()
         self.current_choice = "Oracle"
+        self.ui.setCustomName.blockSignals(True)
+        self.ui.setCustomName.setText("ORCL")
+        self.ui.setCustomName.blockSignals(False)
+
+    def csv_view(self):
+        self.clear_db()
+        self.ui.load_pages.csv.show()
+        self.ui.load_pages.settings.show()
+        self.current_choice = "CSV"
+        self.ui.setCustomName.blockSignals(True)
+        self.ui.setCustomName.setText("CSV")
+        self.ui.setCustomName.blockSignals(False)
 
     def handle_toggle(self, state):
         if state == 2:
@@ -363,7 +540,7 @@ class MainEventHandler():
 
     def on_locale_changed(self):
         query = """UPDATE settings
-            SET [values] = ? where [key] = ?"""
+            SET [values] = ?, updated_at = ? where [key] = ?"""
 
         config.update_settings(
             query, (self.ui.setlocale.currentText(), "locale",))
@@ -380,7 +557,8 @@ class MainEventHandler():
                  for key, db_type, settings in self.config_list
                  if key == self.ui.setDB1.currentText()), None)
 
-            if not self.settings_db1[1].get("password"):
+            if not self.settings_db1[1].get("password") and \
+                    self.settings_db1[0] != "CSV":
                 password = popups.input_value(title, message)
                 if password:
                     self.settings_db1[1]["password"] = password
@@ -391,7 +569,8 @@ class MainEventHandler():
                  for key, db_type, settings in self.config_list
                  if key == self.ui.setDB2.currentText()), None)
 
-            if not self.settings_db2[1].get("password"):
+            if not self.settings_db2[1].get("password") and \
+                    self.settings_db2[0] != "CSV":
                 password = popups.input_value(title, message)
                 if password:
                     self.settings_db2[1]["password"] = password
@@ -449,7 +628,7 @@ class MainEventHandler():
             else:
                 rtn = popups.display_warn(text)
                 if rtn:
-                    folder_path = common.get_work_folder("gap")
+                    folder_path = common.get_file_in_work_folder("gap")
                     common.open_folders(folder_path)
         else:
             popups.display_info(text)
@@ -513,20 +692,28 @@ class FiltersTablesThread(QtCore.QThread):
             self.content.tableWidget.setRowCount(0)
             data = common.get_common_tables(
                 self.settings_db1, self.settings_db2)
+            if not data:
+                raise exceptions.Error(607)
             self.content.tableWidget.setRowCount(len(data))
             for row_idx, (key, values) in enumerate(data.items()):
                 text = QtCore.QCoreApplication.translate(
                     "events", "Compare")
+                item = QtWidgets.QTableWidgetItem(text)
+                item.setTextAlignment(QtCore.Qt.AlignCenter)
                 self.content.tableWidget.setItem(
-                    row_idx, 0, QtWidgets.QTableWidgetItem(text))
+                    row_idx, 0, item)
                 self.content.tableWidget.setItem(
                     row_idx, 1, QtWidgets.QTableWidgetItem(key))
                 self.tables_list.append(key)
 
                 for col_idx, value in enumerate(values):
+                    item = QtWidgets.QTableWidgetItem(str(value))
+                    item.setTextAlignment(QtCore.Qt.AlignCenter)
                     self.content.tableWidget.setItem(
-                        row_idx, col_idx + 2,
-                        QtWidgets.QTableWidgetItem(str(value)))
+                        row_idx, col_idx + 2, item)
+
+            self.content.tableWidget.horizontalHeader().setSectionResizeMode(1,
+                                                                             QtWidgets.QHeaderView.ResizeToContents)
 
         except exceptions.Error as e:
             self.signal_update.emit("error", e.message)

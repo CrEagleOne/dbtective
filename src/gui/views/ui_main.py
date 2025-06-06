@@ -100,7 +100,8 @@ class UI_MainWindow(object):
         self.settings_left_column()
         self.settings_right_column()
         self.settings_oracle()
-        self.settings_DB_buttons()
+        self.settings_csv()
+        self.settings_config()
 
     def setup_ui(self):
         if not self.parent.objectName():
@@ -459,12 +460,9 @@ class UI_MainWindow(object):
             headers=[
                 QtCore.QCoreApplication.translate("ui_main", "Status"),
                 QtCore.QCoreApplication.translate("ui_main", "Table name"),
-                QtCore.QCoreApplication.translate("ui_main", "Size in DB1"),
-                QtCore.QCoreApplication.translate("ui_main", "Size in DB2"),
-                QtCore.QCoreApplication.translate("ui_main", "Cols in DB1"),
-                QtCore.QCoreApplication.translate("ui_main", "Cols in DB2"),
-                QtCore.QCoreApplication.translate("ui_main", "Rows in DB1"),
-                QtCore.QCoreApplication.translate("ui_main", "Rows in DB2")
+                QtCore.QCoreApplication.translate("ui_main", "Size gap"),
+                QtCore.QCoreApplication.translate("ui_main", "Col gap"),
+                QtCore.QCoreApplication.translate("ui_main", "Row gap")
             ]
         )
         self.tableWidget.horizontalHeader().setSectionResizeMode(
@@ -681,6 +679,7 @@ class UI_MainWindow(object):
 
     def setup_page3(self):
         self.load_pages.oracle.hide()
+        self.load_pages.csv.hide()
         self.load_pages.settings.hide()
         self.load_pages.title_label_2.setMaximumHeight(50)
         self.load_pages.description_label_2.setMaximumHeight(50)
@@ -698,15 +697,14 @@ class UI_MainWindow(object):
         )
 
         self.csv_selector = py_tool_button.PyToolButton(
-            text="CSV (WIP)",
+            text="CSV file",
             icon_path="csv.svg",
             bg_color="transparent",
             border_size=0,
             bg_color_checked="#182ACC",
             bg_color_hover="#182ACC",
             is_checkable=True,
-            is_autoexclusive=True,
-            is_enabled=False
+            is_autoexclusive=True
 
         )
 
@@ -947,6 +945,69 @@ class UI_MainWindow(object):
         self.load_pages.authentication_layout.addWidget(
             self.isSavePwdOracle, 2, 2)
 
+    def settings_csv(self):
+
+        self.imagedragzone = py_label.PyLabel(
+            text="",
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            selection_color=self.themes["app_color"]["white"],
+            bg_color=self.themes["app_color"]["bg_one"],
+            bg_color_active=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"],
+            icon_path="icon_upload.svg",
+            accept_drops=True
+        )
+        self.imagedragzone.setMinimumHeight(100)
+        self.imagedragzone.setMaximumHeight(100)
+
+        text_1 = QtCore.QCoreApplication.translate(
+            "ui_main", "Drag & Drop here")
+        text_2 = QtCore.QCoreApplication.translate(
+            "ui_main", "or")
+
+        self.labeldragzone = py_label.PyLabel(
+            text=f"""
+            <b><font size="16">{text_1}</font></b>
+            <br><i><p align="center"><font size="6">
+            {text_2}</font></p></i><br>""",
+            radius=8,
+            border_size=2,
+            color=self.themes["app_color"]["text_foreground"],
+            selection_color=self.themes["app_color"]["white"],
+            bg_color=self.themes["app_color"]["bg_one"],
+            bg_color_active=self.themes["app_color"]["dark_three"],
+            context_color=self.themes["app_color"]["context_color"],
+            accept_drops=True
+        )
+        self.labeldragzone.setMinimumHeight(110)
+        self.labeldragzone.setMaximumHeight(110)
+
+        self.drag_button = py_push_button.PyPushButton(
+            text=QtCore.QCoreApplication.translate(
+                "ui_main", "Browse file"),
+            radius=8,
+            color=self.themes["app_color"]["white"],
+            bg_color=self.themes["app_color"]["lightblue"],
+            bg_color_hover=self.themes["app_color"]["dark_three"],
+            bg_color_pressed=self.themes["app_color"]["dark_four"],
+            bg_color_disabled=self.themes["app_color"]["grey"],
+            accept_drops=True
+        )
+        self.drag_button.setMinimumHeight(40)
+        self.drag_button.setMaximumHeight(40)
+        self.drag_button.setMinimumWidth(150)
+        self.drag_button.setMaximumWidth(150)
+
+        self.load_pages.csv_layout.addWidget(
+            self.imagedragzone, QtCore.Qt.AlignCenter, QtCore.Qt.AlignCenter)
+        self.load_pages.csv_layout.addWidget(
+            self.labeldragzone, QtCore.Qt.AlignCenter, QtCore.Qt.AlignCenter)
+        self.load_pages.csv_layout.addWidget(
+            self.drag_button, QtCore.Qt.AlignCenter, QtCore.Qt.AlignCenter)
+
+    def settings_config(self):
         self.labelCustomName = py_label.PyLabel(
             text=QtCore.QCoreApplication.translate(
                 "ui_main", "Connection name"),
@@ -983,7 +1044,6 @@ class UI_MainWindow(object):
         self.load_pages.settings_layout.addWidget(self.labelCustomName)
         self.load_pages.settings_layout.addWidget(self.setCustomName)
 
-    def settings_DB_buttons(self):
         self.testDB = py_push_button.PyPushButton(
             text=QtCore.QCoreApplication.translate(
                 "ui_main", "Test Connection"),

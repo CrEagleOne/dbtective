@@ -56,7 +56,7 @@ def _duckdb(f):
         """
         try:
             tmp_db = settings.Settings().get_settings()["workconfig"]["db"]
-            db_path = common.get_work_files(tmp_db)
+            db_path = common.get_file_in_work_folder(tmp_db)
             cnn = duckdb.connect(database=db_path)
             kwargs['cnn'] = cnn
             rv = f(*args, **kwargs)
@@ -209,5 +209,5 @@ def delete_tmp_db():
     Delete tmp duckDB database
     """
     tmp_db = settings.Settings().get_settings()["workconfig"]["db"]
-    db_path = common.get_work_files(tmp_db)
+    db_path = common.get_file_in_work_folder(tmp_db)
     os.remove(db_path)

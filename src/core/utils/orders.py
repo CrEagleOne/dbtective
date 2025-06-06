@@ -56,10 +56,10 @@ def compare_db(mode: str, settings_db1: list, settings_db2: list,
     slave_name = settings_data["workconfig"]["files"][1]
     extension = settings_data["workconfig"]["extension"]
 
-    folder = common.get_work_folder("extracts")
+    folder = common.get_file_in_work_folder("extracts")
     path1 = os.path.join(folder, master_name + extension)
     path2 = os.path.join(folder, slave_name + extension)
-    outfile_folder = common.get_work_folder("gap")
+    outfile_folder = common.get_file_in_work_folder("gap")
 
     warn = False
 
@@ -67,11 +67,21 @@ def compare_db(mode: str, settings_db1: list, settings_db2: list,
         raise exceptions.Error(603)
 
     for table in tables:
-        common.extract_to_csv(
-            settings_db1[1], table, path1, segment, fetch)
+        if settings_db1[0] == "Oracle":
+            common.oracle_to_csv(
+                settings_db1[1], table, path1, segment, fetch)
+        elif settings_db1[0] == "CSV":
+            for file_path in settings_db1[1]["file"]:
+                if table in file_path:
+                    common.convert_to_csv(file_path, path1)
 
-        common.extract_to_csv(
-            settings_db2[1], table, path2, segment, fetch)
+        if settings_db2[0] == "Oracle":
+            common.oracle_to_csv(
+                settings_db2[1], table, path2, segment, fetch)
+        elif settings_db2[0] == "CSV":
+            for file_path in settings_db2[1]["file"]:
+                if table in file_path:
+                    common.convert_to_csv(file_path, path2)
 
         if mode == "hash":
             hash1 = common.get_hash_file(path1)
@@ -86,11 +96,11 @@ def compare_db(mode: str, settings_db1: list, settings_db2: list,
             duck.load_file_data(
                 filename=path2, tablename=slave_name)
 
-            query = f"""(SELECT '{settings_db1[2]}' as DATABASE, *
+            query = f"""(SELECT '{settings_db1[2]}', *
             FROM {master_name}
             EXCEPT SELECT '{settings_db1[2]}', * FROM {slave_name})
             UNION
-            (SELECT '{settings_db2[2]}' as DATABASE, * FROM {slave_name}
+            (SELECT '{settings_db2[2]}', * FROM {slave_name}
             EXCEPT SELECT '{settings_db2[2]}', * FROM {master_name})"""
 
             data = duck.get_datas_by_fetchdf(query)

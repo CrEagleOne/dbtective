@@ -40,7 +40,7 @@ def _sqlite(f):
     """
     @wraps(f)
     def wrapper(*args, **kwargs):
-        db_path = common.get_work_files("database.db")
+        db_path = common.get_file_in_work_folder("database.db")
         conn = None
         try:
             conn = sqlite3.connect(db_path)
@@ -106,6 +106,9 @@ def update_settings(query, args: tuple, **kwargs):
     try:
         conn = kwargs.get('conn')
         cursor = conn.cursor()
+        current_datetime = datetime.now()
+        formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
+        args = (args[0], formatted_datetime, args[1])
         cursor.execute(query, args)
     except sqlite3.OperationalError as e:
         if "no such" in str(e).lower():
@@ -181,13 +184,13 @@ def setup_db(**kwargs) -> int:
                                         AUTOINCREMENT
                                         UNIQUE
                                         NOT NULL,
-            connexion_type    VARCHAR (20) NOT NULL,
-            nom               VARCHAR (60) UNIQUE ON CONFLICT ROLLBACK
+            connection_type    VARCHAR (20) NOT NULL,
+            name              VARCHAR (60) UNIQUE ON CONFLICT ROLLBACK
                                         NOT NULL,
             settings          TEXT         NOT NULL
                                         DEFAULT ('{}'),
-            date_creation     DATETIME     NOT NULL,
-            date_modification DATETIME
+            created_at      DATETIME     NOT NULL,
+            updated_at  DATETIME
         );"""
     cursor.execute(query)
     query = """
@@ -196,12 +199,16 @@ def setup_db(**kwargs) -> int:
                             NOT NULL ON CONFLICT ROLLBACK,
             [key]            UNIQUE ON CONFLICT ROLLBACK
                             NOT NULL ON CONFLICT ROLLBACK,
-            [values]         NOT NULL ON CONFLICT ROLLBACK
+            [values]         NOT NULL ON CONFLICT ROLLBACK,
+            created_at      DATETIME     NOT NULL,
+            updated_at  DATETIME
         );"""
     cursor.execute(query)
-    query = """
-        INSERT INTO settings ([key], [values])
-        VALUES ('locale', 'en_US')
+    current_datetime = datetime.now()
+    formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
+    query = f"""
+        INSERT INTO settings ([key], [values], created_at)
+        VALUES ('locale', 'en_US', '{formatted_datetime}')
         ON CONFLICT([key]) DO NOTHING;
     """
     cursor.execute(query)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DBtective \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-03 12:04+0200\n"
+"POT-Creation-Date: 2025-06-06 15:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -102,24 +102,28 @@ msgid "pandas"
 msgstr ""
 
 #: ../../src/core/utils/common.py:docstring of core.utils.common:20
-msgid "QtWidgets (PySide6)"
+msgid "from_path (charset_normalizer)"
 msgstr ""
 
 #: ../../src/core/utils/common.py:docstring of core.utils.common:21
-msgid "oracle.py"
+msgid "QtWidgets (PySide6)"
 msgstr ""
 
 #: ../../src/core/utils/common.py:docstring of core.utils.common:22
+msgid "oracle.py"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common:23
 #: ../../src/core/utils/config.py:docstring of core.utils.config:12
 #: ../../src/core/utils/orders.py:docstring of core.utils.orders:12
 msgid "exceptions.py"
 msgstr ""
 
-#: ../../src/core/utils/common.py:docstring of core.utils.common:23
+#: ../../src/core/utils/common.py:docstring of core.utils.common:24
 msgid "config.py"
 msgstr ""
 
-#: ../../src/core/utils/common.py:docstring of core.utils.common:25
+#: ../../src/core/utils/common.py:docstring of core.utils.common:26
 #: ../../src/core/utils/config.py:docstring of core.utils.config:15
 #: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions:12
 #: ../../src/core/utils/logs.py:docstring of core.utils.logs:15
@@ -127,11 +131,11 @@ msgstr ""
 msgid "Usage Example:"
 msgstr ""
 
-#: ../../src/core/utils/common.py:docstring of core.utils.common:26
+#: ../../src/core/utils/common.py:docstring of core.utils.common:27
 msgid "update_style(widget, \"border\", \"2px solid red\")"
 msgstr ""
 
-#: ../../src/core/utils/common.py:docstring of core.utils.common:29
+#: ../../src/core/utils/common.py:docstring of core.utils.common:30
 #: ../../src/core/utils/common.py:docstring of core.utils.common.update_style:11
 #: ../../src/core/utils/config.py:docstring of core.utils.config:19
 #: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions:16
@@ -140,7 +144,7 @@ msgstr ""
 msgid "Notes"
 msgstr ""
 
-#: ../../src/core/utils/common.py:docstring of core.utils.common:30
+#: ../../src/core/utils/common.py:docstring of core.utils.common:31
 #: ../../src/core/utils/config.py:docstring of core.utils.config:16
 #: ../../src/core/utils/config.py:docstring of core.utils.config:20
 #: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions:17
@@ -150,20 +154,44 @@ msgstr ""
 msgid "N/A"
 msgstr ""
 
-#: ../../src/core/utils/common.py:docstring of core.utils.common.compare_pairs:1
-msgid "Compare pairs of comma-separated strings and return the symmetric difference between their elements"
+#: ../../src/core/utils/common.py:docstring of core.utils.common.analyze_file:1
+msgid "Analyze file to extract some datas"
 msgstr ""
 
 #: ../source/core.utils.rst:0
 msgid "Parameters"
 msgstr ""
 
-#: ../../src/core/utils/common.py:docstring of core.utils.common.compare_pairs:4
-msgid "A list of tuples, where each tuple contains two comma-separated strings to compare"
+#: ../../src/core/utils/common.py:docstring of core.utils.common.analyze_file:3
+msgid "Path of file Supported formats: .txt, .xlsx, .csv"
+msgstr ""
+
+#: ../source/core.utils.rst:0
+msgid "Raises"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.analyze_file:7
+msgid "605 or 606"
 msgstr ""
 
 #: ../source/core.utils.rst:0
 msgid "Returns"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.analyze_file:9
+msgid "datas"
+msgstr ""
+
+#: ../source/core.utils.rst:0
+msgid "Return type"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.compare_pairs:1
+msgid "Compare pairs of comma-separated strings and return the symmetric difference between their elements"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.compare_pairs:4
+msgid "A list of tuples, where each tuple contains two comma-separated strings to compare"
 msgstr ""
 
 #: ../../src/core/utils/common.py:docstring of core.utils.common.compare_pairs:9
@@ -191,8 +219,16 @@ msgstr ""
 msgid "of both strings"
 msgstr ""
 
-#: ../source/core.utils.rst:0
-msgid "Return type"
+#: ../../src/core/utils/common.py:docstring of core.utils.common.convert_to_csv:1
+msgid "Copies a file to a specified directory and converts it to CSV format if necessary."
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.convert_to_csv:4
+msgid "The full path to the source file to be copied. Supported formats: .txt, .xlsx, .csv"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.convert_to_csv:7
+msgid "The path to the destination directory"
 msgstr ""
 
 #: ../../src/core/utils/common.py:docstring of core.utils.common.create_gap_files:1
@@ -215,22 +251,6 @@ msgstr ""
 msgid "The relative path inside the 'dbtective' temp directory to be purged"
 msgstr ""
 
-#: ../../src/core/utils/common.py:docstring of core.utils.common.extract_to_csv:1
-msgid "Extract data to a CSV file"
-msgstr ""
-
-#: ../../src/core/utils/common.py:docstring of core.utils.common.extract_to_csv:3
-msgid "Database configuration"
-msgstr ""
-
-#: ../../src/core/utils/common.py:docstring of core.utils.common.extract_to_csv:5
-msgid "Tablename"
-msgstr ""
-
-#: ../../src/core/utils/common.py:docstring of core.utils.common.extract_to_csv:7
-msgid "Output file name"
-msgstr ""
-
 #: ../../src/core/utils/common.py:docstring of core.utils.common.find_most_similar_pairs:1
 msgid "Finds the most similar pairs in a DataFrame column using Levenshtein distance"
 msgstr ""
@@ -241,6 +261,10 @@ msgstr ""
 
 #: ../../src/core/utils/common.py:docstring of core.utils.common.find_most_similar_pairs:6
 msgid "The name of the column, defaults to 'merged'"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of charset_normalizer.api.from_path:1
+msgid "Same thing than the function from_bytes but with one extra step. Opening and reading given file path in binary mode. Can raise IOError."
 msgstr ""
 
 #: ../../src/core/utils/common.py:docstring of core.utils.common.get_all_locales:1
@@ -256,18 +280,18 @@ msgid "A list of available locales, with the current locale first"
 msgstr ""
 
 #: ../../src/core/utils/common.py:docstring of core.utils.common.get_common_tables:1
-msgid "Retrieve the common tables of 2 bases"
+msgid "Retrieve common tables from 2 data sources Tables must have the same name, including CSV files."
 msgstr ""
 
-#: ../../src/core/utils/common.py:docstring of core.utils.common.get_common_tables:3
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_common_tables:4
 msgid "Database 1 configuration"
 msgstr ""
 
-#: ../../src/core/utils/common.py:docstring of core.utils.common.get_common_tables:5
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_common_tables:6
 msgid "Database 2 configuration"
 msgstr ""
 
-#: ../../src/core/utils/common.py:docstring of core.utils.common.get_common_tables:8
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_common_tables:9
 msgid "Common tables"
 msgstr ""
 
@@ -279,15 +303,28 @@ msgstr ""
 msgid "The current locale setting"
 msgstr ""
 
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_file_in_work_folder:1
+msgid "Get the working folder path inside the system's temporary directory Creates the folder if it does not exist"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_file_in_work_folder:4
+msgid "The relative path inside the work directory"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_file_in_work_folder:7
+msgid "The full path inside the temporary workspace"
+msgstr ""
+
 #: ../../src/core/utils/common.py:docstring of core.utils.common.get_file_size:1
-msgid "Retrieves the file size and dynamically chooses the most suitable unit"
+msgid "Retrieves the file size"
 msgstr ""
 
 #: ../../src/core/utils/common.py:docstring of core.utils.common.get_file_size:3
-msgid "Filenmae"
+msgid "Path of file"
 msgstr ""
 
 #: ../../src/core/utils/common.py:docstring of core.utils.common.get_file_size:6
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_suitable_unit_for_size:6
 msgid "File size with the most suitable unit"
 msgstr ""
 
@@ -307,6 +344,14 @@ msgstr ""
 msgid "File hash"
 msgstr ""
 
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_suitable_unit_for_size:1
+msgid "Dynamically chooses the most suitable unit"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.get_suitable_unit_for_size:3
+msgid "Size value"
+msgstr ""
+
 #: ../../src/core/utils/common.py:docstring of core.utils.common.get_tables_of_db:1
 msgid "Retrieve the list of tables, their size, the number of columns and rows"
 msgstr ""
@@ -319,22 +364,20 @@ msgstr ""
 msgid "Database content"
 msgstr ""
 
-#: ../../src/core/utils/common.py:docstring of core.utils.common.get_work_files:1
-msgid "Get the working file path inside the system's temporary directory"
+#: ../../src/core/utils/common.py:docstring of core.utils.common.is_data_table:1
+msgid "Check if the given file is a valid data table."
 msgstr ""
 
-#: ../../src/core/utils/common.py:docstring of core.utils.common.get_work_files:3
-#: ../../src/core/utils/common.py:docstring of core.utils.common.get_work_folder:4
-msgid "The relative path inside the work directory"
+#: ../../src/core/utils/common.py:docstring of core.utils.common.is_data_table:3
+msgid "This function attempts to read the file using pandas and checks whether it contains both columns and rows."
 msgstr ""
 
-#: ../../src/core/utils/common.py:docstring of core.utils.common.get_work_files:6
-#: ../../src/core/utils/common.py:docstring of core.utils.common.get_work_folder:7
-msgid "The full path inside the temporary workspace"
+#: ../../src/core/utils/common.py:docstring of core.utils.common.is_data_table:6
+msgid "Path to the data file"
 msgstr ""
 
-#: ../../src/core/utils/common.py:docstring of core.utils.common.get_work_folder:1
-msgid "Get the working folder path inside the system's temporary directory Creates the folder if it does not exist"
+#: ../../src/core/utils/common.py:docstring of core.utils.common.is_data_table:9
+msgid "True if the file is a valid data table, False otherwise"
 msgstr ""
 
 #: ../../src/core/utils/common.py:docstring of core.utils.common.levenshtein_distance:1
@@ -346,11 +389,15 @@ msgid "The Levenshtein distance is a measure of the difference between two seque
 msgstr ""
 
 #: ../../src/core/utils/common.py:docstring of core.utils.common.levenshtein_distance:8
-msgid "Parameters: s1 (str): The first string to compare s2 (str): The second string to compare"
+msgid "The first string to compare"
 msgstr ""
 
-#: ../../src/core/utils/common.py:docstring of core.utils.common.levenshtein_distance:12
-msgid "Returns: int: The Levenshtein distance between s1 and s2"
+#: ../../src/core/utils/common.py:docstring of core.utils.common.levenshtein_distance:10
+msgid "The second string to compare"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.levenshtein_distance:13
+msgid "The Levenshtein distance between s1 and s2"
 msgstr ""
 
 #: ../../src/core/utils/common.py:docstring of core.utils.common.merge_columns:1
@@ -387,6 +434,22 @@ msgstr ""
 
 #: ../../src/core/utils/common.py:docstring of core.utils.common.open_folders:3
 msgid "File name"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.oracle_to_csv:1
+msgid "Extract data to a CSV file"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.oracle_to_csv:3
+msgid "Database configuration"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.oracle_to_csv:5
+msgid "Tablename"
+msgstr ""
+
+#: ../../src/core/utils/common.py:docstring of core.utils.common.oracle_to_csv:7
+msgid "Output file name"
 msgstr ""
 
 #: ../../src/core/utils/common.py:docstring of core.utils.common.resource_path:1
@@ -678,7 +741,7 @@ msgid "logs.py"
 msgstr ""
 
 #: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions:13
-msgid "raise Error(100, \"texte\")"
+msgid "raise Error(400, \"text\")"
 msgstr ""
 
 #: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error:1
@@ -695,7 +758,7 @@ msgid "Initializes the exception with an error message and triggers error loggin
 msgstr ""
 
 #: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:4
-msgid "The error code used to fetch the corresponding message  Possible values:     - 400: Poorly formed or invalid SQL query     - 401: An error was occured     - 402: UNIQUE constraint failed     - 403: Syntax error     - 404: Table or column not found     - 405: Incorrect database config     - 406: Data type mismatch     - 407: Conversion error     - 408: Transaction error     - 500: Failed to connect to database     - 501: Database temporarily unavailable     - 502: Out of memory error     - 503: Disk I/O error     - 504: No active Oracle listener     - 505: Account locked     - 506: Incorrect username or password     - 600: System not supported     - 601: Settings file not found     - 602: Themes file not found     - 603: No tables to compare     - 604: Error occurring during data extraction     - 999: Unanticipated error - check logs"
+msgid "The error code used to fetch the corresponding message  Possible values:     - 400: Poorly formed or invalid SQL query     - 401: An error was occured     - 402: UNIQUE constraint failed     - 403: Syntax error     - 404: Table or column not found     - 405: Incorrect database config     - 406: Data type mismatch     - 407: Conversion error     - 408: Transaction error     - 500: Failed to connect to database     - 501: Database temporarily unavailable     - 502: Out of memory error     - 503: Disk I/O error     - 504: No active Oracle listener     - 505: Account locked     - 506: Incorrect username or password     - 600: System not supported     - 601: Settings file not found     - 602: Themes file not found     - 603: No tables to compare     - 604: Error occurring during data extraction     - 605: Unsupported file type     - 606: The file does not appear to contain a header row     - 607: No common tables found     - 608: File not found"
 msgstr ""
 
 #: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:4
@@ -793,10 +856,22 @@ msgid "604: Error occurring during data extraction"
 msgstr ""
 
 #: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:28
-msgid "999: Unanticipated error - check logs"
+msgid "605: Unsupported file type"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:29
+msgid "606: The file does not appear to contain a header row"
 msgstr ""
 
 #: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:30
+msgid "607: No common tables found"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:31
+msgid "608: File not found"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Error.__init__:33
 msgid "System context for logging"
 msgstr ""
 
@@ -835,7 +910,7 @@ msgid "Initializes the info with a message and triggers info signaling"
 msgstr ""
 
 #: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.INFO.__init__:4
-msgid "The info code used to fetch the corresponding message  Possible values:     - 100: Backup successfully     - 101: Backup successfully     - 200: Treatment completed successfully     - 201: No discrepancies were found"
+msgid "The info code used to fetch the corresponding message  Possible values:     - 100: Backup successfully     - 200: Treatment completed successfully     - 201: No discrepancies were found     - 999: Unanticipated error - check logs"
 msgstr ""
 
 #: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.INFO.__init__:4
@@ -847,15 +922,15 @@ msgid "100: Backup successfully"
 msgstr ""
 
 #: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.INFO.__init__:8
-msgid "101: Backup successfully"
-msgstr ""
-
-#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.INFO.__init__:9
 msgid "200: Treatment completed successfully"
 msgstr ""
 
-#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.INFO.__init__:10
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.INFO.__init__:9
 msgid "201: No discrepancies were found"
+msgstr ""
+
+#: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.INFO.__init__:10
+msgid "999: Unanticipated error - check logs"
 msgstr ""
 
 #: ../../src/core/utils/exceptions.py:docstring of core.utils.exceptions.Warn:1
@@ -1029,10 +1104,6 @@ msgstr ""
 
 #: ../../src/core/utils/orders.py:docstring of core.utils.orders.compare_db:13
 msgid "Fetch size"
-msgstr ""
-
-#: ../source/core.utils.rst:0
-msgid "Raises"
 msgstr ""
 
 #: ../../src/core/utils/orders.py:docstring of core.utils.orders.compare_db:16

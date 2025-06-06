@@ -6,7 +6,7 @@ import traceback
 import types
 from PySide6 import QtWidgets, QtCore, QtGui
 from gui.core import functions
-from gui.views import ui_main, events
+from gui.views import ui_main, events, popups
 from core.utils import config, exceptions, common, logs
 
 
@@ -120,7 +120,7 @@ def exception_hook(exctype: type[BaseException],
     """
     error_message = "".join(traceback.format_exception(exctype, value, tb))
     logs.log_critical(error_message)
-    exceptions.ErrorSignal(exceptions.Error(999))
+    popups.display_error(str(exceptions.INFO(999)))
 
 
 def main():

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DBtective \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-03 12:31+0200\n"
+"POT-Creation-Date: 2025-06-06 15:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,24 +20,12 @@ msgstr ""
 msgid "Create a new connection"
 msgstr ""
 
-#: ../source/new_connection.md:7
+#: ../source/new_connection.md:8
 msgid "Configuring Connection Settings"
 msgstr ""
 
-#: ../source/new_connection.md:9
-msgid "For all connections :"
-msgstr ""
-
 #: ../source/new_connection.md:10
-msgid "Test the Connection: Click Test Connection to verify if the connection works"
-msgstr ""
-
-#: ../source/new_connection.md:11
-msgid "Save: Click Save. The connection appears in the database choices"
-msgstr ""
-
-#: ../source/new_connection.md:13
-msgid "Oracle connection settings"
+msgid "For all connections :"
 msgstr ""
 
 #: ../source/new_connection.md:0
@@ -46,6 +34,34 @@ msgstr ""
 
 #: ../source/new_connection.md:0
 msgid "Description"
+msgstr ""
+
+#: ../source/new_connection.md:0
+msgid "Test the Connection"
+msgstr ""
+
+#: ../source/new_connection.md:0
+msgid "Click Test Connection to verify if the connection works"
+msgstr ""
+
+#: ../source/new_connection.md:0
+msgid "Save"
+msgstr ""
+
+#: ../source/new_connection.md:0
+msgid "Click Save. The connection appears in the database choices"
+msgstr ""
+
+#: ../source/new_connection.md:0
+msgid "Connection name"
+msgstr ""
+
+#: ../source/new_connection.md:0
+msgid "Assign a specific name to the connection for easier identification"
+msgstr ""
+
+#: ../source/new_connection.md:18
+msgid "Oracle connection settings"
 msgstr ""
 
 #: ../source/new_connection.md:0
@@ -80,10 +96,18 @@ msgstr ""
 msgid "The credentials required for authentication"
 msgstr ""
 
-#: ../source/new_connection.md:0
-msgid "Connection name"
+#: ../source/new_connection.md:32
+msgid "CSV connection settings"
 msgstr ""
 
-#: ../source/new_connection.md:0
-msgid "Assign a specific name to the connection for easier identification"
+#: ../source/new_connection.md:38
+msgid "Drag and drop or browse files"
+msgstr ""
+
+#: ../source/new_connection.md:40
+msgid "Allowed extensions: csv, xlsx or txt"
+msgstr ""
+
+#: ../source/new_connection.md:42
+msgid "For each file, a structural analysis is performed to ensure that the file's content is a table structure (header, separator, etc.). If at least one file is incorrect (wrong extension or inconsistent content), then this file will be ignored and an alert will appear on the screen."
 msgstr ""

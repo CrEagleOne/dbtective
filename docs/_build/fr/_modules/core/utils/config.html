@@ -8,6 +8,7 @@
   <title>core.utils.config &mdash; Documentation DBtective 1.0.0</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=8399456f" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
@@ -43,7 +44,6 @@
               <p class="caption" role="heading"><span class="caption-text">Documentation utilisateur:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../source/user.html">Fonctionnalités</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../source/user.html#images">Images</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Documentation technique:</span></p>
 <ul>
@@ -117,7 +117,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">db_path</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_work_files</span><span class="p">(</span><span class="s2">&quot;database.db&quot;</span><span class="p">)</span>
+        <span class="n">db_path</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_file_in_work_folder</span><span class="p">(</span><span class="s2">&quot;database.db&quot;</span><span class="p">)</span>
         <span class="n">conn</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">db_path</span><span class="p">)</span>
@@ -188,6 +188,9 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="n">conn</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;conn&#39;</span><span class="p">)</span>
         <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">current_datetime</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">formatted_datetime</span> <span class="o">=</span> <span class="n">current_datetime</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">formatted_datetime</span><span class="p">,</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">OperationalError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="k">if</span> <span class="s2">&quot;no such&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
@@ -272,13 +275,13 @@
 <span class="s2">                                        AUTOINCREMENT</span>
 <span class="s2">                                        UNIQUE</span>
 <span class="s2">                                        NOT NULL,</span>
-<span class="s2">            connexion_type    VARCHAR (20) NOT NULL,</span>
-<span class="s2">            nom               VARCHAR (60) UNIQUE ON CONFLICT ROLLBACK</span>
+<span class="s2">            connection_type    VARCHAR (20) NOT NULL,</span>
+<span class="s2">            name              VARCHAR (60) UNIQUE ON CONFLICT ROLLBACK</span>
 <span class="s2">                                        NOT NULL,</span>
 <span class="s2">            settings          TEXT         NOT NULL</span>
 <span class="s2">                                        DEFAULT (&#39;</span><span class="si">{}</span><span class="s2">&#39;),</span>
-<span class="s2">            date_creation     DATETIME     NOT NULL,</span>
-<span class="s2">            date_modification DATETIME</span>
+<span class="s2">            created_at      DATETIME     NOT NULL,</span>
+<span class="s2">            updated_at  DATETIME</span>
 <span class="s2">        );&quot;&quot;&quot;</span>
     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
     <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -287,12 +290,16 @@
 <span class="s2">                            NOT NULL ON CONFLICT ROLLBACK,</span>
 <span class="s2">            [key]            UNIQUE ON CONFLICT ROLLBACK</span>
 <span class="s2">                            NOT NULL ON CONFLICT ROLLBACK,</span>
-<span class="s2">            [values]         NOT NULL ON CONFLICT ROLLBACK</span>
+<span class="s2">            [values]         NOT NULL ON CONFLICT ROLLBACK,</span>
+<span class="s2">            created_at      DATETIME     NOT NULL,</span>
+<span class="s2">            updated_at  DATETIME</span>
 <span class="s2">        );&quot;&quot;&quot;</span>
     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
-    <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">        INSERT INTO settings ([key], [values])</span>
-<span class="s2">        VALUES (&#39;locale&#39;, &#39;en_US&#39;)</span>
+    <span class="n">current_datetime</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+    <span class="n">formatted_datetime</span> <span class="o">=</span> <span class="n">current_datetime</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        INSERT INTO settings ([key], [values], created_at)</span>
+<span class="s2">        VALUES (&#39;locale&#39;, &#39;en_US&#39;, &#39;</span><span class="si">{</span><span class="n">formatted_datetime</span><span class="si">}</span><span class="s2">&#39;)</span>
 <span class="s2">        ON CONFLICT([key]) DO NOTHING;</span>
 <span class="s2">    &quot;&quot;&quot;</span>
     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>

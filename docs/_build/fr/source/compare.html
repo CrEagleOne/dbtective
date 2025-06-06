@@ -57,6 +57,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#details">Détails</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#csv-files">Fichiers CSV</a></li>
 </ul>
 </li>
 </ul>
@@ -107,7 +108,7 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Base de données 1 et 2</p></td>
-<td><p>Choisissez les bases de données à comparer</p></td>
+<td><p>Choisisser les bases de données à comparer</p></td>
 </tr>
 <tr class="row-odd"><td><p>Requêtes multiples</p></td>
 <td><p>Définit la méthode d’extraction des données (requête unique si désactivée)</p></td>
@@ -146,7 +147,21 @@
 <section id="details">
 <h2>Détails<a class="headerlink" href="#details" title="Lien vers cette rubrique"></a></h2>
 <p>Affiche la liste des tables communes entre les 2 bases de données sélectionnées.</p>
-<p>En appuyant sur « DELETE » sur le clavier, la table associée à la ligne sélectionnée ne sera pas comparée. Pour ajouter à nouveau la table, appuyez sur « Retour arrière ».</p>
+<p>En appuyant sur « DELETE » sur le clavier, la table associée à la ligne sélectionnée ne sera pas comparée. Pour ajouter à nouveau la table, appuyer sur « Retour arrière ».</p>
+</section>
+<section id="csv-files">
+<h2>Fichiers CSV<a class="headerlink" href="#csv-files" title="Lien vers cette rubrique"></a></h2>
+<p>Chaque fichier CSV à traiter lors de la comparaison doit respecter les règles suivantes:</p>
+<ul class="simple">
+<li><p>Le nom du fichier doit être identique</p>
+<ul>
+<li><p>Au nom de la table à comparer pour une comparaison de base de données</p></li>
+<li><p>Au nom de l’autre fichier pour une comparaison avec un autre fichier</p></li>
+</ul>
+</li>
+<li><p>Doit contenir les noms de colonnes dans l’en-tête</p></li>
+<li><p>S’assurer de la cohérence des données exportées</p></li>
+</ul>
 </section>
 </section>
 

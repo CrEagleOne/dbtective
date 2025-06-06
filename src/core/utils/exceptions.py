@@ -13,7 +13,7 @@ Dependencies:
     - logs.py
 
 Usage Example:
-    raise Error(100, "texte")
+    raise Error(400, "text")
 
 Notes:
     - N/A
@@ -117,7 +117,10 @@ class Error(Exception):
                     - 602: Themes file not found
                     - 603: No tables to compare
                     - 604: Error occurring during data extraction
-                    - 999: Unanticipated error - check logs
+                    - 605: Unsupported file type
+                    - 606: The file does not appear to contain a header row
+                    - 607: No common tables found
+                    - 608: File not found
 
             system (str | None, optional): System context for logging
         """
@@ -167,9 +170,14 @@ class Error(Exception):
                 "exceptions", "No tables to compare"),
             604: QtCore.QCoreApplication.translate(
                 "exceptions", "Error occurring during data extraction"),
-
-            999: QtCore.QCoreApplication.translate(
-                "exceptions", "Unanticipated error - check logs"),
+            605: QtCore.QCoreApplication.translate(
+                "exceptions", "Unsupported file type"),
+            606: QtCore.QCoreApplication.translate(
+                "exceptions", "The file does not appear to contain a header row"),
+            607: QtCore.QCoreApplication.translate(
+                "exceptions", "No common tables found"),
+            608: QtCore.QCoreApplication.translate(
+                "exceptions", "File not found")
         }
 
         self.message = self.errors.get(
@@ -230,20 +238,20 @@ class INFO:
 
                 Possible values:
                     - 100: Backup successfully
-                    - 101: Backup successfully
                     - 200: Treatment completed successfully
                     - 201: No discrepancies were found
+                    - 999: Unanticipated error - check logs
         """
 
         self.info = {
             100: QtCore.QCoreApplication.translate(
                 "exceptions", "Backup successfully"),
-            101: QtCore.QCoreApplication.translate(
-                "exceptions", "Backup successfully"),
             200: QtCore.QCoreApplication.translate(
                 "exceptions", "Treatment completed successfully"),
             201: QtCore.QCoreApplication.translate(
                 "exceptions", "No discrepancies were found"),
+            999: QtCore.QCoreApplication.translate(
+                "exceptions", "Unanticipated error - check logs"),
         }
 
         self.message = self.info.get(

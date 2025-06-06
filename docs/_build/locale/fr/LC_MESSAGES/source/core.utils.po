@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DBtective \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-03 12:04+0200\n"
+"POT-Creation-Date: 2025-06-06 15:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -95,40 +95,79 @@ msgid "pandas"
 msgstr ""
 
 #: core.utils.common:20 of
-msgid "QtWidgets (PySide6)"
+msgid "from_path (charset_normalizer)"
 msgstr ""
 
 #: core.utils.common:21 of
+msgid "QtWidgets (PySide6)"
+msgstr ""
+
+#: core.utils.common:22 of
 msgid "oracle.py"
 msgstr ""
 
-#: core.utils.common:22 core.utils.config:12 core.utils.orders:12 of
+#: core.utils.common:23 core.utils.config:12 core.utils.orders:12 of
 msgid "exceptions.py"
 msgstr ""
 
-#: core.utils.common:23 of
+#: core.utils.common:24 of
 msgid "config.py"
 msgstr ""
 
-#: core.utils.common:25 core.utils.config:15 core.utils.exceptions:12
+#: core.utils.common:26 core.utils.config:15 core.utils.exceptions:12
 #: core.utils.logs:15 core.utils.orders:17 of
 msgid "Usage Example:"
 msgstr "Example d'utilisation:"
 
-#: core.utils.common:26 of
+#: core.utils.common:27 of
 msgid "update_style(widget, \"border\", \"2px solid red\")"
 msgstr ""
 
-#: core.utils.common:29 core.utils.common.update_style:11 core.utils.config:19
+#: core.utils.common:30 core.utils.common.update_style:11 core.utils.config:19
 #: core.utils.exceptions:16 core.utils.logs:19 core.utils.orders:21 of
 msgid "Notes"
 msgstr ""
 
-#: core.utils.common:30 core.utils.config:16 core.utils.config:20
+#: core.utils.common:31 core.utils.config:16 core.utils.config:20
 #: core.utils.exceptions:17 core.utils.logs:20 core.utils.orders:18
 #: core.utils.orders:22 of
 msgid "N/A"
 msgstr ""
+
+#: core.utils.common.analyze_file:1 of
+msgid "Analyze file to extract some datas"
+msgstr "Analyser le fichier pour extraire certaines données"
+
+#: ../source/core.utils.rst
+#, fuzzy
+msgid "Parameters"
+msgstr "Paramètres:"
+
+#: core.utils.common.analyze_file:3 of
+msgid "Path of file Supported formats: .txt, .xlsx, .csv"
+msgstr "Chemin du fichier. Formats pris en charge : .txt, .xlsx, .csv"
+
+#: ../source/core.utils.rst
+msgid "Raises"
+msgstr "Déclenche"
+
+#: core.utils.common.analyze_file:7 of
+msgid "605 or 606"
+msgstr "605 ou 606"
+
+#: ../source/core.utils.rst
+#, fuzzy
+msgid "Returns"
+msgstr "Renvoie:"
+
+#: core.utils.common.analyze_file:9 of
+msgid "datas"
+msgstr "données"
+
+#: ../source/core.utils.rst
+#, fuzzy
+msgid "Return type"
+msgstr "Code retour"
 
 #: core.utils.common.compare_pairs:1 of
 msgid ""
@@ -138,11 +177,6 @@ msgstr ""
 "Comparer des paires de chaînes séparées par des virgules et renvoyer la "
 "différence symétrique entre leurs éléments "
 
-#: ../source/core.utils.rst
-#, fuzzy
-msgid "Parameters"
-msgstr "Paramètres:"
-
 #: core.utils.common.compare_pairs:4 of
 msgid ""
 "A list of tuples, where each tuple contains two comma-separated strings "
@@ -150,11 +184,6 @@ msgid ""
 msgstr ""
 "Une liste de tuples, où chaque tuple à comparer contiennent deux chaînes "
 "séparées par des virgules"
-
-#: ../source/core.utils.rst
-#, fuzzy
-msgid "Returns"
-msgstr "Renvoie:"
 
 #: core.utils.common.compare_pairs:9
 #: core.utils.common.find_most_similar_pairs:9 of
@@ -187,10 +216,25 @@ msgstr "Un ensemble contenant la différence symétrique entre les éléments"
 msgid "of both strings"
 msgstr "des deux chaines"
 
-#: ../source/core.utils.rst
-#, fuzzy
-msgid "Return type"
-msgstr "Code retour"
+#: core.utils.common.convert_to_csv:1 of
+msgid ""
+"Copies a file to a specified directory and converts it to CSV format if "
+"necessary."
+msgstr ""
+"Copie un fichier dans un répertoire spécifié et le convertit au format CSV "
+"si nécessaire."
+
+#: core.utils.common.convert_to_csv:4 of
+msgid ""
+"The full path to the source file to be copied. Supported formats: .txt, "
+".xlsx, .csv"
+msgstr ""
+"Chemin d'accès complet au fichier source à copier. Formats pris en charge : .txt,"
+".xlsx, .csv"
+
+#: core.utils.common.convert_to_csv:7 of
+msgid "The path to the destination directory"
+msgstr "Le chemin vers le répertoire de destination"
 
 #: core.utils.common.create_gap_files:1 of
 msgid "Create a csv file containing the data discrepancies"
@@ -218,22 +262,6 @@ msgstr ""
 "Le chemin relatif à l'intérieur du répertoire temporaire 'dbtective' à "
 "purger"
 
-#: core.utils.common.extract_to_csv:1 of
-msgid "Extract data to a CSV file"
-msgstr "Extraire des données dans un fichier CSV"
-
-#: core.utils.common.extract_to_csv:3 of
-msgid "Database configuration"
-msgstr "Configuration de la base de données"
-
-#: core.utils.common.extract_to_csv:5 of
-msgid "Tablename"
-msgstr "Nom de la table"
-
-#: core.utils.common.extract_to_csv:7 of
-msgid "Output file name"
-msgstr "Nom du fichier de sortie"
-
 #: core.utils.common.find_most_similar_pairs:1 of
 msgid ""
 "Finds the most similar pairs in a DataFrame column using Levenshtein "
@@ -250,6 +278,14 @@ msgstr "Le DataFrame contenant la colonne à comparer"
 msgid "The name of the column, defaults to 'merged'"
 msgstr "Le nom de la colonne, par défaut « merged »"
 
+#: charset_normalizer.api.from_path:1 of
+msgid ""
+"Same thing than the function from_bytes but with one extra step. Opening "
+"and reading given file path in binary mode. Can raise IOError."
+msgstr ""
+"Même chose que la fonction from_bytes, mais avec une étape supplémentaire. Ouverture "
+"et lecture du chemin d'accès au fichier donné en mode binaire. Peut générer une erreur IOError."
+
 #: core.utils.common.get_all_locales:1 of
 msgid "Retrieves all available locales from the specified directory"
 msgstr ""
@@ -265,18 +301,22 @@ msgid "A list of available locales, with the current locale first"
 msgstr "Une liste des traductions disponibles, avec le langage actuel en premier"
 
 #: core.utils.common.get_common_tables:1 of
-msgid "Retrieve the common tables of 2 bases"
-msgstr "Récupérer les tables communes de 2 bases"
+msgid ""
+"Retrieve common tables from 2 data sources Tables must have the same "
+"name, including CSV files."
+msgstr ""
+"Récupérer les tables communes à partir de 2 sources de données Les tables doivent avoir les mêmes "
+"nom, y compris les fichiers CSV."
 
-#: core.utils.common.get_common_tables:3 of
+#: core.utils.common.get_common_tables:4 of
 msgid "Database 1 configuration"
 msgstr "Configuration de la base de données 1"
 
-#: core.utils.common.get_common_tables:5 of
+#: core.utils.common.get_common_tables:6 of
 msgid "Database 2 configuration"
 msgstr "Configuration de la base de données 2"
 
-#: core.utils.common.get_common_tables:8 of
+#: core.utils.common.get_common_tables:9 of
 msgid "Common tables"
 msgstr "Tables communes"
 
@@ -288,17 +328,34 @@ msgstr "Récupère la langue choisie par l'utilisateur"
 msgid "The current locale setting"
 msgstr "La langue trouvée"
 
-#: core.utils.common.get_file_size:1 of
-msgid "Retrieves the file size and dynamically chooses the most suitable unit"
+#: core.utils.common.get_file_in_work_folder:1 of
+msgid ""
+"Get the working folder path inside the system's temporary directory "
+"Creates the folder if it does not exist"
 msgstr ""
+"Obtener le chemin du dossier de travail dans le répertoire temporaire du "
+"système Créer le dossier s'il n'existe pas "
+
+#: core.utils.common.get_file_in_work_folder:4 of
+msgid "The relative path inside the work directory"
+msgstr "Le chemin relatif à l'intérieur du répertoire de travail"
+
+#: core.utils.common.get_file_in_work_folder:7 of
+msgid "The full path inside the temporary workspace"
+msgstr "Le chemin relatif à l'intérieur du répertoire de travail"
+
+#: core.utils.common.get_file_size:1 of
+#, fuzzy
+msgid "Retrieves the file size"
+msgstr "Récupère la langue"
 
 #: core.utils.common.get_file_size:3 of
-msgid "Filenmae"
-msgstr ""
-"Récupère la taille du fichier et choisit dynamiquement l'unité la plus "
-"appropriée"
+#, fuzzy
+msgid "Path of file"
+msgstr "Chemin du fichier de sortie"
 
-#: core.utils.common.get_file_size:6 of
+#: core.utils.common.get_file_size:6
+#: core.utils.common.get_suitable_unit_for_size:6 of
 msgid "File size with the most suitable unit"
 msgstr "Taille du fichier avec l'unité la plus adaptée"
 
@@ -320,6 +377,16 @@ msgstr "Algorithme de hachage à utiliser. La valeur par défaut est 'sha256'"
 msgid "File hash"
 msgstr "Hachage de fichiers"
 
+#: core.utils.common.get_suitable_unit_for_size:1 of
+#, fuzzy
+msgid "Dynamically chooses the most suitable unit"
+msgstr "Taille du fichier avec l'unité la plus adaptée"
+
+#: core.utils.common.get_suitable_unit_for_size:3 of
+#, fuzzy
+msgid "Size value"
+msgstr "Valeurs possibles :"
+
 #: core.utils.common.get_tables_of_db:1 of
 msgid "Retrieve the list of tables, their size, the number of columns and rows"
 msgstr ""
@@ -334,27 +401,24 @@ msgstr "Configuration de la base de données"
 msgid "Database content"
 msgstr "Contenu de la base de données"
 
-#: core.utils.common.get_work_files:1 of
-msgid "Get the working file path inside the system's temporary directory"
-msgstr ""
-"Obtener le chemin du fichier de travail dans le répertoire temporaire du "
-"système"
-
-#: core.utils.common.get_work_files:3 core.utils.common.get_work_folder:4 of
-msgid "The relative path inside the work directory"
+#: core.utils.common.is_data_table:1 of
+msgid "Check if the given file is a valid data table."
 msgstr ""
 
-#: core.utils.common.get_work_files:6 core.utils.common.get_work_folder:7 of
-msgid "The full path inside the temporary workspace"
-msgstr "Le chemin relatif à l'intérieur du répertoire de travail"
-
-#: core.utils.common.get_work_folder:1 of
+#: core.utils.common.is_data_table:3 of
 msgid ""
-"Get the working folder path inside the system's temporary directory "
-"Creates the folder if it does not exist"
+"This function attempts to read the file using pandas and checks whether "
+"it contains both columns and rows."
 msgstr ""
-"Obtener le chemin du dossier de travail dans le répertoire temporaire du "
-"système Créer le dossier s'il n'existe pas "
+
+#: core.utils.common.is_data_table:6 of
+#, fuzzy
+msgid "Path to the data file"
+msgstr "Chemin du fichier de sortie"
+
+#: core.utils.common.is_data_table:9 of
+msgid "True if the file is a valid data table, False otherwise"
+msgstr ""
 
 #: core.utils.common.levenshtein_distance:1 of
 msgid "Calculate the Levenshtein distance between two strings"
@@ -373,15 +437,18 @@ msgstr ""
 "nécessaires pour modifier une séquence en une autre "
 
 #: core.utils.common.levenshtein_distance:8 of
-msgid ""
-"Parameters: s1 (str): The first string to compare s2 (str): The second "
-"string to compare"
-msgstr ""
-"Paramètres : s1 (str) : La première chaîne pour comparer s2 (str) : La "
-"seconde chaîne à comparer"
+#, fuzzy
+msgid "The first string to compare"
+msgstr "Liste des tables à comparer"
 
-#: core.utils.common.levenshtein_distance:12 of
-msgid "Returns: int: The Levenshtein distance between s1 and s2"
+#: core.utils.common.levenshtein_distance:10 of
+#, fuzzy
+msgid "The second string to compare"
+msgstr "Le DataFrame contenant la colonne à comparer"
+
+#: core.utils.common.levenshtein_distance:13 of
+#, fuzzy
+msgid "The Levenshtein distance between s1 and s2"
 msgstr "Renvoie : int : La distance de Levenshtein entre s1 et s2"
 
 #: core.utils.common.merge_columns:1 of
@@ -404,19 +471,19 @@ msgstr "Fusionner les données de 2 dict pour chaque clé commune"
 
 #: core.utils.common.merge_common_keys:3 of
 msgid "dict1"
-msgstr ""
+msgstr "dictionnaire 1"
 
 #: core.utils.common.merge_common_keys:5 of
 msgid "dict2"
-msgstr ""
+msgstr "dictionnaire 2"
 
 #: core.utils.common.merge_common_keys:8 of
 msgid "Merge dict"
-msgstr "dict fusionné"
+msgstr "dictionnaire fusionné"
 
 #: core.utils.common.open_folders:1 of
 msgid "Open a file with a file editor"
-msgstr ""
+msgstr "Ouvrir un fichier avec un éditeur de fichiers"
 
 #: core.utils.common.open_folders:3 of
 #, fuzzy
@@ -424,6 +491,22 @@ msgid "File name"
 msgstr ""
 "Récupère la taille du fichier et choisit dynamiquement l'unité la plus "
 "appropriée"
+
+#: core.utils.common.oracle_to_csv:1 of
+msgid "Extract data to a CSV file"
+msgstr "Extraire des données dans un fichier CSV"
+
+#: core.utils.common.oracle_to_csv:3 of
+msgid "Database configuration"
+msgstr "Configuration de la base de données"
+
+#: core.utils.common.oracle_to_csv:5 of
+msgid "Tablename"
+msgstr "Nom de la table"
+
+#: core.utils.common.oracle_to_csv:7 of
+msgid "Output file name"
+msgstr "Nom du fichier de sortie"
 
 #: core.utils.common.resource_path:1 of
 msgid ""
@@ -744,7 +827,7 @@ msgid "logs.py"
 msgstr ""
 
 #: core.utils.exceptions:13 of
-msgid "raise Error(100, \"texte\")"
+msgid "raise Error(400, \"text\")"
 msgstr ""
 
 #: core.utils.exceptions.Error:1 core.utils.exceptions.Warn:1 of
@@ -764,6 +847,7 @@ msgstr ""
 "journalisation des erreurs"
 
 #: core.utils.exceptions.Error.__init__:4 of
+#, fuzzy
 msgid ""
 "The error code used to fetch the corresponding message  Possible values:"
 "     - 400: Poorly formed or invalid SQL query     - 401: An error was "
@@ -776,8 +860,10 @@ msgid ""
 "Account locked     - 506: Incorrect username or password     - 600: "
 "System not supported     - 601: Settings file not found     - 602: Themes"
 " file not found     - 603: No tables to compare     - 604: Error "
-"occurring during data extraction     - 999: Unanticipated error - check "
-"logs"
+"occurring during data extraction     - 605: Unsupported file type     - "
+"606: The file does not appear to contain a header row     - 607: No "
+"common tables found     - 608: File not found"
+
 msgstr ""
 "Le code d'erreur utilisé pour récupérer le message correspondant Valeurs "
 "possibles :  - 400 : Requête SQL mal formée ou non valide - 401 : Une "
@@ -791,8 +877,9 @@ msgstr ""
 "Compte verrouillé - 506 : Nom d'utilisateur ou mot de passe incorrect - "
 "600 :  Système non pris en charge - 601 : Fichier de paramètres "
 "introuvable - 602 : Thème  introuvable - 603 : Pas de tables à comparer -"
-" 604 : Erreur survenant lors de l'extraction des données - 999 : Erreur "
-"imprévue - vérifier les logs"
+" 604 : Erreur survenant lors de l'extraction des données - 605 : Type de "
+"fichier non pris en charge - 606 : Le fichier ne semble pas contenir de "
+"ligne d'en-tête - 607 : Aucune table commune trouvée - 608 : Fichier introuvable"
 
 #: core.utils.exceptions.Error.__init__:4 of
 msgid "The error code used to fetch the corresponding message"
@@ -888,10 +975,24 @@ msgid "604: Error occurring during data extraction"
 msgstr "604: Erreur survenant lors de l'extraction des données"
 
 #: core.utils.exceptions.Error.__init__:28 of
-msgid "999: Unanticipated error - check logs"
-msgstr "999 : Erreur imprévue - vérifier les logs"
+msgid "605: Unsupported file type"
+msgstr "605 : Type de fichier non pris en charge"
+
+#: core.utils.exceptions.Error.__init__:29 of
+msgid "606: The file does not appear to contain a header row"
+msgstr "606 : Le fichier ne semble pas contenir de ligne d'en-tête"
 
 #: core.utils.exceptions.Error.__init__:30 of
+#, fuzzy
+msgid "607: No common tables found"
+msgstr "607 : Aucune table commune trouvée"
+
+#: core.utils.exceptions.Error.__init__:31 of
+#, fuzzy
+msgid "608: File not found"
+msgstr "608: Fichier introuvable"
+
+#: core.utils.exceptions.Error.__init__:33 of
 msgid "System context for logging"
 msgstr "Contexte système pour la journalisation"
 
@@ -930,15 +1031,17 @@ msgstr ""
 " des informations"
 
 #: core.utils.exceptions.INFO.__init__:4 of
+#, fuzzy
 msgid ""
 "The info code used to fetch the corresponding message  Possible values:"
-"     - 100: Backup successfully     - 101: Backup successfully     - 200:"
-" Treatment completed successfully     - 201: No discrepancies were found"
+"     - 100: Backup successfully     - 200: Treatment completed "
+"successfully     - 201: No discrepancies were found     - 999: "
+"Unanticipated error - check logs"
 msgstr ""
 "Le code d'information utilisé pour récupérer le message correspondant "
-"Valeurs possibles : - 100 : Sauvegarde réussie - 101 : Sauvegarde réussie"
-" - 200 : Traitement terminé avec succès - 201 : Aucune divergence n'a été"
-" constatée "
+"Valeurs possibles : - 100 : Sauvegarde réussie - 200 : Traitement terminé "
+"avec succès - 201 : Aucune divergence n'a été constatée - 999: Erreur "
+"imprévue - vérifier les logs"
 
 #: core.utils.exceptions.INFO.__init__:4 of
 msgid "The info code used to fetch the corresponding message"
@@ -949,16 +1052,16 @@ msgid "100: Backup successfully"
 msgstr "100 : Sauvegarde réussie"
 
 #: core.utils.exceptions.INFO.__init__:8 of
-msgid "101: Backup successfully"
-msgstr "101 : Sauvegarde réussie"
-
-#: core.utils.exceptions.INFO.__init__:9 of
 msgid "200: Treatment completed successfully"
 msgstr "200: Traitement terminé avec succès"
 
-#: core.utils.exceptions.INFO.__init__:10 of
+#: core.utils.exceptions.INFO.__init__:9 of
 msgid "201: No discrepancies were found"
 msgstr "201 : Aucun écart n'a été constaté"
+
+#: core.utils.exceptions.INFO.__init__:10 of
+msgid "999: Unanticipated error - check logs"
+msgstr "999 : Erreur imprévue - vérifier les logs"
 
 #: core.utils.exceptions.Warn:1 of
 msgid "Custom warning exception that integrates logging and Qt warning signaling"
@@ -1142,10 +1245,6 @@ msgstr "Liste des tables à comparer"
 msgid "Fetch size"
 msgstr "Taille du fetch"
 
-#: ../source/core.utils.rst
-msgid "Raises"
-msgstr ""
-
 #: core.utils.orders.compare_db:16 of
 msgid "code 300 (data gap)"
 msgstr "code 300 (Ecart de données)"
@@ -1161,46 +1260,3 @@ msgstr "code 201 (Aucun écart de données)"
 #: ../source/core.utils.rst:48
 msgid "Module contents"
 msgstr "Contenu des modules"
-
-#~ msgid "Open a file with a file editor"
-#~ msgstr "Ouvrir un fichier avec un éditeur de fichier"
-
-#~ msgid "Paramètres"
-#~ msgstr "Paramètres:"
-
-#~ msgid "Renvoie"
-#~ msgstr ""
-
-#~ msgid "Type renvoyé"
-#~ msgstr ""
-
-#~ msgid "Ouvrir un fichier avec un éditeur de fichier"
-#~ msgstr ""
-
-#~ msgid "Nom du fichier."
-#~ msgstr "File name"
-
-#~ msgid "Bases : :py:class:`~datetime.date`"
-#~ msgstr ""
-
-#~ msgid "Bases : :py:class:`Exception`"
-#~ msgstr ""
-
-#~ msgid "Bases : :py:class:`~PySide6.QtCore.QObject`"
-#~ msgstr ""
-
-#~ msgid "Bases : :py:class:`object`"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "The log file is stored in the "
-#~ "system's temporary directory under "
-#~ "`dbtective/app.log`"
-#~ msgstr ""
-#~ "Obtener le chemin du fichier de "
-#~ "travail dans le répertoire temporaire du"
-#~ " système"
-
-#~ msgid "Lève"
-#~ msgstr ""
-

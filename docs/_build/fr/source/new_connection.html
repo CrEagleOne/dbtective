@@ -50,6 +50,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Créer une nouvelle connexion</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#configuring-connection-settings">Configuration des paramètres de connexion</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#oracle-connection-settings">Paramètres de connexion Oracle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#csv-connection-settings">Paramètres de connexion CSV</a></li>
 </ul>
 </li>
 </ul>
@@ -96,10 +97,24 @@
 <section id="configuring-connection-settings">
 <h2>Configuration des paramètres de connexion<a class="headerlink" href="#configuring-connection-settings" title="Lien vers cette rubrique"></a></h2>
 <p>Pour toutes les connexions :</p>
-<ul class="simple">
-<li><p>Tester la connexion : cliquer sur Tester la connexion pour vérifier si la connexion fonctionne</p></li>
-<li><p>Enregistrer : Cliquez sur Enregistrer. La connexion apparaît dans les choix de la base de données</p></li>
-</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Paramètres</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Créer une nouvelle connexion</p></td>
+<td><p>Tester la connexion : Cliquer sur Tester la connexion pour vérifier si la connexion fonctionne</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sauvegarder</p></td>
+<td><p>Enregistrer. Cliquer sur Enregistrer pour faire apparaître la connexion dans les choix de la base de données</p></td>
+</tr>
+<tr class="row-even"><td><p>Nom de la connexion</p></td>
+<td><p>Attribuer un nom spécifique à la connexion pour une identification plus facile</p></td>
+</tr>
+</tbody>
+</table>
 <section id="oracle-connection-settings">
 <h3>Paramètres de connexion Oracle<a class="headerlink" href="#oracle-connection-settings" title="Lien vers cette rubrique"></a></h3>
 <p>
@@ -118,17 +133,23 @@
 <tr class="row-odd"><td><p>Port</p></td>
 <td><p>Le numéro de port pour la connexion (1521 par défaut)</p></td>
 </tr>
-<tr class="row-even"><td><p>Base de donénes</p></td>
+<tr class="row-even"><td><p>Base de données</p></td>
 <td><p>Le nom de la base de données spécifique à laquelle vous souhaitez vous connecter</p></td>
 </tr>
 <tr class="row-odd"><td><p>Nom d’utilisateur et mot de passe</p></td>
 <td><p>Les informations d’identification requises pour l’authentification</p></td>
 </tr>
-<tr class="row-even"><td><p>Nom de la connexion</p></td>
-<td><p>Attribuer un nom spécifique à la connexion pour une identification plus facile</p></td>
-</tr>
 </tbody>
 </table>
+</section>
+<section id="csv-connection-settings">
+<h3>Paramètres de connexion CSV<a class="headerlink" href="#csv-connection-settings" title="Lien vers cette rubrique"></a></h3>
+<p>
+  <img src="../../assets/screens/csv_config.png" width="400">
+</p>
+<p>Glisser-déposer ou parcourer les fichiers</p>
+<p>Extensions autorisées : cs</p>
+<p>Pour chaque fichier, une analyse structurelle est effectuée afin de garantir que son contenu est bien structuré en tableau (en-tête, séparateur, etc.). Si au moins un fichier est incorrect (extension incorrecte ou contenu incohérent), ce fichier sera ignoré et une alerte s’affichera à l’écran.</p>
 </section>
 </section>
 </section>

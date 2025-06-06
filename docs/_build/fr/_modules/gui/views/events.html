@@ -8,6 +8,7 @@
   <title>gui.views.events &mdash; Documentation DBtective 1.0.0</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/style.css?v=8399456f" />
 
   
       <script src="../../../_static/jquery.js?v=5d32c60e"></script>
@@ -43,7 +44,6 @@
               <p class="caption" role="heading"><span class="caption-text">Documentation utilisateur:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../source/user.html">Fonctionnalités</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../source/user.html#images">Images</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Documentation technique:</span></p>
 <ul>
@@ -152,8 +152,16 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">use_segments</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">worker</span> <span class="o">=</span> <span class="kc">None</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">valid_mime_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;text/csv&quot;</span><span class="p">,</span>
+                                 <span class="s2">&quot;application/vnd.ms-excel&quot;</span><span class="p">,</span>
+                                 <span class="s2">&quot;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&quot;</span><span class="p">]</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">current_editable_row</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tables_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">csv_files</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">row</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">col</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">current_choice</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">db_query</span> <span class="o">=</span> <span class="kc">None</span>
@@ -204,6 +212,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">columnmode</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">controls</span><span class="o">.</span><span class="n">db_compare</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">oracle_selector</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oracle_view</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">csv_selector</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">csv_view</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">dragEnterEvent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dragEnterEvent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">dropEvent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropEvent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">drag_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">upload_files</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">setExtractionType</span><span class="o">.</span><span class="n">stateChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle_toggle</span><span class="p">)</span>
 
@@ -234,6 +247,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">setCustomName</span><span class="o">.</span><span class="n">textChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
             <span class="k">lambda</span><span class="p">:</span> <span class="n">controls</span><span class="o">.</span><span class="n">oracle</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">setCustomName</span><span class="o">.</span><span class="n">textChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+            <span class="k">lambda</span><span class="p">:</span> <span class="n">controls</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tableWidget</span><span class="o">.</span><span class="n">cellClicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_cell_clicked</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">key_event_filter</span> <span class="o">=</span> <span class="n">KeyEventFilter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tableWidget</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">key_event_filter</span><span class="o">.</span><span class="n">key_pressed</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle_key_press</span><span class="p">)</span>
@@ -241,7 +257,153 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">select_all</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">add_all_table</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">unselect_all</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ignore_all_table</span><span class="p">)</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tableWidget</span><span class="o">.</span><span class="n">cellChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+            <span class="k">lambda</span><span class="p">:</span> <span class="n">controls</span><span class="o">.</span><span class="n">db_compare</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">testDB</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">test_db</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MainEventHandler.upload_files">
+<a class="viewcode-back" href="../../../source/gui.views.html#gui.views.events.MainEventHandler.upload_files">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">upload_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">warn</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="n">popups</span><span class="o">.</span><span class="n">select_files</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">files</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+                <span class="n">type_mime</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QMimeDatabase</span><span class="p">()</span><span class="o">.</span><span class="n">mimeTypeForFile</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">type_mime</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">valid_mime_types</span> <span class="ow">and</span> \
+                        <span class="n">common</span><span class="o">.</span><span class="n">is_data_table</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span> <span class="ow">and</span> \
+                        <span class="n">file_path</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span>
+                            <span class="n">path</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">path</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">csv_files</span><span class="o">.</span><span class="n">items</span><span class="p">()]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">add_item_in_drop_zone</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">warn</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="n">controls</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">warn</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;events&quot;</span><span class="p">,</span> <span class="s2">&quot;At least one file is invalid and has been ignored&quot;</span><span class="p">)</span>
+            <span class="n">popups</span><span class="o">.</span><span class="n">display_warn</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">test</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MainEventHandler.dragEnterEvent">
+<a class="viewcode-back" href="../../../source/gui.views.html#gui.views.events.MainEventHandler.dragEnterEvent">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dragEnterEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QDragEnterEvent</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">mimeData</span><span class="p">()</span><span class="o">.</span><span class="n">hasUrls</span><span class="p">():</span>
+            <span class="n">event</span><span class="o">.</span><span class="n">acceptProposedAction</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">event</span><span class="o">.</span><span class="n">ignore</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="MainEventHandler.dropEvent">
+<a class="viewcode-back" href="../../../source/gui.views.html#gui.views.events.MainEventHandler.dropEvent">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dropEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QDropEvent</span><span class="p">):</span>
+        <span class="n">warn</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">mimeData</span><span class="p">()</span><span class="o">.</span><span class="n">hasUrls</span><span class="p">():</span>
+            <span class="n">urls</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">mimeData</span><span class="p">()</span><span class="o">.</span><span class="n">urls</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
+                <span class="n">file_path</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">toLocalFile</span><span class="p">()</span>
+                <span class="n">type_mime</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QMimeDatabase</span><span class="p">()</span><span class="o">.</span><span class="n">mimeTypeForFile</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">type_mime</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">valid_mime_types</span> <span class="ow">and</span> \
+                        <span class="n">common</span><span class="o">.</span><span class="n">is_data_table</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span> <span class="ow">and</span> \
+                        <span class="n">file_path</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span>
+                            <span class="n">path</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">path</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">csv_files</span><span class="o">.</span><span class="n">items</span><span class="p">()]:</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">add_item_in_drop_zone</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">warn</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="n">controls</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">warn</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+                <span class="s2">&quot;events&quot;</span><span class="p">,</span> <span class="s2">&quot;At least one file is invalid and has been ignored&quot;</span><span class="p">)</span>
+            <span class="n">popups</span><span class="o">.</span><span class="n">display_warn</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">test</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MainEventHandler.add_item_in_drop_zone">
+<a class="viewcode-back" href="../../../source/gui.views.html#gui.views.events.MainEventHandler.add_item_in_drop_zone">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_item_in_drop_zone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">,</span> <span class="n">isfolder</span><span class="p">):</span>
+        <span class="n">file_frame</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QFrame</span><span class="p">()</span>
+        <span class="n">file_frame</span><span class="o">.</span><span class="n">setFrameShape</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QFrame</span><span class="o">.</span><span class="n">Box</span><span class="p">)</span>
+        <span class="n">file_frame</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span>
+        <span class="n">file_frame</span><span class="o">.</span><span class="n">setMaximumHeight</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+        <span class="n">file_frame</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span>
+            <span class="s2">&quot;border: 1px solid #191b1c;&quot;</span><span class="p">)</span>
+        <span class="n">file_frame</span><span class="o">.</span><span class="n">setToolTip</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+        <span class="n">file_layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHBoxLayout</span><span class="p">()</span>
+        <span class="n">image_label</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">isfolder</span><span class="p">:</span>
+            <span class="n">pixmap</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QIcon</span><span class="p">(</span><span class="n">common</span><span class="o">.</span><span class="n">set_svg_icon</span><span class="p">(</span><span class="s2">&quot;icon_folder_open.svg&quot;</span><span class="p">))</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pixmap</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QIcon</span><span class="p">(</span><span class="n">common</span><span class="o">.</span><span class="n">set_svg_icon</span><span class="p">(</span><span class="s2">&quot;csv.svg&quot;</span><span class="p">))</span>
+        <span class="n">pixmap_resized</span> <span class="o">=</span> <span class="n">pixmap</span><span class="o">.</span><span class="n">pixmap</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+        <span class="n">image_label</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span><span class="n">pixmap_resized</span><span class="p">)</span>
+        <span class="n">image_label</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;border: transparent;&quot;</span><span class="p">)</span>
+        <span class="n">file_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">image_label</span><span class="p">)</span>
+        <span class="n">file_name_label</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLabel</span><span class="p">(</span><span class="n">file_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">file_name_label</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;border: transparent;</span>
+<span class="sd">            font-size: 12px; color: gray; text-align: center;&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="n">file_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">file_name_label</span><span class="p">)</span>
+        <span class="n">delete_button</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">()</span>
+
+        <span class="n">icon</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QIcon</span><span class="p">(</span><span class="n">common</span><span class="o">.</span><span class="n">set_svg_icon</span><span class="p">(</span><span class="s2">&quot;icon_close.svg&quot;</span><span class="p">))</span>
+        <span class="n">delete_button</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+        <span class="n">delete_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+            <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_item_in_drop_zone</span><span class="p">(</span><span class="n">file_frame</span><span class="p">))</span>
+        <span class="n">delete_button</span><span class="o">.</span><span class="n">setMinimumWidth</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+        <span class="n">delete_button</span><span class="o">.</span><span class="n">setMaximumWidth</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+        <span class="n">delete_button</span><span class="o">.</span><span class="n">setMinimumHeight</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+        <span class="n">delete_button</span><span class="o">.</span><span class="n">setMaximumHeight</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
+        <span class="n">delete_button</span><span class="o">.</span><span class="n">setCursor</span><span class="p">(</span>
+            <span class="n">QtGui</span><span class="o">.</span><span class="n">QCursor</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">CursorShape</span><span class="o">.</span><span class="n">PointingHandCursor</span><span class="p">))</span>
+        <span class="n">delete_button</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;QPushButton {border: transparent;}</span>
+<span class="sd">            QPushButton:hover {background-color: red;}</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+        <span class="p">)</span>
+        <span class="n">file_layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">delete_button</span><span class="p">)</span>
+        <span class="n">file_frame</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">file_layout</span><span class="p">)</span>
+        <span class="n">file_frame</span><span class="o">.</span><span class="n">setToolTip</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">file_name_label</span><span class="o">.</span><span class="n">text</span><span class="p">()))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">list_files</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">file_frame</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">row</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">csv_files</span><span class="p">[</span><span class="n">file_frame</span><span class="p">]</span> <span class="o">=</span> <span class="n">file_path</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">col</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">col</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">row</span> <span class="o">+=</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="MainEventHandler.remove_item_in_drop_zone">
+<a class="viewcode-back" href="../../../source/gui.views.html#gui.views.events.MainEventHandler.remove_item_in_drop_zone">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">remove_item_in_drop_zone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_frame</span><span class="p">):</span>
+        <span class="n">file_frame</span><span class="o">.</span><span class="n">deleteLater</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">csv_files</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">file_frame</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">list_files</span><span class="o">.</span><span class="n">count</span><span class="p">())):</span>
+            <span class="n">widget</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">list_files</span><span class="o">.</span><span class="n">itemAt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">widget</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">widget</span> <span class="ow">and</span> <span class="n">widget</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">csv_files</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">list_files</span><span class="o">.</span><span class="n">removeWidget</span><span class="p">(</span><span class="n">widget</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">col</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">row</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">frame</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">csv_files</span><span class="p">):</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="n">index</span> <span class="o">//</span> <span class="mi">3</span>
+            <span class="n">col</span> <span class="o">=</span> <span class="n">index</span> <span class="o">%</span> <span class="mi">3</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">list_files</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">col</span> <span class="o">=</span> <span class="n">col</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">row</span> <span class="o">=</span> <span class="n">row</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">csv_files</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">row</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">col</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">col</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">row</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">controls</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="MainEventHandler.on_cell_clicked">
@@ -306,7 +468,7 @@
 <div class="viewcode-block" id="MainEventHandler.update_db_list">
 <a class="viewcode-back" href="../../../source/gui.views.html#gui.views.events.MainEventHandler.update_db_list">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">update_db_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">db_query</span> <span class="o">=</span> <span class="s2">&quot;SELECT nom, connexion_type, settings FROM db_config&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">db_query</span> <span class="o">=</span> <span class="s2">&quot;SELECT name, connection_type, settings FROM db_config&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">config_list</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get_list_data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">db_query</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">setDB1</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">setDB2</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
@@ -333,8 +495,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">setDB2</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">setExtractionType</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">setExtractionType</span><span class="o">.</span><span class="n">setup_animation</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">setSegmentLength</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">setFetchSize</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">setSegmentLength</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&quot;100000&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">setFetchSize</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&quot;10000&quot;</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">btn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">contents</span><span class="o">.</span><span class="n">findChildren</span><span class="p">(</span>
                 <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QRadioButton</span><span class="p">):</span>
@@ -400,8 +562,13 @@
                 <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">setPasswordOracle</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">isSavePwdOracle</span><span class="o">.</span><span class="n">isChecked</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
             <span class="p">}</span>
-        <span class="n">query</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;INSERT INTO db_config (nom, connexion_type,</span>
-<span class="s1">        settings, date_creation) VALUES (?,?,?,?)&#39;&#39;&#39;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_choice</span> <span class="o">==</span> <span class="s2">&quot;CSV&quot;</span><span class="p">:</span>
+            <span class="n">settings</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;file&quot;</span><span class="p">:</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">csv_files</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">csv_files</span><span class="p">]</span>
+            <span class="p">}</span>
+
+        <span class="n">query</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;INSERT INTO db_config (name, connection_type,</span>
+<span class="s1">        settings, created_at) VALUES (?,?,?,?)&#39;&#39;&#39;</span>
         <span class="n">args</span> <span class="o">=</span> <span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">setCustomName</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_choice</span><span class="p">,</span>
             <span class="nb">str</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
@@ -426,7 +593,22 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">current_choice</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">clear_oracle_data</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clear_csv_data</span><span class="p">()</span>
         <span class="n">controls</span><span class="o">.</span><span class="n">init_oracle</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MainEventHandler.clear_csv_data">
+<a class="viewcode-back" href="../../../source/gui.views.html#gui.views.events.MainEventHandler.clear_csv_data">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clear_csv_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Clear all import files of csv config</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">setCustomName</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&quot;CSV&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">csv_files</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">remove_item_in_drop_zone</span><span class="p">(</span><span class="n">file</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="MainEventHandler.clear_oracle_data">
@@ -474,9 +656,25 @@
 <div class="viewcode-block" id="MainEventHandler.oracle_view">
 <a class="viewcode-back" href="../../../source/gui.views.html#gui.views.events.MainEventHandler.oracle_view">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">oracle_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clear_db</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">oracle</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">current_choice</span> <span class="o">=</span> <span class="s2">&quot;Oracle&quot;</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_choice</span> <span class="o">=</span> <span class="s2">&quot;Oracle&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">setCustomName</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">setCustomName</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&quot;ORCL&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">setCustomName</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MainEventHandler.csv_view">
+<a class="viewcode-back" href="../../../source/gui.views.html#gui.views.events.MainEventHandler.csv_view">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">csv_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clear_db</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">csv</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">load_pages</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_choice</span> <span class="o">=</span> <span class="s2">&quot;CSV&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">setCustomName</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">setCustomName</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&quot;CSV&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">setCustomName</span><span class="o">.</span><span class="n">blockSignals</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="MainEventHandler.handle_toggle">
@@ -492,7 +690,7 @@
 <a class="viewcode-back" href="../../../source/gui.views.html#gui.views.events.MainEventHandler.on_locale_changed">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">on_locale_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;UPDATE settings</span>
-<span class="s2">            SET [values] = ? where [key] = ?&quot;&quot;&quot;</span>
+<span class="s2">            SET [values] = ?, updated_at = ? where [key] = ?&quot;&quot;&quot;</span>
 
         <span class="n">config</span><span class="o">.</span><span class="n">update_settings</span><span class="p">(</span>
             <span class="n">query</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">setlocale</span><span class="o">.</span><span class="n">currentText</span><span class="p">(),</span> <span class="s2">&quot;locale&quot;</span><span class="p">,))</span></div>
@@ -512,7 +710,8 @@
                  <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">db_type</span><span class="p">,</span> <span class="n">settings</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_list</span>
                  <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">setDB1</span><span class="o">.</span><span class="n">currentText</span><span class="p">()),</span> <span class="kc">None</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings_db1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;password&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings_db1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;password&quot;</span><span class="p">)</span> <span class="ow">and</span> \
+                    <span class="bp">self</span><span class="o">.</span><span class="n">settings_db1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;CSV&quot;</span><span class="p">:</span>
                 <span class="n">password</span> <span class="o">=</span> <span class="n">popups</span><span class="o">.</span><span class="n">input_value</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">password</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">settings_db1</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;password&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">password</span>
@@ -523,7 +722,8 @@
                  <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">db_type</span><span class="p">,</span> <span class="n">settings</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_list</span>
                  <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">setDB2</span><span class="o">.</span><span class="n">currentText</span><span class="p">()),</span> <span class="kc">None</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings_db2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;password&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings_db2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;password&quot;</span><span class="p">)</span> <span class="ow">and</span> \
+                    <span class="bp">self</span><span class="o">.</span><span class="n">settings_db2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;CSV&quot;</span><span class="p">:</span>
                 <span class="n">password</span> <span class="o">=</span> <span class="n">popups</span><span class="o">.</span><span class="n">input_value</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">password</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">settings_db2</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;password&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">password</span>
@@ -587,7 +787,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">rtn</span> <span class="o">=</span> <span class="n">popups</span><span class="o">.</span><span class="n">display_warn</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">rtn</span><span class="p">:</span>
-                    <span class="n">folder_path</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_work_folder</span><span class="p">(</span><span class="s2">&quot;gap&quot;</span><span class="p">)</span>
+                    <span class="n">folder_path</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_file_in_work_folder</span><span class="p">(</span><span class="s2">&quot;gap&quot;</span><span class="p">)</span>
                     <span class="n">common</span><span class="o">.</span><span class="n">open_folders</span><span class="p">(</span><span class="n">folder_path</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">popups</span><span class="o">.</span><span class="n">display_info</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
@@ -672,20 +872,28 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">tableWidget</span><span class="o">.</span><span class="n">setRowCount</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">get_common_tables</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">settings_db1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings_db2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span><span class="p">(</span><span class="mi">607</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">tableWidget</span><span class="o">.</span><span class="n">setRowCount</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
             <span class="k">for</span> <span class="n">row_idx</span><span class="p">,</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
                 <span class="n">text</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QCoreApplication</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
                     <span class="s2">&quot;events&quot;</span><span class="p">,</span> <span class="s2">&quot;Compare&quot;</span><span class="p">)</span>
+                <span class="n">item</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+                <span class="n">item</span><span class="o">.</span><span class="n">setTextAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">tableWidget</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span>
-                    <span class="n">row_idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+                    <span class="n">row_idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">tableWidget</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span>
                     <span class="n">row_idx</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">tables_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 
                 <span class="k">for</span> <span class="n">col_idx</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+                    <span class="n">item</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+                    <span class="n">item</span><span class="o">.</span><span class="n">setTextAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">tableWidget</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span>
-                        <span class="n">row_idx</span><span class="p">,</span> <span class="n">col_idx</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span>
-                        <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+                        <span class="n">row_idx</span><span class="p">,</span> <span class="n">col_idx</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">tableWidget</span><span class="o">.</span><span class="n">horizontalHeader</span><span class="p">()</span><span class="o">.</span><span class="n">setSectionResizeMode</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span>
+                                                                             <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QHeaderView</span><span class="o">.</span><span class="n">ResizeToContents</span><span class="p">)</span>
 
         <span class="k">except</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">Error</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">signal_update</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">message</span><span class="p">)</span></div>

@@ -7,7 +7,7 @@
 ![Pytest](https://img.shields.io/badge/pytest-%23ffffff.svg?style=for-the-badge&logo=pytest&logoColor=2f9fe3)
 
 # About
-Database compare tool (Preview)
+Dbtective is a multi-approach database data comparison tool.
 
 > [!IMPORTANT]  
 > OracleDB thin mode only
@@ -17,33 +17,28 @@ Database compare tool (Preview)
   <img src="src\gui\images\screens\oracle_config.png" width="400">
 </p>
 
-
 ## Database currently supported
-| DB | Supported |
-|--|--|
-| Oracle | ✅ |
-| CSV | 🔄 |
-| SQLite | ⏳ |
-| PostgreSQL | ❌ |
-| MySQL | ❌ |
-| SQL Server | ❌ |
-| MariaDB | ❌ |
-| Others | ❌ |
+| DB | Supported | Availability |
+|--|--|--|
+| Oracle | ✅ | 🆓 |
+| CSV | ✅ | 🆓 |
+| Others | ❌ | ❌ |
 
 ## OS currently supported
 | OS | Supported |
 |--|--|
 | Windows | ✅ |
-| Linux | ⏳ |
+| Linux | ❌ |
 | MacOS | ❌ |
 
 # Features
-| Feat | Explain |
-|--|--|
-| Save Config | Ability to save database configurations |
-| Compare by Hash | Calculate the hash of a file using the specified algorithm (Fast but without details) |
-| Compare by Line | Retrieve the lines in deviations via the except clause (Depends on the size of the databases to be compared) |
-| Compare by Column | Retrieve the columns in deviations via the Levenshtein distance (Depends on the size of the databases to be compared) |
+| Feat | Description | Availability |
+|--|--|--|
+| Save Config | Ability to save database configurations | 🆓 |
+| Tables filter | Ability to filter tables to compare | 🆓 |
+| Compare by Hash | Calculate the hash of a file using the specified algorithm (Fast but without details) | 🆓 |
+| Compare by Line | Retrieve the lines in deviations via the except clause (Depends on the size of the databases to be compared) | 🆓 |
+| Compare by Column | Retrieve the columns in deviations via the Levenshtein distance (Depends on the size of the databases to be compared) | 🆓 |
 
 # Translations
 | Language | Status |

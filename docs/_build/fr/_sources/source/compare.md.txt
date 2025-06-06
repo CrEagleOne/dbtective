@@ -36,8 +36,16 @@ It is a mathematical distance between 2 character strings, defined as the minimu
 
 
 ## Details
-
 Displays the list of common tables between the 2 selected databases.
 
 By pressing "DELETE" on the keyboard, the table associated with the selected row will not be compared.
 To add the table again, press "Backspace".
+
+
+## CSV files
+Each CSV file to be processed in the comparison must adhere to the following rules:
+- The file name must be identical
+  * To the name of the table to be compared for a database comparison
+  * To the name of the other file for a comparison with another file
+- Must contain the column names in the header
+- Ensure the consistency of the exported data

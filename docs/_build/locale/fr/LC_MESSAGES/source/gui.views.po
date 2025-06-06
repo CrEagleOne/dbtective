@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DBtective \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-03 12:04+0200\n"
+"POT-Creation-Date: 2025-06-06 15:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -69,13 +69,25 @@ msgstr ""
 msgid "Notes"
 msgstr ""
 
+#: gui.views.controls.csv:1 of
+#, fuzzy
+msgid "Control the input data for csv settings"
+msgstr "Contrôle les données d'entrée pour les paramètres Oracle"
+
 #: gui.views.controls.db_compare:1 of
 msgid "Control the input data for database comparison"
 msgstr "Contrôler les données d'entrée pour la comparaison de la base de données"
 
+#: gui.views.controls.init_csv:1 of
+#, fuzzy
+msgid "Init UI of the input data for CSV settings"
+msgstr ""
+"Initialiser l'interface utilisateur des données d'entrée pour la "
+"comparaison de la base de données"
+
 #: gui.views.controls.init_db_compare:1 of
 msgid "Init UI of the input data for database comparison"
-msgstr ""
+msgstr "Initialiser l'interface utilisateur des données d'entrée pour la comparaison de la base de données"
 
 #: gui.views.controls.init_oracle:1 of
 msgid "Init UI of the input data for oracle settings"
@@ -161,6 +173,11 @@ msgstr ""
 msgid "Bases: :py:class:`object`"
 msgstr ""
 
+#: gui.views.events.MainEventHandler.clear_csv_data:1 of
+#, fuzzy
+msgid "Clear all import files of csv config"
+msgstr "Effacer tous les champs de la configuration CSV"
+
 #: gui.views.events.MainEventHandler.clear_db:1 of
 msgid "Clear all fields of compare databases"
 msgstr "Effacer tous les champs des bases de données de comparaison"
@@ -231,7 +248,7 @@ msgstr "Entrée contextuelle"
 
 #: ../source/gui.views.rst
 msgid "Returns"
-msgstr ""
+msgstr "Retour"
 
 #: gui.views.popups.input_value:8 gui.views.popups.select_files:3 of
 msgid "if OK else None"
@@ -239,7 +256,7 @@ msgstr "Si OK sinon vide"
 
 #: ../source/gui.views.rst
 msgid "Return type"
-msgstr ""
+msgstr "Type de retour"
 
 #: gui.views.popups.select_files:1 of
 msgid "File selection popup"
@@ -252,22 +269,3 @@ msgstr "Module gui.views.ui\\_main"
 #: ../source/gui.views.rst:64
 msgid "Module contents"
 msgstr "Contenu des modules"
-
-#~ msgid "Bases : :py:class:`~PySide6.QtCore.QThread`"
-#~ msgstr ""
-
-#~ msgid "Bases : :py:class:`~PySide6.QtWidgets.QWidget`"
-#~ msgstr ""
-
-#~ msgid "Bases : :py:class:`object`"
-#~ msgstr ""
-
-#~ msgid "Paramètres"
-#~ msgstr ""
-
-#~ msgid "Renvoie"
-#~ msgstr ""
-
-#~ msgid "Type renvoyé"
-#~ msgstr ""
-

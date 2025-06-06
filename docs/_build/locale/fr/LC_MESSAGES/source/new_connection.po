@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DBtective \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-03 12:31+0200\n"
+"POT-Creation-Date: 2025-06-06 15:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -23,31 +23,13 @@ msgstr ""
 msgid "Create a new connection"
 msgstr "Créer une nouvelle connexion"
 
-#: ../source/new_connection.md:7
+#: ../source/new_connection.md:8
 msgid "Configuring Connection Settings"
 msgstr "Configuration des paramètres de connexion"
 
-#: ../source/new_connection.md:9
+#: ../source/new_connection.md:10
 msgid "For all connections :"
 msgstr "Pour toutes les connexions :"
-
-#: ../source/new_connection.md:10
-msgid ""
-"Test the Connection: Click Test Connection to verify if the connection "
-"works"
-msgstr ""
-"Tester la connexion : Cliquer sur Tester la connexion pour vérifier si la"
-" connexion fonctionne"
-
-#: ../source/new_connection.md:11
-msgid "Save: Click Save. The connection appears in the database choices"
-msgstr ""
-"Enregistrer : Cliquer sur Enregistrer pour faire apparaître la connexion dans les "
-"choix de la base de données"
-
-#: ../source/new_connection.md:13
-msgid "Oracle connection settings"
-msgstr "Paramètres de connexion Oracle"
 
 #: ../source/new_connection.md
 msgid "Settings"
@@ -56,6 +38,34 @@ msgstr "Paramètres"
 #: ../source/new_connection.md
 msgid "Description"
 msgstr "Description"
+
+#: ../source/new_connection.md
+msgid "Test the Connection"
+msgstr "Créer une nouvelle connexion"
+
+#: ../source/new_connection.md
+msgid "Click Test Connection to verify if the connection works"
+msgstr "Tester la connexion : Cliquer sur Tester la connexion pour vérifier si la connexion fonctionne"
+
+#: ../source/new_connection.md
+msgid "Save"
+msgstr "Sauvegarder"
+
+#: ../source/new_connection.md
+msgid "Click Save. The connection appears in the database choices"
+msgstr "Enregistrer. Cliquer sur Enregistrer pour faire apparaître la connexion dans les choix de la base de données"
+
+#: ../source/new_connection.md
+msgid "Connection name"
+msgstr "Nom de la connexion"
+
+#: ../source/new_connection.md
+msgid "Assign a specific name to the connection for easier identification"
+msgstr "Attribuer un nom spécifique à la connexion pour une identification plus facile"
+
+#: ../source/new_connection.md:18
+msgid "Oracle connection settings"
+msgstr "Paramètres de connexion Oracle"
 
 #: ../source/new_connection.md
 msgid "Host"
@@ -91,13 +101,26 @@ msgstr "Nom d'utilisateur et mot de passe"
 msgid "The credentials required for authentication"
 msgstr "Les informations d'identification requises pour l'authentification"
 
-#: ../source/new_connection.md
-msgid "Connection name"
-msgstr "Nom de la connexion"
+#: ../source/new_connection.md:32
+msgid "CSV connection settings"
+msgstr "Paramètres de connexion CSV"
 
-#: ../source/new_connection.md
-msgid "Assign a specific name to the connection for easier identification"
+#: ../source/new_connection.md:38
+msgid "Drag and drop or browse files"
+msgstr "Glisser-déposer ou parcourer les fichiers"
+
+#: ../source/new_connection.md:40
+msgid "Allowed extensions: csv"
+msgstr "Extensions autorisées : csv
+
+#: ../source/new_connection.md:42
+msgid ""
+"For each file, a structural analysis is performed to ensure that the "
+"file's content is a table structure (header, separator, etc.). If at "
+"least one file is incorrect (wrong extension or inconsistent content), "
+"then this file will be ignored and an alert will appear on the screen."
 msgstr ""
-"Attribuer un nom spécifique à la connexion pour une identification plus "
-"facile"
-
+"Pour chaque fichier, une analyse structurelle est effectuée afin de garantir que "
+"son contenu est bien structuré en tableau (en-tête, séparateur, etc.). Si au moins "
+"un fichier est incorrect (extension incorrecte ou contenu incohérent), "
+"ce fichier sera ignoré et une alerte s'affichera à l'écran."

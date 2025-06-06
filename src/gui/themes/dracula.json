@@ -25,6 +25,7 @@
         "green" : "#00ff7f",
         "red" : "#ff5555",
         "yellow" : "#f1fa8c",
-        "grey": "#6f7175"
+        "grey": "#6f7175",
+        "lightblue": "#138ccd"
     }
 }
